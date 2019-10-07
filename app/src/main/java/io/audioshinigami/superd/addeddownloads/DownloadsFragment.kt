@@ -11,11 +11,7 @@ import io.audioshinigami.superd.R
 
 class DownloadsFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = DownloadsFragment()
-    }
-
-    private lateinit var viewModel: DownloadsViewModel
+    private val viewModel: DownloadsViewModel by lazy { ViewModelProviders.of(this).get(DownloadsViewModel::class.java) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +22,6 @@ class DownloadsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(DownloadsViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
