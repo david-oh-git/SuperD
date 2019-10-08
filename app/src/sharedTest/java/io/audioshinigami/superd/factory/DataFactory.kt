@@ -13,7 +13,7 @@ object DataFactory {
 
     fun randomProgressValue() = Random.nextInt(0, 100)
 
-    fun randomRequestId(length: Int = 12) = ('0'..'9').shuffled().subList(0, length).joinToString("").toInt()
+    fun randomRequestId(length: Int = 12) = Random.nextInt(100000000, 999999999)
 
     private fun randomString( length: Int = 15) = alphabet.map { it }.shuffled().subList(0, length).joinToString("")
 

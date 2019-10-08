@@ -18,7 +18,7 @@ object FileDataFactory {
         val fileName = url.substringAfter('/')
         return FileData(0, randomRequestId(), url, fileName, randomProgressValue())
     }
-    
+
     fun makeListOfFileData( size : Int): List<FileData> {
         val fileDataList = mutableListOf<FileData>()
 
