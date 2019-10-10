@@ -22,6 +22,7 @@ import org.hamcrest.CoreMatchers.`is`
 *
 */
 
+@ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 class FileDataDaoTest {
 
@@ -78,7 +79,7 @@ class FileDataDaoTest {
         //Act : get all data from db
         db.fileDataDao().getAll().observeOnce {
             retrievedData ->
-            assertThat(retrievedData?.size, `is`(2))
+            assertThat(retrievedData.size, `is`(2))
         }
 
         //Assert
@@ -232,6 +233,7 @@ class FileDataDaoTest {
 
     } //END
 
+    @ExperimentalCoroutinesApi
     @Test /* use insertAll to add multiple data to db*/
     fun insertFileDataGetNumberOfData() = runBlockingTest {
         // Arrange : create & add multiple data to db using insertAll
