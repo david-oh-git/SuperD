@@ -1,4 +1,4 @@
-package io.audioshinigami.superd
+package io.audioshinigami.superd.util
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
