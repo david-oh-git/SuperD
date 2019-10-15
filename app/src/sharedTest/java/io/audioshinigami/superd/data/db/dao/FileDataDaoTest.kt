@@ -1,12 +1,12 @@
-package io.audioshinigami.superd.db.dao
+package io.audioshinigami.superd.data.db.dao
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.audioshinigami.superd.util.TestCoroutineRule
-import io.audioshinigami.superd.db.FileDatabase
-import io.audioshinigami.superd.db.entity.FileData
+import io.audioshinigami.superd.data.db.FileDatabase
+import io.audioshinigami.superd.data.db.entity.FileData
 import io.audioshinigami.superd.factory.FileDataFactory
 import io.audioshinigami.superd.util.observeOnce
 import kotlinx.coroutines.ExperimentalCoroutinesApi

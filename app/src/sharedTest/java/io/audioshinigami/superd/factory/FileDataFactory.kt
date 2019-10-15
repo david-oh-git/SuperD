@@ -1,6 +1,6 @@
 package io.audioshinigami.superd.factory
 
-import io.audioshinigami.superd.db.entity.FileData
+import io.audioshinigami.superd.data.db.entity.FileData
 import io.audioshinigami.superd.factory.DataFactory.randomRequestId
 import io.audioshinigami.superd.factory.DataFactory.randomProgressValue
 import io.audioshinigami.superd.factory.DataFactory.randomUrl
