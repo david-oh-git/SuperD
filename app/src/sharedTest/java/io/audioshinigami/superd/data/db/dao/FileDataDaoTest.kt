@@ -4,18 +4,20 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import io.audioshinigami.superd.util.TestCoroutineRule
 import io.audioshinigami.superd.data.db.FileDatabase
-import io.audioshinigami.superd.data.db.entity.FileData
 import io.audioshinigami.superd.factory.FileDataFactory
+import io.audioshinigami.superd.util.TestCoroutineRule
 import io.audioshinigami.superd.util.observeOnce
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import org.hamcrest.CoreMatchers.notNullValue
-import org.junit.*
-import org.junit.runner.RunWith
-import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.MatcherAssert.assertThat
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
 
 /*
 *Test class for [FileDataDao] db interface
@@ -59,7 +61,7 @@ class FileDataDaoTest {
 
         //Assert : confirm data from db is same as data added
         result?.apply {
-            assertThat(this as FileData, notNullValue())
+            assertThat(this , notNullValue())
             assertThat(url, `is`(fileData.url))
             assertThat(fileName, `is`(fileData.fileName))
             assertThat(progressValue, `is`(fileData.progressValue))
