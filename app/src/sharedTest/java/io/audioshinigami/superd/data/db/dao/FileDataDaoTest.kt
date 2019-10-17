@@ -27,7 +27,7 @@ import org.hamcrest.CoreMatchers.`is`
 class FileDataDaoTest {
 
     private lateinit var db: FileDatabase
-    // Executes each task synchronously using Architecture Components.
+    // Executes each test synchronously using Architecture Components.
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
@@ -111,7 +111,7 @@ class FileDataDaoTest {
 
     @Test
     fun insertFileDataAndGetFileData() = runBlockingTest {
-        // Arrange : insert a FileData
+        // Arrange : save a FileData
         val fileData = FileDataFactory.makeFileDataEntry()
         db.fileDataDao().insert(fileData)
 
@@ -131,7 +131,7 @@ class FileDataDaoTest {
 
     @Test
     fun updateCompletedFileDataAndGetById() = runBlockingTest {
-        // Arrange : insert FileData
+        // Arrange : save FileData
         val fileData = FileDataFactory.makeFileDataEntry().copy(uid = 78)
         db.fileDataDao().insert(fileData)
 
@@ -152,7 +152,7 @@ class FileDataDaoTest {
 
     @Test
     fun deleteFileDataByIdAndGetFileData() = runBlockingTest{
-        // Arrange insert data into db
+        // Arrange save data into db
         val fileData = FileDataFactory.makeFileDataEntry().copy(uid = 60)
         db.fileDataDao().insert(fileData)
 
@@ -168,7 +168,7 @@ class FileDataDaoTest {
 
     @Test
     fun deleteFileDataAndGetAllData() = runBlockingTest {
-        // Arrange : insert data to db
+        // Arrange : save data to db
         val fileData = FileDataFactory.makeFileDataEntry()
         db.fileDataDao().insert(fileData)
         val anotherFileData = FileDataFactory.makeFileDataEntry()
@@ -185,7 +185,7 @@ class FileDataDaoTest {
 
     @Test
     fun deleteCompletedFileDataAndGetFileData() = runBlockingTest {
-        // Arrange : insert completed tasks
+        // Arrange : save completed tasks
         val fileDataOne = FileDataFactory.makeFileDataEntry().copy(progressValue = 100)
         val anodaFileData = FileDataFactory.makeFileDataEntry().copy(progressValue = 100)
         db.fileDataDao().insert(fileDataOne)
@@ -202,7 +202,7 @@ class FileDataDaoTest {
 
     @Test
     fun deleteByIdGetNumberOfDeletedData() = runBlockingTest {
-        //Arrange : insert data into db
+        //Arrange : save data into db
         val fileData = FileDataFactory.makeFileDataEntry().copy(uid = 69)
         val anotherData = FileDataFactory.makeFileDataEntry()
         db.fileDataDao().insert(fileData)
@@ -217,7 +217,7 @@ class FileDataDaoTest {
 
     @Test
     fun deleteCompletedAndGetNumberOfDeletedData() = runBlockingTest {
-        // Arrange : create & insert complete & also incomplete FileData
+        // Arrange : create & save complete & also incomplete FileData
         val completedFileData = FileDataFactory.makeFileDataEntry().copy(progressValue = 100)
         val secondCompleteFileData = FileDataFactory.makeFileDataEntry().copy( progressValue = 100)
         val fileData = FileDataFactory.makeFileDataEntry().copy(progressValue = 12)
