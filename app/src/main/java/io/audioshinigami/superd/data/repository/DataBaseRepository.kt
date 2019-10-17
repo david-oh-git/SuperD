@@ -13,11 +13,11 @@ interface DataBaseRepository {
 
     suspend fun delete(fileData: FileData)
 
-    suspend fun clearCompleted()
+    suspend fun clearCompleted(): Int
 
-    fun getById(id: Int ): LiveData<FileData?>
+    suspend fun getById(id: Int ): FileData?
 
-    suspend fun deleteById(id: Int)
+    suspend fun deleteById(id: Int): Int
 
     suspend fun deleteAll()
 

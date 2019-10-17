@@ -1,12 +1,10 @@
 package io.audioshinigami.superd.data.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import io.audioshinigami.superd.data.db.dao.FileDataDao
 import io.audioshinigami.superd.data.db.entity.FileData
-import io.audioshinigami.superd.data.repository.DataBaseRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /*implementation for database repository as data source */
 
@@ -16,40 +14,37 @@ class DefaultRepository(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : DataBaseRepository {
 
-    override suspend fun save(fileData: FileData) {
-
+    override suspend fun save(fileData: FileData) = withContext(ioDispatcher){
+        dao.insert(fileData)
     }
 
-    override suspend fun saveAll(vararg fileData: FileData) {
-
+    override suspend fun saveAll(vararg fileData: FileData) = withContext(ioDispatcher){
+        dao.insertAll(*fileData)
     }
 
-    override fun getById(id: Int): LiveData<FileData?> {
-        val ans =  FileData(11, 344553, "http://ieueydhhd/hdjdjd.xcv", "hshdud.xcv",24)
-        val _ans = MutableLiveData<FileData>()
-        _ans.value = ans
-        return _ans
+    override suspend fun getById(id: Int): FileData? {
+        return dao.findById(id)
     }
 
-    override suspend fun update(fileData: FileData) {
+    override suspend fun update(fileData: FileData) = withContext(ioDispatcher) {
+        dao.updateFileData(fileData)
     }
 
-    override suspend fun clearCompleted() {
-
+    override suspend fun clearCompleted() = withContext(ioDispatcher){
+        return@withContext dao.deleteCompletedFileData()
     }
 
-    override suspend fun delete(fileData: FileData) {
+    override suspend fun delete(fileData: FileData) = withContext(ioDispatcher){
+        dao.delete(fileData)
     }
 
-    override suspend fun deleteAll() {
-
+    override suspend fun deleteAll() = withContext(ioDispatcher){
+        dao.deleteAll()
     }
 
-    override suspend fun deleteById(id: Int) {
+    override suspend fun deleteById(id: Int) = withContext(ioDispatcher) {
+        dao.deleteById(id)
     }
 
-    override suspend fun getAll(): LiveData<List<FileData>> {
-
-        return MutableLiveData<List<FileData>>()
-    }
+    override suspend fun getAll() = dao.getAll()
 }

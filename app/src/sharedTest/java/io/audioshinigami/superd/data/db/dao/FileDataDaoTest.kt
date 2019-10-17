@@ -54,15 +54,16 @@ class FileDataDaoTest {
         val fileData = FileDataFactory.makeFileDataEntry()
         db.fileDataDao().insert(fileData)
 
-        //Act : get fileData via findByUrl . returns LivaData hence
-        db.fileDataDao().findByUrl(fileData.url).observeOnce {
+        //Act : get fileData via findByUrl .
+        val result = db.fileDataDao().findByUrl(fileData.url)
 
-            //Assert : confirm data from db is same as data added
-            assertThat(it as FileData, notNullValue())
-            assertThat(it.url, `is`(fileData.url))
-            assertThat(it.fileName, `is`(fileData.fileName))
-            assertThat(it.progressValue, `is`(fileData.progressValue))
-            assertThat(it.request_id, `is`(fileData.request_id))
+        //Assert : confirm data from db is same as data added
+        result?.apply {
+            assertThat(this as FileData, notNullValue())
+            assertThat(url, `is`(fileData.url))
+            assertThat(fileName, `is`(fileData.fileName))
+            assertThat(progressValue, `is`(fileData.progressValue))
+            assertThat(request_id, `is`(fileData.request_id))
         }
 
     }
@@ -96,15 +97,18 @@ class FileDataDaoTest {
         // Act : when another task with same id is inserted, it should replace it
         val newFileData = FileDataFactory.makeFileDataEntry().copy(uid = customUid )
         db.fileDataDao().insert(newFileData)
-        // Assert
-        db.fileDataDao().findById(customUid).observeOnce {
-            retrievedFileData ->
-            assertThat(retrievedFileData?.uid, `is`(newFileData.uid))
-            assertThat(retrievedFileData?.progressValue, `is`(newFileData.progressValue))
-            assertThat(retrievedFileData?.request_id, `is`(newFileData.request_id))
-            assertThat(retrievedFileData?.fileName, `is`(newFileData.fileName))
-            assertThat(retrievedFileData?.url, `is`(newFileData.url))
-            assertThat(retrievedFileData?.isCompleted, `is`(newFileData.isCompleted))
+
+
+        // Assert : get data from db with same id & test contents
+        val retrievedFileData = db.fileDataDao().findById(customUid)
+
+        retrievedFileData?.apply {
+            assertThat(uid, `is`(newFileData.uid))
+            assertThat(progressValue, `is`(newFileData.progressValue))
+            assertThat(request_id, `is`(newFileData.request_id))
+            assertThat(fileName, `is`(newFileData.fileName))
+            assertThat(url, `is`(newFileData.url))
+            assertThat(isCompleted, `is`(newFileData.isCompleted))
         }
 
     } // END
@@ -140,13 +144,13 @@ class FileDataDaoTest {
         db.fileDataDao().updateFileData(updatedFileData)
 
         // Assert : check if data was updated
-        db.fileDataDao().findById(fileData.uid).observeOnce {
-            retrievedFileData ->
-            assertThat(retrievedFileData?.uid, `is`(updatedFileData.uid))
-            assertThat(retrievedFileData?.progressValue, `is`(100))
-            assertThat(retrievedFileData?.request_id, `is`(8476473) )
-            assertThat(retrievedFileData?.isCompleted, `is`(true))
+        val retrievedFileData = db.fileDataDao().findById(fileData.uid)
 
+        retrievedFileData?.apply {
+            assertThat(uid, `is`(updatedFileData.uid))
+            assertThat(progressValue, `is`(100))
+            assertThat(request_id, `is`(8476473) )
+            assertThat(isCompleted, `is`(true))
         }
     } // END
 
