@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Super D</string>
+    <string name="str_default_filename">Filename.txt</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="str_btn_add_queue">Queue</string>
+    <string name="str_edit_geturl_hint">Paste download link here</string>
+    <string name="btn_pause_str">PAUSE</string>
+    <string name="str_resume_btn">Resume</string>
+    <string name="image_btn_description">click to play or pause</string>
+    <string name="str_imbtn_description">delete icon</string>
+    <string name="str_txtvw_delete">delete</string>
+</resources>

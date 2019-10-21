@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_margin="@dimen/item_padding"
+             android:orientation="vertical"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:id="@+id/id_frame_geturl"
+             tools:context=".fragments.GetUrlFragment">
+
+    <EditText
+            android:layout_margin="@dimen/item_padding"
+            android:inputType="textUri"
+            android:id="@+id/id_edit_geturl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:hint="@string/str_edit_geturl_hint"/>
+    <Button
+            android:layout_margin="@dimen/item_padding"
+            android:background="@color/md_purple_500"
+            android:id="@+id/id_btn_send_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:text="@string/str_btn_add_queue"/>
+
+
+</LinearLayout>
