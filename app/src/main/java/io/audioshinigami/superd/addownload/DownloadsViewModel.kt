@@ -1,4 +1,4 @@
-package io.audioshinigami.superd.addeddownloads
+package io.audioshinigami.superd.addownload
 
 import androidx.lifecycle.ViewModel
 
