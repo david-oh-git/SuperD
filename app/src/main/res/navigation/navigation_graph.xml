@@ -9,5 +9,14 @@
             android:id="@+id/downloadsFragment"
             android:name="io.audioshinigami.superd.addownload.DownloadsFragment"
             android:label="Super D"
-            tools:layout="@layout/downloads_fragment" />
+            tools:layout="@layout/downloads_fragment" >
+        <action
+                android:id="@+id/action_downloadsFragment_to_getUrlFragment"
+                app:destination="@id/getUrlFragment" />
+    </fragment>
+    <dialog
+            android:id="@+id/getUrlFragment"
+            android:name="io.audioshinigami.superd.fragments.GetUrlFragment"
+            android:label="fragment_get_url"
+            tools:layout="@layout/fragment_get_url" />
 </navigation>

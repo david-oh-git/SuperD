@@ -1,6 +1,6 @@
 package io.audioshinigami.superd.listeners
 
-import io.audioshinigami.superd.data.db.entity.FileData
+import io.audioshinigami.superd.data.source.db.entity.FileData
 
 interface DownloadListener {
 

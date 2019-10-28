@@ -1,10 +1,10 @@
-package io.audioshinigami.superd.data.db.dao
+package io.audioshinigami.superd.data.source.db.dao
 
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import io.audioshinigami.superd.common.TABLE_NAME
-import io.audioshinigami.superd.data.db.entity.FileData
+import io.audioshinigami.superd.data.source.db.entity.FileData
 
 @Dao
 interface FileDataDao {

@@ -1,4 +1,4 @@
-//package io.audioshinigami.superd.adaptors
+package io.audioshinigami.superd.adaptors
 //
 //
 //import android.view.LayoutInflater
@@ -12,7 +12,7 @@
 //import io.audioshinigami.superd.activities.HomeActivity
 //import io.audioshinigami.superd.R
 //import io.audioshinigami.superd.listeners.DownloadListener
-//import io.audioshinigami.superd.data.db.entity.FileData
+//import io.audioshinigami.superd.data.source.db.entity.FileData
 //import io.audioshinigami.superd.listeners.ViewHolderInteractionListener
 //import io.audioshinigami.superd.models.DownloadStatus
 //

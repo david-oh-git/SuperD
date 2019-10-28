@@ -11,7 +11,7 @@ import com.tonyodev.fetch2.FetchListener
 import com.tonyodev.fetch2core.DownloadBlock
 import io.audioshinigami.superd.App
 import io.audioshinigami.superd.common.TAG
-import io.audioshinigami.superd.data.db.entity.FileData
+import io.audioshinigami.superd.data.source.db.entity.FileData
 import io.audioshinigami.superd.repository.FileRepository
 import kotlinx.coroutines.*
 

@@ -6,10 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 
 import io.audioshinigami.superd.R
+import io.audioshinigami.superd.databinding.DownloadsFragmentBinding
 
 class DownloadsFragment : Fragment() {
+
 
     private val viewModel: DownloadsViewModel by lazy { ViewModelProviders.of(this).get(DownloadsViewModel::class.java) }
 
@@ -17,12 +21,27 @@ class DownloadsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.downloads_fragment, container, false)
+
+        val binding = DownloadsFragmentBinding.inflate(inflater, container, false)
+
+        /* click action for FAB button */
+        binding.fabListener = createFabListener()
+
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
+    private fun createFabListener() : View.OnClickListener {
+
+        return View.OnClickListener {
+            findNavController().navigate(R.id.action_downloadsFragment_to_getUrlFragment)
+        }
     }
+
+
+
+
+
+
+
 
 }

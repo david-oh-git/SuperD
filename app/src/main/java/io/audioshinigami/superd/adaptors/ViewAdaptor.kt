@@ -9,7 +9,7 @@ import io.audioshinigami.superd.App
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.common.DOWNLOAD_COMPLETE_VALUE
 import io.audioshinigami.superd.activities.HomeActivity
-import io.audioshinigami.superd.data.db.entity.FileData
+import io.audioshinigami.superd.data.source.db.entity.FileData
 import io.audioshinigami.superd.viewholders.ItemViewHolder
 import io.audioshinigami.superd.viewmodels.FileDataViewModel
 

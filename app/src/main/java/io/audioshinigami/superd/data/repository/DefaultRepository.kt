@@ -1,7 +1,7 @@
 package io.audioshinigami.superd.data.repository
 
-import io.audioshinigami.superd.data.db.dao.FileDataDao
-import io.audioshinigami.superd.data.db.entity.FileData
+import io.audioshinigami.superd.data.source.db.dao.FileDataDao
+import io.audioshinigami.superd.data.source.db.entity.FileData
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

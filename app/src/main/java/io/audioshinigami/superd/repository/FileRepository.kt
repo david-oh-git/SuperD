@@ -10,7 +10,7 @@ import com.tonyodev.fetch2.NetworkType
 import com.tonyodev.fetch2.Priority
 import com.tonyodev.fetch2.Request
 import io.audioshinigami.superd.App
-import io.audioshinigami.superd.data.db.entity.FileData
+import io.audioshinigami.superd.data.source.db.entity.FileData
 import io.audioshinigami.superd.utility.ReUseMethods
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

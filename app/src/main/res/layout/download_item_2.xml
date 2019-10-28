@@ -10,7 +10,7 @@
 
         <variable
                 name="fileData"
-                type="io.audioshinigami.superd.data.db.entity.FileData" />
+                type="io.audioshinigami.superd.data.source.db.entity.FileData" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -40,7 +40,7 @@
             <TextView
                     android:textStyle="bold"
                     android:textSize="@dimen/dimen_txtvw_txtsize"
-                    android:textColor="@color/md_white_1000"
+                    android:textColor="@color/md_black_1000"
                     android:text="@string/str_txtvw_delete"
                     android:layout_toStartOf="@id/id_img_btn_delete"
                     android:layout_centerVertical="true"

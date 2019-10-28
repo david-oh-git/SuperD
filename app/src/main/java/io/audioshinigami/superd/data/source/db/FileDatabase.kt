@@ -1,12 +1,12 @@
-package io.audioshinigami.superd.data.db
+package io.audioshinigami.superd.data.source.db
 
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import io.audioshinigami.superd.data.db.dao.FileDataDao
-import io.audioshinigami.superd.data.db.entity.FileData
+import io.audioshinigami.superd.data.source.db.dao.FileDataDao
+import io.audioshinigami.superd.data.source.db.entity.FileData
 
 @Database(entities = [FileData::class], version = 1 )
 abstract class FileDatabase : RoomDatabase(){

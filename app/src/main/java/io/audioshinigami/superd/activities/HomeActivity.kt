@@ -24,7 +24,7 @@ import io.audioshinigami.superd.utility.toast
 import io.audioshinigami.superd.common.TAG
 import io.audioshinigami.superd.common.SD_REQCODE
 import io.audioshinigami.superd.common.subscribe
-import io.audioshinigami.superd.data.db.entity.FileData
+import io.audioshinigami.superd.data.source.db.entity.FileData
 import io.audioshinigami.superd.viewholders.ItemViewHolder
 
 

@@ -1,4 +1,4 @@
-package io.audioshinigami.superd.data.db.entity
+package io.audioshinigami.superd.data.source.db.entity
 
 
 import androidx.room.ColumnInfo

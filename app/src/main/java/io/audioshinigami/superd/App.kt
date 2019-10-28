@@ -3,7 +3,7 @@ package io.audioshinigami.superd
 import android.app.Application
 import com.tonyodev.fetch2.Fetch
 import com.tonyodev.fetch2.FetchConfiguration
-import io.audioshinigami.superd.data.db.FileDatabase
+import io.audioshinigami.superd.data.source.db.FileDatabase
 
 class App : Application() {
 
