@@ -28,8 +28,7 @@ import io.audioshinigami.superd.data.source.db.entity.FileData
 import io.audioshinigami.superd.viewholders.ItemViewHolder
 
 
-class HomeActivity : AppCompatActivity(), View.OnClickListener ,
-    GetUrlFragment.OnFragmentInteractionListener , SwipeToDeleteCallback.SwipeToDeleteListener
+class HomeActivity : AppCompatActivity(), SwipeToDeleteCallback.SwipeToDeleteListener
 {
     private val fileDataViewModel by lazy { ViewModelProviders.of(this).get(FileDataViewModel::class.java) }
     private val adaptor = ViewAdaptor()
@@ -44,8 +43,6 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener ,
 
         fileDataViewModel.allFileData.subscribe(this, adaptor::addItems)
 
-        id_fab.setOnClickListener(this)
-
         setUpRecyclerView()
 
         val itemTouchHelper: ItemTouchHelper.SimpleCallback =
@@ -57,21 +54,6 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener ,
         id_list_download.adapter = adaptor
         id_list_download.layoutManager = LinearLayoutManager(this)
     }/*end addRecycler*/
-
-
-    override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.id_fab -> ReUseMethods.showDialogFrag(GetUrlFragment.newInstance(),supportFragmentManager)
-        } //end when
-    }  //end onClick
-
-    override fun sendUrlString(urlString: String) {
-
-//        if (!ReUseMethods.isNetworkAvailable(this))
-//            ReUseMethods.sendToast(this, "No network detected")
-        fileDataViewModel.startDownload(urlString)
-
-    } /*end sendUrlString*/
 
     override fun onResume() {
         super.onResume()

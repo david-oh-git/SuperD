@@ -1,13 +1,13 @@
 package io.audioshinigami.superd.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-
+import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.R
+import io.audioshinigami.superd.utility.KEY_URL
 import io.audioshinigami.superd.utility.toast
 import kotlinx.android.synthetic.main.fragment_get_url.*
 
@@ -21,7 +21,6 @@ import kotlinx.android.synthetic.main.fragment_get_url.*
  */
 
 class GetUrlFragment : DialogFragment() {
-    private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,52 +38,20 @@ class GetUrlFragment : DialogFragment() {
         id_btn_send_url.setOnClickListener{
             val urlStr = id_edit_geturl.text.toString()
             if(urlStr.isNotEmpty()){
-                listener?.sendUrlString(urlStr)
-                dismiss()
+                // TODO : code to send url back , this is makeshift
+                sendUrl(urlStr)
             }
             else
                 activity?.toast("Enter Url ")
         }
     }
 
+    private fun sendUrl(url: String){
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException("$context must implement OnFragmentInteractionListener")
-        }
+        // add url to bundle
+        val args = Bundle()
+        args.putString(KEY_URL, url)
+
+        findNavController().setGraph(R.navigation.navigation_graph, args)
     }
-
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }
-
-
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun sendUrlString(urlString: String)
-    }
-
-    companion object{
-
-//        returns new instance of fragment
-        fun newInstance(): GetUrlFragment =
-    GetUrlFragment()
-    } //end companion
-
 }
