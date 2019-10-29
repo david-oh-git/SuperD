@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
+import io.audioshinigami.superd.SharedViewModel
 
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.databinding.DownloadsFragmentBinding
@@ -17,7 +17,8 @@ import io.audioshinigami.superd.utility.toast
 class DownloadsFragment : Fragment() {
 
 
-    private val viewModel: DownloadsViewModel by lazy { ViewModelProviders.of(this).get(DownloadsViewModel::class.java) }
+    private val viewModel: SharedViewModel by lazy { ViewModelProviders.of(this).get(
+        SharedViewModel::class.java) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +27,7 @@ class DownloadsFragment : Fragment() {
 
         val binding = DownloadsFragmentBinding.inflate(inflater, container, false)
 
-        /* click action for FAB button */
+        /* click action for FAB button, starts GetUrlFragment */
         binding.fabListener = createFabListener()
 
         /*check for url string from getUrl fragment*/
