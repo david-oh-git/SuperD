@@ -42,7 +42,7 @@ class GetUrlFragment : DialogFragment() {
                 sendUrl(urlStr)
             }
             else
-                activity?.toast("Enter Url ")
+                activity?.toast(getString(R.string.enter_url))
         }
     }
 

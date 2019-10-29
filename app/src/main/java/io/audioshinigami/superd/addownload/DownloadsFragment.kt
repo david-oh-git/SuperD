@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.databinding.DownloadsFragmentBinding
+import io.audioshinigami.superd.utility.KEY_URL
+import io.audioshinigami.superd.utility.toast
 
 class DownloadsFragment : Fragment() {
 
@@ -26,6 +28,12 @@ class DownloadsFragment : Fragment() {
 
         /* click action for FAB button */
         binding.fabListener = createFabListener()
+
+        /*check for url string from getUrl fragment*/
+        arguments?.apply {
+            val url =  this.getString(KEY_URL) ?: " no url found"
+            activity?.toast(url)
+        }
 
         return binding.root
     }
