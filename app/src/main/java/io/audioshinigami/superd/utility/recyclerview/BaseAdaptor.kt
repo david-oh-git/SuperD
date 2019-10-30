@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseAdaptor: RecyclerView.Adapter<AppViewHolder>() {
 
-    abstract val itemClickListener: View.OnClickListener?
+    abstract var itemClickListener: View.OnClickListener?
 
     override fun onBindViewHolder(holder: AppViewHolder, position: Int) {
         val anyObject = getPositionDataObject(position)

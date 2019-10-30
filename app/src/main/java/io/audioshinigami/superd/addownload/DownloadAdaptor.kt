@@ -13,8 +13,7 @@ class DownloadAdaptor(private val layoutID: Int ):
 
     private var data: List<FileData>? = null
 
-    override val itemClickListener: View.OnClickListener?
-        get() = null
+    override var itemClickListener: View.OnClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

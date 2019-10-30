@@ -33,6 +33,8 @@ class DownloadsFragment : Fragment() {
         /* adaptor for download recyclerview*/
         val adaptor = DownloadAdaptor(R.layout.download_item_2)
 
+        subscribeUi(binding, adaptor)
+
 
         /*check for url string from getUrl fragment*/
         arguments?.apply {
@@ -41,6 +43,11 @@ class DownloadsFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun subscribeUi(binding: DownloadsFragmentBinding?, adaptor: DownloadAdaptor) {
+        /* assign click listerner*/
+        adaptor.itemClickListener = downLoadItemClickListener()
     }
 
     private fun createFabListener() : View.OnClickListener {
