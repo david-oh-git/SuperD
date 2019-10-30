@@ -30,6 +30,10 @@ class DownloadsFragment : Fragment() {
         /* click action for FAB button, starts GetUrlFragment */
         binding.fabListener = createFabListener()
 
+        /* adaptor for download recyclerview*/
+        val adaptor = DownloadAdaptor(R.layout.download_item_2)
+
+
         /*check for url string from getUrl fragment*/
         arguments?.apply {
             val url =  this.getString(KEY_URL) ?: " no url found"
@@ -43,6 +47,14 @@ class DownloadsFragment : Fragment() {
 
         return View.OnClickListener {
             findNavController().navigate(R.id.action_downloadsFragment_to_getUrlFragment)
+        }
+    }
+
+    private fun downLoadItemClickListener() : View.OnClickListener {
+
+        /* what happens when the download recyclerView item is click*/
+        return View.OnClickListener {
+            // TODO :
         }
     }
 
