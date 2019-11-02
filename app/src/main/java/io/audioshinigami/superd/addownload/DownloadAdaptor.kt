@@ -23,6 +23,7 @@ class DownloadAdaptor(private val layoutID: Int ):
 
         val binding = DownloadItem2Binding.inflate(layoutInflater, parent, false)
 
+
         return AppViewHolder(binding)
     }
 
@@ -36,6 +37,10 @@ class DownloadAdaptor(private val layoutID: Int ):
         data = currentData
 
         notifyDataSetChanged()
+    }
+
+    fun updateProgressValue( newProgressValue: Int, url: String ){
+
     }
 
 }

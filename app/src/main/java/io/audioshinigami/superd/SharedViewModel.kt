@@ -22,8 +22,6 @@ class SharedViewModel( private val repository: DefaultRepository,
     /* list of currently active downloads*/
     private var activeDownloads = MutableLiveData<MutableList<String>>()
 
-    val cat = mutableListOf<String>()
-
     fun startDownload( url: String ) = viewModelScope.launch(Dispatchers.IO) {
 
         /* start download */

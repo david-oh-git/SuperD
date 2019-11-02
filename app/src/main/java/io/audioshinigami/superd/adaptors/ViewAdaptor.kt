@@ -104,6 +104,7 @@ class ViewAdaptor : RecyclerView.Adapter<ItemViewHolder>(){
                 notifyItemChanged(position)
             }
 
+
         } /*end if*/
 
     } /*end updateProgressBar*/

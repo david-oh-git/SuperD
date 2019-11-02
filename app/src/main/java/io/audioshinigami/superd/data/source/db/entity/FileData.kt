@@ -22,4 +22,7 @@ data class FileData(
 
     val isEmpty: Boolean
     get() = url.isEmpty() || fileName.isEmpty()
+
+    val isActive: Boolean
+    get() = false
 } //end FileData

@@ -104,6 +104,7 @@ class FileDataViewModel(application: Application) : AndroidViewModel(application
                     function(download.progress, download.url)
                 }
 
+
             }
 
             override fun onPaused(download: Download) {
