@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import io.audioshinigami.superd.App
 import io.audioshinigami.superd.common.TAG
 import java.io.File
 
@@ -45,12 +46,16 @@ class ReUseMethods {
         }  //end isExternal
 
         fun getPublicFileStorageDir(albumName: String = "SuperD"): File? {
+
+            // TODO : start here , check if this works on android 10
+
             /* get download directory to store File*/
-            val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+//            val directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+            val directory = App.instance.applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+            val file = File( directory ,
                 albumName )
             if (!file.exists()){
                 file.mkdirs()
-                Log.d(TAG, "Directory not created")
             } //end if
 
             return file
