@@ -3,6 +3,7 @@ package io.audioshinigami.superd.addownload
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import io.audioshinigami.superd.data.source.db.entity.FileData
 import io.audioshinigami.superd.databinding.DownloadItem2Binding
 import io.audioshinigami.superd.utility.recyclerview.AppViewHolder
@@ -40,6 +41,29 @@ class DownloadAdaptor(private val layoutID: Int ):
     }
 
     fun updateProgressValue( newProgressValue: Int, url: String ){
+
+    }
+
+    private class FileDataDiffCallback(
+        private val oldList: List<FileData>,
+        private val newList: List<FileData> ): DiffUtil.Callback() {
+
+        override fun getOldListSize() = oldList.size
+
+        override fun getNewListSize() = newList.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].url == newList[newItemPosition].url
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            val oldItem = oldList[oldItemPosition]
+            val newItem = newList[newItemPosition]
+
+            return ( oldItem.url == newItem.url ) &&
+                    ( oldItem.progressValue == newItem.progressValue ) &&
+                    ( oldItem.isActive == newItem.isActive )
+        }
 
     }
 
