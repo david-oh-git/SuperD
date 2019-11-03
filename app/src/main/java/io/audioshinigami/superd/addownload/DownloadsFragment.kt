@@ -19,8 +19,7 @@ import io.audioshinigami.superd.utility.*
 class DownloadsFragment : Fragment() {
 
 
-    private val viewModel: SharedViewModel by lazy { ViewModelProviders.of(activity!!).get(
-        SharedViewModel::class.java) }
+    private val viewModel by lazy { obtainViewModel(SharedViewModel::class.java) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

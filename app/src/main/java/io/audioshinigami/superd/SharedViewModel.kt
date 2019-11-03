@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tonyodev.fetch2.Fetch
 import io.audioshinigami.superd.data.Result
 import io.audioshinigami.superd.data.repository.DefaultRepository
 import io.audioshinigami.superd.data.source.db.entity.FileData
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class SharedViewModel( private val repository: DefaultRepository) :
@@ -41,19 +41,16 @@ class SharedViewModel( private val repository: DefaultRepository) :
 
     }
 
-    fun loadData(){
+    fun loadData() = viewModelScope.launch(Dispatchers.Main){
         /* loads data from DB */
-        viewModelScope.launch {
+        try {
+            val allFileData = async(Dispatchers.IO) { repository.getAll() }
 
-            launch(Dispatchers.IO) {
-                try {
-                    val allFileData = repository.getAll()
-
-                    _downloads.value = Result.Success(allFileData)
-                }catch (e: Exception){
-                    _downloads.value = Result.Error(Exception("Data not found !"))
-                }
-            }
+            _downloads.value = Result.Success(allFileData.await())
         }
+        catch ( e: Exception ){
+            _downloads.value = Result.Error(Exception("Data not found !"))
+        }
+        
     }
 }
