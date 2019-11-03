@@ -46,12 +46,12 @@ class DownloadsFragment : Fragment() {
     }
 
     private fun subscribeUi(binding: DownloadsFragmentBinding?, adaptor: DownloadAdaptor) {
-        /* assign click listerner*/
+        /* assign click listener*/
         adaptor.itemClickListener = downLoadItemClickListener()
     }
 
     private fun createFabListener() : View.OnClickListener {
-
+        /* launches GetUrlFragment */
         return View.OnClickListener {
             findNavController().navigate(R.id.action_downloadsFragment_to_getUrlFragment)
         }

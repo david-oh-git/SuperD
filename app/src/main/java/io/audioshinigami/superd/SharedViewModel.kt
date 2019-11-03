@@ -16,8 +16,8 @@ class SharedViewModel( private val repository: DefaultRepository,
     ViewModel() {
     // TODO: Implement the ViewModel
 
-    private val _downloads = MutableLiveData<Result<List<FileData>>>()
-    val downloads: LiveData<Result<List<FileData>>> = _downloads
+    private val _downloads = MutableLiveData<Result<LiveData<List<FileData>>>>()
+    val downloads: LiveData<Result<LiveData<List<FileData>>>> = _downloads
 
     /* list of currently active downloads*/
     private var activeDownloads = MutableLiveData<MutableList<String>>()
@@ -40,5 +40,21 @@ class SharedViewModel( private val repository: DefaultRepository,
 
     fun resumeDownload( id: String ){
 
+    }
+
+    fun loadData(){
+        /* loads data from DB */
+        viewModelScope.launch {
+
+            launch(Dispatchers.IO) {
+                try {
+                    val allFileData = repository.getAll()
+
+                    _downloads.value = Result.Success(allFileData)
+                }catch (e: Exception){
+                    _downloads.value = Result.Error(Exception("Data not found !"))
+                }
+            }
+        }
     }
 }

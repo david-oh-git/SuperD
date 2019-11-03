@@ -12,7 +12,7 @@ import io.audioshinigami.superd.utility.recyclerview.BaseAdaptor
 class DownloadAdaptor(private val layoutID: Int ):
  BaseAdaptor() {
 
-    private var data: List<FileData>? = null
+    private val data: ArrayList<FileData> = ArrayList()
 
     override var itemClickListener: View.OnClickListener? = null
 
@@ -30,14 +30,19 @@ class DownloadAdaptor(private val layoutID: Int ):
 
     override fun getLayoutIdForPosition(position: Int) = layoutID
 
-    override fun getPositionDataObject(position: Int) = data?.get(position) as FileData
+    override fun getPositionDataObject(position: Int) = data[position]
 
-    override fun getItemCount() = data?.size ?: 0
+    override fun getItemCount() = data.size
 
     fun setData( currentData : List<FileData>){
-        data = currentData
 
-        notifyDataSetChanged()
+        val  diffcallback = FileDataDiffCallback(data, currentData)
+        val  diffResult = DiffUtil.calculateDiff(diffcallback)
+
+        data.clear()
+        data.addAll(currentData)
+
+        diffResult.dispatchUpdatesTo(this)
     }
 
     fun updateProgressValue( newProgressValue: Int, url: String ){
