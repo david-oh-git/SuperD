@@ -18,8 +18,8 @@ import java.io.File
 
 class DefaultRepository(
     private val dao: FileDataDao,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
-    private val fetch: Fetch
+    private val fetch: Fetch,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : DataBaseRepository, DownloadRepository {
 
     private fun createRequest(urlString: String): Request {

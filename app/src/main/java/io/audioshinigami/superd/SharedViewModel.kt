@@ -11,8 +11,7 @@ import io.audioshinigami.superd.data.source.db.entity.FileData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SharedViewModel( private val repository: DefaultRepository,
-                       private val fetch: Fetch ) :
+class SharedViewModel( private val repository: DefaultRepository) :
     ViewModel() {
     // TODO: Implement the ViewModel
 

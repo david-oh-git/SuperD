@@ -11,6 +11,7 @@ class App : Application() {
     var dataBaseInstance: FileDatabase? = null
         get() = field ?: provideDb()
     private set
+
     /* fetch instance : 3rd party download library*/
     var fetch: Fetch? = null
     private set
