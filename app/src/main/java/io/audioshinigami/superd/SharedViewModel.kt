@@ -16,7 +16,7 @@ class SharedViewModel( private val repository: DefaultRepository,
     ViewModel() {
     // TODO: Implement the ViewModel
 
-    private val _downloads = MutableLiveData<Result<LiveData<List<FileData>>>>()
+    private val _downloads = MutableLiveData<Result<LiveData<List<FileData>>>>().apply { value = Result.Loading }
     val downloads: LiveData<Result<LiveData<List<FileData>>>> = _downloads
 
     /* list of currently active downloads*/

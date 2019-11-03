@@ -14,14 +14,12 @@ import io.audioshinigami.superd.SharedViewModel
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.data.Result
 import io.audioshinigami.superd.databinding.DownloadsFragmentBinding
-import io.audioshinigami.superd.utility.KEY_URL
-import io.audioshinigami.superd.utility.showView
-import io.audioshinigami.superd.utility.toast
+import io.audioshinigami.superd.utility.*
 
 class DownloadsFragment : Fragment() {
 
 
-    private val viewModel: SharedViewModel by lazy { ViewModelProviders.of(this).get(
+    private val viewModel: SharedViewModel by lazy { ViewModelProviders.of(activity!!).get(
         SharedViewModel::class.java) }
 
     override fun onCreateView(
@@ -70,8 +68,12 @@ class DownloadsFragment : Fragment() {
                 is Result.Error -> {
                     binding.progressBar.hide()
                     binding.downloadsRview.showView()
+                    this.sendSnack(getString(R.string.db_error_msg))
 
-
+                }
+                is Result.Loading -> {
+                    binding.downloadsRview.hideView()
+                    binding.progressBar.show()
                 }
             }
         })
