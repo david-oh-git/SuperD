@@ -15,6 +15,7 @@ import io.audioshinigami.superd.R
 import io.audioshinigami.superd.data.Result
 import io.audioshinigami.superd.databinding.DownloadsFragmentBinding
 import io.audioshinigami.superd.utility.KEY_URL
+import io.audioshinigami.superd.utility.showView
 import io.audioshinigami.superd.utility.toast
 
 class DownloadsFragment : Fragment() {
@@ -68,7 +69,8 @@ class DownloadsFragment : Fragment() {
                 }
                 is Result.Error -> {
                     binding.progressBar.hide()
-                    binding.downloadsRview
+                    binding.downloadsRview.showView()
+
 
                 }
             }
