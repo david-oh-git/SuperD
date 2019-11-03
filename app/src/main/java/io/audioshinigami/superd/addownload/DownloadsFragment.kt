@@ -6,10 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.SharedViewModel
 
 import io.audioshinigami.superd.R
+import io.audioshinigami.superd.data.Result
 import io.audioshinigami.superd.databinding.DownloadsFragmentBinding
 import io.audioshinigami.superd.utility.KEY_URL
 import io.audioshinigami.superd.utility.toast
@@ -27,8 +30,11 @@ class DownloadsFragment : Fragment() {
 
         val binding = DownloadsFragmentBinding.inflate(inflater, container, false)
 
-        /* click action for FAB button, starts GetUrlFragment */
-        binding.fabListener = createFabListener()
+        binding.apply {
+            fabListener = createFabListener()
+            lifecycleOwner = this@DownloadsFragment.viewLifecycleOwner
+        }
+
 
         /* adaptor for download recyclerview*/
         val adaptor = DownloadAdaptor(R.layout.download_item_2)
@@ -48,6 +54,25 @@ class DownloadsFragment : Fragment() {
     private fun subscribeUi(binding: DownloadsFragmentBinding?, adaptor: DownloadAdaptor) {
         /* assign click listener*/
         adaptor.itemClickListener = downLoadItemClickListener()
+
+        /* retrieve data from DB */
+        viewModel.loadData()
+
+        viewModel.downloads.observe(binding?.lifecycleOwner!!, Observer {
+            downloads ->
+
+            when(downloads){
+                is Result.Success -> {
+                    binding.progressBar.hide()
+                    adaptor.setData(downloads.data.value!!)
+                }
+                is Result.Error -> {
+                    binding.progressBar.hide()
+                    binding.downloadsRview
+
+                }
+            }
+        })
     }
 
     private fun createFabListener() : View.OnClickListener {
