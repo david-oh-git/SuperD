@@ -9,7 +9,6 @@ import com.google.android.material.snackbar.Snackbar
 import io.audioshinigami.superd.App
 import io.audioshinigami.superd.ViewModelFactory
 import io.audioshinigami.superd.data.repository.DefaultRepository
-import java.util.jar.Manifest
 
 fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>): T {
     val repository = DefaultRepository(App.instance.dataBaseInstance?.fileDataDao()!! ,
@@ -29,3 +28,4 @@ fun Fragment.checkForWriteExternalPermission(): Boolean {
     return ContextCompat.checkSelfPermission( App.instance , android.Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
             PackageManager.PERMISSION_GRANTED
 }
+
