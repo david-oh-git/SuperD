@@ -1,17 +1,16 @@
 package io.audioshinigami.superd.addownload
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
-import io.audioshinigami.superd.SharedViewModel
-
 import io.audioshinigami.superd.R
+import io.audioshinigami.superd.SharedViewModel
+import io.audioshinigami.superd.common.subscribe
 import io.audioshinigami.superd.data.Result
 import io.audioshinigami.superd.databinding.DownloadsFragmentBinding
 import io.audioshinigami.superd.utility.*
@@ -56,23 +55,29 @@ class DownloadsFragment : Fragment() {
         /* retrieve data from DB */
         viewModel.loadData()
 
-        viewModel.downloads.observe(binding?.lifecycleOwner!!, Observer {
-            downloads ->
 
-            when(downloads){
+
+        viewModel.downloads.observe(binding?.lifecycleOwner!!, Observer {
+            results ->
+
+            when(results){
                 is Result.Success -> {
-                    binding.progressBar.hide()
-                    adaptor.setData(downloads.data.value!!)
+                    binding.progressBar.hideView()
+                    binding.downloadsRview.showView()
+                    results.data.let { adaptor.setData(it) }
+                    Log.d("TAGU", " Success ....")
                 }
                 is Result.Error -> {
-                    binding.progressBar.hide()
-                    binding.downloadsRview.showView()
+
+                    binding.progressBar.hideView()
+                    binding.downloadsRview.hideView()
                     this.sendSnack(getString(R.string.db_error_msg))
 
                 }
                 is Result.Loading -> {
                     binding.downloadsRview.hideView()
-                    binding.progressBar.show()
+                    binding.progressBar.showView()
+                    Log.d("TAGU", " loading now ....")
                 }
             }
         })

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import io.audioshinigami.superd.common.subscribe
 import io.audioshinigami.superd.data.Result
 import io.audioshinigami.superd.data.repository.DefaultRepository
 import io.audioshinigami.superd.data.source.db.entity.FileData
@@ -15,8 +16,8 @@ class SharedViewModel( private val repository: DefaultRepository) :
     ViewModel() {
     // TODO: Implement the ViewModel
 
-    private val _downloads = MutableLiveData<Result<LiveData<List<FileData>>>>().apply { value = Result.Loading }
-    val downloads: LiveData<Result<LiveData<List<FileData>>>> = _downloads
+    private val _downloads = MutableLiveData<Result<List<FileData>>>().apply { value = Result.Loading }
+    val downloads: LiveData<Result<List<FileData>>> = _downloads
 
     /* list of currently active downloads*/
     private var activeDownloads = MutableLiveData<MutableList<String>>()
@@ -43,14 +44,19 @@ class SharedViewModel( private val repository: DefaultRepository) :
 
     fun loadData() = viewModelScope.launch(Dispatchers.Main){
         /* loads data from DB */
-        try {
-            val allFileData = async(Dispatchers.IO) { repository.getAll() }
+        launch(Dispatchers.IO) {
 
-            _downloads.value = Result.Success(allFileData.await())
+
+            try {
+                val data = Result.Success( repository.getAll().value!! )
+                _downloads.postValue( data )
+            }
+
+            catch (e : Exception ){
+                _downloads.postValue( Result.Error(Exception("Data not found !")) )
+            }
+
         }
-        catch ( e: Exception ){
-            _downloads.value = Result.Error(Exception("Data not found !"))
-        }
-        
-    }
+
+    } //END loadData
 }
