@@ -1,6 +1,7 @@
 package io.audioshinigami.superd.utility
 
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 
@@ -14,6 +15,7 @@ fun View.showView(){
     this.visibility = View.VISIBLE
 }
 
+/* create a snackbar*/
 fun Fragment.sendSnack( message: String ){
-    Snackbar.make(this.requireView(), message, Snackbar.LENGTH_LONG)
+    Snackbar.make( this.requireView(), message, Snackbar.LENGTH_LONG).show()
 }

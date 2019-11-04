@@ -13,6 +13,7 @@ import io.audioshinigami.superd.SharedViewModel
 import io.audioshinigami.superd.data.Result
 import io.audioshinigami.superd.databinding.DownloadsFragmentBinding
 import io.audioshinigami.superd.utility.*
+import kotlinx.android.synthetic.main.downloads_fragment.*
 
 class DownloadsFragment : Fragment() {
 
@@ -65,7 +66,7 @@ class DownloadsFragment : Fragment() {
 
                     binding.progressBar.hideView()
                     binding.downloadsRview.hideView()
-                    this.sendSnack(getString(R.string.db_error_msg))
+                    sendSnack( getString(R.string.db_error_msg) )
                     Log.d(TAG, " Error ....")
 
                 }
