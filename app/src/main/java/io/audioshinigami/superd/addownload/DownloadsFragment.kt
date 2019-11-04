@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.SharedViewModel
-import io.audioshinigami.superd.common.subscribe
 import io.audioshinigami.superd.data.Result
 import io.audioshinigami.superd.databinding.DownloadsFragmentBinding
 import io.audioshinigami.superd.utility.*
@@ -52,11 +51,6 @@ class DownloadsFragment : Fragment() {
         /* assign click listener*/
         adaptor.itemClickListener = downLoadItemClickListener()
 
-        /* retrieve data from DB */
-        viewModel.loadData()
-
-
-
         viewModel.downloads.observe(binding?.lifecycleOwner!!, Observer {
             results ->
 
@@ -65,19 +59,20 @@ class DownloadsFragment : Fragment() {
                     binding.progressBar.hideView()
                     binding.downloadsRview.showView()
                     results.data.let { adaptor.setData(it) }
-                    Log.d("TAGU", " Success ....")
+                    Log.d(TAG, " Success ....")
                 }
                 is Result.Error -> {
 
                     binding.progressBar.hideView()
                     binding.downloadsRview.hideView()
                     this.sendSnack(getString(R.string.db_error_msg))
+                    Log.d(TAG, " Error ....")
 
                 }
                 is Result.Loading -> {
                     binding.downloadsRview.hideView()
                     binding.progressBar.showView()
-                    Log.d("TAGU", " loading now ....")
+                    Log.d(TAG , " loading now ....")
                 }
             }
         })
@@ -98,11 +93,8 @@ class DownloadsFragment : Fragment() {
         }
     }
 
-
-
-
-
-
-
+    companion object {
+        private const val TAG = "DownloadFrag"
+    }
 
 }

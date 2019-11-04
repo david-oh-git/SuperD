@@ -1,5 +1,6 @@
 package io.audioshinigami.superd
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,6 +23,12 @@ class SharedViewModel( private val repository: DefaultRepository) :
     /* list of currently active downloads*/
     private var activeDownloads = MutableLiveData<MutableList<String>>()
 
+    init {
+
+        /* get data from DB */
+        loadData()
+    }
+
     fun startDownload( url: String ) = viewModelScope.launch(Dispatchers.IO) {
 
         /* start download */
@@ -42,7 +49,7 @@ class SharedViewModel( private val repository: DefaultRepository) :
 
     }
 
-    fun loadData() = viewModelScope.launch(Dispatchers.Main){
+    private fun loadData() = viewModelScope.launch(Dispatchers.Main){
         /* loads data from DB */
         launch(Dispatchers.IO) {
 
@@ -59,4 +66,8 @@ class SharedViewModel( private val repository: DefaultRepository) :
         }
 
     } //END loadData
+
+    companion object {
+        private const val TAG = "SharedView"
+    }
 }
