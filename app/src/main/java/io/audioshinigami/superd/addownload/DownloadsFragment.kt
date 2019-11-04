@@ -33,17 +33,10 @@ class DownloadsFragment : Fragment() {
         }
 
 
-        /* adaptor for download recyclerview*/
+        /* adaptor for download recyclerView*/
         val adaptor = DownloadAdaptor(R.layout.download_item_2)
 
         subscribeUi(binding, adaptor)
-
-
-        /*check for url string from getUrl fragment*/
-        arguments?.apply {
-            val url =  this.getString(KEY_URL) ?: " no url found"
-            activity?.toast(url)
-        }
 
         return binding.root
     }

@@ -35,10 +35,8 @@ class SharedViewModel( private val repository: DefaultRepository) :
         repository.start(url)
 
         /* add to active downloads*/
-        activeDownloads.value?.add(url)
-
+        launch(Dispatchers.Main) { activeDownloads.value?.add(url) }
         // TODO attach fetch listener
-
     }
 
     fun pauseDownload( id: String ){

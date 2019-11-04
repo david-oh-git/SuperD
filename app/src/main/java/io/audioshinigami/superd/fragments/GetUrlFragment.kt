@@ -8,6 +8,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.utility.KEY_URL
+import io.audioshinigami.superd.utility.WRITE_EXTERNAL_REQUEST_CODE
 import io.audioshinigami.superd.utility.toast
 import kotlinx.android.synthetic.main.fragment_get_url.*
 
@@ -48,10 +49,22 @@ class GetUrlFragment : DialogFragment() {
 
     private fun sendUrl(url: String){
 
-        // add url to bundle
-        val args = Bundle()
-        args.putString(KEY_URL, url)
+        if ( url.isNotEmpty() ){
+            // add url to bundle
+            val args = Bundle()
+            args.putString(KEY_URL, url)
 
-        findNavController().setGraph(R.navigation.navigation_graph, args)
+            requestPermissions( arrayOf( android.Manifest.permission.WRITE_EXTERNAL_STORAGE),  WRITE_EXTERNAL_REQUEST_CODE )
+
+            findNavController().popBackStack()
+        }
+
+        findNavController()
+
+
+
+
+
+
     }
 }

@@ -14,8 +14,3 @@ fun View.hideView(){
 fun View.showView(){
     this.visibility = View.VISIBLE
 }
-
-/* create a snackbar*/
-fun Fragment.sendSnack( message: String ){
-    Snackbar.make( this.requireView(), message, Snackbar.LENGTH_LONG).show()
-}
