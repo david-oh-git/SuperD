@@ -21,7 +21,7 @@ class SharedViewModel( private val repository: DefaultRepository) :
     val downloads: LiveData<Result<List<FileData>>> = _downloads
 
     /* list of currently active downloads*/
-    private var activeDownloads = MutableLiveData<MutableList<String>>()
+    var activeDownloads = arrayListOf<String>()
 
     init {
 
@@ -35,7 +35,7 @@ class SharedViewModel( private val repository: DefaultRepository) :
         repository.start(url)
 
         /* add to active downloads*/
-        launch(Dispatchers.Main) { activeDownloads.value?.add(url) }
+        launch(Dispatchers.Main) { activeDownloads.add(url) }
         // TODO attach fetch listener
     }
 

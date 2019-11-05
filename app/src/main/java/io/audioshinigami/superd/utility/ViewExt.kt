@@ -2,8 +2,11 @@ package io.audioshinigami.superd.utility
 
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import io.audioshinigami.superd.R
 
 /* hides view*/
 fun View.hideView(){
