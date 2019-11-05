@@ -6,7 +6,7 @@ import io.audioshinigami.superd.R
 
 object PlayButtonBinding {
 
-    @BindingAdapter( "icon" )
+    @BindingAdapter( "app:icon" )
     @JvmStatic fun setImageViewResource(imageView: ImageView, active: Boolean ){
         with(imageView){
             if(active)
