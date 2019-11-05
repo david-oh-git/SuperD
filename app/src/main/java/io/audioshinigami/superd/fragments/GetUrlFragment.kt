@@ -8,10 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.R
-import io.audioshinigami.superd.utility.KEY_URL
-import io.audioshinigami.superd.utility.WRITE_EXTERNAL_REQUEST_CODE
-import io.audioshinigami.superd.utility.checkForWriteExternalPermission
-import io.audioshinigami.superd.utility.toast
+import io.audioshinigami.superd.utility.*
 import kotlinx.android.synthetic.main.fragment_get_url.*
 
 
@@ -51,15 +48,28 @@ class GetUrlFragment : DialogFragment() {
 
     private fun sendUrl(url: String){
 
+        val permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+
         if( url.isEmpty() ){
             Toast.makeText(context, getString(R.string.download_url), Toast.LENGTH_LONG).show()
             return
         }
 
-        if ( !checkForWriteExternalPermission() )
-            requestPermissions( arrayOf( android.Manifest.permission.WRITE_EXTERNAL_STORAGE),  WRITE_EXTERNAL_REQUEST_CODE )
+
+        PermissionManager.requestPermission( context!!,
+            permission,
+            ::makePermissionRequest )
+
+        if ( !PermissionManager.isPermissionGranted(context!!,permission) )
+            return
+
 
 
     }
+
+    private fun makePermissionRequest(permission: String){
+        requestPermissions( arrayOf( permission ), WRITE_EXTERNAL_REQUEST_CODE )
+    }
+
 
 }

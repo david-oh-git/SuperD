@@ -45,6 +45,9 @@ class DownloadsFragment : Fragment() {
         /* assign click listener*/
         adaptor.itemClickListener = downLoadItemClickListener()
 
+        /* assign download_item binding to viewModel*/
+        adaptor.binding.viewModel = viewModel
+
         viewModel.downloads.observe(binding?.lifecycleOwner!!, Observer {
             results ->
 

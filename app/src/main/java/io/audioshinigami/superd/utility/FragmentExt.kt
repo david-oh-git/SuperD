@@ -1,6 +1,7 @@
 package io.audioshinigami.superd.utility
 
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
@@ -23,7 +24,7 @@ fun Fragment.sendSnack( message: String ){
 }
 
 /* check for write external permission */
-fun Fragment.checkForWriteExternalPermission(): Boolean {
+fun Fragment.isPermissionGranted(): Boolean {
 
     return ContextCompat.checkSelfPermission( App.instance , android.Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
             PackageManager.PERMISSION_GRANTED

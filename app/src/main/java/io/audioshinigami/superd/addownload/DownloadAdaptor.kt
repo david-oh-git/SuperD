@@ -16,13 +16,15 @@ class DownloadAdaptor(private val layoutID: Int ):
 
     override var itemClickListener: View.OnClickListener? = null
 
+    lateinit var binding: DownloadItem2Binding
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
 //        val binding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, viewType ,
 //            parent, false)
 
-        val binding = DownloadItem2Binding.inflate(layoutInflater, parent, false)
+        binding = DownloadItem2Binding.inflate(layoutInflater, parent, false)
 
 
         return AppViewHolder(binding)

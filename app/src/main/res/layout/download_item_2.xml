@@ -7,6 +7,9 @@
         <variable
                 name="clickListener"
                 type="android.view.View.OnClickListener" />
+        <variable
+                name="viewModel"
+                type="io.audioshinigami.superd.SharedViewModel" />
 
         <variable
                 name="fileData"
