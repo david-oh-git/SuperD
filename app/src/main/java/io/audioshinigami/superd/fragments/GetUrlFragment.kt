@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.R
+import io.audioshinigami.superd.SharedViewModel
 import io.audioshinigami.superd.utility.*
 import kotlinx.android.synthetic.main.fragment_get_url.*
 
@@ -21,6 +22,8 @@ import kotlinx.android.synthetic.main.fragment_get_url.*
  */
 
 class GetUrlFragment : DialogFragment() {
+
+    private val viewModel by lazy { obtainViewModel(SharedViewModel::class.java) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,7 +67,9 @@ class GetUrlFragment : DialogFragment() {
             return
 
 
+        viewModel.startDownload(url)
 
+        findNavController().popBackStack()
     }
 
     private fun makePermissionRequest(permission: String){

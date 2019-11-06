@@ -1,6 +1,7 @@
 package io.audioshinigami.superd.data.repository
 
 import android.net.Uri
+import android.util.Log
 import com.tonyodev.fetch2.Fetch
 import com.tonyodev.fetch2.NetworkType
 import com.tonyodev.fetch2.Priority
@@ -41,6 +42,7 @@ class DefaultRepository(
     }
 
     override suspend fun save(fileData: FileData) = withContext(ioDispatcher){
+        Log.d(TAG, "save started")
         dao.insert(fileData)
     }
 
@@ -80,7 +82,7 @@ class DefaultRepository(
         val request = createRequest(url)
 
         /* start the download*/
-        fetch.enqueue(request)
+//        fetch.enqueue(request)
 
         /* create [FileData] info for file*/
         val fileData = FileData(
@@ -111,5 +113,9 @@ class DefaultRepository(
 
         /* start the download*/
         fetch.enqueue(request)
+    }
+
+    companion object{
+        private const val TAG = "DefaultRepo"
     }
 }

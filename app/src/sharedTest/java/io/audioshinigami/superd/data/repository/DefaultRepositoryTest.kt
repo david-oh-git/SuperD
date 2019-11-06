@@ -4,6 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.tonyodev.fetch2.Fetch
+import io.audioshinigami.superd.App
 import io.audioshinigami.superd.data.source.db.FileDatabase
 import io.audioshinigami.superd.factory.FileDataFactory
 import io.audioshinigami.superd.util.TestCoroutineRule
@@ -26,6 +28,7 @@ class DefaultRepositoryTest {
 
     private lateinit var defaultRepository: DefaultRepository
     private lateinit var database : FileDatabase
+    private lateinit var fetch: Fetch
 
     // run each test synchronously
     @get:Rule
@@ -45,7 +48,9 @@ class DefaultRepositoryTest {
             .allowMainThreadQueries()
             .build()
 
-        defaultRepository = DefaultRepository(database.fileDataDao(), Dispatchers.Main)
+        fetch = App.instance.fetch!!
+
+        defaultRepository = DefaultRepository(database.fileDataDao(),fetch ,Dispatchers.Main)
     } //end init
 
     @After
