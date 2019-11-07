@@ -2,6 +2,10 @@ package io.audioshinigami.superd.data.repository
 
 import android.net.Uri
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.tonyodev.fetch2.Fetch
 import com.tonyodev.fetch2.NetworkType
 import com.tonyodev.fetch2.Priority
@@ -75,6 +79,8 @@ class DefaultRepository(
     }
 
     override suspend fun getAll() = dao.getAll()
+
+    fun getAllPaged() = dao.getAllPaged()
 
     override suspend fun start(url: String) {
 

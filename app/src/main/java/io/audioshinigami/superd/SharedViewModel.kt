@@ -1,6 +1,12 @@
 package io.audioshinigami.superd
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.paging.DataSource
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import io.audioshinigami.superd.data.Result
 import io.audioshinigami.superd.data.repository.DefaultRepository
 import io.audioshinigami.superd.data.source.db.entity.FileData
@@ -14,15 +20,29 @@ class SharedViewModel( private val repository: DefaultRepository) :
     private val _downloads = MutableLiveData<Result<List<FileData>>>().apply { value = Result.Loading }
     val downloads: LiveData<Result<List<FileData>>> = _downloads
 
+    lateinit var pagedDownloads: LiveData<PagedList<FileData>>
+    private set
+
     /* list of currently active downloads*/
     private val _activeDownloads = arrayListOf<String>()
     val isActive: (String) -> LiveData<Boolean>
     get() = ::isDownloadActive
 
     init {
-
+        loadPagedData()
         /* get data from DB */
         loadData()
+    }
+
+    fun loadPagedData(){
+
+        val factory: DataSource.Factory<Int, FileData> = repository.getAllPaged()
+        val pagedListBuilder: LivePagedListBuilder<Int, FileData> = LivePagedListBuilder<Int, FileData>(factory,
+            CACHED_PAGE_SIZE )
+
+
+
+        pagedDownloads = pagedListBuilder.build()
     }
 
     fun isDownloadActive(url : String ): MutableLiveData<Boolean> {
@@ -36,7 +56,7 @@ class SharedViewModel( private val repository: DefaultRepository) :
         repository.start(url)
 
         /* add to active downloads*/
-        launch(Dispatchers.Main) { activeDownloads.add(url) }
+//        launch(Dispatchers.Main) { activeDownloads.add(url) }
         // TODO attach fetch listener
     }
 
@@ -56,7 +76,7 @@ class SharedViewModel( private val repository: DefaultRepository) :
             try {
 
                 val dbLiveData = repository.getAll()
-                _downloads.postValue(Transformations.map(dbLiveData, ::createSuccess) )
+                _downloads.postValue( Result.Success(dbLiveData.value!!) )
             }
 
             catch (e : Exception ){
@@ -74,5 +94,6 @@ class SharedViewModel( private val repository: DefaultRepository) :
 
     companion object {
         private const val TAG = "SharedView"
+        private const val CACHED_PAGE_SIZE = 15
     }
 }

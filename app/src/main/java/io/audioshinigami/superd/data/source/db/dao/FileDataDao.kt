@@ -2,6 +2,7 @@ package io.audioshinigami.superd.data.source.db.dao
 
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import io.audioshinigami.superd.common.TABLE_NAME
 import io.audioshinigami.superd.data.source.db.entity.FileData
@@ -12,6 +13,9 @@ interface FileDataDao {
 * for some strange issues/probably a bug, getAll cant be a suspend function*/
     @Query("SELECT * FROM $TABLE_NAME ORDER BY uid ASC")
     fun getAll(): LiveData<List<FileData>>
+
+    @Query("SELECT * FROM $TABLE_NAME ORDER BY uid DESC")
+    fun getAllPaged(): DataSource.Factory<Int, FileData>
 
     // @Query("SELECT * FROM People WHERE id = :id")   
     @Query("SELECT * FROM $TABLE_NAME WHERE url = :getUrl")

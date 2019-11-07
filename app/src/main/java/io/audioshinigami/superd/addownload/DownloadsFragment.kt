@@ -35,7 +35,7 @@ class DownloadsFragment : Fragment() {
 
         /* adaptor for download recyclerView*/
         val adaptor = DownloadAdaptor(R.layout.download_item_2)
-
+//        val adaptor = FIleDataAdaptor()
         subscribeUi(binding, adaptor)
 
         return binding.root
@@ -43,7 +43,7 @@ class DownloadsFragment : Fragment() {
 
     private fun subscribeUi(binding: DownloadsFragmentBinding?, adaptor: DownloadAdaptor) {
         /* assign click listener*/
-        adaptor.itemClickListener = downLoadItemClickListener()
+//        adaptor.itemClickListener = downLoadItemClickListener()
 
         /* assign download_item binding to viewModel*/
         adaptor.binding?.viewModel = viewModel
@@ -56,6 +56,7 @@ class DownloadsFragment : Fragment() {
                     binding.progressBar.hideView()
                     binding.downloadsRview.showView()
                     results.data.let { adaptor.setData(it) }
+                    binding.downloadsRview.adapter = adaptor
                     Log.d(TAG, " Success ....")
                 }
                 is Result.Error -> {
@@ -73,6 +74,19 @@ class DownloadsFragment : Fragment() {
                 }
             }
         })
+
+//        viewModel.pagedDownloads.observe(binding?.lifecycleOwner!!, Observer {
+//            data ->
+//            data?.apply {
+//                adaptor.submitList(this)
+//
+//                binding.apply {
+//                    progressBar.hideView()
+//                    downloadsRview.adapter = adaptor
+//                    downloadsRview.showView()
+//                }
+//            }
+//        })
     }
 
     private fun createFabListener() : View.OnClickListener {

@@ -1,6 +1,7 @@
 package io.audioshinigami.superd.data.repository
 
 import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
 import io.audioshinigami.superd.data.source.db.entity.FileData
 
 
@@ -23,4 +24,5 @@ interface DataBaseRepository {
     suspend fun deleteAll()
 
     suspend fun getAll(): LiveData<List<FileData>>
+
 }
