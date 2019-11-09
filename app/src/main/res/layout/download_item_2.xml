@@ -23,7 +23,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardElevation="4dp"
+            app:cardElevation="8dp"
             app:cardCornerRadius="2dp"
             android:layout_margin="@dimen/card_margin">
 
@@ -77,19 +77,17 @@
                     app:layout_constraintBottom_toBottomOf="parent" />
 
             <ProgressBar
-                    android:max="@integer/progressbar_maxValue"
-                    android:progress="@{fileData.progressValue}"
+                    android:id="@+id/id_dwloadprogressbar"
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/id_dwloadprogressbar"
-                    app:layout_constraintStart_toEndOf="@+id/id_play_pause"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="16dp"
+                    android:max="@integer/progressbar_maxValue"
+                    android:progress="@{fileData.progressValue}"
+                    app:layout_constraintBottom_toBottomOf="@id/id_play_pause"
+                    app:layout_constraintEnd_toEndOf="@id/id_filename"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintTop_toBottomOf="@+id/id_filename"
-                    android:layout_marginTop="8dp"/>
+                    app:layout_constraintStart_toStartOf="@id/id_filename"
+                    app:layout_constraintTop_toBottomOf="@+id/id_filename" />
 
             <TextView
                     android:textSize="@dimen/filename_text_size"
@@ -97,9 +95,26 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/id_filename"
-                    app:layout_constraintEnd_toEndOf="@+id/id_dwloadprogressbar"
-                    app:layout_constraintStart_toStartOf="@+id/id_dwloadprogressbar"
-                    android:textAlignment="center" app:layout_constraintTop_toTopOf="@+id/id_play_pause"/>
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toTopOf="@id/id_dwloadprogressbar"
+                    app:layout_constraintStart_toEndOf="@+id/id_play_pause"
+                    app:layout_constraintEnd_toStartOf="@+id/overflow_icon"
+                    android:textAlignment="center"
+                    app:layout_constraintTop_toTopOf="@+id/id_play_pause"/>
+
+            <TextView
+                    android:textColor="@color/item_overflow"
+                    android:id="@+id/overflow_icon"
+                    android:text="@string/overflow"
+                    android:layout_marginEnd="8dp"
+                    android:textAppearance="?android:textAppearanceLarge"
+                    app:layout_constraintStart_toEndOf="@id/id_filename"
+                    app:layout_constraintTop_toTopOf="@id/id_filename"
+                    app:layout_constraintBottom_toBottomOf="@id/id_dwloadprogressbar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

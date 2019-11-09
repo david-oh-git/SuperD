@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--    app background colour-->
+    <color name="background_color">@color/md_black_1000</color>
+    <color name="progressbar_color">@android:color/black</color>
+    <color name="item_overflow">@color/md_purple_200</color>
+
+</resources>

@@ -14,4 +14,6 @@
     <string name="enter_url">Please enter a url</string>
     <string name="db_error_msg">Error retrieving data from database</string>
     <string name="download_url">Enter a download url ..</string>
+    <string name="overflow" translatable="false" >⋮</string>
+
 </resources>

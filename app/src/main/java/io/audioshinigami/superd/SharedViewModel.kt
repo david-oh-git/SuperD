@@ -28,6 +28,9 @@ class SharedViewModel( private val repository: DefaultRepository) :
     val isActive: (String) -> LiveData<Boolean>
     get() = ::isDownloadActive
 
+    /* updates progressbar value*/
+    var setProgressValue: ( ( String, Int ) -> Unit )? = null
+
     init {
         loadPagedData()
         /* get data from DB */
@@ -43,6 +46,8 @@ class SharedViewModel( private val repository: DefaultRepository) :
 
 
         pagedDownloads = pagedListBuilder.build()
+
+
     }
 
     fun isDownloadActive(url : String ): MutableLiveData<Boolean> {

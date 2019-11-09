@@ -6,4 +6,7 @@
 
 <!--    app background colour-->
     <color name="background_color">@android:color/white</color>
+    <color name="progressbar_color">@android:color/black</color>
+    <color name="item_overflow">@color/md_purple_500</color>
+
 </resources>

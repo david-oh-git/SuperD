@@ -5,10 +5,13 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import io.audioshinigami.superd.R.layout.download_item_2
+import io.audioshinigami.superd.SharedViewModel
 import io.audioshinigami.superd.data.source.db.entity.FileData
 import io.audioshinigami.superd.databinding.DownloadItem2Binding
 
-class FIleDataAdaptor: PagedListAdapter<FileData, FileDataViewHolder>(FileDataDiffCallback()) {
+class FIleDataAdaptor(
+    private val viewModel: SharedViewModel
+): PagedListAdapter<FileData, FileDataViewHolder>(FileDataDiffCallback()) {
 
     var binding: DownloadItem2Binding? = null
 
@@ -25,7 +28,10 @@ class FIleDataAdaptor: PagedListAdapter<FileData, FileDataViewHolder>(FileDataDi
 
         binding = DownloadItem2Binding.inflate(layoutInflater, parent, false)
 
-        return FileDataViewHolder(binding!!)
+        return FileDataViewHolder(binding!!).apply {
+            if( viewModel.setProgressValue == null )
+                viewModel.setProgressValue = ::setProgressValue
+        }
     }
 
     override fun getItemViewType(position: Int) = download_item_2

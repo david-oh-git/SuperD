@@ -145,6 +145,7 @@ class FileDataViewModel(application: Application) : AndroidViewModel(application
         } //end listener
 
         App.instance.fetch?.addListener(fetchListener!!)
+        
 
     } //end fetchListenerActive
 

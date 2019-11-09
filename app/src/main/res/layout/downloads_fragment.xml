@@ -13,6 +13,7 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:background="@color/background_color"
             android:id="@+id/downloads_parent_view"
             app:fabSize="normal"
             android:orientation="vertical"
