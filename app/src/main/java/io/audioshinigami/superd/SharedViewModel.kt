@@ -24,9 +24,10 @@ class SharedViewModel( private val repository: DefaultRepository) :
     private set
 
     /* list of currently active downloads*/
-    private val _activeDownloads = arrayListOf<String>()
-    val isActive: (String) -> LiveData<Boolean>
-    get() = ::isDownloadActive
+    private val _activeDownloads = mutableMapOf<String, Boolean>()
+
+    private val _isActive = MutableLiveData(false)
+    val isActive: LiveData<Boolean> = _isActive
 
     /* updates progressbar value*/
     var setProgressValue: ( ( String, Int ) -> Unit )? = null
@@ -35,6 +36,12 @@ class SharedViewModel( private val repository: DefaultRepository) :
         loadPagedData()
         /* get data from DB */
         loadData()
+    }
+
+    fun isDownloading( url: String): MutableLiveData<Boolean> {
+        val isActive = _activeDownloads[url] ?: false
+
+        return MutableLiveData(isActive)
     }
 
     fun loadPagedData(){
@@ -50,10 +57,6 @@ class SharedViewModel( private val repository: DefaultRepository) :
 
     }
 
-    fun isDownloadActive(url : String ): MutableLiveData<Boolean> {
-
-        return MutableLiveData(url in _activeDownloads)
-    }
 
     fun startDownload( url: String ) = viewModelScope.launch(Dispatchers.IO) {
 
@@ -61,7 +64,7 @@ class SharedViewModel( private val repository: DefaultRepository) :
         repository.start(url)
 
         /* add to active downloads*/
-//        launch(Dispatchers.Main) { activeDownloads.add(url) }
+        launch(Dispatchers.Main) { _activeDownloads[url] = true }
         // TODO attach fetch listener
     }
 

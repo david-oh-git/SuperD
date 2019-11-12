@@ -34,6 +34,10 @@ interface FileDataDao {
     @Update
     suspend fun updateFileData(fileData: FileData)
 
+    // updates progress value for a fileData, as url is unique
+    @Query("UPDATE $TABLE_NAME SET progress_value = :progress WHERE url = :url")
+    suspend fun updateProgressValue(url: String, progress: Int)
+
     @Delete
     suspend fun delete(fileData: FileData)
 

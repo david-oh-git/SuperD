@@ -22,9 +22,4 @@ class FileDataViewHolder( private val binding: DownloadItem2Binding )
         }
     }
 
-    /* sets progress value, function is passed to viewModel for realtime updates*/
-    fun setProgressValue(url: String, value: Int){
-        if( binding.fileData.url == url ) binding.idDwloadprogressbar.progress = value
-
-    }
 }

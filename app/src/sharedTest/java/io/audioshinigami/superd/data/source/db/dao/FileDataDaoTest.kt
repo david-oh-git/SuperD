@@ -254,4 +254,67 @@ class FileDataDaoTest {
         }
     }
 
+    @Test
+    fun insertFileDataAndUpdateProgressValue() = runBlockingTest {
+        // Arrange : add data to db with progress value: 0
+        val fileData = FileDataFactory.makeFileDataEntry().copy( progressValue = 0)
+        db.fileDataDao().insert(fileData)
+
+        // Act: update the progress value
+        val newProgressValue = 23
+        db.fileDataDao().updateProgressValue(fileData.url, newProgressValue)
+
+        // retrieve fileData & confirm progress value was updated
+        db.fileDataDao().getAll().observeOnce {
+            assertThat(it.isEmpty(), `is`(false)) // check data not empty
+            assertThat(it[0].progressValue, `is`(newProgressValue))
+        }
+    }
+
+    @Test
+    fun insertMultipleDataAndUpdateProgressValues() = runBlockingTest {
+        // Arrange: add multiple data
+        val data = FileDataFactory.makeFileDataEntry()
+        val data2 = FileDataFactory.makeFileDataEntry()
+        val data3 = FileDataFactory.makeFileDataEntry()
+        val data4 = FileDataFactory.makeFileDataEntry()
+        val data5 = FileDataFactory.makeFileDataEntry()
+
+        db.fileDataDao().insertAll(data, data2, data3, data4, data5)
+
+        // Act: update progress values
+        val progress = 77
+        val progress2 = 34
+        val progress3 = 100
+        val progress4 = 25
+        val progress5 = 42
+        db.fileDataDao().updateProgressValue( data.url, progress)
+        db.fileDataDao().updateProgressValue( data2.url, progress2)
+        db.fileDataDao().updateProgressValue( data3.url, progress3)
+        db.fileDataDao().updateProgressValue( data4.url, progress4)
+        db.fileDataDao().updateProgressValue( data5.url, progress5)
+
+        // retrieve data from db & assert values
+        db.fileDataDao().getAll().observeOnce {
+            assertThat(it.isEmpty(), `is`(false)) // check data not empty
+
+            for( obj in it ){
+
+                when(obj.url){
+
+                    data.url -> assertProgressValue( obj.progressValue , progress )
+                    data2.url -> assertProgressValue( obj.progressValue , progress2 )
+                    data3.url -> assertProgressValue( obj.progressValue , progress3 )
+                    data4.url -> assertProgressValue( obj.progressValue , progress4 )
+                    data5.url -> assertProgressValue( obj.progressValue , progress5 )
+                }
+
+            }
+        }
+    } // END insertMultipleDataAndUpdateProgressValues
+
+    private fun assertProgressValue(progressValue: Int, updatedProgressvalue: Int ){
+        assertThat( progressValue, `is`(updatedProgressvalue))
+    }
+
 }

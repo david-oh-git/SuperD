@@ -28,10 +28,7 @@ class FIleDataAdaptor(
 
         binding = DownloadItem2Binding.inflate(layoutInflater, parent, false)
 
-        return FileDataViewHolder(binding!!).apply {
-            if( viewModel.setProgressValue == null )
-                viewModel.setProgressValue = ::setProgressValue
-        }
+        return FileDataViewHolder(binding!!)
     }
 
     override fun getItemViewType(position: Int) = download_item_2
