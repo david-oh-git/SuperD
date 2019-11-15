@@ -33,9 +33,11 @@ class SharedViewModel( private val repository: DefaultRepository) :
     var setProgressValue: ( ( String, Int ) -> Unit )? = null
 
     init {
+        
+        /* get paged data */
         loadPagedData()
         /* get data from DB */
-        loadData()
+//        loadData()
     }
 
     fun isDownloading( url: String): MutableLiveData<Boolean> {
