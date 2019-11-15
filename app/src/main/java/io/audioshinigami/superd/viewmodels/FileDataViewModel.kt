@@ -32,7 +32,7 @@ class FileDataViewModel(application: Application) : AndroidViewModel(application
 
     fun update( fileData: FileData) = viewModelScope.launch(Dispatchers.IO) {
         FileRepository.update(fileData)
-    } /*end updateFileData*/
+    } /*end updateProgressvalue*/
 
     fun delete( fileData: FileData) = viewModelScope.launch(Dispatchers.IO) {
         FileRepository.delete(fileData)
@@ -81,7 +81,7 @@ class FileDataViewModel(application: Application) : AndroidViewModel(application
 
             override fun onCompleted(download: Download) {
                 Log.d(TAG, "Download 100%")
-                //TODO updateFileData db value
+                //TODO updateProgressvalue db value
 
             }
 
@@ -99,7 +99,7 @@ class FileDataViewModel(application: Application) : AndroidViewModel(application
                 /*updates the progressbar */
                 Log.d(TAG, "onProgress" )
                 Log.d(TAG, "progress value : ${download.progress} ")
-                //TODO updateFileData progress bar
+                //TODO updateProgressvalue progress bar
                 progressListener?.let { function ->
                     function(download.progress, download.url)
                 }
@@ -110,7 +110,7 @@ class FileDataViewModel(application: Application) : AndroidViewModel(application
             override fun onPaused(download: Download) {
 //                TODO: when paused button icon doesnt change
                 Log.d(TAG, "Download paused" )
-                //TODO when pasued updateFileData db progress value
+                //TODO when pasued updateProgressvalue db progress value
             }
 
             override fun onResumed(download: Download) {

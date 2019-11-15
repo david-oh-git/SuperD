@@ -11,6 +11,8 @@ interface DataBaseRepository {
 
     suspend fun saveAll(vararg fileData: FileData)
 
+    suspend fun updateProgressvalue(url: String, progressValue: Int )
+
     suspend fun update(fileData: FileData)
 
     suspend fun delete(fileData: FileData)

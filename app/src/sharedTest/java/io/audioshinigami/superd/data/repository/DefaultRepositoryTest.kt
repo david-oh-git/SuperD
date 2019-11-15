@@ -173,4 +173,53 @@ class DefaultRepositoryTest {
         }
     } //END
 
+    @Test /* updates progress value of Db row via unique url */
+    fun updateFileData_getUpdatedData() = runBlockingTest {
+        // Arrange : create & add data to DB
+        val testUid = 45
+        val fileData = FileDataFactory.makeFileDataEntry().copy( uid = testUid )
+        defaultRepository.save(fileData)
+
+        // Act: update progress value
+        val updatedProgressValue = 67
+        defaultRepository.updateProgressvalue( fileData.url, updatedProgressValue)
+
+        // Assert: check if progress value was updated
+        val result = defaultRepository.getById( testUid )
+
+        assertThat( result , `is`(notNullValue()) )
+        assertThat( result?.progressValue , `is`(updatedProgressValue))
+
+    }
+
+    @Test
+    fun updateMultipleData_getUpdatedDataSet() =  runBlockingTest {
+        // Arrange: add multiple data
+        val ( uid , uid2 , uid3 ) =  arrayOf( 34, 67 , 22)
+        val data = FileDataFactory.makeFileDataEntry().copy( uid = uid)
+        val data2 = FileDataFactory.makeFileDataEntry().copy( uid = uid2 )
+        val data3 = FileDataFactory.makeFileDataEntry().copy( uid = uid3 )
+        defaultRepository.saveAll( data, data2, data3 )
+
+        // Act: update progress values
+        val ( updatedProgress, updatedProgress2, updatedProgress3 ) = arrayOf( 99, 77, 44)
+        defaultRepository.updateProgressvalue( data.url, updatedProgress )
+        defaultRepository.updateProgressvalue( data2.url , updatedProgress2)
+        defaultRepository.updateProgressvalue( data3.url , updatedProgress3 )
+
+        //Assert : test it duh !!!
+        val result = defaultRepository.getById( uid )
+        val result2 = defaultRepository.getById( uid2 )
+        val result3 = defaultRepository.getById( uid3 )
+
+        assertThat( result , `is`(notNullValue()))
+        assertThat( result2 , `is`(notNullValue()))
+        assertThat( result3 , `is`(notNullValue()))
+
+        assertThat( result?.progressValue, `is`(updatedProgress) )
+        assertThat( result2?.progressValue, `is`(updatedProgress2) )
+        assertThat( result3?.progressValue, `is`(updatedProgress3) )
+
+    }
+
 }// END class

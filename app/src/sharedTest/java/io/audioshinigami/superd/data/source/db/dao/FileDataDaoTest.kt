@@ -141,7 +141,7 @@ class FileDataDaoTest {
         val fileData = FileDataFactory.makeFileDataEntry().copy(uid = 78)
         db.fileDataDao().insert(fileData)
 
-        // Act : updateFileData FileData
+        // Act : updateProgressvalue FileData
         val updatedFileData =  fileData.copy(progressValue = 100, request_id = 8476473)
         db.fileDataDao().updateFileData(updatedFileData)
 

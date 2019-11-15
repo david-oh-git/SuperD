@@ -54,6 +54,10 @@ class DefaultRepository(
         dao.insertAll(*fileData)
     }
 
+    override suspend fun updateProgressvalue(url: String, progressValue: Int ) = withContext(ioDispatcher){
+        dao.updateProgressValue( url , progressValue )
+    }
+
     override suspend fun getById(id: Int): FileData? {
         return dao.findById(id)
     }

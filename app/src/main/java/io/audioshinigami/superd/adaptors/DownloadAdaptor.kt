@@ -71,7 +71,7 @@ package io.audioshinigami.superd.adaptors
 //    }
 //
 //    override fun updateProgressBar(progressValue: Int, request_id: Int) {
-//        /*so fetch listener can updateFileData current view holder data :) */
+//        /*so fetch listener can updateProgressvalue current view holder data :) */
 //        for(dataIndex in 0 until filesData.size){
 //            val currentFileData = filesData[dataIndex]  /*current fileData object in loop */
 //            if( currentFileData.request_id == request_id ){
