@@ -6,13 +6,9 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33825971-b23c-46b9-a034-287db03bac44" name="Default Changelist" comment="++++ updated tests : DefaultRepositoryTest">
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+    <list default="true" id="33825971-b23c-46b9-a034-287db03bac44" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/SharedViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/SharedViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/repository/DefaultRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/repository/DefaultRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/download_item_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/download_item_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/downloads_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/downloads_fragment.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,15 +41,6 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/source/db/dao/FileDataDao.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="11" column="2" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/sharedTest/java/io/audioshinigami/superd/data/repository/DefaultRepositoryTest.kt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-2280">
@@ -65,8 +52,24 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/SharedViewModel.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="814">
-              <caret line="91" column="8" lean-forward="true" selection-start-line="91" selection-start-column="8" selection-end-line="91" selection-end-column="8" />
+            <state relative-caret-position="-882">
+              <caret line="83" column="59" selection-start-line="83" selection-start-column="59" selection-end-line="83" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-612" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/App.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -74,18 +77,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/viewmodels/FileDataViewModel.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-748">
+            <state relative-caret-position="68">
               <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/download_item_2.xml">
-          <provider selected="true" editor-type-id="android-designer2" />
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="42" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -129,6 +122,13 @@
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Object" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -149,6 +149,7 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/downloads_fragment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/download_item_2.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/repository/DefaultRepository.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/listeners/DownloadFetchListener.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/SharedViewModel.kt" />
       </list>
     </option>
@@ -286,6 +287,13 @@
               <item name="data" type="462c0819:PsiDirectoryNode" />
               <item name="db" type="462c0819:PsiDirectoryNode" />
               <item name="dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SuperD" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="superd" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="listeners" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="SuperD" type="1abcf292:AndroidViewProjectNode" />
@@ -639,7 +647,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573822161118</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="++++ logic to disable fetchListener: SharedViewModel">
+      <created>1574082721124</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1574082721125</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -676,7 +691,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49945474" visible="true" weight="0.16268657" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49945474" visible="true" weight="0.16268657" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" sideWeight="0.50054526" side_tool="true" weight="0.2925532" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -707,7 +722,8 @@
     <MESSAGE value="+++ i dont f#ckin know !!!!!!!!!!!!!!!" />
     <MESSAGE value="++++ updated tests : FileDataDaoTests" />
     <MESSAGE value="++++ updated tests : DefaultRepositoryTest" />
-    <option name="LAST_COMMIT_MESSAGE" value="++++ updated tests : DefaultRepositoryTest" />
+    <MESSAGE value="++++ logic to disable fetchListener: SharedViewModel" />
+    <option name="LAST_COMMIT_MESSAGE" value="++++ logic to disable fetchListener: SharedViewModel" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/io/audioshinigami/superd/ExampleInstrumentedTest.kt" />
@@ -828,17 +844,60 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/App.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.tonyodev.fetch2/xfetch2/3.1.4/f982ca5d8e2077f71bbfcfebe95e9c1d51d0cb9c/xfetch2-3.1.4-sources.jar!/com/tonyodev/fetch2/Fetch.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="34" column="8" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-612" />
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.tonyodev.fetch2/xfetch2/3.1.4/f982ca5d8e2077f71bbfcfebe95e9c1d51d0cb9c/xfetch2-3.1.4-sources.jar!/com/tonyodev/fetch2/FetchListener.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/viewmodels/FileDataViewModel.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-748">
+        <state relative-caret-position="68">
           <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/listeners/DownloadFetchListener.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+          <folding>
+            <element signature="e#44#198#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.tonyodev.fetch2/xfetch2/3.1.4/f982ca5d8e2077f71bbfcfebe95e9c1d51d0cb9c/xfetch2-3.1.4-sources.jar!/com/tonyodev/fetch2/Download.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-935">
+          <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/SharedViewModel.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="814">
-          <caret line="91" column="8" lean-forward="true" selection-start-line="91" selection-start-column="8" selection-end-line="91" selection-end-column="8" />
+        <state relative-caret-position="-882">
+          <caret line="83" column="59" selection-start-line="83" selection-start-column="59" selection-end-line="83" selection-end-column="59" />
         </state>
       </provider>
     </entry>

@@ -1,5 +1,6 @@
 package io.audioshinigami.superd
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,7 +8,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.tonyodev.fetch2.Download
+import com.tonyodev.fetch2.Error
 import com.tonyodev.fetch2.FetchListener
+import com.tonyodev.fetch2core.DownloadBlock
 import io.audioshinigami.superd.data.Result
 import io.audioshinigami.superd.data.repository.DefaultRepository
 import io.audioshinigami.superd.data.source.db.entity.FileData
@@ -75,11 +79,82 @@ class SharedViewModel( private val repository: DefaultRepository) :
         // TODO attach fetch listener
     }
 
-    private fun updateProgressValue( url: String, progressValue: Int ){
-
+    /* saves updated progress value to DB*/
+    private fun updateProgressValue( url: String, progressValue: Int ) = viewModelScope.launch(Dispatchers.IO) {
+        repository.updateProgressvalue( url, progressValue )
     }
 
     fun enableFetchListener(){
+
+        /* if not null, add fetchListener*/
+        fetchListener?.apply {
+            repository.fetch.addListener(this)
+            return
+        }
+
+        fetchListener = object : FetchListener {
+
+            override fun onCompleted(download: Download) {
+
+            }
+
+            override fun onQueued(download: Download, waitingOnNetwork: Boolean) {
+
+            }
+
+            override fun onAdded(download: Download) {
+
+            }
+
+            override fun onCancelled(download: Download) {
+            }
+
+            override fun onDeleted(download: Download) {
+            }
+
+            override fun onDownloadBlockUpdated(
+                download: Download,
+                downloadBlock: DownloadBlock,
+                totalBlocks: Int
+            ) {
+            }
+
+            override fun onError(download: Download, error: Error, throwable: Throwable?) {
+                Log.d( TAG, "onError: error code is ${error.value}")
+            }
+
+            override fun onPaused(download: Download) {
+            }
+
+            override fun onProgress(
+                download: Download,
+                etaInMilliSeconds: Long,
+                downloadedBytesPerSecond: Long
+            ) {
+
+                updateProgressValue( download.url, download.progress )
+            }
+
+            override fun onRemoved(download: Download) {
+            }
+
+            override fun onResumed(download: Download) {
+            }
+
+            override fun onStarted(
+                download: Download,
+                downloadBlocks: List<DownloadBlock>,
+                totalBlocks: Int
+            ) {
+            }
+
+            override fun onWaitingNetwork(download: Download) {
+            }
+        } //END FetchListener
+
+
+
+        fetchListener?.apply { repository.fetch.addListener(this) }
 
     }
 
@@ -89,7 +164,7 @@ class SharedViewModel( private val repository: DefaultRepository) :
         fetchListener?.apply {
             repository.fetch.removeListener(this)
         }
-        
+
     }
 
     fun pauseDownload( id: String ){
