@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.tonyodev.fetch2.FetchListener
 import io.audioshinigami.superd.data.Result
 import io.audioshinigami.superd.data.repository.DefaultRepository
 import io.audioshinigami.superd.data.source.db.entity.FileData
@@ -31,6 +32,10 @@ class SharedViewModel( private val repository: DefaultRepository) :
 
     /* updates progressbar value*/
     var setProgressValue: ( ( String, Int ) -> Unit )? = null
+
+    /* fetch listener*/
+    var fetchListener: FetchListener? = null
+
 
     init {
         
@@ -68,6 +73,23 @@ class SharedViewModel( private val repository: DefaultRepository) :
         /* add to active downloads*/
         launch(Dispatchers.Main) { _activeDownloads[url] = true }
         // TODO attach fetch listener
+    }
+
+    private fun updateProgressValue( url: String, progressValue: Int ){
+
+    }
+
+    fun enableFetchListener(){
+
+    }
+
+    fun disableFetchListener(){
+
+        /* remove fetchListener */
+        fetchListener?.apply {
+            repository.fetch.removeListener(this)
+        }
+        
     }
 
     fun pauseDownload( id: String ){

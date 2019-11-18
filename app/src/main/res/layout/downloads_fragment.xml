@@ -29,6 +29,7 @@
                 android:layout_gravity="bottom|end" />
 
         <androidx.recyclerview.widget.RecyclerView
+
                 android:background="@color/md_grey_300"
                 android:id="@+id/downloads_rview"
                 android:visibility="invisible"

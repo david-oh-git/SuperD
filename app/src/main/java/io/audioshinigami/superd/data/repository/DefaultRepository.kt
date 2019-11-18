@@ -23,7 +23,7 @@ import java.io.File
 
 class DefaultRepository(
     private val dao: FileDataDao,
-    private val fetch: Fetch,
+    val fetch: Fetch,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : DataBaseRepository, DownloadRepository {
 
