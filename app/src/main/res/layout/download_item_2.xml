@@ -8,8 +8,8 @@
         <import type="androidx.core.content.ContextCompat"/>
 
         <variable
-                name="clickListener"
-                type="android.view.View.OnClickListener" />
+                name="action"
+                type="io.audioshinigami.superd.addownload.ItemActions" />
 
         <variable
                 name="fileData"
@@ -68,7 +68,7 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/circular_button"
                 android:contentDescription="@string/image_btn_description"
-                android:onClick="@{clickListener}"
+                android:onClick="@{ () -> action.downloadAction.invoke(fileData.request_id)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

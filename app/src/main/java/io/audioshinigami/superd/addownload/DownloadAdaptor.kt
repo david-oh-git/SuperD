@@ -33,7 +33,9 @@ class DownloadAdaptor(
     override fun onBindViewHolder(holder: AppViewHolder, position: Int) {
         val anyObject = getPositionDataObject(position)
 
-        holder.bind(itemClickListener, anyObject)
+        val action = ItemActions( ::downloadButtonAction, ::overFlowButtonAction )
+
+        holder.bind( action, anyObject)
     }
 
     override fun getLayoutIdForPosition(position: Int) = layoutID
@@ -57,12 +59,13 @@ class DownloadAdaptor(
 
     }
 
-    fun downLoadAcitonClick( url: String ) =
+    fun downloadButtonAction( id: Int ){
 
-        View.OnClickListener {
-            // TODO code to pause/resume/restart download
-        }
+    }
 
+    fun overFlowButtonAction( fileData: FileData){
+
+    }
 
     private class FileDataDiffCallback(
         private val oldList: List<FileData>,
