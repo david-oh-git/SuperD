@@ -7,6 +7,6 @@ import io.audioshinigami.superd.data.source.db.entity.FileData
 */
 
 class ItemActions(
-    val downloadAction: ( Int ) -> Unit,
+    val downloadAction: ( Int , String ) -> Unit,
     val overFlowAction: (FileData ) -> Unit
 )

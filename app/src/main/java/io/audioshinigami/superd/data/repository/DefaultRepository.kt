@@ -108,13 +108,13 @@ class DefaultRepository(
         save(fileData)
     }
 
-    override suspend fun pause(id: Int) {
+    override fun pause(id: Int) {
 
         /*pause download*/
         fetch.pause(id)
     }
 
-    override suspend fun resume(id: Int) {
+    override fun resume(id: Int) {
         fetch.resume(id)
     }
 

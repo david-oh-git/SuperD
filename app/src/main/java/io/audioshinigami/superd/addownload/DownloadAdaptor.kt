@@ -11,7 +11,8 @@ import io.audioshinigami.superd.utility.recyclerview.AppViewHolder
 import io.audioshinigami.superd.utility.recyclerview.BaseAdaptor
 
 class DownloadAdaptor(
-    private val layoutID: Int
+    private val layoutID: Int,
+    private val viewModel: SharedViewModel
 ): BaseAdaptor() {
 
     private val data: ArrayList<FileData> = ArrayList()
@@ -59,12 +60,12 @@ class DownloadAdaptor(
 
     }
 
-    fun downloadButtonAction( id: Int ){
-
+    private fun downloadButtonAction( id: Int , url: String ){
+        viewModel.downloadActionClick( id, url)
     }
 
-    fun overFlowButtonAction( fileData: FileData){
-
+    private fun overFlowButtonAction( fileData: FileData){
+        // TODo inflate popUp Menu
     }
 
     private class FileDataDiffCallback(

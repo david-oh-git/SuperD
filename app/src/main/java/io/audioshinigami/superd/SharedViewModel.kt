@@ -137,7 +137,7 @@ class SharedViewModel( private val repository: DefaultRepository) :
                 Log.d(TAG, "progress : ${download.progress}% .... ")
 
                 if( download.progress > 10 )
-                    pauseDownload( download.id )
+                    repository.pause( download.id )
                 updateProgressValue( download.url, download.progress )
             }
 
@@ -173,15 +173,6 @@ class SharedViewModel( private val repository: DefaultRepository) :
 
     }
 
-    fun pauseDownload( id: Int ){
-        repository.fetch.pause( id )
-
-    }
-
-    fun resumeDownload( id: String ){
-
-    }
-
     private fun loadData() = viewModelScope.launch(Dispatchers.Main){
         /* loads data from DB */
         launch(Dispatchers.IO) {
@@ -200,6 +191,26 @@ class SharedViewModel( private val repository: DefaultRepository) :
         }
 
     } //END loadData
+
+    fun downloadActionClick( id: Int , url: String ){
+
+        when( _activeDownloads[url] ){
+            true -> {
+                repository.pause(id)
+                _activeDownloads[url] = false
+            }
+
+            false -> {
+                repository.resume(id)
+                _activeDownloads[url] = true
+            }
+
+            else -> {
+                viewModelScope.launch(Dispatchers.IO) { repository.restart(url) }
+                _activeDownloads[url] = true
+            }
+        }
+    }
 
     private fun createSuccess( data: List<FileData>): Result.Success<List<FileData>> {
         return Result.Success( data )

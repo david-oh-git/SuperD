@@ -6,7 +6,7 @@ interface DownloadRepository {
 
     suspend fun restart(url: String)
 
-    suspend fun pause(id: Int)
+    fun pause(id: Int)
 
-    suspend fun resume(id: Int)
+    fun resume(id: Int)
 }
