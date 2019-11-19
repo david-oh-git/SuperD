@@ -313,8 +313,30 @@ class FileDataDaoTest {
         }
     } // END insertMultipleDataAndUpdateProgressValues
 
-    private fun assertProgressValue(progressValue: Int, updatedProgressvalue: Int ){
-        assertThat( progressValue, `is`(updatedProgressvalue))
+    @Test
+    fun insertMultipleDataWithSameUrl() = runBlockingTest {
+        // Arrange: create multiple FileData with same url
+        val fileData = FileDataFactory.makeFileDataEntry()
+        val fileData2 =  FileDataFactory.makeFileDataEntry().copy( url = fileData.url )
+
+        // Act : save them
+        db.fileDataDao().apply {
+            insert(fileData)
+            insert(fileData2)
+        }
+
+        // Assert:
+
+        db.fileDataDao().getAll().observeOnce {
+
+            assertThat(it.size, `is`(1))
+            assertThat(it[0].url , `is`(fileData.url) )
+        }
+
+    }
+
+    private fun assertProgressValue(progressValue: Int, updatedProgressValue: Int ){
+        assertThat( progressValue, `is`(updatedProgressValue))
     }
 
 }

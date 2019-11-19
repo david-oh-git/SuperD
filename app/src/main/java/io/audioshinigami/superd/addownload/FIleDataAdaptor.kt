@@ -9,9 +9,8 @@ import io.audioshinigami.superd.SharedViewModel
 import io.audioshinigami.superd.data.source.db.entity.FileData
 import io.audioshinigami.superd.databinding.DownloadItem2Binding
 
-class FIleDataAdaptor(
-    private val viewModel: SharedViewModel
-): PagedListAdapter<FileData, FileDataViewHolder>(FileDataDiffCallback()) {
+class FIleDataAdaptor():
+    PagedListAdapter<FileData, FileDataViewHolder>(FileDataDiffCallback()) {
 
     var binding: DownloadItem2Binding? = null
 

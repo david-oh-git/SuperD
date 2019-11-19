@@ -54,4 +54,5 @@ abstract class FileDatabase : RoomDatabase(){
         } //end getDbInstance
 
     } // end companion object
+
 } //end Filedatabase

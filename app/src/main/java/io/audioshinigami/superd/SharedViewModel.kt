@@ -20,7 +20,6 @@ import kotlinx.coroutines.launch
 
 class SharedViewModel( private val repository: DefaultRepository) :
     ViewModel() {
-    // TODO: Implement the ViewModel
 
     private val _downloads = MutableLiveData<Result<List<FileData>>>().apply { value = Result.Loading }
     val downloads: LiveData<Result<List<FileData>>> = _downloads
@@ -44,9 +43,9 @@ class SharedViewModel( private val repository: DefaultRepository) :
     init {
         
         /* get paged data */
-        loadPagedData()
+//        loadPagedData()
         /* get data from DB */
-//        loadData()
+        loadData()
     }
 
     fun isDownloading( url: String): MutableLiveData<Boolean> {
@@ -61,8 +60,6 @@ class SharedViewModel( private val repository: DefaultRepository) :
         val pagedListBuilder: LivePagedListBuilder<Int, FileData> = LivePagedListBuilder<Int, FileData>(factory,
             CACHED_PAGE_SIZE )
 
-
-
         pagedDownloads = pagedListBuilder.build()
 
 
@@ -71,12 +68,14 @@ class SharedViewModel( private val repository: DefaultRepository) :
 
     fun startDownload( url: String ) = viewModelScope.launch(Dispatchers.IO) {
 
+        Log.d(TAG, "startDownload called ....")
         /* start download */
         repository.start(url)
 
         /* add to active downloads*/
         launch(Dispatchers.Main) { _activeDownloads[url] = true }
-        // TODO attach fetch listener
+
+        enableFetchListener()
     }
 
     /* saves updated progress value to DB*/
@@ -121,6 +120,10 @@ class SharedViewModel( private val repository: DefaultRepository) :
 
             override fun onError(download: Download, error: Error, throwable: Throwable?) {
                 Log.d( TAG, "onError: error code is ${error.value}")
+                Log.d( TAG, "onError: msg is $error")
+
+                /* remove url from activeDownload*/
+                _activeDownloads.remove( download.url )
             }
 
             override fun onPaused(download: Download) {
@@ -131,7 +134,10 @@ class SharedViewModel( private val repository: DefaultRepository) :
                 etaInMilliSeconds: Long,
                 downloadedBytesPerSecond: Long
             ) {
+                Log.d(TAG, "progress : ${download.progress}% .... ")
 
+                if( download.progress > 10 )
+                    pauseDownload( download.id )
                 updateProgressValue( download.url, download.progress )
             }
 
@@ -167,7 +173,8 @@ class SharedViewModel( private val repository: DefaultRepository) :
 
     }
 
-    fun pauseDownload( id: String ){
+    fun pauseDownload( id: Int ){
+        repository.fetch.pause( id )
 
     }
 
@@ -182,8 +189,8 @@ class SharedViewModel( private val repository: DefaultRepository) :
 
             try {
 
-                val dbLiveData = repository.getAll()
-                _downloads.postValue( Result.Success(dbLiveData.value!!) )
+                val data = repository.getData()
+                _downloads.postValue( Result.Success(data) )
             }
 
             catch (e : Exception ){

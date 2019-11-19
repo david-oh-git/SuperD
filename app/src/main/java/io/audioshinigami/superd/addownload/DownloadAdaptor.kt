@@ -4,19 +4,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import io.audioshinigami.superd.SharedViewModel
 import io.audioshinigami.superd.data.source.db.entity.FileData
 import io.audioshinigami.superd.databinding.DownloadItem2Binding
 import io.audioshinigami.superd.utility.recyclerview.AppViewHolder
 import io.audioshinigami.superd.utility.recyclerview.BaseAdaptor
 
-class DownloadAdaptor(private val layoutID: Int ):
- BaseAdaptor() {
+class DownloadAdaptor(
+    private val layoutID: Int
+): BaseAdaptor() {
 
     private val data: ArrayList<FileData> = ArrayList()
 
     override var itemClickListener: View.OnClickListener? = null
 
-    var binding: DownloadItem2Binding? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -24,10 +25,15 @@ class DownloadAdaptor(private val layoutID: Int ):
 //        val binding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, viewType ,
 //            parent, false)
 
-        binding = DownloadItem2Binding.inflate(layoutInflater, parent, false)
-
+        val binding = DownloadItem2Binding.inflate(layoutInflater, parent, false)
 
         return AppViewHolder(binding!!)
+    }
+
+    override fun onBindViewHolder(holder: AppViewHolder, position: Int) {
+        val anyObject = getPositionDataObject(position)
+
+        holder.bind(itemClickListener, anyObject)
     }
 
     override fun getLayoutIdForPosition(position: Int) = layoutID
@@ -50,6 +56,13 @@ class DownloadAdaptor(private val layoutID: Int ):
     fun updateProgressValue( newProgressValue: Int, url: String ){
 
     }
+
+    fun downLoadAcitonClick( url: String ) =
+
+        View.OnClickListener {
+            // TODO code to pause/resume/restart download
+        }
+
 
     private class FileDataDiffCallback(
         private val oldList: List<FileData>,

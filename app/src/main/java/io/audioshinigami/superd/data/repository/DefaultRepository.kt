@@ -2,10 +2,6 @@ package io.audioshinigami.superd.data.repository
 
 import android.net.Uri
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
 import com.tonyodev.fetch2.Fetch
 import com.tonyodev.fetch2.NetworkType
 import com.tonyodev.fetch2.Priority
@@ -33,6 +29,7 @@ class DefaultRepository(
         val directory = ReUseMethods.getPublicFileStorageDir()
 
         val pathUri = Uri.parse( directory.toString() + File.separator + fileName )
+        Log.d(TAG, "path : $pathUri")
 
         val request =  Request(urlString, pathUri)
 
@@ -46,7 +43,7 @@ class DefaultRepository(
     }
 
     override suspend fun save(fileData: FileData) = withContext(ioDispatcher){
-        Log.d(TAG, "save started")
+
         dao.insert(fileData)
     }
 
@@ -86,13 +83,17 @@ class DefaultRepository(
 
     fun getAllPaged() = dao.getAllPaged()
 
+    override suspend fun getData(): List<FileData> {
+        return dao.getData()
+    }
+
     override suspend fun start(url: String) {
 
         /* create a request*/
         val request = createRequest(url)
 
         /* start the download*/
-//        fetch.enqueue(request)
+        fetch.enqueue(request)
 
         /* create [FileData] info for file*/
         val fileData = FileData(

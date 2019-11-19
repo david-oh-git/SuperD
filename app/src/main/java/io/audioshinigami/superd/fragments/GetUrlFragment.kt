@@ -45,7 +45,7 @@ class GetUrlFragment : DialogFragment() {
                 sendUrl(urlStr)
             }
             else
-                activity?.toast(getString(R.string.enter_url))
+                activity?.toast(getString(R.string.download_url))
         }
     }
 
@@ -54,7 +54,7 @@ class GetUrlFragment : DialogFragment() {
         val permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 
         if( url.isEmpty() ){
-            Toast.makeText(context, getString(R.string.download_url), Toast.LENGTH_LONG).show()
+            activity?.toast(getString(R.string.download_url))
             return
         }
 

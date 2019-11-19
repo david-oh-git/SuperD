@@ -11,7 +11,6 @@
     <string name="image_btn_description">click to play or pause</string>
     <string name="str_imbtn_description">delete icon</string>
     <string name="str_txtvw_delete">delete</string>
-    <string name="enter_url">Please enter a url</string>
     <string name="db_error_msg">Error retrieving data from database</string>
     <string name="download_url">Enter a download url ..</string>
     <string name="overflow" translatable="false" >⋮</string>

@@ -16,10 +16,7 @@ class FileDataViewHolder( private val binding: DownloadItem2Binding )
     }
 
     fun clear(){
-        binding.apply {
-            setVariable(BR.fileData, null )
-            executePendingBindings()
-        }
+        binding.unbind()
     }
 
 }

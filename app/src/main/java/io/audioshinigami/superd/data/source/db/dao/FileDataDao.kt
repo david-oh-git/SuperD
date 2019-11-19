@@ -14,6 +14,9 @@ interface FileDataDao {
     @Query("SELECT * FROM $TABLE_NAME ORDER BY uid ASC")
     fun getAll(): LiveData<List<FileData>>
 
+    @Query("SELECT * FROM $TABLE_NAME ORDER BY uid ASC")
+    suspend fun getData(): List<FileData>
+
     @Query("SELECT * FROM $TABLE_NAME ORDER BY uid DESC")
     fun getAllPaged(): DataSource.Factory<Int, FileData>
 
