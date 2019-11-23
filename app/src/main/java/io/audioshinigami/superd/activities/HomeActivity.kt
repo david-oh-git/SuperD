@@ -1,13 +1,9 @@
 package io.audioshinigami.superd.activities
 
-import android.os.Bundle
-import android.view.View
-import io.audioshinigami.superd.fragments.GetUrlFragment
-import io.audioshinigami.superd.utility.ReUseMethods
-import kotlinx.android.synthetic.main.activity_home.*
 import android.Manifest
 import android.content.pm.PackageManager
-import android.util.Log
+import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProviders
@@ -17,15 +13,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import io.audioshinigami.superd.App
 import io.audioshinigami.superd.R
-import io.audioshinigami.superd.listeners.SwipeToDeleteCallback
 import io.audioshinigami.superd.adaptors.ViewAdaptor
-import io.audioshinigami.superd.viewmodels.FileDataViewModel
-import io.audioshinigami.superd.utility.toast
-import io.audioshinigami.superd.common.TAG
 import io.audioshinigami.superd.common.SD_REQCODE
 import io.audioshinigami.superd.common.subscribe
 import io.audioshinigami.superd.data.source.db.entity.FileData
+import io.audioshinigami.superd.listeners.SwipeToDeleteCallback
+import io.audioshinigami.superd.utility.ReUseMethods
+import io.audioshinigami.superd.utility.toast
 import io.audioshinigami.superd.viewholders.ItemViewHolder
+import io.audioshinigami.superd.viewmodels.FileDataViewModel
+import kotlinx.android.synthetic.main.activity_home.*
+import timber.log.Timber
 
 
 class HomeActivity : AppCompatActivity(), SwipeToDeleteCallback.SwipeToDeleteListener
@@ -83,7 +81,7 @@ class HomeActivity : AppCompatActivity(), SwipeToDeleteCallback.SwipeToDeleteLis
 
         if(requestCode == SD_REQCODE && grantResults.isNotEmpty() &&
                 grantResults[0] == PackageManager.PERMISSION_GRANTED ){
-            Log.d(TAG, "Write Permission granted")
+            Timber.d( "Write Permission granted")
         } //end if
         else{
             toast("Write Permission not granted")
@@ -95,11 +93,11 @@ class HomeActivity : AppCompatActivity(), SwipeToDeleteCallback.SwipeToDeleteLis
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int) {
         if ( viewHolder is ItemViewHolder ){
             val deletedItem: FileData = adaptor.getItem(viewHolder.adapterPosition )
-            Log.d(TAG, "deleted item object: $deletedItem")
+             Timber.d( "deleted item object: $deletedItem")
             val deletedIndex: Int =  viewHolder.adapterPosition
-            Log.d(TAG, "deleted item index:  $deletedIndex")
+             Timber.d( "deleted item index:  $deletedIndex")
             adaptor.removeItem(viewHolder.adapterPosition)
-            Log.d(TAG, "adaptor position is $deletedIndex")
+             Timber.d( "adaptor position is $deletedIndex")
 
             val snackbar = Snackbar.make( id_parent_layout, "Removed ", Snackbar.LENGTH_LONG)
             snackbar.setAction("UNDO", View.OnClickListener {

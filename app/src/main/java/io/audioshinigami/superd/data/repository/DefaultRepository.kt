@@ -1,15 +1,10 @@
 package io.audioshinigami.superd.data.repository
 
-import android.content.ContentValues
 import android.net.Uri
-import android.os.Build
-import android.provider.MediaStore
-import android.util.Log
 import com.tonyodev.fetch2.Fetch
 import com.tonyodev.fetch2.NetworkType
 import com.tonyodev.fetch2.Priority
 import com.tonyodev.fetch2.Request
-import io.audioshinigami.superd.App
 import io.audioshinigami.superd.data.source.db.dao.FileDataDao
 import io.audioshinigami.superd.data.source.db.entity.FileData
 import io.audioshinigami.superd.utility.ReUseMethods
@@ -131,7 +126,4 @@ class DefaultRepository(
         fetch.enqueue(request)
     }
 
-    companion object{
-        private const val TAG = "DefaultRepo"
-    }
 }

@@ -1,7 +1,6 @@
 package io.audioshinigami.superd.addownload
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +11,11 @@ import io.audioshinigami.superd.R
 import io.audioshinigami.superd.SharedViewModel
 import io.audioshinigami.superd.data.Result
 import io.audioshinigami.superd.databinding.DownloadsFragmentBinding
-import io.audioshinigami.superd.utility.*
-import kotlinx.android.synthetic.main.downloads_fragment.*
+import io.audioshinigami.superd.utility.hideView
+import io.audioshinigami.superd.utility.obtainViewModel
+import io.audioshinigami.superd.utility.sendSnack
+import io.audioshinigami.superd.utility.showView
+import timber.log.Timber
 
 class DownloadsFragment : Fragment() {
 
@@ -56,20 +58,20 @@ class DownloadsFragment : Fragment() {
                     binding.downloadsRview.showView()
                     results.data.let { adaptor.setData(it) }
                     binding.downloadsRview.adapter = adaptor
-                    Log.d(TAG, " Success ....")
+                    Timber.d( " Success ....")
                 }
                 is Result.Error -> {
 
                     binding.progressBar.hideView()
                     binding.downloadsRview.hideView()
                     sendSnack( getString(R.string.db_error_msg) )
-                    Log.d(TAG, " Error ....")
+                    Timber.d( " Error ....")
 
                 }
                 is Result.Loading -> {
                     binding.downloadsRview.hideView()
                     binding.progressBar.showView()
-                    Log.d(TAG , " loading now ....")
+                    Timber.d( " loading now ....")
                 }
             }
         })
@@ -101,10 +103,6 @@ class DownloadsFragment : Fragment() {
         return View.OnClickListener {
             // TODO :
         }
-    }
-
-    companion object {
-        private const val TAG = "DownloadFrag"
     }
 
 }

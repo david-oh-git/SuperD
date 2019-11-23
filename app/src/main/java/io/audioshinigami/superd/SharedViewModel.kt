@@ -1,6 +1,5 @@
 package io.audioshinigami.superd
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,6 +16,7 @@ import io.audioshinigami.superd.data.repository.DefaultRepository
 import io.audioshinigami.superd.data.source.db.entity.FileData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class SharedViewModel( private val repository: DefaultRepository) :
     ViewModel() {
@@ -68,7 +68,7 @@ class SharedViewModel( private val repository: DefaultRepository) :
 
     fun startDownload( url: String ) = viewModelScope.launch(Dispatchers.IO) {
 
-        Log.d(TAG, "startDownload called ....")
+        Timber.d("startDownload called ....")
         /* start download */
         repository.start(url)
 
@@ -119,9 +119,9 @@ class SharedViewModel( private val repository: DefaultRepository) :
             }
 
             override fun onError(download: Download, error: Error, throwable: Throwable?) {
-                Log.d( TAG, "onError: error code is ${error.value}")
-                Log.d( TAG, "onError: msg is $error")
-                Log.d( TAG, " url is : ${download.url}")
+                Timber.d(  "onError: error code is ${error.value}")
+                Timber.d(  "onError: msg is $error")
+                Timber.d(  " url is : ${download.url}")
 
                 /* remove url from activeDownload*/
                 _activeDownloads.remove( download.url )
@@ -135,7 +135,7 @@ class SharedViewModel( private val repository: DefaultRepository) :
                 etaInMilliSeconds: Long,
                 downloadedBytesPerSecond: Long
             ) {
-                Log.d(TAG, "progress : ${download.progress}% .... ")
+                Timber.d( "progress : ${download.progress}% .... ")
 
                 if( download.progress > 5 )
                     repository.pause( download.id )
@@ -199,20 +199,20 @@ class SharedViewModel( private val repository: DefaultRepository) :
             true -> {
                 repository.pause(id)
                 _activeDownloads[url] = false
-                Log.d(TAG, "pausing download ***** \n")
+                Timber.d( "pausing download ***** \n")
             }
 
             false -> {
                 repository.resume(id)
                 _activeDownloads[url] = true
-                Log.d(TAG, "resuming download ***** \n")
+                Timber.d("resuming download ***** \n")
             }
 
             else -> {
                 viewModelScope.launch(Dispatchers.IO) { repository.restart(url) }
                 enableFetchListener()
                 _activeDownloads[url] = true
-                Log.d(TAG, "restarting download ***** \n")
+                Timber.d("restarting download ***** \n")
             }
         }
     }
@@ -223,7 +223,6 @@ class SharedViewModel( private val repository: DefaultRepository) :
     }
 
     companion object {
-        private const val TAG = "SharedView"
         private const val CACHED_PAGE_SIZE = 15
     }
 }

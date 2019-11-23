@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.SharedViewModel
-import io.audioshinigami.superd.utility.*
+import io.audioshinigami.superd.utility.PermissionManager
+import io.audioshinigami.superd.utility.WRITE_EXTERNAL_REQUEST_CODE
+import io.audioshinigami.superd.utility.obtainViewModel
+import io.audioshinigami.superd.utility.toast
 import kotlinx.android.synthetic.main.fragment_get_url.*
 
 

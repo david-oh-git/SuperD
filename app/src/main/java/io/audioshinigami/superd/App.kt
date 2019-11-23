@@ -4,6 +4,7 @@ import android.app.Application
 import com.tonyodev.fetch2.Fetch
 import com.tonyodev.fetch2.FetchConfiguration
 import io.audioshinigami.superd.data.source.db.FileDatabase
+import timber.log.Timber
 
 class App : Application() {
 
@@ -21,6 +22,9 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        if( BuildConfig.DEBUG)
+            Timber.plant( Timber.DebugTree() )
 
         synchronized(this){
             instance = this

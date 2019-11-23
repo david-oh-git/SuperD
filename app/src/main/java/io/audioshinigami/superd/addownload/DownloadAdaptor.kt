@@ -1,6 +1,5 @@
 package io.audioshinigami.superd.addownload
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,7 @@ import io.audioshinigami.superd.data.source.db.entity.FileData
 import io.audioshinigami.superd.databinding.DownloadItem2Binding
 import io.audioshinigami.superd.utility.recyclerview.AppViewHolder
 import io.audioshinigami.superd.utility.recyclerview.BaseAdaptor
+import timber.log.Timber
 
 class DownloadAdaptor(
     private val layoutID: Int,
@@ -62,7 +62,7 @@ class DownloadAdaptor(
     }
 
     private fun downloadButtonAction( id: Int , url: String ){
-        Log.d(TAG, "download action called. id: $id & url : $url")
+        Timber.d( "download action called. id: $id & url : $url")
         viewModel.downloadAction( id, url)
     }
 
@@ -91,10 +91,6 @@ class DownloadAdaptor(
                     ( oldItem.isActive == newItem.isActive )
         }
 
-    }
-
-    companion object {
-        private const val TAG = "DownloadAdaptor"
     }
 
 }
