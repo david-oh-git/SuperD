@@ -121,6 +121,7 @@ class SharedViewModel( private val repository: DefaultRepository) :
             override fun onError(download: Download, error: Error, throwable: Throwable?) {
                 Log.d( TAG, "onError: error code is ${error.value}")
                 Log.d( TAG, "onError: msg is $error")
+                Log.d( TAG, " url is : ${download.url}")
 
                 /* remove url from activeDownload*/
                 _activeDownloads.remove( download.url )
@@ -136,7 +137,7 @@ class SharedViewModel( private val repository: DefaultRepository) :
             ) {
                 Log.d(TAG, "progress : ${download.progress}% .... ")
 
-                if( download.progress > 10 )
+                if( download.progress > 5 )
                     repository.pause( download.id )
                 updateProgressValue( download.url, download.progress )
             }
@@ -192,22 +193,26 @@ class SharedViewModel( private val repository: DefaultRepository) :
 
     } //END loadData
 
-    fun downloadActionClick( id: Int , url: String ){
+    fun downloadAction(id: Int, url: String ){
 
         when( _activeDownloads[url] ){
             true -> {
                 repository.pause(id)
                 _activeDownloads[url] = false
+                Log.d(TAG, "pausing download ***** \n")
             }
 
             false -> {
                 repository.resume(id)
                 _activeDownloads[url] = true
+                Log.d(TAG, "resuming download ***** \n")
             }
 
             else -> {
                 viewModelScope.launch(Dispatchers.IO) { repository.restart(url) }
+                enableFetchListener()
                 _activeDownloads[url] = true
+                Log.d(TAG, "restarting download ***** \n")
             }
         }
     }

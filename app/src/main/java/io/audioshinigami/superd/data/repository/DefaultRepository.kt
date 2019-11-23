@@ -1,11 +1,15 @@
 package io.audioshinigami.superd.data.repository
 
+import android.content.ContentValues
 import android.net.Uri
+import android.os.Build
+import android.provider.MediaStore
 import android.util.Log
 import com.tonyodev.fetch2.Fetch
 import com.tonyodev.fetch2.NetworkType
 import com.tonyodev.fetch2.Priority
 import com.tonyodev.fetch2.Request
+import io.audioshinigami.superd.App
 import io.audioshinigami.superd.data.source.db.dao.FileDataDao
 import io.audioshinigami.superd.data.source.db.entity.FileData
 import io.audioshinigami.superd.utility.ReUseMethods
@@ -14,7 +18,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
 
-/*implementation of the projects default repository */
+/*
+* implementation of the projects default repository
+*/
 
 
 class DefaultRepository(
@@ -27,19 +33,15 @@ class DefaultRepository(
 
         val fileName = urlString.substringAfterLast("/")
         val directory = ReUseMethods.getPublicFileStorageDir()
+        val downloadUri = Uri.parse( directory.toString() + File.separator + fileName )
 
-        val pathUri = Uri.parse( directory.toString() + File.separator + fileName )
-        Log.d(TAG, "path : $pathUri")
-
-        val request =  Request(urlString, pathUri)
-
-        request.apply {
-            priority = Priority.HIGH
+        return  Request(urlString, downloadUri!! ) // TODO fix this null BS !!!!
+            .apply {
+            priority = Priority.NORMAL
             networkType = NetworkType.ALL
             addHeader("clientKey", "SD78DF93_3947&MVNGHE1WONG")
         }
 
-        return request
     }
 
     override suspend fun save(fileData: FileData) = withContext(ioDispatcher){
@@ -122,6 +124,8 @@ class DefaultRepository(
         /* create a request*/
         val request = createRequest(url)
 
+        /*update request id in DB */
+        dao.updateRequestId( url, request.id)
 
         /* start the download*/
         fetch.enqueue(request)

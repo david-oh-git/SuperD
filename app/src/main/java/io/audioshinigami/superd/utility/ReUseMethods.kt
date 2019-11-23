@@ -45,13 +45,13 @@ class ReUseMethods {
             return ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
         }  //end isExternal
 
-        fun getPublicFileStorageDir(albumName: String = "SuperD"): File? {
+        fun getPublicFileStorageDir(albumName: String = "superd"): File? {
 
             // TODO : start here , check if this works on android 10
 
             /* get download directory to store File*/
-//            val directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-            val directory = App.instance.applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+            val directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+//            val directory = App.instance.applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
             val file = File( directory ,
                 albumName )
             if (!file.exists()){
@@ -65,4 +65,5 @@ class ReUseMethods {
 
 
     }  //end companion
+
 } //end Reuse

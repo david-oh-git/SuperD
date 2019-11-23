@@ -1,5 +1,6 @@
 package io.audioshinigami.superd.addownload
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,7 @@ class DownloadAdaptor(
 
         val binding = DownloadItem2Binding.inflate(layoutInflater, parent, false)
 
-        return AppViewHolder(binding!!)
+        return AppViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: AppViewHolder, position: Int) {
@@ -61,7 +62,8 @@ class DownloadAdaptor(
     }
 
     private fun downloadButtonAction( id: Int , url: String ){
-        viewModel.downloadActionClick( id, url)
+        Log.d(TAG, "download action called. id: $id & url : $url")
+        viewModel.downloadAction( id, url)
     }
 
     private fun overFlowButtonAction( fileData: FileData){
@@ -89,6 +91,10 @@ class DownloadAdaptor(
                     ( oldItem.isActive == newItem.isActive )
         }
 
+    }
+
+    companion object {
+        private const val TAG = "DownloadAdaptor"
     }
 
 }

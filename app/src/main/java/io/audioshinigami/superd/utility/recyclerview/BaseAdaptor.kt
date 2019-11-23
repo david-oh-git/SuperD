@@ -10,7 +10,7 @@ abstract class BaseAdaptor: RecyclerView.Adapter<AppViewHolder>() {
     override fun onBindViewHolder(holder: AppViewHolder, position: Int) {
         val anyObject = getPositionDataObject(position)
 
-        holder.bind(itemClickListener, anyObject)
+//        holder.bind(itemClickListener, anyObject)
     }
 
     override fun getItemViewType(position: Int) = getLayoutIdForPosition(position)
