@@ -54,4 +54,5 @@ ext {
     hamcrest_version = '2.1'
     paging_version = "2.1.0"
     lifecycle_version = "2.1.0"
+    timber_version = "4.7.1"
 }

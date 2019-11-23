@@ -114,6 +114,8 @@ dependencies {
     // 3rd Party
         // Fetch2
     implementation "androidx.tonyodev.fetch2:xfetch2:$fetch2_version"
+        // Timber
+    implementation "com.jakewharton.timber:timber:$timber_version"
 
     // AndroidX tests dependencies ###
     androidTestImplementation "androidx.test:core-ktx:$test_core_version"
