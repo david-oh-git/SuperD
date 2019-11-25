@@ -9,13 +9,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.SharedViewModel
-import io.audioshinigami.superd.data.Result
 import io.audioshinigami.superd.databinding.DownloadsFragmentBinding
 import io.audioshinigami.superd.utility.hideView
 import io.audioshinigami.superd.utility.obtainViewModel
-import io.audioshinigami.superd.utility.sendSnack
 import io.audioshinigami.superd.utility.showView
-import timber.log.Timber
 
 class DownloadsFragment : Fragment() {
 
@@ -36,58 +33,63 @@ class DownloadsFragment : Fragment() {
 
 
         /* adaptor for download recyclerView*/
-        val adaptor = DownloadAdaptor(R.layout.download_item_2, viewModel )
-//        val adaptor = FIleDataAdaptor()
+//        val adaptor = DownloadAdaptor(R.layout.download_item_2, viewModel )
+        val adaptor = FIleDataAdaptor( viewModel )
         subscribeUi(binding, adaptor)
 
         return binding.root
     }
 
-    private fun subscribeUi(binding: DownloadsFragmentBinding?, adaptor: DownloadAdaptor) {
+    private fun subscribeUi(binding: DownloadsFragmentBinding?, adaptor: FIleDataAdaptor) {
         /* assign click listener*/
 //        adaptor.itemClickListener = downLoadItemClickListener()
 
         /* assign download_item binding to viewModel*/
 
-        viewModel.downloads.observe(binding?.lifecycleOwner!!, Observer {
-            results ->
-
-            when(results){
-                is Result.Success -> {
-                    binding.progressBar.hideView()
-                    binding.downloadsRview.showView()
-                    results.data.let { adaptor.setData(it) }
-                    binding.downloadsRview.adapter = adaptor
-                    Timber.d( " Success ....")
-                }
-                is Result.Error -> {
-
-                    binding.progressBar.hideView()
-                    binding.downloadsRview.hideView()
-                    sendSnack( getString(R.string.db_error_msg) )
-                    Timber.d( " Error ....")
-
-                }
-                is Result.Loading -> {
-                    binding.downloadsRview.hideView()
-                    binding.progressBar.showView()
-                    Timber.d( " loading now ....")
-                }
-            }
-        })
-
-//        viewModel.pagedDownloads.observe(binding?.lifecycleOwner!!, Observer {
-//            data ->
-//            data?.apply {
-//                adaptor.submitList(this)
+//        viewModel.downloads.observe(binding?.lifecycleOwner!!, Observer {
+//            results ->
 //
-//                binding.apply {
-//                    progressBar.hideView()
-//                    downloadsRview.adapter = adaptor
-//                    downloadsRview.showView()
+//            when(results){
+//                is Result.Success -> {
+//                    binding.progressBar.hideView()
+//                    binding.downloadsRview.showView()
+//                    results.data.let { adaptor.setData(it) }
+//                    binding.downloadsRview.adapter = adaptor
+//                    Timber.d( " Success ....")
+//                }
+//                is Result.Error -> {
+//
+//                    binding.progressBar.hideView()
+//                    binding.downloadsRview.hideView()
+//                    sendSnack( getString(R.string.db_error_msg) )
+//                    Timber.d( " Error ....")
+//
+//                }
+//                is Result.Loading -> {
+//                    binding.downloadsRview.hideView()
+//                    binding.progressBar.showView()
+//                    Timber.d( " loading now ....")
 //                }
 //            }
 //        })
+
+        binding?.apply {
+            downloadsRview.hideView()
+            progressBar.showView()
+        }
+
+        viewModel.pagedDownloads.observe(binding?.lifecycleOwner!!, Observer {
+            data ->
+            data?.apply {
+                adaptor.submitList(this)
+
+                binding.apply {
+                    progressBar.hideView()
+                    downloadsRview.adapter = adaptor
+                    downloadsRview.showView()
+                }
+            }
+        })
     }
 
     private fun createFabListener() : View.OnClickListener {

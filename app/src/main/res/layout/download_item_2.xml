@@ -20,8 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/card_margin"
+        android:layout_marginBottom="0dp"
         android:background="@android:color/darker_gray"
-        app:cardCornerRadius="9dp"
+        app:cardCornerRadius="6dp"
         app:cardElevation="8dp" >
 
         <RelativeLayout
@@ -55,6 +56,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/id_view_forground"
+            android:paddingBottom="0dp"
+            android:layout_marginBottom="0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/md_purple_400">
@@ -78,16 +81,20 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:padding="-1dp"
                 android:max="@integer/progressbar_maxValue"
-                android:progress="@{fileData.progressValue}"
-                app:layout_constraintBottom_toBottomOf="@id/id_play_pause"
-                app:layout_constraintEnd_toEndOf="@id/id_filename"
+                android:progress="62"
+                android:layout_marginBottom="0dp"
+                android:paddingBottom="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/id_view_forground"
+                app:layout_constraintEnd_toEndOf="@id/id_view_forground"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@id/id_filename"
-                app:layout_constraintTop_toBottomOf="@+id/id_filename" />
+                app:layout_constraintStart_toStartOf="@id/id_view_forground" />
 
             <TextView
                 android:id="@+id/id_filename"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"

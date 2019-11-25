@@ -30,12 +30,6 @@ class SharedViewModel( private val repository: DefaultRepository) :
     /* list of currently active downloads*/
     private val _activeDownloads = mutableMapOf<String, Boolean>()
 
-    private val _isActive = MutableLiveData(false)
-    val isActive: LiveData<Boolean> = _isActive
-
-    /* updates progressbar value*/
-    var setProgressValue: ( ( String, Int ) -> Unit )? = null
-
     /* fetch listener*/
     var fetchListener: FetchListener? = null
 
@@ -43,15 +37,9 @@ class SharedViewModel( private val repository: DefaultRepository) :
     init {
         
         /* get paged data */
-//        loadPagedData()
+        loadPagedData()
         /* get data from DB */
-        loadData()
-    }
-
-    fun isDownloading( url: String): MutableLiveData<Boolean> {
-        val isActive = _activeDownloads[url] ?: false
-
-        return MutableLiveData(isActive)
+//        loadData()
     }
 
     fun loadPagedData(){
@@ -61,10 +49,7 @@ class SharedViewModel( private val repository: DefaultRepository) :
             CACHED_PAGE_SIZE )
 
         pagedDownloads = pagedListBuilder.build()
-
-
     }
-
 
     fun startDownload( url: String ) = viewModelScope.launch(Dispatchers.IO) {
 
@@ -76,6 +61,9 @@ class SharedViewModel( private val repository: DefaultRepository) :
         launch(Dispatchers.Main) { _activeDownloads[url] = true }
 
         enableFetchListener()
+
+        /* get latest data from DB for UI */
+//        loadData()
     }
 
     /* saves updated progress value to DB*/
@@ -136,9 +124,9 @@ class SharedViewModel( private val repository: DefaultRepository) :
                 downloadedBytesPerSecond: Long
             ) {
                 Timber.d( "progress : ${download.progress}% .... ")
-
-                if( download.progress > 5 )
-                    repository.pause( download.id )
+//
+//                if( download.progress > 5 )
+//                    repository.pause( download.id )
                 updateProgressValue( download.url, download.progress )
             }
 
@@ -211,7 +199,10 @@ class SharedViewModel( private val repository: DefaultRepository) :
             else -> {
                 viewModelScope.launch(Dispatchers.IO) { repository.restart(url) }
                 enableFetchListener()
+
+                /* add url to list of active urls*/
                 _activeDownloads[url] = true
+
                 Timber.d("restarting download ***** \n")
             }
         }

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import io.audioshinigami.superd.SharedViewModel
 import io.audioshinigami.superd.data.source.db.entity.FileData
 import io.audioshinigami.superd.databinding.DownloadItem2Binding

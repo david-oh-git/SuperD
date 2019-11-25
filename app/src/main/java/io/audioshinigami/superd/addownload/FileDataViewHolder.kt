@@ -8,9 +8,10 @@ import io.audioshinigami.superd.databinding.DownloadItem2Binding
 class FileDataViewHolder( private val binding: DownloadItem2Binding )
     : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind( any: FileData ){
+    fun bind( _action: ItemActions , any: FileData ){
         binding.apply {
             setVariable(BR.fileData, any)
+            action = _action
             executePendingBindings()
         }
     }

@@ -6,13 +6,10 @@ import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Environment
-import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import io.audioshinigami.superd.App
-import io.audioshinigami.superd.common.TAG
 import java.io.File
 
 class ReUseMethods {
@@ -45,7 +42,7 @@ class ReUseMethods {
             return ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
         }  //end isExternal
 
-        fun getPublicFileStorageDir(albumName: String = "superd"): File? {
+        fun getPublicFileStorageDir(albumName: String = "Superd"): File? {
 
             // TODO : start here , check if this works on android 10
 
