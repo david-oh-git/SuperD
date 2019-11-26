@@ -14,5 +14,7 @@
     <string name="db_error_msg">Error retrieving data from database</string>
     <string name="download_url">Enter a download url ..</string>
     <string name="overflow" translatable="false" >⋮</string>
+    <string name="copy_url_string">Copy URL</string>
+    <string name="delete">Delete</string>
 
 </resources>
