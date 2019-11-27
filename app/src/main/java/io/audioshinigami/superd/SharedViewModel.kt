@@ -208,6 +208,10 @@ class SharedViewModel( private val repository: DefaultRepository) :
         }
     }
 
+    fun delete( fileData: FileData) = viewModelScope.launch(Dispatchers.IO){
+        repository.delete( fileData )
+    }
+
     private fun createSuccess( data: List<FileData>): Result.Success<List<FileData>> {
         return Result.Success( data )
 

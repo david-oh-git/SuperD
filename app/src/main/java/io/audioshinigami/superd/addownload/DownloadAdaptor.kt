@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import io.audioshinigami.superd.SharedViewModel
 import io.audioshinigami.superd.data.source.db.entity.FileData
 import io.audioshinigami.superd.databinding.DownloadItem2Binding
@@ -36,9 +35,7 @@ class DownloadAdaptor(
     override fun onBindViewHolder(holder: AppViewHolder, position: Int) {
         val anyObject = getPositionDataObject(position)
 
-        val action = ItemActions( ::downloadButtonAction, ::overFlowButtonAction )
-
-        holder.bind( action, anyObject)
+        holder.bind( anyObject )
     }
 
     override fun getLayoutIdForPosition(position: Int) = layoutID
@@ -56,19 +53,6 @@ class DownloadAdaptor(
         data.addAll(currentData)
 
         diffResult.dispatchUpdatesTo(this)
-    }
-
-    fun updateProgressValue( newProgressValue: Int, url: String ){
-
-    }
-
-    private fun downloadButtonAction( id: Int , url: String ){
-        Timber.d( "download action called. id: $id & url : $url")
-        viewModel.downloadAction( id, url)
-    }
-
-    private fun overFlowButtonAction( fileData: FileData){
-        // TODO inflate popUp Menu
     }
 
     private class FileDataDiffCallback(

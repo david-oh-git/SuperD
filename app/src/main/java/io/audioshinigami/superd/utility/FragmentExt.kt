@@ -1,7 +1,6 @@
 package io.audioshinigami.superd.utility
 
 import android.content.pm.PackageManager
-import android.os.Build
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel

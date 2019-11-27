@@ -2,22 +2,29 @@ package io.audioshinigami.superd.addownload
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.SharedViewModel
+import io.audioshinigami.superd.data.source.db.entity.FileData
 import io.audioshinigami.superd.databinding.DownloadsFragmentBinding
 import io.audioshinigami.superd.utility.hideView
 import io.audioshinigami.superd.utility.obtainViewModel
 import io.audioshinigami.superd.utility.showView
+import timber.log.Timber
 
-class DownloadsFragment : Fragment() {
+class DownloadsFragment :
+    Fragment(), PopupMenu.OnMenuItemClickListener, DownloadItemActions {
 
 
     private val viewModel by lazy { obtainViewModel(SharedViewModel::class.java) }
+    private var _itemUrl: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,20 +34,48 @@ class DownloadsFragment : Fragment() {
         val binding = DownloadsFragmentBinding.inflate(inflater, container, false)
 
         binding.apply {
-            fabListener = createFabListener()
+            fabListener = fabOnClickListener()
             lifecycleOwner = this@DownloadsFragment.viewLifecycleOwner
         }
 
 
         /* adaptor for download recyclerView*/
 //        val adaptor = DownloadAdaptor(R.layout.download_item_2, viewModel )
-        val adaptor = FIleDataAdaptor( viewModel )
+        val adaptor = FileDataAdaptor(  this )
         subscribeUi(binding, adaptor)
 
         return binding.root
     }
 
-    private fun subscribeUi(binding: DownloadsFragmentBinding?, adaptor: FIleDataAdaptor) {
+    override fun onMenuItemClick(item: MenuItem?): Boolean {
+        return when(item?.itemId){
+            R.id.action_copy_url -> {
+                _itemUrl?.apply {
+                    Toast.makeText(context, "URL copied !", Toast.LENGTH_LONG ).show()
+                }
+                true
+            }
+
+            R.id.action_delete -> {
+                true
+            }
+
+            else -> false
+        }
+    }
+
+    override fun downloadButtonAction(id: Int, url: String) {
+        viewModel.downloadAction( id, url )
+    }
+
+    override fun showPopup(view: View, itemUrl: String ) {
+        showMenu(view)
+
+        /* assigns popup url*/
+        _itemUrl = itemUrl
+    }
+
+    private fun subscribeUi(binding: DownloadsFragmentBinding?, adaptor: FileDataAdaptor) {
         /* assign click listener*/
 //        adaptor.itemClickListener = downLoadItemClickListener()
 
@@ -92,19 +127,26 @@ class DownloadsFragment : Fragment() {
         })
     }
 
-    private fun createFabListener() : View.OnClickListener {
+    private fun fabOnClickListener() : View.OnClickListener {
         /* launches GetUrlFragment */
         return View.OnClickListener {
             findNavController().navigate(R.id.action_downloadsFragment_to_getUrlFragment)
         }
     }
 
-    private fun downLoadItemClickListener() : View.OnClickListener {
-
-        /* what happens when the download recyclerView item is click*/
-        return View.OnClickListener {
-            // TODO :
+    /* inflates popup menu */
+    private fun showMenu( view: View ){
+        PopupMenu(context, view ).apply {
+            // this fragments implements onMenuItemClickListener
+            setOnMenuItemClickListener(this@DownloadsFragment)
+            inflate(R.menu.item_popup)
+            show()
         }
+    }
+
+    /* copies url to clipboard*/
+    private fun setClipBoard( url : String ){
+
     }
 
 }
