@@ -12,12 +12,11 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.SharedViewModel
-import io.audioshinigami.superd.data.source.db.entity.FileData
 import io.audioshinigami.superd.databinding.DownloadsFragmentBinding
 import io.audioshinigami.superd.utility.hideView
-import io.audioshinigami.superd.utility.obtainViewModel
+import io.audioshinigami.superd.utility.recyclerview.extentions.copyToClipBoard
+import io.audioshinigami.superd.utility.recyclerview.extentions.obtainViewModel
 import io.audioshinigami.superd.utility.showView
-import timber.log.Timber
 
 class DownloadsFragment :
     Fragment(), PopupMenu.OnMenuItemClickListener, DownloadItemActions {
@@ -49,8 +48,11 @@ class DownloadsFragment :
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         return when(item?.itemId){
+            
             R.id.action_copy_url -> {
                 _itemUrl?.apply {
+                    // copies url to clipboard
+                    context?.copyToClipBoard(this)
                     Toast.makeText(context, "URL copied !", Toast.LENGTH_LONG ).show()
                 }
                 true
@@ -143,10 +145,4 @@ class DownloadsFragment :
             show()
         }
     }
-
-    /* copies url to clipboard*/
-    private fun setClipBoard( url : String ){
-
-    }
-
 }

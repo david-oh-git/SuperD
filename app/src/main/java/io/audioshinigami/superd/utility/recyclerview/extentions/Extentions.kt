@@ -1,4 +1,4 @@
-package io.audioshinigami.superd.utility
+package io.audioshinigami.superd.utility.recyclerview.extentions
 
 import android.content.Context
 import android.widget.Toast

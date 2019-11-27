@@ -9,9 +9,9 @@ import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.SharedViewModel
 import io.audioshinigami.superd.utility.PermissionManager
-import io.audioshinigami.superd.utility.WRITE_EXTERNAL_REQUEST_CODE
-import io.audioshinigami.superd.utility.obtainViewModel
-import io.audioshinigami.superd.utility.toast
+import io.audioshinigami.superd.utility.recyclerview.extentions.WRITE_EXTERNAL_REQUEST_CODE
+import io.audioshinigami.superd.utility.recyclerview.extentions.obtainViewModel
+import io.audioshinigami.superd.utility.recyclerview.extentions.toast
 import kotlinx.android.synthetic.main.fragment_get_url.*
 
 
@@ -75,7 +75,9 @@ class GetUrlFragment : DialogFragment() {
     }
 
     private fun makePermissionRequest(permission: String){
-        requestPermissions( arrayOf( permission ), WRITE_EXTERNAL_REQUEST_CODE )
+        requestPermissions( arrayOf( permission ),
+            WRITE_EXTERNAL_REQUEST_CODE
+        )
     }
 
 
