@@ -11,7 +11,7 @@ import io.audioshinigami.superd.SharedViewModel
 import io.audioshinigami.superd.utility.PermissionManager
 import io.audioshinigami.superd.utility.extentions.WRITE_EXTERNAL_REQUEST_CODE
 import io.audioshinigami.superd.utility.extentions.obtainViewModel
-import io.audioshinigami.superd.utility.extentions.toast
+import io.audioshinigami.superd.utility.extentions.sendToastMsg
 import kotlinx.android.synthetic.main.fragment_get_url.*
 
 
@@ -47,7 +47,8 @@ class GetUrlFragment : DialogFragment() {
                 sendUrl(urlStr)
             }
             else
-                activity?.toast(getString(R.string.download_url))
+                sendToastMsg( getString(R.string.download_url) )
+
         }
     }
 
@@ -56,7 +57,7 @@ class GetUrlFragment : DialogFragment() {
         val permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 
         if( url.isEmpty() ){
-            activity?.toast(getString(R.string.download_url))
+            sendToastMsg( getString(R.string.download_url) )
             return
         }
 

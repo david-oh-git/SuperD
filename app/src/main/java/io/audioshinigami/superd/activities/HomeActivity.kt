@@ -19,7 +19,6 @@ import io.audioshinigami.superd.common.subscribe
 import io.audioshinigami.superd.data.source.db.entity.FileData
 import io.audioshinigami.superd.listeners.SwipeToDeleteCallback
 import io.audioshinigami.superd.utility.ReUseMethods
-import io.audioshinigami.superd.utility.extentions.toast
 import io.audioshinigami.superd.viewholders.ItemViewHolder
 import io.audioshinigami.superd.viewmodels.FileDataViewModel
 import kotlinx.android.synthetic.main.activity_home.*
@@ -84,7 +83,7 @@ class HomeActivity : AppCompatActivity(), SwipeToDeleteCallback.SwipeToDeleteLis
             Timber.d( "Write Permission granted")
         } //end if
         else{
-            toast("Write Permission not granted")
+//            toast("Write Permission not granted")
             finish()
         }
 

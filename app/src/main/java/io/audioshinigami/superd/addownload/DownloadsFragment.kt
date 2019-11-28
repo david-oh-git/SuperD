@@ -13,10 +13,7 @@ import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.SharedViewModel
 import io.audioshinigami.superd.databinding.DownloadsFragmentBinding
-import io.audioshinigami.superd.utility.extentions.hideView
-import io.audioshinigami.superd.utility.extentions.copyToClipBoard
-import io.audioshinigami.superd.utility.extentions.obtainViewModel
-import io.audioshinigami.superd.utility.extentions.showView
+import io.audioshinigami.superd.utility.extentions.*
 
 class DownloadsFragment :
     Fragment(), PopupMenu.OnMenuItemClickListener, DownloadItemActions {
@@ -53,7 +50,7 @@ class DownloadsFragment :
                 _itemUrl?.apply {
                     // copies url to clipboard
                     context?.copyToClipBoard(this)
-                    Toast.makeText(context, "URL copied !", Toast.LENGTH_LONG ).show()
+                    sendToastMsg( getString( R.string.url_copied ) )
                 }
 
                 _itemUrl = null
@@ -63,6 +60,7 @@ class DownloadsFragment :
             R.id.action_delete -> {
                 _itemUrl?.apply {
                     viewModel.delete( this )
+                    sendToastMsg(getString( R.string.deleted ))
                 }
                 true
             }
