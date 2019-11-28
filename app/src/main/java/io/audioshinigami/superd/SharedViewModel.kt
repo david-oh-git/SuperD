@@ -68,7 +68,7 @@ class SharedViewModel( private val repository: DefaultRepository) :
 
     /* saves updated progress value to DB*/
     private fun updateProgressValue( url: String, progressValue: Int ) = viewModelScope.launch(Dispatchers.IO) {
-        repository.updateProgressvalue( url, progressValue )
+        repository.update( url, progressValue )
     }
 
     fun enableFetchListener(){

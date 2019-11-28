@@ -44,20 +44,20 @@ class DefaultRepository(
         dao.insert(fileData)
     }
 
-    override suspend fun saveAll(vararg fileData: FileData) = withContext(ioDispatcher){
-        dao.insertAll(*fileData)
+    override suspend fun save(vararg fileData: FileData) = withContext(ioDispatcher){
+        dao.insert(*fileData)
     }
 
-    override suspend fun updateProgressvalue(url: String, progressValue: Int ) = withContext(ioDispatcher){
-        dao.updateProgressValue( url , progressValue )
+    override suspend fun update(url: String, progressValue: Int ) = withContext(ioDispatcher){
+        dao.update( url , progressValue )
     }
 
     override suspend fun getById(id: Int): FileData? {
-        return dao.findById(id)
+        return dao.find(id)
     }
 
     override suspend fun update(fileData: FileData) = withContext(ioDispatcher) {
-        dao.updateFileData(fileData)
+        dao.update(fileData)
     }
 
     override suspend fun clearCompleted() = withContext(ioDispatcher){
@@ -72,8 +72,12 @@ class DefaultRepository(
         dao.deleteAll()
     }
 
-    override suspend fun deleteById(id: Int) = withContext(ioDispatcher) {
-        dao.deleteById(id)
+    override suspend fun delete(id: Int) = withContext(ioDispatcher) {
+        dao.delete(id)
+    }
+
+    override suspend fun delete(url: String): Int {
+        return dao.delete( url )
     }
 
     override suspend fun getAll() = dao.getAll()

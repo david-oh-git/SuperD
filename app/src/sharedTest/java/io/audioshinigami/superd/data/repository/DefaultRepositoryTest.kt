@@ -121,7 +121,7 @@ class DefaultRepositoryTest {
         val completeFileData = FileDataFactory.makeFileDataEntry().copy(progressValue = 100, uid = completeUid)
         val completeFileData2 = FileDataFactory.makeFileDataEntry().copy(progressValue = 100, uid = completeUid2)
         val fileData = FileDataFactory.makeFileDataEntry().copy(progressValue = 34, uid = testUid)
-        defaultRepository.saveAll( completeFileData, completeFileData2, fileData)
+        defaultRepository.save( completeFileData, completeFileData2, fileData)
 
         // Act :  clear all completed data
         defaultRepository.clearCompleted()
@@ -146,7 +146,7 @@ class DefaultRepositoryTest {
         val fileData = FileDataFactory.makeFileDataEntry()
         val fileData2 = FileDataFactory.makeFileDataEntry()
 
-        defaultRepository.saveAll(fileData, fileData2)
+        defaultRepository.save(fileData, fileData2)
 
         // Act : delete all data
         defaultRepository.deleteAll()
@@ -163,7 +163,7 @@ class DefaultRepositoryTest {
         // Assert : add multiple data & save to db
         val fileData = FileDataFactory.makeFileDataEntry()
         val fileData2 = FileDataFactory.makeFileDataEntry()
-        defaultRepository.saveAll(fileData, fileData2)
+        defaultRepository.save(fileData, fileData2)
 
         // Act : get all data from db
         defaultRepository.getAll().observeOnce {
@@ -182,7 +182,7 @@ class DefaultRepositoryTest {
 
         // Act: update progress value
         val updatedProgressValue = 67
-        defaultRepository.updateProgressvalue( fileData.url, updatedProgressValue)
+        defaultRepository.update( fileData.url, updatedProgressValue)
 
         // Assert: check if progress value was updated
         val result = defaultRepository.getById( testUid )
@@ -199,13 +199,13 @@ class DefaultRepositoryTest {
         val data = FileDataFactory.makeFileDataEntry().copy( uid = uid)
         val data2 = FileDataFactory.makeFileDataEntry().copy( uid = uid2 )
         val data3 = FileDataFactory.makeFileDataEntry().copy( uid = uid3 )
-        defaultRepository.saveAll( data, data2, data3 )
+        defaultRepository.save( data, data2, data3 )
 
         // Act: update progress values
         val ( updatedProgress, updatedProgress2, updatedProgress3 ) = arrayOf( 99, 77, 44)
-        defaultRepository.updateProgressvalue( data.url, updatedProgress )
-        defaultRepository.updateProgressvalue( data2.url , updatedProgress2)
-        defaultRepository.updateProgressvalue( data3.url , updatedProgress3 )
+        defaultRepository.update( data.url, updatedProgress )
+        defaultRepository.update( data2.url , updatedProgress2)
+        defaultRepository.update( data3.url , updatedProgress3 )
 
         //Assert : test it duh !!!
         val result = defaultRepository.getById( uid )
@@ -220,6 +220,26 @@ class DefaultRepositoryTest {
         assertThat( result2?.progressValue, `is`(updatedProgress2) )
         assertThat( result3?.progressValue, `is`(updatedProgress3) )
 
+    }
+
+    @Test
+    fun deleteItemWithUrl() = runBlockingTest {
+        // Arrange : add multiple items to DB
+        val data = FileDataFactory.makeFileDataEntry()
+        val data2 = FileDataFactory.makeFileDataEntry()
+        val data3 = FileDataFactory.makeFileDataEntry()
+
+        defaultRepository.save( data, data2, data3 )
+
+        // Act: delete an item
+        val numberOfDeletedItems = defaultRepository.delete( data.url )
+
+        // Assert : where the action happens , grab a seat
+        val result = defaultRepository.getData()
+
+        assertThat( result.isNotEmpty() , `is`(true) )
+        assertThat( result.size , `is`(2) )
+        assertThat( numberOfDeletedItems, `is`(1) )
     }
 
 }// END class

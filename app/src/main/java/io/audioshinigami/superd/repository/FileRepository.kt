@@ -31,7 +31,7 @@ object FileRepository {
 
     @WorkerThread
     suspend fun update(fileData: FileData){
-        fileDataDao.updateFileData(fileData)
+        fileDataDao.update(fileData)
     }
 
     @WorkerThread
@@ -52,7 +52,7 @@ object FileRepository {
 
     @WorkerThread
     suspend fun insertMultiple(fileData: Array<FileData>){
-        fileDataDao.insertAll(*fileData)
+        fileDataDao.insert(*fileData)
     }
 
     @WorkerThread

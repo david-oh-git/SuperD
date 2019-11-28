@@ -102,7 +102,7 @@ class FileDataDaoTest {
 
 
         // Assert : get data from db with same id & test contents
-        val retrievedFileData = db.fileDataDao().findById(customUid)
+        val retrievedFileData = db.fileDataDao().find(customUid)
 
         retrievedFileData?.apply {
             assertThat(uid, `is`(newFileData.uid))
@@ -143,10 +143,10 @@ class FileDataDaoTest {
 
         // Act : updateProgressvalue FileData
         val updatedFileData =  fileData.copy(progressValue = 100, request_id = 8476473)
-        db.fileDataDao().updateFileData(updatedFileData)
+        db.fileDataDao().update(updatedFileData)
 
         // Assert : check if data was updated
-        val retrievedFileData = db.fileDataDao().findById(fileData.uid)
+        val retrievedFileData = db.fileDataDao().find(fileData.uid)
 
         retrievedFileData?.apply {
             assertThat(uid, `is`(updatedFileData.uid))
@@ -163,7 +163,7 @@ class FileDataDaoTest {
         db.fileDataDao().insert(fileData)
 
         // Act : delete data with uid
-        db.fileDataDao().deleteById(fileData.uid)
+        db.fileDataDao().delete(fileData.uid)
 
         //Assert
         db.fileDataDao().getAll().observeOnce {
@@ -215,7 +215,7 @@ class FileDataDaoTest {
         db.fileDataDao().insert(anotherData)
 
         //Act : delete data with uid
-        val numberOfDeleted = db.fileDataDao().deleteById(69)
+        val numberOfDeleted = db.fileDataDao().delete(69)
 
         //Assert confirm data is deleted & it returns 1
         assertThat(1, `is`(numberOfDeleted))
@@ -246,7 +246,7 @@ class FileDataDaoTest {
         val completedFileData = FileDataFactory.makeFileDataEntry().copy(progressValue = 100)
         val secondCompleteFileData = FileDataFactory.makeFileDataEntry().copy( progressValue = 100)
         val fileData = FileDataFactory.makeFileDataEntry().copy(progressValue = 12)
-        db.fileDataDao().insertAll(completedFileData, secondCompleteFileData, fileData)
+        db.fileDataDao().insert(completedFileData, secondCompleteFileData, fileData)
 
         // Act : get all data from db
         db.fileDataDao().getAll().observeOnce {
@@ -262,7 +262,7 @@ class FileDataDaoTest {
 
         // Act: update the progress value
         val newProgressValue = 23
-        db.fileDataDao().updateProgressValue(fileData.url, newProgressValue)
+        db.fileDataDao().update(fileData.url, newProgressValue)
 
         // retrieve fileData & confirm progress value was updated
         db.fileDataDao().getAll().observeOnce {
@@ -280,7 +280,7 @@ class FileDataDaoTest {
         val data4 = FileDataFactory.makeFileDataEntry()
         val data5 = FileDataFactory.makeFileDataEntry()
 
-        db.fileDataDao().insertAll(data, data2, data3, data4, data5)
+        db.fileDataDao().insert(data, data2, data3, data4, data5)
 
         // Act: update progress values
         val progress = 77
@@ -288,11 +288,11 @@ class FileDataDaoTest {
         val progress3 = 100
         val progress4 = 25
         val progress5 = 42
-        db.fileDataDao().updateProgressValue( data.url, progress)
-        db.fileDataDao().updateProgressValue( data2.url, progress2)
-        db.fileDataDao().updateProgressValue( data3.url, progress3)
-        db.fileDataDao().updateProgressValue( data4.url, progress4)
-        db.fileDataDao().updateProgressValue( data5.url, progress5)
+        db.fileDataDao().update( data.url, progress)
+        db.fileDataDao().update( data2.url, progress2)
+        db.fileDataDao().update( data3.url, progress3)
+        db.fileDataDao().update( data4.url, progress4)
+        db.fileDataDao().update( data5.url, progress5)
 
         // retrieve data from db & assert values
         db.fileDataDao().getAll().observeOnce {
@@ -356,7 +356,7 @@ class FileDataDaoTest {
         // Arrange save data into db
         val fileData = FileDataFactory.makeFileDataEntry()
         val filedata2 =  FileDataFactory.makeFileDataEntry()
-        db.fileDataDao().insertAll(fileData, filedata2 )
+        db.fileDataDao().insert(fileData, filedata2 )
 
         // Act : delete data with URL
         val numberOfDeletedItems: Int = db.fileDataDao().delete( fileData.url )

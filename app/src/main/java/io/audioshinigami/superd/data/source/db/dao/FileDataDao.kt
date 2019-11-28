@@ -26,20 +26,20 @@ interface FileDataDao {
 
     // @Query("SELECT * FROM People WHERE id = :id")
     @Query("SELECT * FROM $TABLE_NAME WHERE uid = :id")
-    suspend fun findById(id: Int): FileData?
+    suspend fun find(id: Int): FileData?
 
     @Insert
-    suspend fun insertAll(vararg allFileData: FileData)
+    suspend fun insert(vararg allFileData: FileData)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(fileData: FileData)
 
-    @Update
-    suspend fun updateFileData(fileData: FileData)
+    @Update /* replaces item*/
+    suspend fun update(fileData: FileData)
 
     // updates progress value for a fileData, as url is unique
     @Query("UPDATE $TABLE_NAME SET progress_value = :progress WHERE url = :url")
-    suspend fun updateProgressValue(url: String, progress: Int)
+    suspend fun update(url: String, progress: Int)
 
     // updates request id for a fileData, as url is unique
     @Query("UPDATE $TABLE_NAME SET request_id = :id WHERE url = :url")
@@ -54,7 +54,7 @@ interface FileDataDao {
 
     /* delete FileData with uid. This should return number of FileData deleted. it should be 1*/
     @Query("DELETE FROM $TABLE_NAME WHERE uid = :id")
-    suspend fun deleteById(id: Int): Int
+    suspend fun delete(id: Int): Int
 
     /*
     * deletes all completed data, returns number of deletes items
