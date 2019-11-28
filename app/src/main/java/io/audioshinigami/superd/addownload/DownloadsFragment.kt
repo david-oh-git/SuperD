@@ -48,7 +48,7 @@ class DownloadsFragment :
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         return when(item?.itemId){
-            
+
             R.id.action_copy_url -> {
                 _itemUrl?.apply {
                     // copies url to clipboard

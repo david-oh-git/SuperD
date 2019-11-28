@@ -48,6 +48,10 @@ interface FileDataDao {
     @Delete
     suspend fun delete(fileData: FileData)
 
+    /* deletes row with URL*/
+    @Query("DELETE FROM $TABLE_NAME WHERE url = :url")
+    suspend fun delete( url: String ): Int
+
     /* delete FileData with uid. This should return number of FileData deleted. it should be 1*/
     @Query("DELETE FROM $TABLE_NAME WHERE uid = :id")
     suspend fun deleteById(id: Int): Int

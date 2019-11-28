@@ -335,6 +335,40 @@ class FileDataDaoTest {
 
     }
 
+    @Test
+    fun deleteFileDataByUrlAndGetFileData() = runBlockingTest{
+        // Arrange save data into db
+        val fileData = FileDataFactory.makeFileDataEntry()
+        db.fileDataDao().insert(fileData)
+
+        // Act : delete data with URL
+        db.fileDataDao().delete( fileData.url )
+
+        //Assert
+        db.fileDataDao().getAll().observeOnce {
+                data ->
+            assertThat(data.isEmpty(), `is`(true))
+        }
+    } //END
+
+    @Test
+    fun deleteFileDataByUrl_partII() = runBlockingTest{
+        // Arrange save data into db
+        val fileData = FileDataFactory.makeFileDataEntry()
+        val filedata2 =  FileDataFactory.makeFileDataEntry()
+        db.fileDataDao().insertAll(fileData, filedata2 )
+
+        // Act : delete data with URL
+        val numberOfDeletedItems: Int = db.fileDataDao().delete( fileData.url )
+
+        //Assert
+        db.fileDataDao().getAll().observeOnce {
+                data ->
+            assertThat(data.size, `is`(1))
+            assertThat( numberOfDeletedItems , `is`(1) )
+        }
+    } //END
+
     private fun assertProgressValue(progressValue: Int, updatedProgressValue: Int ){
         assertThat( progressValue, `is`(updatedProgressValue))
     }
