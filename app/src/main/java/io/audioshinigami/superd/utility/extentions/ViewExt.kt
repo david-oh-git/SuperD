@@ -1,4 +1,4 @@
-package io.audioshinigami.superd.utility
+package io.audioshinigami.superd.utility.extentions
 
 import android.view.View
 import android.view.ViewGroup

@@ -19,7 +19,7 @@ import io.audioshinigami.superd.common.subscribe
 import io.audioshinigami.superd.data.source.db.entity.FileData
 import io.audioshinigami.superd.listeners.SwipeToDeleteCallback
 import io.audioshinigami.superd.utility.ReUseMethods
-import io.audioshinigami.superd.utility.recyclerview.extentions.toast
+import io.audioshinigami.superd.utility.extentions.toast
 import io.audioshinigami.superd.viewholders.ItemViewHolder
 import io.audioshinigami.superd.viewmodels.FileDataViewModel
 import kotlinx.android.synthetic.main.activity_home.*

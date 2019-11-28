@@ -13,10 +13,10 @@ import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.SharedViewModel
 import io.audioshinigami.superd.databinding.DownloadsFragmentBinding
-import io.audioshinigami.superd.utility.hideView
-import io.audioshinigami.superd.utility.recyclerview.extentions.copyToClipBoard
-import io.audioshinigami.superd.utility.recyclerview.extentions.obtainViewModel
-import io.audioshinigami.superd.utility.showView
+import io.audioshinigami.superd.utility.extentions.hideView
+import io.audioshinigami.superd.utility.extentions.copyToClipBoard
+import io.audioshinigami.superd.utility.extentions.obtainViewModel
+import io.audioshinigami.superd.utility.extentions.showView
 
 class DownloadsFragment :
     Fragment(), PopupMenu.OnMenuItemClickListener, DownloadItemActions {
@@ -55,10 +55,15 @@ class DownloadsFragment :
                     context?.copyToClipBoard(this)
                     Toast.makeText(context, "URL copied !", Toast.LENGTH_LONG ).show()
                 }
+
+                _itemUrl = null
                 true
             }
 
             R.id.action_delete -> {
+                _itemUrl?.apply {
+                    viewModel.delete( this )
+                }
                 true
             }
 

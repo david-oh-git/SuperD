@@ -11,11 +11,19 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33825971-b23c-46b9-a034-287db03bac44" name="Default Changelist" comment="+++ implement delete with url : FileDataDao &amp; add tests to : FileDataDaoTest">
+    <list default="true" id="33825971-b23c-46b9-a034-287db03bac44" name="Default Changelist" comment="+++ implement delete with url : SharedViewModel + popup menu : DownloadFragment">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/SharedViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/SharedViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/activities/HomeActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/activities/HomeActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/addownload/DownloadsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/addownload/DownloadsFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/source/db/dao/FileDataDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/source/db/dao/FileDataDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/sharedTest/java/io/audioshinigami/superd/data/source/db/dao/FileDataDaoTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/sharedTest/java/io/audioshinigami/superd/data/source/db/dao/FileDataDaoTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/fragments/GetUrlFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/fragments/GetUrlFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/ViewExt.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/extentions/ViewExt.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/recyclerview/extentions/ActivityExt.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/extentions/ActivityExt.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/recyclerview/extentions/Constants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/extentions/Constants.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/recyclerview/extentions/ContextExt.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/extentions/ContextExt.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/recyclerview/extentions/Extentions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/extentions/Extentions.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/recyclerview/extentions/FragmentExt.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/extentions/FragmentExt.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/recyclerview/extentions/ListExt.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/extentions/ListExt.kt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +56,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/recyclerview/extentions/ContextExt.kt">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/extentions/ContextExt.kt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
               <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
@@ -57,28 +65,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/addownload/DownloadsFragment.kt">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/SharedViewModel.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1037">
-              <caret line="77" column="5" selection-start-line="77" selection-start-column="5" selection-end-line="77" selection-end-column="5" />
+            <state relative-caret-position="672">
+              <caret line="216" column="5" lean-forward="true" selection-start-line="216" selection-start-column="5" selection-end-line="216" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/source/db/dao/FileDataDao.kt">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/addownload/DownloadsFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="52" column="42" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
+            <state relative-caret-position="308">
+              <caret line="64" column="44" selection-start-line="64" selection-start-column="44" selection-end-line="64" selection-end-column="44" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/sharedTest/java/io/audioshinigami/superd/data/source/db/dao/FileDataDaoTest.kt">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/extentions/FragmentExt.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="719">
-              <caret line="367" column="56" lean-forward="true" selection-start-line="367" selection-start-column="56" selection-end-line="367" selection-end-column="56" />
+            <state relative-caret-position="357">
+              <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
             </state>
           </provider>
         </entry>
@@ -130,15 +138,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/sharedTest/java/io/audioshinigami/superd/data/repository/DefaultRepositoryTest.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/listeners/DownloadFetchListener.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/source/db/FileDatabase.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/repository/DataBaseRepository.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/repository/DownloadRepository.kt" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/App.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/repository/DefaultRepository.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/fragments/GetUrlFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/common/Constants.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/viewmodels/FileDataViewModel.kt" />
@@ -153,7 +157,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/menu/item_popup.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/MainActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/addownload/TextViewBingings.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/SharedViewModel.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/addownload/TextViewBindings.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/addownload/FileDataViewHolder.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/download_item_2.xml" />
@@ -165,9 +168,15 @@
         <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/FragmentExt.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/recyclerview/BaseAdaptor.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/recyclerview/extentions/ContextExt.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/addownload/DownloadsFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/sharedTest/java/io/audioshinigami/superd/data/source/db/dao/FileDataDaoTest.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/repository/DownloadRepository.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/source/db/dao/FileDataDao.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/repository/DataBaseRepository.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/repository/DefaultRepository.kt" />
+        <option value="$PROJECT_DIR$/app/src/sharedTest/java/io/audioshinigami/superd/data/repository/DefaultRepositoryTest.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/SharedViewModel.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/addownload/DownloadsFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/extentions/FragmentExt.kt" />
       </list>
     </option>
   </component>
@@ -187,6 +196,78 @@
       <pane id="AndroidView">
         <subPane>
           <expand>
+            <path>
+              <item name="SuperD" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="SuperD" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="SuperD" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="superd" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SuperD" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="superd" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="utility" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SuperD" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="superd" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="utility" type="462c0819:PsiDirectoryNode" />
+              <item name="extentions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SuperD" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="superd" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="utility" type="462c0819:PsiDirectoryNode" />
+              <item name="recyclerview" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SuperD" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="superd" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SuperD" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="superd" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SuperD" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="superd" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="repository" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SuperD" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="superd" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SuperD" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="superd" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
             <path>
               <item name="SuperD" type="1abcf292:AndroidViewProjectNode" />
               <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
@@ -228,7 +309,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Android Instrumented Tests.FileDataDaoTest (2)">
+  <component name="RunManager" selected="Android Instrumented Tests.DefaultRepositoryTest">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -506,8 +587,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Android Instrumented Tests.FileDataDaoTest (2)" />
         <item itemvalue="Android Instrumented Tests.DefaultRepositoryTest" />
+        <item itemvalue="Android Instrumented Tests.FileDataDaoTest (2)" />
         <item itemvalue="Gradle.SuperD [sourceSets]" />
         <item itemvalue="Android Instrumented Tests.FileDataDaoTest (1)" />
         <item itemvalue="Android Instrumented Tests.FileDataDaoTest" />
@@ -637,22 +718,24 @@
       <option name="project" value="LOCAL" />
       <updated>1574884221708</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="+++ implement delete with url : FileDataDao &amp; add tests to : FileDataDaoTest">
+      <created>1574941646532</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1574941646533</updated>
+    </task>
+    <task id="LOCAL-00018" summary="+++ implement delete with url : DefaultRepository &amp; add tests to : DefaultRepository + misc">
+      <created>1574945168137</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1574945168137</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="FileDataDaoTest_(2) - 2019.11.18 at 17h 58m 23s.xml">
-      <configuration name="FileDataDaoTest (2)" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="FileDataDaoTest_(2) - 2019.11.18 at 17h 59m 55s.xml">
-      <configuration name="FileDataDaoTest (2)" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="FileDataDaoTest_(2) - 2019.11.18 at 18h 00m 55s.xml">
-      <configuration name="FileDataDaoTest (2)" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="FileDataDaoTest_(2) - 2019.11.18 at 18h 02m 27s.xml">
-      <configuration name="FileDataDaoTest (2)" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
     <history-entry file="FileDataDaoTest_(2) - 2019.11.18 at 18h 10m 48s.xml">
       <configuration name="FileDataDaoTest (2)" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
@@ -671,13 +754,25 @@
     <history-entry file="FileDataDaoTest_(2) - 2019.11.28 at 12h 40m 50s.xml">
       <configuration name="FileDataDaoTest (2)" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
+    <history-entry file="DefaultRepositoryTest - 2019.11.28 at 13h 29m 49s.xml">
+      <configuration name="DefaultRepositoryTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="DefaultRepositoryTest - 2019.11.28 at 13h 31m 09s.xml">
+      <configuration name="DefaultRepositoryTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="DefaultRepositoryTest - 2019.11.28 at 13h 34m 50s.xml">
+      <configuration name="DefaultRepositoryTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="DefaultRepositoryTest - 2019.11.28 at 13h 37m 11s.xml">
+      <configuration name="DefaultRepositoryTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="804" y="27" width="1116" height="1053" extended-state="4" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49945474" visible="true" weight="0.18317758" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49945474" visible="true" weight="0.18317758" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" sideWeight="0.50054526" side_tool="true" weight="0.2925532" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -692,10 +787,11 @@
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" weight="0.3293348" />
       <window_info anchor="bottom" id="Build" order="5" weight="0.32715377" />
       <window_info anchor="bottom" id="Android Profiler" order="6" />
-      <window_info active="true" anchor="bottom" id="Run" order="7" visible="true" weight="0.3293348" />
+      <window_info anchor="bottom" id="Run" order="7" weight="0.3293348" />
       <window_info anchor="bottom" id="Debug" order="8" weight="0.3293348" />
       <window_info active="true" anchor="bottom" id="Messages" order="9" visible="true" weight="0.3293348" />
       <window_info anchor="bottom" id="Find" order="10" weight="0.3293348" />
+      <window_info anchor="right" id="Hierarchy" weight="0.32990655" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" weight="0.3297244" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
@@ -721,31 +817,11 @@
     <MESSAGE value="+++ create pop up menu for recyclerView item + add icons ( ic_copy &amp; ic_delete )" />
     <MESSAGE value="+++ implement click to show popup menu &amp; remove some redundant logic" />
     <MESSAGE value="+++ implement copy to clipBoard : ContextExt + logic for popmenu" />
-    <option name="LAST_COMMIT_MESSAGE" value="+++ implement copy to clipBoard : ContextExt + logic for popmenu" />
+    <MESSAGE value="+++ implement delete with url : FileDataDao &amp; add tests to : FileDataDaoTest" />
+    <MESSAGE value="+++ implement delete with url : DefaultRepository &amp; add tests to : DefaultRepository + misc" />
+    <option name="LAST_COMMIT_MESSAGE" value="+++ implement delete with url : DefaultRepository &amp; add tests to : DefaultRepository + misc" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.tonyodev.fetch2/xfetch2/3.1.4/f982ca5d8e2077f71bbfcfebe95e9c1d51d0cb9c/xfetch2-3.1.4-sources.jar!/com/tonyodev/fetch2/Priority.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Android/Sdk/sources/android-29/android/content/ContentResolver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="1812" column="49" lean-forward="true" selection-start-line="1812" selection-start-column="49" selection-end-line="1812" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.tonyodev.fetch2core/xfetch2core/3.1.4/5e24e459aa0a676a0514b7ab72371789f6fd63db/xfetch2core-3.1.4-sources.jar!/com/tonyodev/fetch2core/Func.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="1" lean-forward="true" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/FileExt.kt" />
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.tonyodev.fetch2/xfetch2/3.1.4/f982ca5d8e2077f71bbfcfebe95e9c1d51d0cb9c/xfetch2-3.1.4-sources.jar!/com/tonyodev/fetch2/fetch/FetchImpl.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="531">
@@ -785,13 +861,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/repository/DefaultRepository.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="39" column="5" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -908,13 +977,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/addownload/TextViewBindings.kt" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/SharedViewModel.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3366">
-          <caret line="214" column="32" selection-start-line="214" selection-start-column="32" selection-end-line="214" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/addownload/FileDataViewHolder.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -973,13 +1035,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/recyclerview/extentions/FragmentExt.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="29" column="1" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/ReUseMethods.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -1015,7 +1070,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/recyclerview/extentions/ContextExt.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/sharedTest/java/io/audioshinigami/superd/data/source/db/dao/FileDataDaoTest.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="719">
+          <caret line="367" column="56" lean-forward="true" selection-start-line="367" selection-start-column="56" selection-end-line="367" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/repository/DownloadRepository.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/source/db/entity/FileData.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/source/db/dao/FileDataDao.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="48" column="42" lean-forward="true" selection-start-line="48" selection-start-column="42" selection-end-line="48" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/repository/DataBaseRepository.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="25" column="36" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/repository/DefaultRepository.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-403">
+          <caret line="82" column="48" selection-start-line="82" selection-start-column="48" selection-end-line="82" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/sharedTest/java/io/audioshinigami/superd/data/repository/DefaultRepositoryTest.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="749">
+          <caret line="244" column="13" selection-start-line="244" selection-start-column="13" selection-end-line="244" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/SharedViewModel.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="672">
+          <caret line="216" column="5" lean-forward="true" selection-start-line="216" selection-start-column="5" selection-end-line="216" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/extentions/ContextExt.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
@@ -1024,22 +1135,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/addownload/DownloadsFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="77" column="5" selection-start-line="77" selection-start-column="5" selection-end-line="77" selection-end-column="5" />
+        <state relative-caret-position="308">
+          <caret line="64" column="44" selection-start-line="64" selection-start-column="44" selection-end-line="64" selection-end-column="44" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/data/source/db/dao/FileDataDao.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/io/audioshinigami/superd/utility/extentions/FragmentExt.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="52" column="42" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/sharedTest/java/io/audioshinigami/superd/data/source/db/dao/FileDataDaoTest.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="719">
-          <caret line="367" column="56" lean-forward="true" selection-start-line="367" selection-start-column="56" selection-end-line="367" selection-end-column="56" />
+        <state relative-caret-position="357">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
         </state>
       </provider>
     </entry>

@@ -1,4 +1,4 @@
-package io.audioshinigami.superd.utility.recyclerview.extentions
+package io.audioshinigami.superd.utility.extentions
 
 import android.app.Application
 import androidx.appcompat.app.AppCompatActivity

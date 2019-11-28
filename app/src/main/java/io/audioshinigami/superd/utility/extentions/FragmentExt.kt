@@ -1,6 +1,7 @@
-package io.audioshinigami.superd.utility.recyclerview.extentions
+package io.audioshinigami.superd.utility.extentions
 
 import android.content.pm.PackageManager
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
@@ -20,6 +21,12 @@ fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>): T {
 /* create a snackbar*/
 fun Fragment.sendSnack( message: String ){
     Snackbar.make( this.requireView(), message, Snackbar.LENGTH_LONG).show()
+}
+
+/* sends a Toast */
+
+fun Fragment.sendToastMsg( msg: String, length: Int = Toast.LENGTH_LONG ){
+    Toast.makeText(context, msg, length ).show()
 }
 
 /* check for write external permission */
