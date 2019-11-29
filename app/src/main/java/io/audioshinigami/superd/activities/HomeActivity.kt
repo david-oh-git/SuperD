@@ -87,7 +87,7 @@ class HomeActivity : AppCompatActivity(), SwipeToDeleteCallback.SwipeToDeleteLis
             finish()
         }
 
-    }// end onRequestPermissons
+    }// end onRequestPermissions
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int) {
         if ( viewHolder is ItemViewHolder ){

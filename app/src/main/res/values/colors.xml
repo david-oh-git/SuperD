@@ -2,11 +2,15 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">@color/primary_pink</color>
 
 <!--    app background colour-->
     <color name="background_color">@android:color/white</color>
     <color name="progressbar_color">@android:color/black</color>
     <color name="item_overflow">@android:color/black</color>
+    <color name="primary_pink">#D81B60</color>
+    <color name="translucent_purple">#606530C4</color>
+
+
 
 </resources>
