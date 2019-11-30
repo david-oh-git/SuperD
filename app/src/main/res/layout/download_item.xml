@@ -12,13 +12,13 @@
             android:layout_height="wrap_content">
 
         <TextView
-                android:id="@+id/id_filename_txtvw"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/pt_sans"
-                android:text="@string/str_default_filename"
-                android:textAlignment="center"
-                android:textStyle="bold" />
+            android:id="@+id/id_filename_txtvw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pt_sans_bold"
+            android:text="@string/str_default_filename"
+            android:textAlignment="center"
+            android:textStyle="bold" />
 
         <ProgressBar
                 style="?android:attr/progressBarStyleHorizontal"

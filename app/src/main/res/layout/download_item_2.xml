@@ -82,7 +82,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:max="@integer/progressbar_maxValue"
-                android:progress= "22"
+                android:progress= "@{ fileData.progressValue }"
                 android:layout_marginBottom="0dp"
                 android:paddingBottom="0dp"
                 app:layout_constraintBottom_toBottomOf="@id/id_view_forground"
@@ -92,6 +92,7 @@
 
             <TextView
                 android:id="@+id/id_filename"
+                android:fontFamily="@font/pt_sans_bold"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:layout_width="0dp"

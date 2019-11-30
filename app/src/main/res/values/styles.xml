@@ -9,6 +9,13 @@
 <!--        to remove default actionBar-->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
+<!--        App wide font-->
+        <item name="android:fontFamily">@font/pt_sans</item>
     </style>
+
+    <string name="toolbarStyle">
+        
+    </string>
 
 </resources>
