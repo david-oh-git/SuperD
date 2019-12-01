@@ -13,7 +13,6 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:background="@color/background_color"
             android:id="@+id/downloads_parent_view"
             app:fabSize="normal"
             android:orientation="vertical"
@@ -31,7 +30,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
 
-                android:background="@color/md_grey_300"
+                android:background="@color/background_color"
                 android:id="@+id/downloads_rview"
                 android:visibility="invisible"
                 android:scrollbars="vertical"
@@ -42,6 +41,7 @@
 
         <ProgressBar
                 android:id="@+id/progressBar"
+                android:background="@color/background_color"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
