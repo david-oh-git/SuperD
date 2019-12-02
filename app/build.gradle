@@ -51,6 +51,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        beta {
+            applicationIdSuffix ".beta"
+            versionNameSuffix "-beta"
+            resValue "string", "my_name", "Super D-beta"
+        }
+
+        alpha {
+            minifyEnabled true
+            applicationIdSuffix ".alpha"
+            versionNameSuffix "-alpha"
+            resValue "string", "my_name", "Super alpha"
+        }
     }
     packagingOptions {
         exclude 'README.txt'
