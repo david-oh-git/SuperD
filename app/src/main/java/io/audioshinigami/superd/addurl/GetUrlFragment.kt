@@ -1,4 +1,4 @@
-package io.audioshinigami.superd.fragments
+package io.audioshinigami.superd.addurl
 
 import android.os.Bundle
 import android.view.LayoutInflater

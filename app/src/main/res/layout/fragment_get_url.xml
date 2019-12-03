@@ -6,7 +6,7 @@
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:id="@+id/id_frame_geturl"
-             tools:context=".fragments.GetUrlFragment">
+             tools:context=".addurl.GetUrlFragment">
 
     <EditText
             android:layout_margin="@dimen/item_padding"

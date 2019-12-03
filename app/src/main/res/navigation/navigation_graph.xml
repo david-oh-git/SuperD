@@ -16,7 +16,7 @@
     </fragment>
     <dialog
             android:id="@+id/getUrlFragment"
-            android:name="io.audioshinigami.superd.fragments.GetUrlFragment"
+            android:name="io.audioshinigami.superd.addurl.GetUrlFragment"
             android:label="fragment_get_url"
             tools:layout="@layout/fragment_get_url" />
 </navigation>

@@ -108,6 +108,7 @@
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/overflow_icon"
+                android:contentDescription="@string/overflow_menu"
                 android:background="@drawable/circular_button"
                 app:srcCompat="@drawable/ic_overflow"
                 android:onClick="@{ (view) -> itemAction.showPopup( view ,fileData.url) }"
