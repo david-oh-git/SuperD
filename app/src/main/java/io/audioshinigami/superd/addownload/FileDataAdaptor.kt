@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import io.audioshinigami.superd.R.layout.download_item_2
+import io.audioshinigami.superd.R.layout.download_item
 import io.audioshinigami.superd.data.source.db.entity.FileData
-import io.audioshinigami.superd.databinding.DownloadItem2Binding
+import io.audioshinigami.superd.databinding.DownloadItemBinding
 
 class FileDataAdaptor(
     private val downloadItemActions: DownloadItemActions
@@ -26,12 +26,12 @@ class FileDataAdaptor(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FileDataViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
-        val binding = DownloadItem2Binding.inflate(layoutInflater, parent, false)
+        val binding = DownloadItemBinding.inflate(layoutInflater, parent, false)
 
         return FileDataViewHolder(binding)
     }
 
-    override fun getItemViewType(position: Int) = download_item_2
+    override fun getItemViewType(position: Int) = download_item
 
     private class FileDataDiffCallback: DiffUtil.ItemCallback<FileData>() {
 

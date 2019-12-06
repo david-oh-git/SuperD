@@ -36,7 +36,7 @@ class DownloadsFragment :
 
 
         /* adaptor for download recyclerView*/
-//        val adaptor = DownloadAdaptor(R.layout.download_item_2, viewModel )
+//        val adaptor = DownloadAdaptor(R.layout.download_item, viewModel )
         val adaptor = FileDataAdaptor(  this )
         subscribeUi(binding, adaptor)
 

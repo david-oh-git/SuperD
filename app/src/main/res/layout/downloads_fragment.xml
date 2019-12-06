@@ -35,7 +35,7 @@
                 android:id="@+id/downloads_rview"
                 android:visibility="invisible"
                 android:scrollbars="vertical"
-                tools:listitem="@layout/download_item_2"
+                tools:listitem="@layout/download_item"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
