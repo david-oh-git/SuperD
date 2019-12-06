@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.tonyodev.fetch2:xfetch2:3.1.4@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f8af3535ed3f9d9147c8448318918bf8/xfetch2-3.1.4/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f8af3535ed3f9d9147c8448318918bf8/xfetch2-3.1.4/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8401f18242a5c56dec10b7895afe533d/xfetch2-3.1.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8401f18242a5c56dec10b7895afe533d/xfetch2-3.1.4/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.tonyodev.fetch2/xfetch2/3.1.4/685af89922d0bcbef05aa677478adf2b2b965de7/xfetch2-3.1.4-javadoc.jar!/" />

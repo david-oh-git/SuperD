@@ -81,38 +81,8 @@ class DownloadsFragment :
     }
 
     private fun subscribeUi(binding: DownloadsFragmentBinding?, adaptor: FileDataAdaptor) {
-        /* assign click listener*/
-//        adaptor.itemClickListener = downLoadItemClickListener()
 
-        /* assign download_item binding to viewModel*/
-
-//        viewModel.downloads.observe(binding?.lifecycleOwner!!, Observer {
-//            results ->
-//
-//            when(results){
-//                is Result.Success -> {
-//                    binding.progressBar.hideView()
-//                    binding.downloadsRview.showView()
-//                    results.data.let { adaptor.setData(it) }
-//                    binding.downloadsRview.adapter = adaptor
-//                    Timber.d( " Success ....")
-//                }
-//                is Result.Error -> {
-//
-//                    binding.progressBar.hideView()
-//                    binding.downloadsRview.hideView()
-//                    sendSnack( getString(R.string.db_error_msg) )
-//                    Timber.d( " Error ....")
-//
-//                }
-//                is Result.Loading -> {
-//                    binding.downloadsRview.hideView()
-//                    binding.progressBar.showView()
-//                    Timber.d( " loading now ....")
-//                }
-//            }
-//        })
-
+        /* shows loading progressBar , hides recyclerView*/
         binding?.apply {
             downloadsRview.hideView()
             progressBar.showView()
