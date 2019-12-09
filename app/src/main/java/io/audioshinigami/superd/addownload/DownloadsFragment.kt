@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -69,8 +70,10 @@ class DownloadsFragment :
         }
     }
 
-    override fun downloadButtonAction(id: Int, url: String) {
+    override fun downloadButtonAction( view: View ,id: Int, url: String) {
         viewModel.downloadAction( id, url )
+        setItemIcon( url , view as ImageButton )
+
     }
 
     override fun showPopup(view: View, itemUrl: String ) {
@@ -116,6 +119,14 @@ class DownloadsFragment :
             setOnMenuItemClickListener(this@DownloadsFragment)
             inflate(R.menu.item_popup)
             show()
+        }
+    }
+
+    private fun setItemIcon( url: String , button : ImageButton ){
+
+        when( viewModel.isUrlActive(url) ){
+            true -> button.setImageResource(R.drawable.ic_pause)
+            false -> button.setImageResource(R.drawable.ic_download)
         }
     }
 }

@@ -42,6 +42,8 @@ class SharedViewModel( private val repository: DefaultRepository) :
 //        loadData()
     }
 
+    fun isUrlActive( url: String ) = _activeDownloads[url] ?: false
+
     fun loadPagedData(){
 
         val factory: DataSource.Factory<Int, FileData> = repository.getAllPaged()

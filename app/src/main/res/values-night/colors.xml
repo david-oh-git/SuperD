@@ -2,7 +2,7 @@
 <resources>
 
     <!--    app background colour-->
-    <color name="background_color">@color/md_black_1000</color>
+    <color name="background_color">@color/md_grey_900</color>
     <color name="progressbar_color">@android:color/black</color>
     <color name="item_overflow">@color/md_purple_200</color>
 

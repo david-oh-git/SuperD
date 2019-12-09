@@ -3,7 +3,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="downld_item_margin">8dp</dimen>
     <dimen name="item_padding">4dp</dimen>
-    <dimen name="card_margin">4dp</dimen>
+    <dimen name="card_margin">8dp</dimen>
     <dimen name="circle_radius">100dp</dimen>
     <dimen name="filename_text_size">19sp</dimen>
     <dimen name="dimen_imgbtn">28dp</dimen>
