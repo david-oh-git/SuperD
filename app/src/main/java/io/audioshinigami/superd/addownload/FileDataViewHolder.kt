@@ -13,13 +13,6 @@ class FileDataViewHolder( private val binding: DownloadItemBinding )
         binding.apply {
             setVariable(BR.fileData, any)
             itemAction = downloadItemActions
-
-            /* if progress is completed disable download button & add done icon */
-            if( any.progressValue == 100 ) {
-                binding.idPlayPause.isEnabled = false
-                binding.idPlayPause.setImageResource( R.drawable.ic_done )
-            }
-
             executePendingBindings()
         }
 

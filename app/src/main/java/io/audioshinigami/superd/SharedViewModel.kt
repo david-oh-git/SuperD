@@ -17,8 +17,12 @@ import io.audioshinigami.superd.data.source.db.entity.FileData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import kotlin.math.absoluteValue
 
-class SharedViewModel( private val repository: DefaultRepository) :
+class SharedViewModel(
+    private val repository: DefaultRepository,
+    private val _isActive: MutableMap<String, Boolean> = App.instance.isActive
+    ) :
     ViewModel() {
 
     private val _downloads = MutableLiveData<Result<List<FileData>>>().apply { value = Result.Loading }
@@ -113,8 +117,15 @@ class SharedViewModel( private val repository: DefaultRepository) :
                 Timber.d(  "onError: msg is $error")
                 Timber.d(  " url is : ${download.url}")
 
+                Timber.d("b4 progress : ${download.progress}")
+
                 /* remove url from activeDownload*/
                 _activeDownloads.remove( download.url )
+                _isActive[download.url] = false
+
+                val progress = if ( 0 > download.progress ) download.progress else download.progress * -1
+                Timber.d(" Progress is : $progress")
+                updateProgressValue( download.url , progress )
             }
 
             override fun onPaused(download: Download) {
@@ -185,27 +196,31 @@ class SharedViewModel( private val repository: DefaultRepository) :
 
     fun downloadAction(id: Int, url: String ){
 
-        when( _activeDownloads[url] ){
+        when( _isActive[url] ){
             true -> {
                 repository.pause(id)
-                _activeDownloads[url] = false
+                _isActive[url] = false
                 Timber.d( "pausing download ***** \n")
+                Timber.d("Is download active ? ${_isActive[url]}")
             }
 
             false -> {
                 repository.resume(id)
-                _activeDownloads[url] = true
+                _isActive[url] = true
                 Timber.d("resuming download ***** \n")
+                Timber.d("Is download active ? ${_isActive[url]}")
             }
 
             else -> {
+                /* add url to list of active urls*/
+                _isActive[url] = true
+
                 viewModelScope.launch(Dispatchers.IO) { repository.restart(url) }
+                /* enable listener*/
                 enableFetchListener()
 
-                /* add url to list of active urls*/
-                _activeDownloads[url] = true
-
                 Timber.d("restarting download ***** \n")
+                Timber.d("Is download active ? ${_isActive[url]}")
             }
         }
     }

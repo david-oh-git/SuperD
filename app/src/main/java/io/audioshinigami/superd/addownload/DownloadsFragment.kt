@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import io.audioshinigami.superd.App
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.SharedViewModel
 import io.audioshinigami.superd.databinding.DownloadsFragmentBinding
@@ -73,7 +74,6 @@ class DownloadsFragment :
     override fun downloadButtonAction( view: View ,id: Int, url: String) {
         viewModel.downloadAction( id, url )
         setItemIcon( url , view as ImageButton )
-
     }
 
     override fun showPopup(view: View, itemUrl: String ) {
@@ -101,6 +101,7 @@ class DownloadsFragment :
                     downloadsRview.adapter = adaptor
                     downloadsRview.showView()
                 }
+
             }
         })
     }
@@ -124,7 +125,7 @@ class DownloadsFragment :
 
     private fun setItemIcon( url: String , button : ImageButton ){
 
-        when( viewModel.isUrlActive(url) ){
+        when( App.instance.isActive[url] ){
             true -> button.setImageResource(R.drawable.ic_pause)
             false -> button.setImageResource(R.drawable.ic_download)
         }

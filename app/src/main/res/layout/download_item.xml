@@ -7,6 +7,7 @@
         <import type="android.view.View"/>
         <import type="androidx.core.content.ContextCompat"/>
 
+
         <variable
             name="itemAction"
             type="io.audioshinigami.superd.addownload.DownloadItemActions" />
@@ -63,7 +64,6 @@
 
             <ImageButton
                 android:id="@+id/id_play_pause"
-                app:srcCompat="@drawable/ic_download"
                 android:elevation="4dp"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
@@ -73,6 +73,7 @@
                 android:background="@drawable/circular_button"
                 android:contentDescription="@string/image_btn_description"
                 android:onClick="@{ (view) -> itemAction.downloadButtonAction( view ,fileData.request_id, fileData.url )}"
+                app:itemData="@{ fileData }"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -83,7 +84,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:max="@integer/progressbar_maxValue"
-                android:progress= "@{ fileData.progressValue }"
+                android:progress= "@{ fileData.progressValue > 0 ? fileData.progressValue : -(fileData.progressValue) }"
                 android:layout_marginBottom="0dp"
                 android:paddingBottom="0dp"
                 app:layout_constraintBottom_toBottomOf="@id/id_view_forground"

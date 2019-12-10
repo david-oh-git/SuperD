@@ -18,7 +18,8 @@ class App : Application() {
     private set
     get() = field ?: provideFetch()
 
-    var activeDownloads: MutableMap<String, Boolean>? = null
+    /* list of active urls */
+    lateinit var isActive: MutableMap<String, Boolean>
 
     override fun onCreate() {
         super.onCreate()
@@ -30,7 +31,7 @@ class App : Application() {
             instance = this
         }
 
-        activeDownloads = mutableMapOf()
+        isActive = mutableMapOf()
     }
 
     /* provides a db instance*/
