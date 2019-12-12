@@ -45,9 +45,7 @@ class SharedViewModel(
 //        loadData()
     }
 
-    fun isUrlActive( url: String ) = _activeDownloads[url] ?: false
-
-    fun loadPagedData(){
+    private fun loadPagedData(){
 
         val factory: DataSource.Factory<Int, FileData> = repository.getAllPaged()
         val pagedListBuilder: LivePagedListBuilder<Int, FileData> = LivePagedListBuilder<Int, FileData>(factory,
@@ -86,9 +84,10 @@ class SharedViewModel(
             return
         }
 
+
         /* if not null, add fetchListener*/
         fetchListener?.apply {
-            repository.fetch.addListener(this, true)
+            repository.fetch.addListener(this)
             return
         }
 
@@ -130,12 +129,15 @@ class SharedViewModel(
                 _activeDownloads.remove( download.url )
                 _isActive.remove( download.url )
 
+                /* if error , assign negative value of progress */
                 val progress = if ( 0 > download.progress ) download.progress else download.progress * -1
+
                 Timber.d(" Progress is : $progress")
                 updateProgressValue( download.url , progress )
             }
 
             override fun onPaused(download: Download) {
+                Timber.d("Paused ")
             }
 
             override fun onProgress(
@@ -154,6 +156,7 @@ class SharedViewModel(
             }
 
             override fun onResumed(download: Download) {
+                Timber.d("Resumed")
             }
 
             override fun onStarted(
@@ -174,6 +177,9 @@ class SharedViewModel(
     }
 
     fun disableFetchListener(){
+
+        if( repository.fetch.isClosed )
+            return
 
         /* remove fetchListener */
         fetchListener?.apply {

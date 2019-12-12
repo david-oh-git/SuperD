@@ -45,6 +45,18 @@ class DownloadsFragment :
         return binding.root
     }
 
+    override fun onPause() {
+        super.onPause()
+
+        viewModel.disableFetchListener()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        viewModel.enableFetchListener()
+    }
+
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         return when(item?.itemId){
 
