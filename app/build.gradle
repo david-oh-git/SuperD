@@ -14,8 +14,8 @@ android {
         applicationId "io.audioshinigami.superd"
         minSdkVersion rootProject.min_sdk_version
         targetSdkVersion rootProject.target_sdk_version
-        versionCode 3
-        versionName "0.3"
+        versionCode 4
+        versionName "0.31"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
 
         vectorDrawables.useSupportLibrary = true
