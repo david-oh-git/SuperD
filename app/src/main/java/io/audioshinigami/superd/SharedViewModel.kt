@@ -17,7 +17,6 @@ import io.audioshinigami.superd.data.source.db.entity.FileData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import kotlin.math.absoluteValue
 
 class SharedViewModel(
     private val repository: DefaultRepository,
@@ -63,6 +62,9 @@ class SharedViewModel(
         /* start download */
         repository.start(url)
 
+        /*add to active url*/
+        _isActive[url] = true
+
         /* add to active downloads*/
         launch(Dispatchers.Main) { _activeDownloads[url] = true }
 
@@ -79,9 +81,14 @@ class SharedViewModel(
 
     fun enableFetchListener(){
 
+        /* if fetch instance is closed, exit*/
+        if( repository.fetch.isClosed ){
+            return
+        }
+
         /* if not null, add fetchListener*/
         fetchListener?.apply {
-            repository.fetch.addListener(this)
+            repository.fetch.addListener(this, true)
             return
         }
 
@@ -121,7 +128,7 @@ class SharedViewModel(
 
                 /* remove url from activeDownload*/
                 _activeDownloads.remove( download.url )
-                _isActive[download.url] = false
+                _isActive.remove( download.url )
 
                 val progress = if ( 0 > download.progress ) download.progress else download.progress * -1
                 Timber.d(" Progress is : $progress")
@@ -230,6 +237,7 @@ class SharedViewModel(
     }
 
     fun delete( url: String ) = viewModelScope.launch(Dispatchers.IO){
+        // TODO : also remove from queue if downloading
         repository.delete( url )
     }
 
