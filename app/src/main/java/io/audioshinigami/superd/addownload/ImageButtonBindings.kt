@@ -20,12 +20,17 @@ object ImageButtonBindings {
                     setImageResource(R.drawable.ic_done)
                     isEnabled = false
                 }
+
+                App.instance.isActive[_data.url] == true -> setImageResource(R.drawable.ic_pause)
+
+                App.instance.isActive[_data.url] == false -> setImageResource(R.drawable.ic_download )
+
                 _data.progressValue < 0 -> setImageResource(R.drawable.ic_error)
 //
-//                App.instance.isActive[_data.url] == true -> setImageResource(R.drawable.ic_pause)
-//                App.instance.isActive[_data.url] == false -> setImageResource(R.drawable.ic_download )
 
-                else -> setImageResource(R.drawable.ic_download)
+                App.instance.isActive[_data.url] == null -> setImageResource(R.drawable.ic_download )
+
+//                else -> setImageResource(R.drawable.ic_download)
             }
         }
     }

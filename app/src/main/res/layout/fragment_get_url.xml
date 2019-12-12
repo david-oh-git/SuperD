@@ -19,7 +19,8 @@
             android:background="@color/md_purple_500"
             android:id="@+id/id_btn_send_url"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:text="@string/str_btn_add_queue"/>
+            android:layout_height="wrap_content"
+            android:text="@string/str_btn_add_queue" />
 
 
 </LinearLayout>

@@ -17,7 +17,6 @@ import io.audioshinigami.superd.data.source.db.entity.FileData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import kotlin.math.absoluteValue
 
 class SharedViewModel(
     private val repository: DefaultRepository,
@@ -46,9 +45,7 @@ class SharedViewModel(
 //        loadData()
     }
 
-    fun isUrlActive( url: String ) = _activeDownloads[url] ?: false
-
-    fun loadPagedData(){
+    private fun loadPagedData(){
 
         val factory: DataSource.Factory<Int, FileData> = repository.getAllPaged()
         val pagedListBuilder: LivePagedListBuilder<Int, FileData> = LivePagedListBuilder<Int, FileData>(factory,
@@ -62,6 +59,9 @@ class SharedViewModel(
         Timber.d("startDownload called ....")
         /* start download */
         repository.start(url)
+
+        /*add to active url*/
+        _isActive[url] = true
 
         /* add to active downloads*/
         launch(Dispatchers.Main) { _activeDownloads[url] = true }
@@ -78,6 +78,12 @@ class SharedViewModel(
     }
 
     fun enableFetchListener(){
+
+        /* if fetch instance is closed, exit*/
+        if( repository.fetch.isClosed ){
+            return
+        }
+
 
         /* if not null, add fetchListener*/
         fetchListener?.apply {
@@ -121,14 +127,17 @@ class SharedViewModel(
 
                 /* remove url from activeDownload*/
                 _activeDownloads.remove( download.url )
-                _isActive[download.url] = false
+                _isActive.remove( download.url )
 
+                /* if error , assign negative value of progress */
                 val progress = if ( 0 > download.progress ) download.progress else download.progress * -1
+
                 Timber.d(" Progress is : $progress")
                 updateProgressValue( download.url , progress )
             }
 
             override fun onPaused(download: Download) {
+                Timber.d("Paused ")
             }
 
             override fun onProgress(
@@ -147,6 +156,7 @@ class SharedViewModel(
             }
 
             override fun onResumed(download: Download) {
+                Timber.d("Resumed")
             }
 
             override fun onStarted(
@@ -167,6 +177,9 @@ class SharedViewModel(
     }
 
     fun disableFetchListener(){
+
+        if( repository.fetch.isClosed )
+            return
 
         /* remove fetchListener */
         fetchListener?.apply {
@@ -230,6 +243,7 @@ class SharedViewModel(
     }
 
     fun delete( url: String ) = viewModelScope.launch(Dispatchers.IO){
+        // TODO : also remove from queue if downloading
         repository.delete( url )
     }
 
