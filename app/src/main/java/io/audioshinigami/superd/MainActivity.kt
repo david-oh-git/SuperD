@@ -2,6 +2,10 @@ package io.audioshinigami.superd
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -25,6 +29,29 @@ class MainActivity : AppCompatActivity() {
     * + fragments back stack*/
     override fun onSupportNavigateUp() : Boolean {
         return findNavController(R.id.nav_host_fragment_container).navigateUp() || super.onSupportNavigateUp()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        return super.onCreateOptionsMenu(menu)
+
+        menuInflater.inflate(R.menu.action_bar, menu)
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when( item.itemId){
+
+            R.id.action_settings -> {
+
+                Toast.makeText(this, "I was clicked ", Toast.LENGTH_LONG )
+                    .show()
+
+                true
+            }
+            else ->  super.onOptionsItemSelected(item)
+        }
     }
 
 }

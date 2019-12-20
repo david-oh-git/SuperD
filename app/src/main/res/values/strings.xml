@@ -20,5 +20,6 @@
     <string name="deleted">Deleted !</string>
     <string name="fab_label">Add download URL</string>
     <string name="overflow_menu">download item overflow menu</string>
+    <string name="settings_menu">Settings</string>
 
 </resources>
