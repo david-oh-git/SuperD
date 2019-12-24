@@ -45,8 +45,8 @@ class MainActivity : AppCompatActivity() {
 
             R.id.action_settings -> {
 
-                Toast.makeText(this, "I was clicked ", Toast.LENGTH_LONG )
-                    .show()
+                findNavController(R.id.nav_host_fragment_container)
+                    .navigate(R.id.action_downloadsFragment_to_settingsFragment)
 
                 true
             }

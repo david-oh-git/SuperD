@@ -13,10 +13,18 @@
         <action
                 android:id="@+id/action_downloadsFragment_to_getUrlFragment"
                 app:destination="@id/getUrlFragment" />
+        <action
+            android:id="@+id/action_downloadsFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <dialog
             android:id="@+id/getUrlFragment"
             android:name="io.audioshinigami.superd.addurl.GetUrlFragment"
             android:label="fragment_get_url"
             tools:layout="@layout/fragment_get_url" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="io.audioshinigami.superd.settings.SettingsFragment"
+        android:label="@string/settings_frag_title" />
+
 </navigation>
