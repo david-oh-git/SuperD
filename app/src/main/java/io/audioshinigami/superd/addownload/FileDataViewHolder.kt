@@ -14,6 +14,7 @@ class FileDataViewHolder( private val binding: DownloadItemBinding )
             setVariable(BR.fileData, any)
             itemAction = downloadItemActions
             executePendingBindings()
+
         }
 
     }
