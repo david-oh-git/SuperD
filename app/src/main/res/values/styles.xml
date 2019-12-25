@@ -3,8 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/md_purple_500</item>
         <item name="colorPrimaryDark">@color/status_bar</item>
+        <item name="colorSecondary">@color/md_purple_200</item>
         <item name="colorAccent">@color/colorAccent</item>
 <!--        to remove default actionBar-->
         <item name="windowActionBar">false</item>
