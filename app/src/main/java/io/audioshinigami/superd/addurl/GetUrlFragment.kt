@@ -85,9 +85,10 @@ class GetUrlFragment : DialogFragment() {
     private fun autoPaste(){
 
         val clipBoard = activity?.getSystemService( Context.CLIPBOARD_SERVICE ) as ClipboardManager
+
         if( clipBoard.hasPrimaryClip() && ( clipBoard.primaryClipDescription?.hasMimeType( MIMETYPE_TEXT_PLAIN ) == true ) ){
 
-            var pasteText = clipBoard.primaryClip?.getItemAt(0)?.text
+            val pasteText = clipBoard.primaryClip?.getItemAt(0)?.text
             id_edit_geturl.setText(pasteText)
 
         }
