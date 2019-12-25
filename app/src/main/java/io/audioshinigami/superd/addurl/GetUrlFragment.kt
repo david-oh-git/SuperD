@@ -1,5 +1,8 @@
 package io.audioshinigami.superd.addurl
 
+import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,10 +19,7 @@ import kotlinx.android.synthetic.main.fragment_get_url.*
 
 
 /**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [GetUrlFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
+ * starts a download
  *
  */
 
@@ -39,11 +39,11 @@ class GetUrlFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         id_edit_geturl.requestFocus()
+        autoPaste()
 
         id_btn_send_url.setOnClickListener{
             val urlStr = id_edit_geturl.text.toString()
             if(urlStr.isNotEmpty()){
-                // TODO : code to send url back , this is makeshift
                 sendUrl(urlStr)
             }
             else
@@ -81,5 +81,17 @@ class GetUrlFragment : DialogFragment() {
         )
     }
 
+    /* automatically pastes url in editText box*/
+    private fun autoPaste(){
+
+        val clipBoard = activity?.getSystemService( Context.CLIPBOARD_SERVICE ) as ClipboardManager
+        if( clipBoard.hasPrimaryClip() && ( clipBoard.primaryClipDescription?.hasMimeType( MIMETYPE_TEXT_PLAIN ) == true ) ){
+
+            var pasteText = clipBoard.primaryClip?.getItemAt(0)?.text
+            id_edit_geturl.setText(pasteText)
+
+        }
+
+    }
 
 }

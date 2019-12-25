@@ -1,26 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_margin="@dimen/item_padding"
-             android:orientation="vertical"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:id="@+id/id_frame_geturl"
-             tools:context=".addurl.GetUrlFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/id_frame_geturl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="500dp"
+    android:minHeight="200dp"
+    android:layout_margin="@dimen/item_padding"
+    android:background="@color/background_color"
+    android:orientation="vertical"
+    tools:context=".addurl.GetUrlFragment">
 
-    <EditText
-            android:layout_margin="@dimen/item_padding"
-            android:inputType="textUri"
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="@dimen/item_padding"
+        android:hint="@string/str_edit_geturl_hint"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/id_edit_geturl"
+            android:gravity="top"
+            android:minLines="6"
+            android:inputType="textMultiLine"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:hint="@string/str_edit_geturl_hint"/>
-    <Button
-            android:layout_margin="@dimen/item_padding"
-            android:background="@color/md_purple_500"
-            android:id="@+id/id_btn_send_url"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/str_btn_add_queue" />
+            android:layout_height="match_parent" />
 
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/id_btn_send_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/item_padding"
+        android:background="@color/md_purple_500"
+        android:text="@string/str_btn_add_queue" />
 
 </LinearLayout>

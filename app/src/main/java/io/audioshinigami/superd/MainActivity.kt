@@ -9,18 +9,19 @@ import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private val navController by lazy { findNavController(R.id.nav_host_fragment_container) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(toolbar)
-
-        val navController = findNavController(R.id.nav_host_fragment_container)
 
         NavigationUI.setupActionBarWithNavController(this, navController)
     }
@@ -34,6 +35,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 //        return super.onCreateOptionsMenu(menu)
 
+//        TODO : gear icon appears on all fragments
+
         menuInflater.inflate(R.menu.action_bar, menu)
 
         return true
@@ -41,17 +44,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        return when( item.itemId){
+        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
 
-            R.id.action_settings -> {
-
-                findNavController(R.id.nav_host_fragment_container)
-                    .navigate(R.id.action_downloadsFragment_to_settingsFragment)
-
-                true
-            }
-            else ->  super.onOptionsItemSelected(item)
-        }
     }
 
 }

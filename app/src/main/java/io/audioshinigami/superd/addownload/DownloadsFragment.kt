@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import io.audioshinigami.superd.App
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.SharedViewModel
@@ -32,7 +33,6 @@ class DownloadsFragment :
             fabListener = fabOnClickListener()
             lifecycleOwner = this@DownloadsFragment.viewLifecycleOwner
         }
-
 
         /* adaptor for download recyclerView*/
 //        val adaptor = DownloadAdaptor(R.layout.download_item, viewModel )
