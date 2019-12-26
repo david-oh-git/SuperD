@@ -22,5 +22,6 @@
     <string name="overflow_menu">download item overflow menu</string>
     <string name="settings_menu">Settings</string>
     <string name="settings_frag_title">Settings</string>
+    <string name="download_rview_label">List of downloaded items</string>
 
 </resources>

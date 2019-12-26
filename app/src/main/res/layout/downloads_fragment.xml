@@ -32,6 +32,7 @@
         <androidx.recyclerview.widget.RecyclerView
 
                 android:background="@color/background_color"
+                android:contentDescription="@string/download_rview_label"
                 android:id="@+id/downloads_rview"
                 android:visibility="invisible"
                 android:scrollbars="vertical"
