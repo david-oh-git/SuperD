@@ -1,6 +1,6 @@
 package io.audioshinigami.superd.data.repository
 
-interface DownloadRepository {
+interface DownloadDataSource {
 
     suspend fun start(url: String )
 

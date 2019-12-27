@@ -8,15 +8,15 @@ import io.audioshinigami.superd.zdata.FileData
 import io.audioshinigami.superd.zdata.Result
 import io.audioshinigami.superd.zdata.Result.Error
 import io.audioshinigami.superd.zdata.Result.Success
-import io.audioshinigami.superd.zdata.source.LocalDataSource
+import io.audioshinigami.superd.zdata.source.FileDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class LocalDataSource internal constructor(
+class LocalFileDataSource internal constructor(
     private val fileDataDao: FileDataDao,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-) : LocalDataSource {
+) : FileDataSource {
 
     private val CACHED_PAGE_SIZE = 10
 
@@ -55,9 +55,7 @@ class LocalDataSource internal constructor(
     }
 
     override suspend fun insert(vararg allFileData: FileData) = withContext(ioDispatcher) {
-        for( data in allFileData ){
-            fileDataDao.insert(data)
-        }
+        fileDataDao.insert( *allFileData )
     }
 
     override suspend fun update(fileData: FileData) = withContext(ioDispatcher){

@@ -7,7 +7,7 @@ import io.audioshinigami.superd.zdata.Result
 
 /*entry point for accessing FileData in DB */
 
-interface LocalDataSource {
+interface FileDataSource {
 
     fun observeAll(): LiveData<Result<List<FileData>>>
 

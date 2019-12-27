@@ -22,7 +22,7 @@ class DefaultRepository(
     private val dao: FileDataDao,
     val fetch: Fetch,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-) : DataBaseRepository, DownloadRepository {
+) : DataBaseRepository, DownloadDataSource {
 
     private fun createRequest(urlString: String): Request {
 

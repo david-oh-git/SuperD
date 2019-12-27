@@ -5,11 +5,11 @@ import androidx.paging.PagedList
 import io.audioshinigami.superd.zdata.FileData
 import io.audioshinigami.superd.zdata.Result
 import io.audioshinigami.superd.zdata.Result.Success
-import io.audioshinigami.superd.zdata.source.LocalDataSource
+import io.audioshinigami.superd.zdata.source.FileDataSource
 
 class FakeDataSource (
     var dbData: MutableList<FileData>? = mutableListOf()
-) : LocalDataSource {
+) : FileDataSource {
 
     override fun observeAll(): LiveData<Result<List<FileData>>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
