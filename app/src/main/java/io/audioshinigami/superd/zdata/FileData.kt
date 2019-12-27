@@ -25,5 +25,5 @@ data class FileData(
 
     val isActive: Boolean
     get() = false
-    
+
 } //end FileData
