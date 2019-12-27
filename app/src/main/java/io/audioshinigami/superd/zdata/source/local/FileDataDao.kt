@@ -5,7 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.*
 import io.audioshinigami.superd.common.TABLE_NAME
-import io.audioshinigami.superd.data.source.db.entity.FileData
+import io.audioshinigami.superd.zdata.FileData
+import io.audioshinigami.superd.zdata.Result
 
 /* data access for DB table, info on each download */
 
@@ -28,7 +29,7 @@ interface FileDataDao {
 
     // @Query("SELECT * FROM People WHERE id = :id")   
     @Query("SELECT * FROM $TABLE_NAME WHERE url = :getUrl")
-    fun find(getUrl: String): FileData?
+    suspend fun find(getUrl: String): FileData?
 
     // @Query("SELECT * FROM People WHERE id = :id")
     @Query("SELECT * FROM $TABLE_NAME WHERE uid = :id")
