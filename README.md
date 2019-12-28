@@ -2,4 +2,4 @@
 
 **Build Status:** Currently in development  
 
-![App main screen](https://photos.app.goo.gl/pkVqof5QEa1jXZPi6)
+![App main screen](https://drive.google.com/uc?export=view&id=1bW-Jmn_OQJ0lLVkclbs8uZE2l6EwEvrt)
