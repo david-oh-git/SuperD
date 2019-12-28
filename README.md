@@ -1,6 +1,11 @@
-# SuperD Android download manager app
+# SuperD 
+# Android download manager app
 
 **Build Status:** Currently in development  
+
+Download files with pause and resume options.
+
+
 
 App main screen             |  Add url screen
 :-------------------------:|:-------------------------:
