@@ -2,48 +2,48 @@ package io.audioshinigami.superd.data.source
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
-import io.audioshinigami.superd.zdata.FileData
+import io.audioshinigami.superd.zdata.FileInfo
 import io.audioshinigami.superd.zdata.Result
 import io.audioshinigami.superd.zdata.Result.Success
-import io.audioshinigami.superd.zdata.source.FileDataSource
+import io.audioshinigami.superd.zdata.source.FileInfoSource
 
-class FakeDataSource (
-    var dbData: MutableList<FileData>? = mutableListOf()
-) : FileDataSource {
+class FakeInfoDataSource (
+    var dbData: MutableList<FileInfo>? = mutableListOf()
+) : FileInfoSource {
 
-    override fun observeAll(): LiveData<Result<List<FileData>>> {
+    override fun observeAll(): LiveData<Result<List<FileInfo>>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getAllPaged(): LiveData<PagedList<FileData>> {
+    override fun getAllPaged(): LiveData<PagedList<FileInfo>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun getDataResult(): Result<List<FileData>> {
+    override suspend fun getDataResult(): Result<List<FileInfo>> {
         dbData?.let { return Success(it) }
 
         return Result.Error( Exception("No data found !!"))
     }
 
-    override fun observeFileData(id: Int): LiveData<Result<FileData>> {
+    override fun observeFileData(id: Int): LiveData<Result<FileInfo>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun find(id: Int): FileData? {
+    override suspend fun find(id: Int): FileInfo? {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun find(getUrl: String): FileData? {
+    override suspend fun find(getUrl: String): FileInfo? {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun insert(vararg allFileData: FileData) {
+    override suspend fun insert(vararg allFileData: FileInfo) {
         for( data in allFileData){
             dbData?.add(data)
         }
     }
 
-    override suspend fun update(fileData: FileData) {
+    override suspend fun update(fileInfo: FileInfo) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -55,9 +55,9 @@ class FakeDataSource (
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun delete(fileData: FileData) {
+    override suspend fun delete(fileInfo: FileInfo) {
         dbData?.removeAll{
-            it == fileData
+            it == fileInfo
         }
 
     }

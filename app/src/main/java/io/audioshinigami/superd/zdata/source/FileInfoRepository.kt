@@ -3,26 +3,28 @@ package io.audioshinigami.superd.zdata.source
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
-import io.audioshinigami.superd.zdata.FileData
+import io.audioshinigami.superd.zdata.FileInfo
 import io.audioshinigami.superd.zdata.Result
 
-interface FileDataRepository {
+interface FileInfoRepository {
 
-    fun observeAll(): LiveData<Result<List<FileData>>>
+    fun observeAll(): LiveData<Result<List<FileInfo>>>
 
-    fun getAllPaged(): LiveData<PagedList<FileData>>
+    fun getAllPaged(): LiveData<PagedList<FileInfo>>
 
-    suspend fun saveFileData( vararg fileData: FileData )
+    fun getAllFileInfo(): Result<List<FileInfo>>
 
-    suspend fun update( fileData: FileData )
+    suspend fun save(vararg fileInfo: FileInfo )
+
+    suspend fun update(fileInfo: FileInfo )
 
     suspend fun update( url: String , progressValue: Int )
 
-    suspend fun find( id: Int ) : FileData?
+    suspend fun find( id: Int ) : FileInfo?
 
     suspend fun clearCompleted(): Int
 
-    suspend fun delete( fileData: FileData)
+    suspend fun delete(fileInfo: FileInfo)
 
     suspend fun delete( url: String )
 

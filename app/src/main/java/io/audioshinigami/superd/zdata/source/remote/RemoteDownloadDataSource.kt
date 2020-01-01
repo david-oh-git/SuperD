@@ -5,16 +5,16 @@ import com.tonyodev.fetch2.Fetch
 import com.tonyodev.fetch2.NetworkType
 import com.tonyodev.fetch2.Priority
 import com.tonyodev.fetch2.Request
-import io.audioshinigami.superd.zdata.FileData
+import io.audioshinigami.superd.zdata.FileInfo
 import io.audioshinigami.superd.zdata.source.DownloadDataSource
-import io.audioshinigami.superd.zdata.source.local.FileDataDao
+import io.audioshinigami.superd.zdata.source.local.FileInfoDao
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class RemoteDownloadDataSource internal constructor(
     private val fetch: Fetch,
-    private val fileDataDao: FileDataDao,
+    private val fileInfoDao: FileInfoDao,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     override var _priority: Priority = Priority.NORMAL,
     override var _networkType: NetworkType = NetworkType.ALL
@@ -28,7 +28,7 @@ class RemoteDownloadDataSource internal constructor(
         fetch.enqueue(request)
 
         /* create [FileData] info for file*/
-        val fileData = FileData(
+        val fileData = FileInfo(
             0,
             request.id,
             url,
@@ -37,7 +37,7 @@ class RemoteDownloadDataSource internal constructor(
         )
 
         /* add to DB*/
-        fileDataDao.insert(fileData)
+        fileInfoDao.insert(fileData)
     }
 
     override suspend fun restart(url: String, downloadUri: Uri ) = withContext(ioDispatcher){
@@ -47,7 +47,7 @@ class RemoteDownloadDataSource internal constructor(
         /* start the download*/
         fetch.enqueue(request)
         
-        fileDataDao.updateRequestId( url, request.id )
+        fileInfoDao.updateRequestId( url, request.id )
     }
 
     override fun pause(id: Int) {

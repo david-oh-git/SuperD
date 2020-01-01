@@ -26,7 +26,7 @@ import org.junit.runner.RunWith
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
-class FileDataDaoTest {
+class FileInfoDaoTest {
 
     private lateinit var db: FileDatabase
     // Executes each test synchronously using Architecture Components.

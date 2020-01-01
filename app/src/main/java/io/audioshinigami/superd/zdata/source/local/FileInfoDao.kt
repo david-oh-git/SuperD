@@ -5,44 +5,43 @@ import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.*
 import io.audioshinigami.superd.common.TABLE_NAME
-import io.audioshinigami.superd.zdata.FileData
-import io.audioshinigami.superd.zdata.Result
+import io.audioshinigami.superd.zdata.FileInfo
 
 /* data access for DB table, info on each download */
 
 @Dao
-interface FileDataDao {
+interface FileInfoDao {
 /*
 * for some strange issues/probably a bug, getAll cant be a suspend function*/
     @Query("SELECT * FROM $TABLE_NAME ORDER BY uid ASC")
-    fun observeAll(): LiveData<List<FileData>>
+    fun observeAll(): LiveData<List<FileInfo>>
 
     // @Query("SELECT * FROM People WHERE id = :id")
     @Query("SELECT * FROM $TABLE_NAME WHERE uid = :id")
-    fun observeFileData(id: Int): LiveData<FileData>
+    fun observeFileInfo(id: Int): LiveData<FileInfo>
 
     @Query("SELECT * FROM $TABLE_NAME ORDER BY uid ASC")
-    suspend fun getData(): List<FileData>
+    suspend fun getData(): List<FileInfo>
 
     @Query("SELECT * FROM $TABLE_NAME ORDER BY uid DESC")
-    fun getAllPaged(): DataSource.Factory<Int, FileData>
+    fun getAllPaged(): DataSource.Factory<Int, FileInfo>
 
     // @Query("SELECT * FROM People WHERE id = :id")   
     @Query("SELECT * FROM $TABLE_NAME WHERE url = :getUrl")
-    suspend fun find(getUrl: String): FileData?
+    suspend fun find(getUrl: String): FileInfo?
 
     // @Query("SELECT * FROM People WHERE id = :id")
     @Query("SELECT * FROM $TABLE_NAME WHERE uid = :id")
-    suspend fun find(id: Int): FileData?
+    suspend fun find(id: Int): FileInfo?
 
     @Insert
-    suspend fun insert(vararg allFileData: FileData)
+    suspend fun insert(vararg allFileData: FileInfo)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(fileData: FileData)
+    suspend fun insert(fileInfo: FileInfo)
 
     @Update /* replaces item*/
-    suspend fun update(fileData: FileData)
+    suspend fun update(fileInfo: FileInfo)
 
     // updates progress value for a fileData, as url is unique
     @Query("UPDATE $TABLE_NAME SET progress_value = :progress WHERE url = :url")
@@ -53,7 +52,7 @@ interface FileDataDao {
     suspend fun updateRequestId(url: String, id: Int)
 
     @Delete
-    suspend fun delete(fileData: FileData)
+    suspend fun delete(fileInfo: FileInfo)
 
     /* deletes row with URL*/
     @Query("DELETE FROM $TABLE_NAME WHERE url = :url")

@@ -9,7 +9,7 @@ import io.audioshinigami.superd.common.TABLE_NAME
 
 
 @Entity(tableName = TABLE_NAME, indices = arrayOf( Index(value = ["url"], unique = true)))
-data class FileData(
+data class FileInfo(
     @PrimaryKey(autoGenerate = true) val uid: Int,
     @ColumnInfo(name = "request_id") val request_id: Int,
     @ColumnInfo(name = "url") val url: String,
