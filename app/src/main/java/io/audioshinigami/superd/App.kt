@@ -1,6 +1,7 @@
 package io.audioshinigami.superd
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
 import com.tonyodev.fetch2.Fetch
 import com.tonyodev.fetch2.FetchConfiguration
 import io.audioshinigami.superd.data.source.db.FileDatabase
@@ -32,6 +33,8 @@ class App : Application() {
         }
 
         isActive = mutableMapOf()
+
+
     }
 
     /* provides a db instance*/

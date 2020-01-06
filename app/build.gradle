@@ -147,6 +147,8 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:$arch_testing_version"
     testImplementation "org.hamcrest:hamcrest:$hamcrest_version"
     testImplementation "org.hamcrest:hamcrest-library:$hamcrest_version"
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+    testImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dex_maker_version"
     // Coroutines test
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutine_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$test_coroutine_version"
