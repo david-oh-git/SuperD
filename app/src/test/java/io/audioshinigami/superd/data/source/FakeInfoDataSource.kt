@@ -30,7 +30,7 @@ class FakeInfoDataSource (
     }
 
     override suspend fun find(id: Int): FileInfo? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return dbData?.find { it.uid == id }
     }
 
     override suspend fun find(getUrl: String): FileInfo? {
@@ -44,7 +44,15 @@ class FakeInfoDataSource (
     }
 
     override suspend fun update(fileInfo: FileInfo) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val replace = dbData?.find { it.uid == fileInfo.uid }
+
+        dbData?.indexOf(replace)?.run {
+
+            dbData?.remove( replace )
+
+            dbData?.add( this, fileInfo)
+        }
+
     }
 
     override suspend fun update(url: String, progress: Int) {

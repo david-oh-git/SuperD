@@ -8,11 +8,11 @@ import io.audioshinigami.superd.zdata.Result
 
 interface FileInfoRepository {
 
-    fun observeAll(): LiveData<Result<List<FileInfo>>>
+    suspend fun observeAll(): LiveData<Result<List<FileInfo>>>
 
     fun getAllPaged(): LiveData<PagedList<FileInfo>>
 
-    fun getAllFileInfo(): Result<List<FileInfo>>
+    suspend fun getAllFileInfo(): Result<List<FileInfo>>
 
     suspend fun save(vararg fileInfo: FileInfo )
 

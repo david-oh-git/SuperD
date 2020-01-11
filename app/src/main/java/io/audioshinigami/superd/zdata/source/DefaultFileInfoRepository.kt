@@ -7,6 +7,7 @@ import io.audioshinigami.superd.zdata.FileInfo
 import io.audioshinigami.superd.zdata.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class DefaultFileInfoRepository(
     private val localFileInfoSource: FileInfoSource,
@@ -14,7 +15,7 @@ class DefaultFileInfoRepository(
     private val ioDispather: CoroutineDispatcher = Dispatchers.IO
 ): FileInfoRepository {
 
-    override fun observeAll(): LiveData<Result<List<FileInfo>>> {
+    override suspend fun observeAll(): LiveData<Result<List<FileInfo>>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -22,24 +23,24 @@ class DefaultFileInfoRepository(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getAllFileInfo(): Result<List<FileInfo>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override suspend fun getAllFileInfo(): Result<List<FileInfo>> = withContext(ioDispather){
+        return@withContext localFileInfoSource.getDataResult()
     }
 
     override suspend fun save(vararg fileInfo: FileInfo) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        localFileInfoSource.insert( *fileInfo )
     }
 
     override suspend fun update(fileInfo: FileInfo) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        localFileInfoSource.update(fileInfo)
     }
 
     override suspend fun update(url: String, progressValue: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun find(id: Int): FileInfo? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override suspend fun find(id: Int): FileInfo? = withContext(ioDispather){
+        return@withContext localFileInfoSource.find(id)
     }
 
     override suspend fun clearCompleted(): Int {
@@ -71,10 +72,10 @@ class DefaultFileInfoRepository(
     }
 
     override fun pause(id: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        remoteDownloadDataSource.pause(id)
     }
 
     override fun resume(id: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        remoteDownloadDataSource.resume(id)
     }
 }

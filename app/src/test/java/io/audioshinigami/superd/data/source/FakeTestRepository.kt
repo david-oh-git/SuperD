@@ -22,14 +22,14 @@ class FakeTestRepository : FileInfoRepository {
         shouldReturnError = value
     }
 
-    override fun getAllFileInfo(): Result<List<FileInfo>> {
+    override suspend fun getAllFileInfo(): Result<List<FileInfo>> {
         if( shouldReturnError )
             return Error( Exception("Test exception") )
 
         return Success( fileInfoDataService.values.toList() )
     }
 
-    override fun observeAll(): LiveData<Result<List<FileInfo>>> {
+    override suspend fun observeAll(): LiveData<Result<List<FileInfo>>> {
         observableFileInfos.value = getAllFileInfo()
 
         return observableFileInfos

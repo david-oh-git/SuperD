@@ -2,15 +2,15 @@ package io.audioshinigami.superd.zdata.source.local
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import io.audioshinigami.superd.zdata.source.SharedPreferenceRepo
+import io.audioshinigami.superd.zdata.source.SharedPreferencesSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class SharedPreferenceSource(
+class LocalPreferenceSource(
     private val sharedPreferences: SharedPreferences ,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-): SharedPreferenceRepo {
+): SharedPreferencesSource {
 
     override suspend fun save(key: String, value: String) =  withContext(ioDispatcher){
         sharedPreferences.edit {
