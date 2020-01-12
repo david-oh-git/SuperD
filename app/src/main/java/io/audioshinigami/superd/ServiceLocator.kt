@@ -21,7 +21,6 @@ object ServiceLocator {
     @Volatile // could be used from multiple threads
     var sharedPreferences: SharedPreferences? = null
     private var database: FileDatabase? = null
-    private var fetch: Fetch? = null
     @Volatile
     var fileInfoRepository: FileInfoRepository? = null
         @VisibleForTesting set

@@ -21,11 +21,16 @@ class RemoteDownloadDataSource internal constructor(
 
 ): DownloadDataSource  {
 
-    override suspend fun start(url: String , downloadUri: Uri ) = withContext(ioDispatcher){
+    override val isActive: MutableMap<Int, Boolean> = mutableMapOf()
+
+    override suspend fun start(url: String, downloadUri: Uri ) = withContext(ioDispatcher){
         /* create a request*/
         val request = createRequest(url, downloadUri)
         /* start the download*/
         fetch.enqueue(request)
+
+        // add to active urls
+        isActive[request.id] = true
 
         /* create [FileData] info for file*/
         val fileData = FileInfo(
@@ -35,7 +40,7 @@ class RemoteDownloadDataSource internal constructor(
             url.substringAfterLast("/"),
             0
         )
-        
+
         /* add to DB*/
         fileInfoDao.insert(fileData)
     }
@@ -46,16 +51,22 @@ class RemoteDownloadDataSource internal constructor(
 
         /* start the download*/
         fetch.enqueue(request)
+        // add to active urls
+        isActive[request.id] = true
         
         fileInfoDao.updateRequestId( url, request.id )
     }
 
     override fun pause(id: Int) {
         fetch.pause(id)
+        // add to active urls
+        isActive[id] = false
     }
 
     override fun resume(id: Int) {
         fetch.resume(id)
+        // add to active urls
+        isActive[id] = true
     }
 
     override suspend fun delete(id: Int) = withContext(ioDispatcher){

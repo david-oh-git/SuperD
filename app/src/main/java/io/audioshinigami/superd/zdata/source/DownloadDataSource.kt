@@ -9,6 +9,7 @@ interface DownloadDataSource {
 
     var _priority: Priority
     var _networkType: NetworkType
+    val isActive: Map<Int, Boolean>
 
     suspend fun start(url: String, downloadUri: Uri )
 
