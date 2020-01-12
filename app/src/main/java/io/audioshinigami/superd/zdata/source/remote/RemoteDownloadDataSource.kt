@@ -35,7 +35,7 @@ class RemoteDownloadDataSource internal constructor(
             url.substringAfterLast("/"),
             0
         )
-
+        
         /* add to DB*/
         fileInfoDao.insert(fileData)
     }

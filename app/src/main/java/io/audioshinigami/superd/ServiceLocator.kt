@@ -2,14 +2,19 @@ package io.audioshinigami.superd
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.annotation.VisibleForTesting
 import androidx.room.Room
 import com.tonyodev.fetch2.Fetch
 import com.tonyodev.fetch2.FetchConfiguration
 import io.audioshinigami.superd.common.NUMBER_OF_DOWNLOADS_KEY
 import io.audioshinigami.superd.common.SETTINGS_PREF_NAME
+import io.audioshinigami.superd.zdata.source.DefaultFileInfoRepository
+import io.audioshinigami.superd.zdata.source.DownloadDataSource
+import io.audioshinigami.superd.zdata.source.FileInfoRepository
 import io.audioshinigami.superd.zdata.source.FileInfoSource
 import io.audioshinigami.superd.zdata.source.local.FileDatabase
 import io.audioshinigami.superd.zdata.source.local.LocalFileInfoSource
+import io.audioshinigami.superd.zdata.source.remote.RemoteDownloadDataSource
 
 object ServiceLocator {
 
@@ -17,8 +22,17 @@ object ServiceLocator {
     var sharedPreferences: SharedPreferences? = null
     private var database: FileDatabase? = null
     private var fetch: Fetch? = null
+    @Volatile
+    var fileInfoRepository: FileInfoRepository? = null
+        @VisibleForTesting set
 
     private val lock = Any()
+
+    internal fun provideFileInfoRepository( context: Context): FileInfoRepository {
+        synchronized(this){
+            return fileInfoRepository ?: createFileInfoRepository( context )
+        }
+    }
 
     internal fun provideSharedPreference( name: String,  context: Context ): SharedPreferences {
 
@@ -27,10 +41,24 @@ object ServiceLocator {
         }
     }
 
+    private fun createFileInfoRepository( context: Context ): FileInfoRepository {
+        val newRepo = DefaultFileInfoRepository( createFileInfoSource(context),
+            createDownloadDataSource(context))
+
+        fileInfoRepository = newRepo
+        return newRepo
+    }
+
     private fun createFileInfoSource( context: Context ): FileInfoSource {
         val database = database ?: createDatabase(context)
 
         return LocalFileInfoSource(database.fileDataDao())
+    }
+
+    private fun createDownloadDataSource( context: Context ): DownloadDataSource {
+        val database = database ?: createDatabase(context)
+
+        return RemoteDownloadDataSource( createFetch( context.applicationContext) , database.fileDataDao() )
     }
 
     private fun createSharedPreference( name: String, context: Context ): SharedPreferences {
@@ -47,7 +75,7 @@ object ServiceLocator {
     }
 
     /* creates fetch instance*/
-    private fun createFetch(numberOfDownloads: Int = 3 , context: Context ): Fetch {
+    private fun createFetch( context: Context ,numberOfDownloads: Int = 3 ): Fetch {
         val fetchConfig = FetchConfiguration.Builder(context.applicationContext )
             .setDownloadConcurrentLimit(numberOfDownloads)
             .build()

@@ -12,7 +12,7 @@ import kotlinx.coroutines.withContext
 class DefaultFileInfoRepository(
     private val localFileInfoSource: FileInfoSource,
     private val remoteDownloadDataSource: DownloadDataSource,
-    private val ioDispather: CoroutineDispatcher = Dispatchers.IO
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): FileInfoRepository {
 
     override suspend fun observeAll(): LiveData<Result<List<FileInfo>>> {
@@ -23,7 +23,7 @@ class DefaultFileInfoRepository(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun getAllFileInfo(): Result<List<FileInfo>> = withContext(ioDispather){
+    override suspend fun getAllFileInfo(): Result<List<FileInfo>> = withContext(ioDispatcher){
         return@withContext localFileInfoSource.getDataResult()
     }
 
@@ -39,7 +39,7 @@ class DefaultFileInfoRepository(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun find(id: Int): FileInfo? = withContext(ioDispather){
+    override suspend fun find(id: Int): FileInfo? = withContext(ioDispatcher){
         return@withContext localFileInfoSource.find(id)
     }
 
