@@ -10,7 +10,7 @@
 
         <variable
             name="itemAction"
-            type="io.audioshinigami.superd.addownload.DownloadItemActions" />
+            type="io.audioshinigami.superd.downloads.DownloadItemActions" />
 
         <variable
                 name="fileData"

@@ -25,11 +25,26 @@ object ServiceLocator {
     var fileInfoRepository: FileInfoRepository? = null
         @VisibleForTesting set
 
+    @Volatile
+    var fetch: Fetch? = null
+
     private val lock = Any()
 
     internal fun provideFileInfoRepository( context: Context): FileInfoRepository {
         synchronized(this){
             return fileInfoRepository ?: createFileInfoRepository( context )
+        }
+    }
+
+    internal fun provideFetch( context: Context ): Fetch {
+        synchronized(this){
+            val defaultFetch = fetch
+            if( defaultFetch == null || defaultFetch.isClosed ){
+                val newFetch = createFetch(context)
+                fetch = newFetch
+                return newFetch
+            }
+            return fetch ?: createFetch(context)
         }
     }
 
@@ -57,7 +72,7 @@ object ServiceLocator {
     private fun createDownloadDataSource( context: Context ): DownloadDataSource {
         val database = database ?: createDatabase(context)
 
-        return RemoteDownloadDataSource( createFetch( context.applicationContext) , database.fileDataDao() )
+        return RemoteDownloadDataSource( provideFetch( context.applicationContext) , database.fileDataDao() )
     }
 
     private fun createSharedPreference( name: String, context: Context ): SharedPreferences {
@@ -79,7 +94,9 @@ object ServiceLocator {
             .setDownloadConcurrentLimit(numberOfDownloads)
             .build()
 
-        return Fetch.Impl.getInstance(fetchConfig)
+        val newFetch = Fetch.Impl.getInstance(fetchConfig)
+        fetch = newFetch
+        return newFetch
     }
 
     private fun provideNumberOfDownloads( context: Context): Int {

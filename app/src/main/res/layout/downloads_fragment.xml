@@ -18,7 +18,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".addownload.DownloadsFragment">
+            tools:context=".downloads.DownloadsFragment">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
                 app:srcCompat="@drawable/ic_add"

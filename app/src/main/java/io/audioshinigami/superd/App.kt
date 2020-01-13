@@ -15,9 +15,8 @@ class App : Application() {
     private set
 
     /* fetch instance : 3rd party download library*/
-    var fetch: Fetch? = null
-    private set
-    get() = field ?: provideFetch()
+    val fetch: Fetch
+    get() = ServiceLocator.provideFetch(this)
 
     /* list of active urls */
     lateinit var isActive: MutableMap<String, Boolean>

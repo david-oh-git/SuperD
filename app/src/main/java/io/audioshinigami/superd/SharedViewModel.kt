@@ -52,6 +52,7 @@ class SharedViewModel(
             CACHED_PAGE_SIZE )
 
         pagedDownloads = pagedListBuilder.build()
+
     }
 
     fun startDownload( url: String ) = viewModelScope.launch(Dispatchers.IO) {

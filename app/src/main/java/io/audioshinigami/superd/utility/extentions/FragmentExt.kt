@@ -13,7 +13,7 @@ import io.audioshinigami.superd.data.repository.DefaultRepository
 
 fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>): T {
     val repository = DefaultRepository(App.instance.dataBaseInstance?.fileDataDao()!! ,
-        App.instance.fetch!! )
+        App.instance.fetch )
 
     return ViewModelProviders.of(this.requireActivity(), ViewModelFactory(repository)).get(viewModelClass)
 }

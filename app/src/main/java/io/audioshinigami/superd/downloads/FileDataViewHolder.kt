@@ -1,8 +1,7 @@
-package io.audioshinigami.superd.addownload
+package io.audioshinigami.superd.downloads
 
 import androidx.recyclerview.widget.RecyclerView
 import io.audioshinigami.superd.BR
-import io.audioshinigami.superd.R
 import io.audioshinigami.superd.data.source.db.entity.FileData
 import io.audioshinigami.superd.databinding.DownloadItemBinding
 

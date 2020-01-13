@@ -1,4 +1,4 @@
-package io.audioshinigami.superd.addownload
+package io.audioshinigami.superd.downloads
 
 import android.widget.ImageButton
 import androidx.databinding.BindingAdapter

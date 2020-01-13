@@ -1,10 +1,7 @@
 package io.audioshinigami.superd.zdata.source.remote
 
 import android.net.Uri
-import com.tonyodev.fetch2.Fetch
-import com.tonyodev.fetch2.NetworkType
-import com.tonyodev.fetch2.Priority
-import com.tonyodev.fetch2.Request
+import com.tonyodev.fetch2.*
 import io.audioshinigami.superd.zdata.FileInfo
 import io.audioshinigami.superd.zdata.source.DownloadDataSource
 import io.audioshinigami.superd.zdata.source.local.FileInfoDao
@@ -22,6 +19,8 @@ class RemoteDownloadDataSource internal constructor(
 ): DownloadDataSource  {
 
     override val isActive: MutableMap<Int, Boolean> = mutableMapOf()
+    /* fetch listener*/
+    var fetchListener: FetchListener? = null
 
     override suspend fun start(url: String, downloadUri: Uri ) = withContext(ioDispatcher){
         /* create a request*/
@@ -31,6 +30,7 @@ class RemoteDownloadDataSource internal constructor(
 
         // add to active urls
         isActive[request.id] = true
+
 
         /* create [FileData] info for file*/
         val fileData = FileInfo(

@@ -1,4 +1,4 @@
-package io.audioshinigami.superd.addurl
+package io.audioshinigami.superd.adddownload
 
 import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.ClipboardManager
@@ -15,7 +15,7 @@ import io.audioshinigami.superd.utility.PermissionManager
 import io.audioshinigami.superd.utility.extentions.WRITE_EXTERNAL_REQUEST_CODE
 import io.audioshinigami.superd.utility.extentions.obtainViewModel
 import io.audioshinigami.superd.utility.extentions.sendToastMsg
-import kotlinx.android.synthetic.main.fragment_get_url.*
+import kotlinx.android.synthetic.main.fragment_add_fileinfo.*
 
 
 /**
@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_get_url.*
  *
  */
 
-class GetUrlFragment : DialogFragment() {
+class AddFileInfoFragment : DialogFragment() {
 
     private val viewModel by lazy { obtainViewModel(SharedViewModel::class.java) }
 
@@ -32,7 +32,7 @@ class GetUrlFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_get_url, container, false)
+        return inflater.inflate(R.layout.fragment_add_fileinfo, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
