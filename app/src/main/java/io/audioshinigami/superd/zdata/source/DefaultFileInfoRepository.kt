@@ -78,4 +78,8 @@ class DefaultFileInfoRepository(
     override fun resume(id: Int) {
         remoteDownloadDataSource.resume(id)
     }
+
+    override suspend fun isDownloading() = withContext(ioDispatcher) {
+        return@withContext remoteDownloadDataSource.isDownloading()
+    }
 }

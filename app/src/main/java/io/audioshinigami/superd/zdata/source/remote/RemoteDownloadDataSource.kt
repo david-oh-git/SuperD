@@ -1,15 +1,14 @@
 package io.audioshinigami.superd.zdata.source.remote
 
 import android.net.Uri
+import androidx.lifecycle.MutableLiveData
 import com.tonyodev.fetch2.*
-import com.tonyodev.fetch2core.DownloadBlock
 import io.audioshinigami.superd.zdata.FileInfo
 import io.audioshinigami.superd.zdata.source.DownloadDataSource
 import io.audioshinigami.superd.zdata.source.local.FileInfoDao
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 class RemoteDownloadDataSource internal constructor(
     private val fetch: Fetch,
@@ -85,6 +84,20 @@ class RemoteDownloadDataSource internal constructor(
 
     override suspend fun isActive(id: Int) = withContext(ioDispatcher) {
         return@withContext isActive[id]
+    }
+
+    override suspend fun isDownloading() = withContext(ioDispatcher) {
+        // TODO shameless coding here, utterly shameless.
+
+        if(isActive.isEmpty() )
+            return@withContext MutableLiveData(false)
+
+        for ( value in isActive.values ){
+            if(value)
+                return@withContext MutableLiveData(value)
+        }
+
+        return@withContext MutableLiveData(false)
     }
 
     private suspend fun createRequest(url: String, downloadUri: Uri ): Request

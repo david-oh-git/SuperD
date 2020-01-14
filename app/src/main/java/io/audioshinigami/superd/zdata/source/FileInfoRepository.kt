@@ -39,4 +39,6 @@ interface FileInfoRepository {
     fun pause(id: Int)
 
     fun resume(id: Int)
+
+    suspend fun isDownloading(): LiveData<Boolean>
 }
