@@ -40,12 +40,19 @@ object ServiceLocator {
         synchronized(this){
             val defaultFetch = fetch
             if( defaultFetch == null || defaultFetch.isClosed ){
-                val newFetch = createFetch(context)
+                val newFetch = createFetch(context , getNumberOfDownloads(context))
                 fetch = newFetch
                 return newFetch
             }
-            return fetch ?: createFetch(context)
+            return fetch ?: createFetch(context, getNumberOfDownloads(context))
         }
+    }
+
+    private fun getNumberOfDownloads(context: Context): Int {
+        val numberOfDownloads = provideSharedPreference( SETTINGS_PREF_NAME , context.applicationContext)
+            .getInt( NUMBER_OF_DOWNLOADS_KEY , -99)
+
+        return if( numberOfDownloads == -99) 2 else numberOfDownloads
     }
 
     internal fun provideSharedPreference( name: String,  context: Context ): SharedPreferences {
@@ -72,7 +79,9 @@ object ServiceLocator {
     private fun createDownloadDataSource( context: Context ): DownloadDataSource {
         val database = database ?: createDatabase(context)
 
-        return RemoteDownloadDataSource( provideFetch( context.applicationContext) , database.fileDataDao() )
+        return RemoteDownloadDataSource(
+            provideFetch( context.applicationContext )
+            , database.fileDataDao() )
     }
 
     private fun createSharedPreference( name: String, context: Context ): SharedPreferences {
@@ -89,7 +98,7 @@ object ServiceLocator {
     }
 
     /* creates fetch instance*/
-    private fun createFetch( context: Context ,numberOfDownloads: Int = 3 ): Fetch {
+    private fun createFetch( context: Context ,numberOfDownloads: Int ): Fetch {
         val fetchConfig = FetchConfiguration.Builder(context.applicationContext )
             .setDownloadConcurrentLimit(numberOfDownloads)
             .build()
@@ -97,13 +106,6 @@ object ServiceLocator {
         val newFetch = Fetch.Impl.getInstance(fetchConfig)
         fetch = newFetch
         return newFetch
-    }
-
-    private fun provideNumberOfDownloads( context: Context): Int {
-        val numberOfDownloads = provideSharedPreference( SETTINGS_PREF_NAME , context)
-            .getInt( NUMBER_OF_DOWNLOADS_KEY , -99)
-
-        return if( numberOfDownloads == -99) 3 else numberOfDownloads
     }
 
 }

@@ -34,11 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 //        return super.onCreateOptionsMenu(menu)
-
-//        TODO : gear icon appears on all fragments
-
         menuInflater.inflate(R.menu.action_bar, menu)
-
         return true
     }
 

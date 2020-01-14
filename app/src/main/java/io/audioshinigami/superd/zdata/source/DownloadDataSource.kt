@@ -22,4 +22,8 @@ interface DownloadDataSource {
     suspend fun delete(id: Int): Fetch
 
     suspend fun remove(id: Int): Fetch
+
+    suspend fun update( url: String , progress: Int )
+
+    suspend fun isActive(id: Int ): Boolean?
 }
