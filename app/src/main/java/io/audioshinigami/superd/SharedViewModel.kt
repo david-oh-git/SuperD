@@ -20,7 +20,7 @@ import timber.log.Timber
 
 class SharedViewModel(
     private val repository: DefaultRepository,
-    private val _isActive: MutableMap<String, Boolean> = App.instance.isActive
+    private val _isActive: MutableMap<String, Boolean> = mutableMapOf()
     ) :
     ViewModel() {
 
@@ -148,8 +148,8 @@ class SharedViewModel(
             ) {
                 Timber.d( "progress : ${download.progress}% .... ")
 //
-//                if( download.progress > 5 )
-//                    repository.pause( download.id )
+                if( download.progress > 67 )
+                    repository.pause( download.id )
                 updateProgressValue( download.url, download.progress )
             }
 
@@ -208,9 +208,9 @@ class SharedViewModel(
 
     } //END loadData
 
-    fun downloadAction(id: Int, url: String ){
+    fun downloadAction(id: Int, url: String , isActive: Boolean? ){
 
-        when( _isActive[url] ){
+        when( isActive ){
             true -> {
                 repository.pause(id)
                 _isActive[url] = false

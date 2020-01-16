@@ -82,8 +82,8 @@ class DownloadsFragment :
     }
 
     override fun downloadButtonAction( view: View ,id: Int, url: String) {
-        viewModel.downloadAction( id, url )
-        setItemIcon( url , view as ImageButton )
+        viewModel.downloadAction( id, url, (requireContext().applicationContext as App).activeDownloads[id] )
+        setItemIcon( id , view as ImageButton )
     }
 
     override fun showPopup(view: View, itemUrl: String ) {
@@ -133,9 +133,9 @@ class DownloadsFragment :
         }
     }
 
-    private fun setItemIcon( url: String , button : ImageButton ){
+    private fun setItemIcon( id: Int , button : ImageButton ){
 
-        when( App.instance.isActive[url] ){
+        when( (requireContext().applicationContext as App).activeDownloads[id] ){
             true -> button.setImageResource(R.drawable.ic_pause)
             false -> button.setImageResource(R.drawable.ic_download)
         }

@@ -3,19 +3,24 @@ package io.audioshinigami.superd.adddownload
 import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.ClipboardManager
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import io.audioshinigami.superd.App
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.SharedViewModel
 import io.audioshinigami.superd.utility.PermissionManager
+import io.audioshinigami.superd.utility.ReUseMethods
 import io.audioshinigami.superd.utility.extentions.WRITE_EXTERNAL_REQUEST_CODE
 import io.audioshinigami.superd.utility.extentions.obtainViewModel
 import io.audioshinigami.superd.utility.extentions.sendToastMsg
 import kotlinx.android.synthetic.main.fragment_add_fileinfo.*
+import java.io.File
 
 
 /**
@@ -25,7 +30,9 @@ import kotlinx.android.synthetic.main.fragment_add_fileinfo.*
 
 class AddFileInfoFragment : DialogFragment() {
 
-    private val viewModel by lazy { obtainViewModel(SharedViewModel::class.java) }
+    private val viewModel by viewModels<AddFileInfoViewModel> {
+        AddFileInfoViewModelFactory( (requireContext().applicationContext as App ).repository)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,8 +76,12 @@ class AddFileInfoFragment : DialogFragment() {
         if ( !PermissionManager.isPermissionGranted(context!!,permission) )
             return
 
+        // TODO get uri from user
 
-        viewModel.startDownload(url)
+        val uri = Uri.parse( ReUseMethods.getPublicFileStorageDir().toString() +
+        File.separator + url.substringAfterLast("/") )
+
+        viewModel.startDownload(url, uri)
 
         findNavController().popBackStack()
     }

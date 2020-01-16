@@ -1,9 +1,7 @@
 package io.audioshinigami.superd
 
 import android.app.Application
-import androidx.appcompat.app.AppCompatDelegate
 import com.tonyodev.fetch2.Fetch
-import com.tonyodev.fetch2.FetchConfiguration
 import io.audioshinigami.superd.data.source.db.FileDatabase
 import io.audioshinigami.superd.zdata.source.FileInfoRepository
 import timber.log.Timber
@@ -28,8 +26,8 @@ class App : Application() {
     val fetch: Fetch
         get() = ServiceLocator.provideFetch(this)
 
-    /* list of active urls */
-    lateinit var isActive: MutableMap<String, Boolean>
+    /* list of active downloads request ids */
+    val activeDownloads: MutableMap<Int, Boolean> = ServiceLocator.provideActiveDownloadsMap()
 
     override fun onCreate() {
         super.onCreate()
@@ -40,9 +38,6 @@ class App : Application() {
         synchronized(this){
             instance = this
         }
-
-        isActive = mutableMapOf()
-
 
     }
 

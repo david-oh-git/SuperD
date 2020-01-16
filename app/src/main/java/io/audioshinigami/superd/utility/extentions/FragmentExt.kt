@@ -13,7 +13,7 @@ import io.audioshinigami.superd.data.repository.DefaultRepository
 
 fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>): T {
     val repository = DefaultRepository(App.instance.dataBaseInstance?.fileDataDao()!! ,
-        App.instance.fetch )
+        (requireContext().applicationContext as App).fetch )
 
     return ViewModelProviders.of(this.requireActivity(), ViewModelFactory(repository)).get(viewModelClass)
 }
@@ -35,4 +35,3 @@ fun Fragment.isPermissionGranted(): Boolean {
     return ContextCompat.checkSelfPermission( App.instance , android.Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
             PackageManager.PERMISSION_GRANTED
 }
-

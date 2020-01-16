@@ -15,12 +15,12 @@ class DefaultFileInfoRepository(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): FileInfoRepository {
 
-    override suspend fun observeAll(): LiveData<Result<List<FileInfo>>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override suspend fun observeAll() = withContext(ioDispatcher) {
+        return@withContext localFileInfoSource.observeAll()
     }
 
     override fun getAllPaged(): LiveData<PagedList<FileInfo>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return localFileInfoSource.getAllPaged()
     }
 
     override suspend fun getAllFileInfo(): Result<List<FileInfo>> = withContext(ioDispatcher){
@@ -36,39 +36,39 @@ class DefaultFileInfoRepository(
     }
 
     override suspend fun update(url: String, progressValue: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //TODO To change body of created functions
     }
 
     override suspend fun find(id: Int): FileInfo? = withContext(ioDispatcher){
         return@withContext localFileInfoSource.find(id)
     }
 
-    override suspend fun clearCompleted(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override suspend fun clearCompleted() = withContext(ioDispatcher){
+        return@withContext localFileInfoSource.deleteCompletedFileData()
     }
 
     override suspend fun delete(fileInfo: FileInfo) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //TODO To change body of created functions
     }
 
     override suspend fun delete(url: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //TODO To change body of created functions
     }
 
     override suspend fun delete(id: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //TODO To change body of created functions use File | Settings | File Templates.
     }
 
     override suspend fun deleteAll() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //TODO To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun start(url: String, downloadUri: Uri) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override suspend fun start(url: String, downloadUri: Uri) = withContext(ioDispatcher){
+        return@withContext remoteDownloadDataSource.start(url , downloadUri )
     }
 
     override suspend fun restart(url: String, downloadUri: Uri) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+         //TODO To change body of created functions use File | Settings | File Templates.
     }
 
     override fun pause(id: Int) {

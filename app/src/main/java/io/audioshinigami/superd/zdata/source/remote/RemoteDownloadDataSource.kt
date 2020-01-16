@@ -13,13 +13,13 @@ import kotlinx.coroutines.withContext
 class RemoteDownloadDataSource internal constructor(
     private val fetch: Fetch,
     private val fileInfoDao: FileInfoDao,
+    override val isActive: MutableMap<Int, Boolean>,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     override var _priority: Priority = Priority.NORMAL,
     override var _networkType: NetworkType = NetworkType.ALL
 
 ): DownloadDataSource  {
 
-    override val isActive: MutableMap<Int, Boolean> = mutableMapOf()
     /* fetch listener*/
     var fetchListener: FetchListener? = null
 

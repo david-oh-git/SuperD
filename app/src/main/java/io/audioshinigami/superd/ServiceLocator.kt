@@ -26,6 +26,9 @@ object ServiceLocator {
         @VisibleForTesting set
 
     @Volatile
+    private var activeDownloads: MutableMap<Int, Boolean>? = null
+
+    @Volatile
     var fetch: Fetch? = null
 
     private val lock = Any()
@@ -62,6 +65,12 @@ object ServiceLocator {
         }
     }
 
+    internal fun provideActiveDownloadsMap(): MutableMap<Int, Boolean> {
+        synchronized(this){
+            return activeDownloads ?: mutableMapOf()
+        }
+    }
+
     private fun createFileInfoRepository( context: Context ): FileInfoRepository {
         val newRepo = DefaultFileInfoRepository( createFileInfoSource(context),
             createDownloadDataSource(context))
@@ -81,7 +90,8 @@ object ServiceLocator {
 
         return RemoteDownloadDataSource(
             provideFetch( context.applicationContext )
-            , database.fileDataDao() )
+            , database.fileDataDao(),
+            provideActiveDownloadsMap() )
     }
 
     private fun createSharedPreference( name: String, context: Context ): SharedPreferences {

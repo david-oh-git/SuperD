@@ -16,21 +16,21 @@ object ImageButtonBindings {
     @JvmStatic fun setItemData(button: ImageButton, _data: FileData ){
         with(button){
 
-            val activeDownloads = ((this.context.applicationContext) as App ).isActive
+            val activeDownloads = ((this.context.applicationContext) as App ).activeDownloads
             when{
                 _data.progressValue == 100 -> {
                     setImageResource(R.drawable.ic_done)
                     isEnabled = false
                 }
 
-                activeDownloads[_data.url] == true -> setImageResource(R.drawable.ic_pause)
+                activeDownloads[_data.request_id] == true -> setImageResource(R.drawable.ic_pause)
 
-                activeDownloads[_data.url] == false -> setImageResource(R.drawable.ic_download )
+                activeDownloads[_data.request_id] == false -> setImageResource(R.drawable.ic_download )
 
                 _data.progressValue < 0 -> setImageResource(R.drawable.ic_error)
 //
 
-                activeDownloads[_data.url] == null -> setImageResource(R.drawable.ic_download )
+                activeDownloads[_data.request_id] == null -> setImageResource(R.drawable.ic_download )
 
 //                else -> setImageResource(R.drawable.ic_download)
             }
