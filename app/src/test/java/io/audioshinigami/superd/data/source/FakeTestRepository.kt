@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
+import io.audioshinigami.superd.util.FileInfoFactory
 import io.audioshinigami.superd.zdata.FileInfo
 import io.audioshinigami.superd.zdata.Result
 import io.audioshinigami.superd.zdata.Result.Error
@@ -17,6 +18,8 @@ class FakeTestRepository : FileInfoRepository {
     private val observableFileInfos = MutableLiveData<Result<List<FileInfo>>>()
 
     private var shouldReturnError = false
+
+    private var activeDownloads = mutableMapOf<Int, Boolean>()
 
     fun setReturnError(value: Boolean) {
         shouldReturnError = value
@@ -59,7 +62,12 @@ class FakeTestRepository : FileInfoRepository {
     }
 
     override suspend fun clearCompleted(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val size = fileInfoDataService.filterValues { it.progressValue == 100 }.size
+
+        fileInfoDataService = fileInfoDataService.filterValues { it.progressValue != 100
+        } as LinkedHashMap<Int, FileInfo>
+
+        return size
     }
 
     override suspend fun delete(fileInfo: FileInfo) {
@@ -78,8 +86,10 @@ class FakeTestRepository : FileInfoRepository {
         fileInfoDataService.clear()
     }
 
-    override suspend fun start(url: String, downloadUri: Uri) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override suspend fun start(_url: String, downloadUri: Uri) {
+        val fileInfo = FileInfoFactory.singleEntry().copy( url = _url)
+        fileInfoDataService[fileInfo.request_id] = fileInfo
+        activeDownloads[fileInfo.request_id] = true
     }
 
     override suspend fun restart(url: String, downloadUri: Uri) {
@@ -87,10 +97,22 @@ class FakeTestRepository : FileInfoRepository {
     }
 
     override fun pause(id: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        activeDownloads[id] = false
     }
 
     override fun resume(id: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun isDownloading(): LiveData<Boolean> {
+        if( activeDownloads.isEmpty())
+            return MutableLiveData(false)
+
+        for( value in activeDownloads.values ){
+            if( value )
+                return MutableLiveData(true)
+        }
+
+        return MutableLiveData(false)
     }
 }
