@@ -3,6 +3,7 @@ package io.audioshinigami.superd.zdata.source
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
+import com.tonyodev.fetch2.FetchListener
 import io.audioshinigami.superd.zdata.FileInfo
 import io.audioshinigami.superd.zdata.Result
 
@@ -41,4 +42,8 @@ interface FileInfoRepository {
     fun resume(id: Int)
 
     suspend fun isDownloading(): LiveData<Boolean>
+
+    fun setListener(fetchListener: FetchListener)
+
+    fun disableListener()
 }

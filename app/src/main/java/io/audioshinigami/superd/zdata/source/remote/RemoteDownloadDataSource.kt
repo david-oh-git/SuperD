@@ -21,7 +21,7 @@ class RemoteDownloadDataSource internal constructor(
 ): DownloadDataSource  {
 
     /* fetch listener*/
-    var _fetchListener: FetchListener? = null
+    private var _fetchListener: FetchListener? = null
 
     override suspend fun start(url: String, downloadUri: Uri ) = withContext(ioDispatcher){
         /* create a request*/
@@ -31,7 +31,6 @@ class RemoteDownloadDataSource internal constructor(
 
         // add to active urls
         isActive[request.id] = true
-
 
         /* create [FileData] info for file*/
         val fileData = FileInfo(

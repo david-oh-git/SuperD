@@ -3,6 +3,7 @@ package io.audioshinigami.superd.zdata.source
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
+import com.tonyodev.fetch2.FetchListener
 import io.audioshinigami.superd.zdata.FileInfo
 import io.audioshinigami.superd.zdata.Result
 import kotlinx.coroutines.CoroutineDispatcher
@@ -69,6 +70,14 @@ class DefaultFileInfoRepository(
 
     override suspend fun restart(url: String, downloadUri: Uri) {
          //TODO To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun setListener(fetchListener: FetchListener) {
+        remoteDownloadDataSource.setListener(fetchListener)
+    }
+
+    override fun disableListener() {
+        remoteDownloadDataSource.disableListener()
     }
 
     override fun pause(id: Int) {
