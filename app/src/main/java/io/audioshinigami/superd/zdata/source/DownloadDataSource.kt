@@ -3,6 +3,7 @@ package io.audioshinigami.superd.zdata.source
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import com.tonyodev.fetch2.Fetch
+import com.tonyodev.fetch2.FetchListener
 import com.tonyodev.fetch2.NetworkType
 import com.tonyodev.fetch2.Priority
 
@@ -29,4 +30,8 @@ interface DownloadDataSource {
     suspend fun isActive(id: Int ): Boolean?
 
     suspend fun isDownloading(): LiveData<Boolean>
+
+    fun setListener(fetchListener: FetchListener)
+
+    fun disableListener()
 }

@@ -21,7 +21,7 @@ class RemoteDownloadDataSource internal constructor(
 ): DownloadDataSource  {
 
     /* fetch listener*/
-    var fetchListener: FetchListener? = null
+    var _fetchListener: FetchListener? = null
 
     override suspend fun start(url: String, downloadUri: Uri ) = withContext(ioDispatcher){
         /* create a request*/
@@ -100,6 +100,19 @@ class RemoteDownloadDataSource internal constructor(
         return@withContext MutableLiveData(false)
     }
 
+    override fun setListener(fetchListener: FetchListener) {
+        fetch.addListener( provideFetchListener(fetchListener) )
+    }
+
+    override fun disableListener() {
+
+        _fetchListener?.run {
+            fetch.removeListener(this)
+        }
+
+        _fetchListener = null
+    }
+
     private suspend fun createRequest(url: String, downloadUri: Uri ): Request
             = withContext(ioDispatcher){
 
@@ -109,6 +122,20 @@ class RemoteDownloadDataSource internal constructor(
                 networkType = _networkType
                 addHeader("clientKey", "SD78DF93_3947&MVNGHE1WONG")
             }
+    }
+
+    private fun provideFetchListener(fetchListener: FetchListener): FetchListener {
+        synchronized(this){
+            val defaultListener = _fetchListener
+
+            if( defaultListener == null ){
+                _fetchListener = fetchListener
+
+                return fetchListener
+            }
+
+            return _fetchListener ?: fetchListener
+        }
     }
 
 }
