@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
+import com.tonyodev.fetch2.FetchListener
 import io.audioshinigami.superd.util.FileInfoFactory
 import io.audioshinigami.superd.zdata.FileInfo
 import io.audioshinigami.superd.zdata.Result
@@ -86,8 +87,8 @@ class FakeTestRepository : FileInfoRepository {
         fileInfoDataService.clear()
     }
 
-    override suspend fun start(_url: String, downloadUri: Uri) {
-        val fileInfo = FileInfoFactory.singleEntry().copy( url = _url)
+    override suspend fun start(url: String, downloadUri: Uri) {
+        val fileInfo = FileInfoFactory.singleEntry().copy( url = url)
         fileInfoDataService[fileInfo.request_id] = fileInfo
         activeDownloads[fileInfo.request_id] = true
     }
@@ -104,15 +105,35 @@ class FakeTestRepository : FileInfoRepository {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun isDownloading(): LiveData<Boolean> {
+    override suspend fun setListener(fetchListener: FetchListener) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun disableListener() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun isDownloading(): Boolean {
         if( activeDownloads.isEmpty())
-            return MutableLiveData(false)
+            return false
 
         for( value in activeDownloads.values ){
             if( value )
-                return MutableLiveData(true)
+                return true
         }
 
-        return MutableLiveData(false)
+        return false
+    }
+
+    override suspend fun find(url: String): FileInfo? {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun hasActiveListener(): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onError(id: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

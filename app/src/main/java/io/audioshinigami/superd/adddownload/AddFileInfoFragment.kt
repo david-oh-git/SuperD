@@ -20,6 +20,7 @@ import io.audioshinigami.superd.utility.extentions.WRITE_EXTERNAL_REQUEST_CODE
 import io.audioshinigami.superd.utility.extentions.obtainViewModel
 import io.audioshinigami.superd.utility.extentions.sendToastMsg
 import kotlinx.android.synthetic.main.fragment_add_fileinfo.*
+import timber.log.Timber
 import java.io.File
 
 

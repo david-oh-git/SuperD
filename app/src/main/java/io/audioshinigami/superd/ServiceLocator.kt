@@ -91,7 +91,7 @@ object ServiceLocator {
         return RemoteDownloadDataSource(
             provideFetch( context.applicationContext )
             , database.fileDataDao(),
-            provideActiveDownloadsMap() )
+            (context.applicationContext as App) )
     }
 
     private fun createSharedPreference( name: String, context: Context ): SharedPreferences {

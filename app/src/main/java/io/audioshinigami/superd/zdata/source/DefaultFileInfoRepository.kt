@@ -37,11 +37,15 @@ class DefaultFileInfoRepository(
     }
 
     override suspend fun update(url: String, progressValue: Int) {
-        //TODO To change body of created functions
+        localFileInfoSource.update(url, progressValue)
     }
 
     override suspend fun find(id: Int): FileInfo? = withContext(ioDispatcher){
         return@withContext localFileInfoSource.find(id)
+    }
+
+    override suspend fun find(url: String): FileInfo? = withContext(ioDispatcher){
+        return@withContext localFileInfoSource.find(url)
     }
 
     override suspend fun clearCompleted() = withContext(ioDispatcher){
@@ -49,19 +53,19 @@ class DefaultFileInfoRepository(
     }
 
     override suspend fun delete(fileInfo: FileInfo) {
-        //TODO To change body of created functions
+        localFileInfoSource.delete(fileInfo)
     }
 
     override suspend fun delete(url: String) {
-        //TODO To change body of created functions
+        localFileInfoSource.delete(url)
     }
 
     override suspend fun delete(id: Int) {
-        //TODO To change body of created functions use File | Settings | File Templates.
+        localFileInfoSource.delete(id)
     }
 
     override suspend fun deleteAll() {
-        //TODO To change body of created functions use File | Settings | File Templates.
+        localFileInfoSource.deleteAll()
     }
 
     override suspend fun start(url: String, downloadUri: Uri) = withContext(ioDispatcher){
@@ -69,10 +73,10 @@ class DefaultFileInfoRepository(
     }
 
     override suspend fun restart(url: String, downloadUri: Uri) {
-         //TODO To change body of created functions use File | Settings | File Templates.
+        remoteDownloadDataSource.restart(url, downloadUri)
     }
 
-    override fun setListener(fetchListener: FetchListener) {
+    override suspend fun setListener(fetchListener: FetchListener)= withContext(ioDispatcher) {
         remoteDownloadDataSource.setListener(fetchListener)
     }
 
@@ -88,7 +92,11 @@ class DefaultFileInfoRepository(
         remoteDownloadDataSource.resume(id)
     }
 
-    override suspend fun isDownloading() = withContext(ioDispatcher) {
-        return@withContext remoteDownloadDataSource.isDownloading()
+    override fun isDownloading()= remoteDownloadDataSource.isDownloading()
+
+    override fun hasActiveListener() = remoteDownloadDataSource.hasActiveListener()
+
+    override fun onError(id: Int) {
+        remoteDownloadDataSource.onError(id)
     }
 }

@@ -14,7 +14,7 @@
 
         <variable
                 name="fileData"
-                type="io.audioshinigami.superd.data.source.db.entity.FileData" />
+                type="io.audioshinigami.superd.zdata.FileInfo" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -84,7 +84,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:max="@integer/progressbar_maxValue"
-                android:progress= "@{ fileData.progressValue > 0 ? fileData.progressValue : -(fileData.progressValue) }"
+                android:progress= "@{ fileData.progressValue > 0 ? fileData.progressValue : (-1 * fileData.progressValue) }"
                 android:layout_marginBottom="0dp"
                 android:paddingBottom="0dp"
                 app:layout_constraintBottom_toBottomOf="@id/id_view_forground"

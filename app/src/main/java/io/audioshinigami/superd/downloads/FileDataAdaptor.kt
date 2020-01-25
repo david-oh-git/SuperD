@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import io.audioshinigami.superd.R.layout.download_item
-import io.audioshinigami.superd.data.source.db.entity.FileData
 import io.audioshinigami.superd.databinding.DownloadItemBinding
+import io.audioshinigami.superd.zdata.FileInfo
 
 class FileDataAdaptor(
     private val downloadItemActions: DownloadItemActions
 ):
-    PagedListAdapter<FileData, FileDataViewHolder>(FileDataDiffCallback()) {
+    PagedListAdapter<FileInfo, FileDataViewHolder>(FileDataDiffCallback()) {
 
 //    var binding: DownloadItem2Binding? = null
 
@@ -33,13 +33,13 @@ class FileDataAdaptor(
 
     override fun getItemViewType(position: Int) = download_item
 
-    private class FileDataDiffCallback: DiffUtil.ItemCallback<FileData>() {
+    private class FileDataDiffCallback: DiffUtil.ItemCallback<FileInfo>() {
 
-        override fun areItemsTheSame(oldItem: FileData, newItem: FileData): Boolean {
+        override fun areItemsTheSame(oldItem: FileInfo, newItem: FileInfo): Boolean {
             return oldItem.url == newItem.url
         }
 
-        override fun areContentsTheSame(oldItem: FileData, newItem: FileData): Boolean {
+        override fun areContentsTheSame(oldItem: FileInfo, newItem: FileInfo): Boolean {
             return oldItem == newItem
         }
     }

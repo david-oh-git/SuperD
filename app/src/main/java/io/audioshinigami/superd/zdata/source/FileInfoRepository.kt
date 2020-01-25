@@ -23,6 +23,8 @@ interface FileInfoRepository {
 
     suspend fun find( id: Int ) : FileInfo?
 
+    suspend fun find( url: String ) : FileInfo?
+
     suspend fun clearCompleted(): Int
 
     suspend fun delete(fileInfo: FileInfo)
@@ -41,9 +43,13 @@ interface FileInfoRepository {
 
     fun resume(id: Int)
 
-    suspend fun isDownloading(): LiveData<Boolean>
+    fun isDownloading(): Boolean
 
-    fun setListener(fetchListener: FetchListener)
+    fun hasActiveListener(): Boolean
+
+    suspend fun setListener(fetchListener: FetchListener)
 
     fun disableListener()
+
+    fun onError(id: Int)
 }

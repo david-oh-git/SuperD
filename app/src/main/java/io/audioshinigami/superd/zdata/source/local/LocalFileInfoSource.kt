@@ -18,7 +18,7 @@ class LocalFileInfoSource internal constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : FileInfoSource {
 
-    private val CACHED_PAGE_SIZE = 10
+    private val CACHED_PAGE_SIZE = 15
 
     override fun observeAll(): LiveData<Result<List<FileInfo>>> {
         return Transformations.map( fileInfoDao.observeAll() ){

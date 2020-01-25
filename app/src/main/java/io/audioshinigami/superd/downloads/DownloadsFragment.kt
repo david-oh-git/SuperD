@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.App
@@ -15,12 +16,16 @@ import io.audioshinigami.superd.R
 import io.audioshinigami.superd.SharedViewModel
 import io.audioshinigami.superd.databinding.DownloadsFragmentBinding
 import io.audioshinigami.superd.utility.extentions.*
+import timber.log.Timber
 
 class DownloadsFragment :
     Fragment(), PopupMenu.OnMenuItemClickListener, DownloadItemActions {
 
 
-    private val viewModel by lazy { obtainViewModel(SharedViewModel::class.java) }
+//    private val viewModel by lazy { obtainViewModel(SharedViewModel::class.java) }
+    private val viewModel by viewModels<DownloadsViewModel> {
+        DownloadsViewModelFactory( (requireContext().applicationContext as App ).repository )
+    }
     private var _itemUrl: String? = null
 
     override fun onCreateView(
@@ -53,6 +58,12 @@ class DownloadsFragment :
         super.onStart()
 
         viewModel.enableFetchListener()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        viewModel.disableFetchListener()
     }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
