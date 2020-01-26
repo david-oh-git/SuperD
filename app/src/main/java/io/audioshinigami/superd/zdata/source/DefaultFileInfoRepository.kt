@@ -96,7 +96,7 @@ class DefaultFileInfoRepository(
 
     override fun hasActiveListener() = remoteDownloadDataSource.hasActiveListener()
 
-    override fun onError(id: Int) {
-        remoteDownloadDataSource.onError(id)
+    override fun addState(id: Int, state: State) {
+        remoteDownloadDataSource.addState(id, state)
     }
 }

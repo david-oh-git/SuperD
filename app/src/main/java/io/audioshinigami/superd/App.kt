@@ -3,8 +3,9 @@ package io.audioshinigami.superd
 import android.app.Application
 import com.tonyodev.fetch2.Fetch
 import io.audioshinigami.superd.data.source.db.FileDatabase
-import io.audioshinigami.superd.zdata.source.DownloadDataSource
 import io.audioshinigami.superd.zdata.source.FileInfoRepository
+import io.audioshinigami.superd.zdata.source.State
+import io.audioshinigami.superd.zdata.source.State.DOWNLOADING
 import io.audioshinigami.superd.zdata.source.remote.ActiveListener
 import timber.log.Timber
 
@@ -29,12 +30,12 @@ class App : Application() , ActiveListener {
         get() = ServiceLocator.provideFetch(this)
 
     /* list of active downloads request ids */
-    val activeDownloads: MutableMap<Int, Boolean> = ServiceLocator.provideActiveDownloadsMap()
+    val activeDownloads: MutableMap<Int, State> = ServiceLocator.provideActiveDownloadsMap()
 
     override fun onCreate() {
         super.onCreate()
 
-        if( BuildConfig.DEBUG)
+        if( BuildConfig.DEBUG )
             Timber.plant( Timber.DebugTree() )
 
         synchronized(this){
@@ -46,15 +47,11 @@ class App : Application() , ActiveListener {
     /* provides a db instance*/
     private fun provideDb(): FileDatabase = FileDatabase.getDbInstance(this)
 
-    override fun add(id: Int, isActive: Boolean) {
+    override fun add(id: Int, isActive: State) {
         activeDownloads[id] = isActive
     }
 
-    override fun isDownloading() = true in activeDownloads.values
-
-    override fun onError(id: Int) {
-        activeDownloads.remove(id)
-    }
+    override fun isDownloading() = DOWNLOADING in activeDownloads.values
 
     companion object{
         lateinit var  instance: App

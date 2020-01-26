@@ -1,5 +1,9 @@
 package io.audioshinigami.superd.zdata.source
 
+/*
+* Download state for downloads
+* */
+
 enum class State(val value: Int) {
 
     /* it is currently downloading*/

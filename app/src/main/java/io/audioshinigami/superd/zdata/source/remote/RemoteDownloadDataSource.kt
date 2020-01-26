@@ -2,9 +2,11 @@ package io.audioshinigami.superd.zdata.source.remote
 
 import android.net.Uri
 import com.tonyodev.fetch2.*
-import io.audioshinigami.superd.App
 import io.audioshinigami.superd.zdata.FileInfo
 import io.audioshinigami.superd.zdata.source.DownloadDataSource
+import io.audioshinigami.superd.zdata.source.State
+import io.audioshinigami.superd.zdata.source.State.DOWNLOADING
+import io.audioshinigami.superd.zdata.source.State.PAUSED
 import io.audioshinigami.superd.zdata.source.local.FileInfoDao
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +33,7 @@ class RemoteDownloadDataSource internal constructor(
         fetch.enqueue(request)
 
         // add to active urls
-        activeListener.add(request.id, true)
+        activeListener.add(request.id, DOWNLOADING)
 
         /* create [FileData] info for file*/
         val fileData = FileInfo(
@@ -56,7 +58,7 @@ class RemoteDownloadDataSource internal constructor(
         /* start the download*/
         fetch.enqueue(request)
         // add to active urls
-        activeListener.add(request.id, true)
+        activeListener.add(request.id, DOWNLOADING)
         
         fileInfoDao.updateRequestId( url, request.id )
     }
@@ -64,19 +66,19 @@ class RemoteDownloadDataSource internal constructor(
     override fun pause(id: Int) {
         fetch.pause(id)
         // add to active urls
-        activeListener.add(id, false)
+        activeListener.add(id, PAUSED)
     }
 
     override fun resume(id: Int) {
         fetch.resume(id)
         // add to active urls
-        activeListener.add(id, true)
+        activeListener.add(id, DOWNLOADING)
     }
 
     override fun isDownloading() =  activeListener.isDownloading()
 
-    override fun onError(id: Int) {
-        activeListener.onError(id)
+    override fun addState(id: Int, isActive: State) {
+        activeListener.add(id, isActive)
     }
 
     override suspend fun setListener(fetchListener: FetchListener) {

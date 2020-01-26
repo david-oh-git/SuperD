@@ -8,10 +8,7 @@ import com.tonyodev.fetch2.Fetch
 import com.tonyodev.fetch2.FetchConfiguration
 import io.audioshinigami.superd.common.NUMBER_OF_DOWNLOADS_KEY
 import io.audioshinigami.superd.common.SETTINGS_PREF_NAME
-import io.audioshinigami.superd.zdata.source.DefaultFileInfoRepository
-import io.audioshinigami.superd.zdata.source.DownloadDataSource
-import io.audioshinigami.superd.zdata.source.FileInfoRepository
-import io.audioshinigami.superd.zdata.source.FileInfoSource
+import io.audioshinigami.superd.zdata.source.*
 import io.audioshinigami.superd.zdata.source.local.FileDatabase
 import io.audioshinigami.superd.zdata.source.local.LocalFileInfoSource
 import io.audioshinigami.superd.zdata.source.remote.RemoteDownloadDataSource
@@ -26,7 +23,7 @@ object ServiceLocator {
         @VisibleForTesting set
 
     @Volatile
-    private var activeDownloads: MutableMap<Int, Boolean>? = null
+    private var activeDownloads: MutableMap<Int, State>? = null
 
     @Volatile
     var fetch: Fetch? = null
@@ -65,7 +62,7 @@ object ServiceLocator {
         }
     }
 
-    internal fun provideActiveDownloadsMap(): MutableMap<Int, Boolean> {
+    internal fun provideActiveDownloadsMap(): MutableMap<Int, State> {
         synchronized(this){
             return activeDownloads ?: mutableMapOf()
         }

@@ -13,9 +13,9 @@ import com.tonyodev.fetch2core.DownloadBlock
 import io.audioshinigami.superd.utility.ReUseMethods
 import io.audioshinigami.superd.zdata.FileInfo
 import io.audioshinigami.superd.zdata.source.FileInfoRepository
-import kotlinx.coroutines.async
+import io.audioshinigami.superd.zdata.source.State
+import io.audioshinigami.superd.zdata.source.State.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.File
 
@@ -26,15 +26,14 @@ class DownloadsViewModel(
     private val _pagedDownloads = fileInfoRepository.getAllPaged()
     val pagedDownloads: LiveData<PagedList<FileInfo>> = _pagedDownloads
 
-    fun downloadAction(id: Int, url: String , isActive: Boolean?) = viewModelScope.launch{
+    fun downloadAction(id: Int, url: String , isActive: State? ) = viewModelScope.launch{
 
-        Timber.d("isactive is $isActive")
         when( isActive ){
-            true -> {
+            DOWNLOADING -> {
                 fileInfoRepository.pause(id)
                 Timber.d("pausing download")
             }
-            false -> {
+            PAUSED -> {
                 fileInfoRepository.resume(id)
                 Timber.d("Resuming download")
             }
@@ -64,6 +63,9 @@ class DownloadsViewModel(
 
                 override fun onCompleted(download: Download) {
                     Timber.d("download completed...")
+                    viewModelScope.launch {
+                        fileInfoRepository.addState(download.id , COMPLETE)
+                    }
                 }
 
                 override fun onQueued(download: Download, waitingOnNetwork: Boolean) {
@@ -100,7 +102,7 @@ class DownloadsViewModel(
                     Timber.e(" Progress is : $progress")
                     viewModelScope.launch {
                         fileInfoRepository.update( download.url, download.progress)
-                        fileInfoRepository.onError(download.id)
+                        fileInfoRepository.addState(download.id, ERROR)
                     }
                 }
 

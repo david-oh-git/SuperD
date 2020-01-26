@@ -51,5 +51,5 @@ interface FileInfoRepository {
 
     fun disableListener()
 
-    fun onError(id: Int)
+    fun addState(id: Int, state: State)
 }

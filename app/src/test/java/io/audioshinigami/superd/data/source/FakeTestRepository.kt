@@ -11,6 +11,7 @@ import io.audioshinigami.superd.zdata.Result
 import io.audioshinigami.superd.zdata.Result.Error
 import io.audioshinigami.superd.zdata.Result.Success
 import io.audioshinigami.superd.zdata.source.FileInfoRepository
+import io.audioshinigami.superd.zdata.source.State
 
 class FakeTestRepository : FileInfoRepository {
 
@@ -133,7 +134,7 @@ class FakeTestRepository : FileInfoRepository {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onError(id: Int) {
+    override fun addState(id: Int, state: State) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

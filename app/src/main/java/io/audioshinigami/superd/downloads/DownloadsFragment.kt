@@ -13,10 +13,12 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.App
 import io.audioshinigami.superd.R
-import io.audioshinigami.superd.SharedViewModel
 import io.audioshinigami.superd.databinding.DownloadsFragmentBinding
-import io.audioshinigami.superd.utility.extentions.*
-import timber.log.Timber
+import io.audioshinigami.superd.utility.extentions.copyToClipBoard
+import io.audioshinigami.superd.utility.extentions.hideView
+import io.audioshinigami.superd.utility.extentions.sendToastMsg
+import io.audioshinigami.superd.utility.extentions.showView
+import io.audioshinigami.superd.zdata.source.State.*
 
 class DownloadsFragment :
     Fragment(), PopupMenu.OnMenuItemClickListener, DownloadItemActions {
@@ -147,8 +149,16 @@ class DownloadsFragment :
     private fun setItemIcon( id: Int , button : ImageButton ){
 
         when( (requireContext().applicationContext as App).activeDownloads[id] ){
-            true -> button.setImageResource(R.drawable.ic_pause)
-            false -> button.setImageResource(R.drawable.ic_download)
+            DOWNLOADING -> button.setImageResource(R.drawable.ic_pause)
+            PAUSED -> button.setImageResource(R.drawable.ic_download)
+            ERROR -> button.setImageResource(R.drawable.ic_error)
+            COMPLETE -> {
+                button.setImageResource(R.drawable.ic_done)
+                button.isEnabled = false
+            }
+            NONE -> {
+                // TODO sumamabitch !!! RIP Bernie !!
+            }
         }
     }
 }
