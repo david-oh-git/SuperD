@@ -9,7 +9,9 @@
     <color name="progressbar_color">@android:color/black</color>
     <color name="item_overflow">@android:color/black</color>
     <color name="primary_pink">#D81B60</color>
-    <color name="download_btn_colour">@color/md_yellow_A100</color>
+    <color name="download_btn_colour">@color/md_purple_400</color>
+
+    <color name="card_background">@android:color/white</color>
 
     <color name="toolbar_background">@android:color/white</color>
     <color name="status_bar">@color/md_white_1000</color>

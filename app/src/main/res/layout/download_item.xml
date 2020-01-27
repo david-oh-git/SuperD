@@ -23,36 +23,7 @@
         android:layout_margin="@dimen/card_margin"
         android:layout_marginBottom="0dp"
         app:cardCornerRadius="6dp"
-        app:cardElevation="16dp" >
-
-        <RelativeLayout
-            android:id="@+id/id_view_background"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary">
-
-            <ImageView
-                android:id="@+id/id_img_btn_delete"
-                android:layout_width="@dimen/dimen_imgbtn"
-                android:layout_height="@dimen/dimen_imgbtn"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:contentDescription="@string/str_imbtn_description"
-                app:srcCompat="@drawable/ic_delete" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:layout_toStartOf="@id/id_img_btn_delete"
-                android:text="@string/str_txtvw_delete"
-                android:textColor="@color/md_black_1000"
-                android:textSize="@dimen/dimen_txtvw_txtsize"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
+        app:cardElevation="8dp" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/id_view_forground"
@@ -60,7 +31,7 @@
             android:layout_marginBottom="-5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/md_purple_400">
+            android:background="@color/card_background">
 
             <ImageButton
                 android:id="@+id/id_play_pause"
@@ -111,7 +82,7 @@
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/overflow_icon"
                 android:contentDescription="@string/overflow_menu"
-                android:background="@drawable/circular_button"
+                android:background="@android:color/transparent"
                 app:srcCompat="@drawable/ic_overflow"
                 android:onClick="@{ (view) -> itemAction.showPopup( view ,fileData.url) }"
                 android:layout_width="wrap_content"

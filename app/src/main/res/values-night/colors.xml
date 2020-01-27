@@ -5,6 +5,7 @@
     <color name="background_color">@color/md_grey_900</color>
     <color name="progressbar_color">@android:color/black</color>
     <color name="item_overflow">@color/md_purple_200</color>
+    <color name="card_background">#40D500F9</color>
 
     <color name="toolbar_background">@android:color/black</color>
     <color name="status_bar">@color/md_black_1000</color>
