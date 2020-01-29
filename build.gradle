@@ -57,4 +57,5 @@ ext {
     mockito_version = "2.8.9"
     dex_maker_version = "2.12.1"
     truth_version = "0.44"
+    slide_up_version = "3.4.0"
 }

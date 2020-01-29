@@ -10,4 +10,7 @@
     <color name="toolbar_background">@android:color/black</color>
     <color name="status_bar">@color/md_black_1000</color>
 
+    <color name="theme_set_btn">@color/md_white_1000</color>
+    <color name="general_txt">@color/md_white_1000</color>
+
 </resources>

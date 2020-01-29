@@ -27,6 +27,15 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="io.audioshinigami.superd.settings.SettingsFragment"
-        android:label="@string/settings_frag_title" />
+        android:label="@string/settings_frag_title" >
+        <action
+            android:id="@+id/action_settingsFragment_to_themeBottomSheetFragment"
+            app:destination="@id/themeBottomSheetFragment" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/themeBottomSheetFragment"
+        android:name="io.audioshinigami.superd.selecttheme.ThemeBottomSheetFragment"
+        android:label="ThemeBottomSheetFragment" />
 
 </navigation>

@@ -1,6 +1,7 @@
 package io.audioshinigami.superd
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
 import com.tonyodev.fetch2.Fetch
 import io.audioshinigami.superd.data.source.db.FileDatabase
 import io.audioshinigami.superd.zdata.source.FileInfoRepository
@@ -42,6 +43,9 @@ class App : Application() , ActiveListener {
             instance = this
         }
 
+//        AppCompatDelegate.setDefaultNightMode(
+//            AppCompatDelegate.MODE_NIGHT_YES
+//        )
     }
 
     /* provides a db instance*/
