@@ -12,7 +12,7 @@ interface SharedPreferencesSource {
 
     suspend fun getBoolean( key: String ) : Boolean
 
-    suspend fun getInt( key: String ) : Int?
+    suspend fun getInt( key: String ) : Int
 
     suspend fun remove( key: String )
 }

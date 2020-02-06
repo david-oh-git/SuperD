@@ -26,7 +26,7 @@ class DownloadsFragment :
 
 //    private val viewModel by lazy { obtainViewModel(SharedViewModel::class.java) }
     private val viewModel by viewModels<DownloadsViewModel> {
-        DownloadsViewModelFactory( (requireContext().applicationContext as App ).repository )
+        DownloadsViewModelFactory( (requireContext().applicationContext as App ).fileInfoRepository )
     }
     private var _itemUrl: String? = null
 

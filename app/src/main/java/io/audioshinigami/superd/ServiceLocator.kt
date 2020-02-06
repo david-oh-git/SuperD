@@ -11,6 +11,7 @@ import io.audioshinigami.superd.common.SETTINGS_PREF_NAME
 import io.audioshinigami.superd.zdata.source.*
 import io.audioshinigami.superd.zdata.source.local.FileDatabase
 import io.audioshinigami.superd.zdata.source.local.LocalFileInfoSource
+import io.audioshinigami.superd.zdata.source.local.LocalPreferenceSource
 import io.audioshinigami.superd.zdata.source.remote.RemoteDownloadDataSource
 
 object ServiceLocator {
@@ -23,6 +24,9 @@ object ServiceLocator {
         @VisibleForTesting set
 
     @Volatile
+    var preferenceRepository: SharedPreferenceRepo? = null
+
+    @Volatile
     private var activeDownloads: MutableMap<Int, State>? = null
 
     @Volatile
@@ -33,6 +37,12 @@ object ServiceLocator {
     internal fun provideFileInfoRepository( context: Context): FileInfoRepository {
         synchronized(this){
             return fileInfoRepository ?: createFileInfoRepository( context )
+        }
+    }
+
+    internal fun provideSharedPreferenceRepository( name: String, context: Context): SharedPreferenceRepo {
+        synchronized(this){
+            return preferenceRepository ?: createPreferenceRepository(name, context)
         }
     }
 
@@ -76,6 +86,12 @@ object ServiceLocator {
         return newRepo
     }
 
+    private fun createPreferenceRepository( name: String ,context: Context): SharedPreferenceRepo {
+        return DefaultPreferenceRepository(
+            createLocalPreferenceSource(name, context )
+        )
+    }
+
     private fun createFileInfoSource( context: Context ): FileInfoSource {
         val database = database ?: createDatabase(context)
 
@@ -93,6 +109,12 @@ object ServiceLocator {
 
     private fun createSharedPreference( name: String, context: Context ): SharedPreferences {
         return context.getSharedPreferences( name , 0 )
+    }
+
+    private fun createLocalPreferenceSource(name: String, context: Context): LocalPreferenceSource {
+        return LocalPreferenceSource(
+            createSharedPreference(name, context)
+        )
     }
 
     private fun createDatabase( context: Context ): FileDatabase {

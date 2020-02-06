@@ -5,13 +5,10 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.audioshinigami.superd.R
 import kotlinx.android.synthetic.main.content_settings.*
-import kotlinx.android.synthetic.main.theme_bottom_sheet.*
 
 
 /**
@@ -37,8 +34,7 @@ class SettingsFragment : Fragment()  {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btn_bottom.setOnClickListener {
-            // launch themes selection bottomSheet
+        theme_test.setOnClickListener{
             findNavController().navigate(R.id.action_settingsFragment_to_themeBottomSheetFragment)
         }
     }

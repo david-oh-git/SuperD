@@ -3,11 +3,15 @@ package io.audioshinigami.superd
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import com.tonyodev.fetch2.Fetch
+import io.audioshinigami.superd.common.SETTINGS_PREF_NAME
+import io.audioshinigami.superd.common.THEME_PREF_KEY
 import io.audioshinigami.superd.data.source.db.FileDatabase
 import io.audioshinigami.superd.zdata.source.FileInfoRepository
+import io.audioshinigami.superd.zdata.source.SharedPreferenceRepo
 import io.audioshinigami.superd.zdata.source.State
 import io.audioshinigami.superd.zdata.source.State.DOWNLOADING
 import io.audioshinigami.superd.zdata.source.remote.ActiveListener
+import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 
 /**
@@ -23,8 +27,11 @@ class App : Application() , ActiveListener {
     private set
 
     /* repository instance*/
-    val repository: FileInfoRepository
+    val fileInfoRepository: FileInfoRepository
         get() = ServiceLocator.provideFileInfoRepository(this)
+
+    val sharedPreferenceRepo: SharedPreferenceRepo
+        get() = ServiceLocator.provideSharedPreferenceRepository(SETTINGS_PREF_NAME, this)
 
     /* fetch instance : 3rd party download library*/
     val fetch: Fetch
@@ -46,6 +53,7 @@ class App : Application() , ActiveListener {
 //        AppCompatDelegate.setDefaultNightMode(
 //            AppCompatDelegate.MODE_NIGHT_YES
 //        )
+
     }
 
     /* provides a db instance*/

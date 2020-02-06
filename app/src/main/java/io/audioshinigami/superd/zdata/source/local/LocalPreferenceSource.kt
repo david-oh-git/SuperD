@@ -31,18 +31,20 @@ class LocalPreferenceSource(
     }
 
     override suspend fun getString(key: String): String? = withContext(ioDispatcher){
-        return@withContext sharedPreferences.getString(key, null )
+        return@withContext sharedPreferences.getString(key, "" )
     }
 
     override suspend fun getBoolean(key: String): Boolean = withContext(ioDispatcher){
         return@withContext sharedPreferences.getBoolean(key, false )
     }
 
-    override suspend fun getInt(key: String): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override suspend fun getInt(key: String) = withContext(ioDispatcher) {
+        return@withContext sharedPreferences.getInt(key, -999)
     }
 
-    override suspend fun remove(key: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override suspend fun remove(key: String) = withContext(ioDispatcher){
+        sharedPreferences.edit{
+            remove(key)
+        }
     }
 }
