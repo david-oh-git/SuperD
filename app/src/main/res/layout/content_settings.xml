@@ -11,23 +11,20 @@
 
     <LinearLayout
         android:id="@+id/theme_test"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            app:srcCompat="@drawable/ic_theme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
         <TextView
             style="@style/TextAppearance.AppCompat.Headline"
+            android:textAlignment="center"
             android:id="@+id/btn_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="Theme" />
+            android:text="@string/theme" />
 
     </LinearLayout>
 

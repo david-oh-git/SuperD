@@ -28,5 +28,6 @@
     <string name="light">Light</string>
     <string name="system_default">System Default</string>
     <string name="set_btn">Set</string>
+    <string name="theme">Theme</string>
 
 </resources>
