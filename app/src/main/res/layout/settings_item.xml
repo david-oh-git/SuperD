@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <io.audioshinigami.superd.customviews.CircleView
+            android:id="@+id/circle_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="80dp"
+            android:layout_height="80dp"/>
+
+        <TextView
+            tools:text="Fake Title Text"
+            style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
+            android:fontFamily="@font/pt_sans"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@id/circle_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/circle_view"
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            tools:text="@string/display_string"
+            android:textAlignment="center"
+            android:fontFamily="@font/pt_sans"
+            style="@style/Widget.MaterialComponents.TextView"
+            app:layout_constraintStart_toEndOf="@id/circle_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintBottom_toBottomOf="@id/circle_view"
+            android:id="@+id/sub_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
