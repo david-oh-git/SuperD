@@ -29,5 +29,6 @@
     <string name="system_default">System Default</string>
     <string name="set_btn">Set</string>
     <string name="theme">Theme</string>
+    <string name="circleview_icon_description">Icon for circleView</string>
 
 </resources>

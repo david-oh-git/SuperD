@@ -137,4 +137,11 @@ object ServiceLocator {
         return newFetch
     }
 
+    @VisibleForTesting
+    fun resetRepository(){
+
+        database = null
+        fileInfoRepository = null
+    }
+
 }

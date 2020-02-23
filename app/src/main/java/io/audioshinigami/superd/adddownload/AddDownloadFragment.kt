@@ -17,7 +17,7 @@ import io.audioshinigami.superd.utility.PermissionManager
 import io.audioshinigami.superd.utility.ReUseMethods
 import io.audioshinigami.superd.utility.extentions.WRITE_EXTERNAL_REQUEST_CODE
 import io.audioshinigami.superd.utility.extentions.sendToastMsg
-import kotlinx.android.synthetic.main.fragment_add_fileinfo.*
+import kotlinx.android.synthetic.main.fragment_add_download.*
 import java.io.File
 
 
@@ -26,10 +26,10 @@ import java.io.File
  *
  */
 
-class AddFileInfoFragment : DialogFragment() {
+class AddDownloadFragment : DialogFragment() {
 
     private val viewModel by viewModels<AddFileInfoViewModel> {
-        AddFileInfoViewModelFactory( (requireContext().applicationContext as App ).fileInfoRepository)
+        AddDownloadViewModelFactory( (requireContext().applicationContext as App ).fileInfoRepository)
     }
 
     override fun onCreateView(
@@ -37,7 +37,7 @@ class AddFileInfoFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_fileinfo, container, false)
+        return inflater.inflate(R.layout.fragment_add_download, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

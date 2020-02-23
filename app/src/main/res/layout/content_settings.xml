@@ -8,24 +8,20 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior" >
 
 
-
-    <LinearLayout
-        android:id="@+id/theme_test"
-        android:orientation="vertical"
-        android:layout_margin="8dp"
+    <TextView
+        style="@style/TextAppearance.AppCompat.Headline"
+        android:textAlignment="center"
+        android:id="@+id/btn_bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="@string/theme" />
 
-
-        <TextView
-            style="@style/TextAppearance.AppCompat.Headline"
-            android:textAlignment="center"
-            android:id="@+id/btn_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="@string/theme" />
-
-    </LinearLayout>
+    <io.audioshinigami.superd.customviews.CircleView
+        android:layout_gravity="center"
+        app:image="@drawable/ic_done"
+        app:circleColor="@color/md_purple_500"
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
 
 </LinearLayout>

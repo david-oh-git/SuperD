@@ -34,7 +34,7 @@ class SettingsFragment : Fragment()  {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        theme_test.setOnClickListener{
+        btn_bottom.setOnClickListener{
             findNavController().navigate(R.id.action_settingsFragment_to_themeBottomSheetFragment)
         }
     }

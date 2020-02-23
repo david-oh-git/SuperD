@@ -20,9 +20,9 @@
 
     <dialog
             android:id="@+id/getUrlFragment"
-            android:name="io.audioshinigami.superd.adddownload.AddFileInfoFragment"
+            android:name="io.audioshinigami.superd.adddownload.AddDownloadFragment"
             android:label="fragment_get_url"
-            tools:layout="@layout/fragment_add_fileinfo" />
+            tools:layout="@layout/fragment_add_download" />
 
     <fragment
         android:id="@+id/settingsFragment"

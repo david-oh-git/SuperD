@@ -139,6 +139,10 @@ dependencies {
     androidTestImplementation "org.hamcrest:hamcrest:$hamcrest_version"
     androidTestImplementation "org.hamcrest:hamcrest-library:$hamcrest_version"
     androidTestImplementation "androidx.test:runner:$test_runner_version"
+    androidTestImplementation "org.mockito:mockito-core:$mockito_version"
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dex_maker_version"
+    implementation "androidx.fragment:fragment-testing:$fragment_version"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$test_coroutine_version"
     // Espresso
     androidTestImplementation "androidx.test.espresso:espresso-core:$expresso_core_version"
 
@@ -156,6 +160,6 @@ dependencies {
     // Coroutines test
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutine_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$test_coroutine_version"
-    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$test_coroutine_version"
+
 
 }

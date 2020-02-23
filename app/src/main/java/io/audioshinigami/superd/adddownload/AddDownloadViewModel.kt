@@ -19,7 +19,7 @@ class AddFileInfoViewModel(
 }
 
 @Suppress("UNCHECKED_CAST")
-class AddFileInfoViewModelFactory(
+class AddDownloadViewModelFactory(
     private val fileInfoRepository: FileInfoRepository
 ): ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
