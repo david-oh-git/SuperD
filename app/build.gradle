@@ -160,6 +160,4 @@ dependencies {
     // Coroutines test
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutine_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$test_coroutine_version"
-
-
 }

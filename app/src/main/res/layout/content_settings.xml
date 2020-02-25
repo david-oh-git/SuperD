@@ -8,9 +8,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior" >
 
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         style="@style/TextAppearance.AppCompat.Headline"
-        android:textAlignment="center"
         android:id="@+id/btn_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,6 +21,10 @@
         app:image="@drawable/ic_done"
         app:circleColor="@color/md_purple_500"
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:layout_height="100dp" />
+
+    <io.audioshinigami.superd.customviews.SettingsItem
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

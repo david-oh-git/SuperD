@@ -43,7 +43,7 @@ class CircleView @JvmOverloads constructor(
             }
         }
     // View size in pixels
-    private var size = 300
+    private var size = 150
     // ovalMode , false makes the view a square
     var ovalMode = DEFAULT_OVAL_MODE
         set(value) {
@@ -55,7 +55,10 @@ class CircleView @JvmOverloads constructor(
     var image: Int = 0
         set(value) {
             if (initState){
-                (image_id as ImageView).setImageResource(value)
+                (image_id as ImageView)
+                    .apply {
+                        setImageResource(value)
+                    }
             }
         }
 
@@ -117,8 +120,12 @@ class CircleView @JvmOverloads constructor(
             val container = container as RelativeLayout
             container.layout(0,0,size,size)
 
-            val imageView = image_id as ImageView
-            imageView.layout(0,0,size,size)
+            val imageView = container.image_id as ImageView
+            val halfQuarterSize = (size/4) /2
+            // make the image 3/4 of the parent
+            imageView.layout(halfQuarterSize,halfQuarterSize,(size * 3/4) + halfQuarterSize,(size * 3/4) + halfQuarterSize)
+
+
         }
     }
 
