@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <data >
 
@@ -14,39 +14,40 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/downloads_parent_view"
-            app:fabSize="normal"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:fabSize="normal"
             tools:context=".downloads.DownloadsFragment">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-                app:srcCompat="@drawable/ic_add"
-                android:contentDescription="@string/fab_label"
-                android:layout_margin="@dimen/fab_margin"
+                android:id="@+id/add_download_fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/fab_margin"
+                android:contentDescription="@string/fab_label"
                 android:onClick="@{fabListener}"
-                android:layout_gravity="bottom|end" />
+                app:srcCompat="@drawable/ic_add" />
 
         <androidx.recyclerview.widget.RecyclerView
 
+                android:id="@+id/downloads_rview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@color/background_color"
                 android:contentDescription="@string/download_rview_label"
-                android:id="@+id/downloads_rview"
-                android:visibility="invisible"
                 android:scrollbars="vertical"
-                tools:listitem="@layout/download_item"
+                android:visibility="invisible"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                tools:listitem="@layout/download_item" />
 
         <ProgressBar
                 android:id="@+id/progressBar"
-                android:background="@color/background_color"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
+                android:background="@color/background_color"
                 android:visibility="visible"/>
 
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SettingsItem">
+
+        <attr name="setting_image_color" format="color" />
+        <attr name="setting_image" format="reference" />
+        <attr name="setting_title" format="string"/>
+        <attr name="setting_sub_title" format="string"/>
+
+    </declare-styleable>
+
+</resources>

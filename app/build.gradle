@@ -14,8 +14,8 @@ android {
         applicationId "io.audioshinigami.superd"
         minSdkVersion rootProject.min_sdk_version
         targetSdkVersion rootProject.target_sdk_version
-        versionCode 5
-        versionName "0.32"
+        versionCode 6
+        versionName "0.33"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
 
         vectorDrawables.useSupportLibrary = true
@@ -121,8 +121,7 @@ dependencies {
     // Room Db
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation "androidx.recyclerview:recyclerview:$recycler_view_version"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     kapt "androidx.room:room-compiler:$room_version"
@@ -131,8 +130,6 @@ dependencies {
     implementation "androidx.tonyodev.fetch2:xfetch2:$fetch2_version"
     // Timber
     implementation "com.jakewharton.timber:timber:$timber_version"
-    //Slide up sothree
-    implementation "com.sothree.slidinguppanel:library:$slide_up_version"
     // AndroidX tests dependencies ###
     androidTestImplementation "androidx.test:core-ktx:$test_core_version"
     androidTestImplementation "androidx.test.ext:junit-ktx:$test_ext_kotlin_runner_version"
@@ -142,6 +139,10 @@ dependencies {
     androidTestImplementation "org.hamcrest:hamcrest:$hamcrest_version"
     androidTestImplementation "org.hamcrest:hamcrest-library:$hamcrest_version"
     androidTestImplementation "androidx.test:runner:$test_runner_version"
+    androidTestImplementation "org.mockito:mockito-core:$mockito_version"
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dex_maker_version"
+    implementation "androidx.fragment:fragment-testing:$fragment_version"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$test_coroutine_version"
     // Espresso
     androidTestImplementation "androidx.test.espresso:espresso-core:$expresso_core_version"
 
@@ -159,6 +160,4 @@ dependencies {
     // Coroutines test
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutine_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$test_coroutine_version"
-    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$test_coroutine_version"
-
 }

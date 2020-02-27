@@ -132,6 +132,7 @@ class DownloadsFragment :
     private fun fabOnClickListener() : View.OnClickListener {
         /* launches GetUrlFragment */
         return View.OnClickListener {
+
             findNavController().navigate(R.id.action_downloadsFragment_to_getUrlFragment)
         }
     }

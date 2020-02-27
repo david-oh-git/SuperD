@@ -19,4 +19,10 @@
     <color name="theme_set_btn">@color/md_black_1000</color>
     <color name="general_txt">@color/md_black_1000</color>
 
+    <color name="default_icon_color">@android:color/black</color>
+
+    <!--    Settings fragment colours-->
+    <color name="settings_theme">@color/md_orange_600</color>
+    <color name="setting_about">@color/md_teal_600</color>
+
 </resources>
