@@ -1,35 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <io.audioshinigami.superd.customviews.SettingsItem
-        android:id="@+id/select_theme"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:setting_image="@drawable/ic_theme"
-        app:setting_image_color="@color/settings_theme"
-        app:setting_title="Theme"
-        app:setting_sub_title="System Default"
-        android:layout_width="0dp"
-        android:layout_height="60dp" />
+    <data>
 
-    <io.audioshinigami.superd.customviews.SettingsItem
-        android:id="@+id/about"
-        app:layout_constraintStart_toStartOf="@id/select_theme"
-        app:layout_constraintEnd_toEndOf="@id/select_theme"
-        app:layout_constraintTop_toBottomOf="@id/select_theme"
-        app:setting_image="@drawable/ic_about"
-        app:setting_title="@string/setting_about"
-        app:setting_sub_title="@string/setting_about_sub_title"
-        app:setting_image_color="@color/setting_about"
-        android:layout_marginTop="8dp"
-        android:layout_width="0dp"
-        android:layout_height="60dp"/>
+        <variable
+            name="settingSubTitle" type="String" />
+    </data>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+
+        <io.audioshinigami.superd.customviews.SettingsItem
+            android:id="@+id/select_theme"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:setting_image="@drawable/ic_theme"
+            app:setting_image_color="@color/settings_theme"
+            app:setting_title="Theme"
+            app:setting_sub_title="@{ settingSubTitle }"
+            android:layout_width="0dp"
+            android:layout_height="60dp" />
+
+        <io.audioshinigami.superd.customviews.SettingsItem
+            android:id="@+id/about"
+            app:layout_constraintStart_toStartOf="@id/select_theme"
+            app:layout_constraintEnd_toEndOf="@id/select_theme"
+            app:layout_constraintTop_toBottomOf="@id/select_theme"
+            app:setting_image="@drawable/ic_about"
+            app:setting_title="@string/setting_about"
+            app:setting_sub_title="@string/setting_about_sub_title"
+            app:setting_image_color="@color/setting_about"
+            android:layout_marginTop="8dp"
+            android:layout_width="0dp"
+            android:layout_height="60dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

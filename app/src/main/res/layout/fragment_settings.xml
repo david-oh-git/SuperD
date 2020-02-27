@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:id="@+id/sliding_panel"
-    android:layout_gravity="bottom"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
-    <include
-        layout="@layout/content_settings" />
+    <data>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <variable
+            name="currentTheme" type="String" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+
+        android:orientation="vertical"
+        android:id="@+id/sliding_panel"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            bind:settingSubTitle="@{ currentTheme }"
+            layout="@layout/content_settings" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>
