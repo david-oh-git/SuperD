@@ -31,5 +31,7 @@
     <string name="theme">Theme</string>
     <string name="circleview_icon_description">Icon for circleView</string>
     <string name="display_string">Fake sub title text , what a beautiful day it is. The lovely smell of akpu</string>
+    <string name="setting_about">About</string>
+    <string name="setting_about_sub_title">Team and 3rd Party Library</string>
 
 </resources>

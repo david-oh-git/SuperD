@@ -15,4 +15,9 @@
 
     <color name="default_icon_color">@android:color/white</color>
 
+
+    <!--    Settings fragment colours-->
+    <color name="settings_theme">@color/md_orange_200</color>
+    <color name="setting_about">@color/md_teal_200</color>
+
 </resources>

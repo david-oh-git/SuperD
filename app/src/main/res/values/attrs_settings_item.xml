@@ -3,7 +3,7 @@
 
     <declare-styleable name="SettingsItem">
 
-        <attr name="image_circle_color" format="color" />
+        <attr name="setting_image_color" format="color" />
         <attr name="setting_image" format="reference" />
         <attr name="setting_title" format="string"/>
         <attr name="setting_sub_title" format="string"/>

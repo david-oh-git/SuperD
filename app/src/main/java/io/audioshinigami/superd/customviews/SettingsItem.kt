@@ -33,7 +33,7 @@ class SettingsItem @JvmOverloads constructor(
         context.theme.obtainStyledAttributes(attrs, R.styleable.SettingsItem ,0,0)
             .apply {
                 try {
-                    circleColor = getColor(R.styleable.SettingsItem_image_circle_color, DEFAULT_ICON_BACKGROUND_COLOR)
+                    circleColor = getColor(R.styleable.SettingsItem_setting_image_color, DEFAULT_ICON_BACKGROUND_COLOR)
                     val image = getDrawable(R.styleable.SettingsItem_setting_image)
                     val title = getString(R.styleable.SettingsItem_setting_title)
                     val subTitle = getString(R.styleable.SettingsItem_setting_sub_title)
