@@ -6,7 +6,6 @@ import io.audioshinigami.superd.common.THEME_PREF_KEY
 import io.audioshinigami.superd.zdata.source.SharedPreferenceRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class ThemeBottomSheetViewModel(
     private val repository: SharedPreferenceRepo
@@ -31,10 +30,10 @@ class ThemeBottomSheetViewModel(
 
     fun radioButtonAction(theme: Int) {
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
 
             // assign theme value
-            _theme.value = theme
+            _theme.postValue(theme)
         }
     }
 

@@ -33,15 +33,18 @@ class SettingsFragment : Fragment()  {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        btn_bottom.setOnClickListener{
-//            findNavController().navigate(R.id.action_settingsFragment_to_themeBottomSheetFragment)
-//        }
+        initClickListeners()
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
 //        remove optionsMenu
         menu.clear()
+    }
+
+    private fun initClickListeners(){
+        select_theme.setOnClickListener {
+            findNavController().navigate(R.id.action_settingsFragment_to_themeBottomSheetFragment)
+        }
     }
 
 }

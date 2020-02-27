@@ -10,7 +10,6 @@ import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.audioshinigami.superd.App
-import io.audioshinigami.superd.R
 import io.audioshinigami.superd.databinding.ThemeBottomSheetFragmentBinding
 import kotlinx.android.synthetic.main.theme_bottom_sheet_fragment.*
 
@@ -49,11 +48,11 @@ class ThemeBottomSheetFragment : BottomSheetDialogFragment() {
                 AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> theme_system_default.isChecked = true
             }
         }
+
     }
 
     fun setTheme() = View.OnClickListener {
         _viewModel.setTheme()
         findNavController().popBackStack()
     }
-
 }
