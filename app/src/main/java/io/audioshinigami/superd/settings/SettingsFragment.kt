@@ -34,9 +34,9 @@ class SettingsFragment : Fragment()  {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btn_bottom.setOnClickListener{
-            findNavController().navigate(R.id.action_settingsFragment_to_themeBottomSheetFragment)
-        }
+//        btn_bottom.setOnClickListener{
+//            findNavController().navigate(R.id.action_settingsFragment_to_themeBottomSheetFragment)
+//        }
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {

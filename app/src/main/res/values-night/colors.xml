@@ -13,4 +13,6 @@
     <color name="theme_set_btn">@color/md_white_1000</color>
     <color name="general_txt">@color/md_white_1000</color>
 
+    <color name="default_icon_color">@android:color/white</color>
+
 </resources>
