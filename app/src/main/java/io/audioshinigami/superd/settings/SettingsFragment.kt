@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.R
+import io.audioshinigami.superd.databinding.SettingsFragmentBinding
 import kotlinx.android.synthetic.main.content_settings.*
 
 
@@ -28,7 +29,13 @@ class SettingsFragment : Fragment()  {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        val binding = SettingsFragmentBinding.inflate( inflater, container, false)
+
+        binding.apply {
+            currentTheme = "Dark"
+        }
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

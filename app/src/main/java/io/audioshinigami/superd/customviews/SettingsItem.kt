@@ -27,7 +27,7 @@ class SettingsItem @JvmOverloads constructor(
     var settingSubTitle = ""
         set(value) {
             field = value
-            settings_item_container.title.text = value
+            settings_item_container.sub_title.text = value
         }
 
     init {
