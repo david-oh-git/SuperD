@@ -6,7 +6,10 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import io.audioshinigami.superd.App
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.databinding.SettingsFragmentBinding
 import kotlinx.android.synthetic.main.content_settings.*
@@ -16,6 +19,10 @@ import kotlinx.android.synthetic.main.content_settings.*
  * A simple [Fragment] subclass.
  */
 class SettingsFragment : Fragment()  {
+
+    private val _viewModel by viewModels<SettingsViewModel> {
+        SettingsViewModelFactory( (requireContext().applicationContext as App).sharedPreferenceRepo )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +38,9 @@ class SettingsFragment : Fragment()  {
         // Inflate the layout for this fragment
         val binding = SettingsFragmentBinding.inflate( inflater, container, false)
 
-        binding.apply {
-            currentTheme = "Dark"
-        }
+        binding.lifecycleOwner = this@SettingsFragment.viewLifecycleOwner
+
+        subscribe(binding)
 
         return binding.root
     }
@@ -48,10 +55,31 @@ class SettingsFragment : Fragment()  {
         menu.clear()
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        // load the latest theme value
+        _viewModel.loadThemeValue()
+
+
+    }
+
     private fun initClickListeners(){
         select_theme.setOnClickListener {
             findNavController().navigate(R.id.action_settingsFragment_to_themeBottomSheetFragment)
         }
+
+        about.setOnClickListener {
+            findNavController().navigate(R.id.action_settingsFragment_to_aboutFragment)
+        }
     }
+
+    private fun subscribe(binding: SettingsFragmentBinding){
+
+        _viewModel.theme.observe(this) {
+            binding.currentTheme = it
+        }
+    }
+
 
 }

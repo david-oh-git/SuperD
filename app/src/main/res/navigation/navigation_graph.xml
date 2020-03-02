@@ -31,11 +31,19 @@
         <action
             android:id="@+id/action_settingsFragment_to_themeBottomSheetFragment"
             app:destination="@id/themeBottomSheetFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
     </fragment>
 
     <dialog
         android:id="@+id/themeBottomSheetFragment"
         android:name="io.audioshinigami.superd.selecttheme.ThemeBottomSheetFragment"
         android:label="ThemeBottomSheetFragment" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="io.audioshinigami.superd.about.AboutFragment"
+        android:label="About"
+        tools:layout="@layout/about_fragment" />
 
 </navigation>
