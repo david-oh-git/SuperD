@@ -16,6 +16,8 @@ class SettingsItem @JvmOverloads constructor(
     defStyle: Int = 0
 ): ConstraintLayout( context, attrs, defStyle) {
 
+    // TODO work on issue on API 19
+
     companion object{
         private const val DEFAULT_ICON_BACKGROUND_COLOR = Color.TRANSPARENT
     }
