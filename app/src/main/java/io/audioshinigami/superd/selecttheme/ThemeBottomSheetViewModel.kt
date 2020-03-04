@@ -54,13 +54,13 @@ class ThemeBottomSheetViewModel(
         }
     }
 
+}
 
-    @Suppress("UNCHECKED_CAST")
-    class ThemeBottomSheetViewModelFactory(
-        private val repository: SharedPreferenceRepo
-    ): ViewModelProvider.NewInstanceFactory() {
+@Suppress("UNCHECKED_CAST")
+class ThemeBottomSheetViewModelFactory(
+    private val repository: SharedPreferenceRepo
+): ViewModelProvider.NewInstanceFactory() {
 
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-            ( ThemeBottomSheetViewModel(repository) as T)
-    }
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T =
+        ( ThemeBottomSheetViewModel(repository) as T)
 }

@@ -11,13 +11,13 @@
     <io.audioshinigami.superd.customviews.CircleView
         android:id="@+id/circle_view"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/sub_title"
         app:layout_constraintEnd_toStartOf="@id/title"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/title" />
 
     <com.google.android.material.textview.MaterialTextView
             tools:text="@tools:sample/lorem"
@@ -26,11 +26,11 @@
             android:fontFamily="@font/pt_sans"
             android:textAlignment="textStart"
             android:singleLine="true"
-            android:layout_marginStart="16dp"
             app:layout_constraintHorizontal_weight="4"
             app:layout_constraintStart_toEndOf="@id/circle_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/sub_title"
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
@@ -45,6 +45,7 @@
             app:layout_constraintStart_toStartOf="@id/title"
             app:layout_constraintEnd_toEndOf="@id/title"
             app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_weight="4"
             android:id="@+id/sub_title"
             android:layout_width="0dp"

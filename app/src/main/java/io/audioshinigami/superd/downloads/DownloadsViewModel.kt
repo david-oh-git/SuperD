@@ -117,7 +117,7 @@ class DownloadsViewModel(
                 ) {
                     Timber.d( "progress : ${download.progress}% .... ")
 //
-                    if( download.progress > 10 )
+                    if( download.progress > 2 )
                         fileInfoRepository.pause(download.id)
 
                     viewModelScope.launch {

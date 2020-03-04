@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".about.AboutFragment">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/team_sub_title"
+        style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/team"
+        android:textAllCaps="true"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/developer_item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <io.audioshinigami.superd.customviews.SettingsItem
+        android:id="@+id/developer_item"
+        app:layout_constraintTop_toBottomOf="@id/team_sub_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:setting_title="@string/developer_name"
+        app:setting_sub_title="@string/developer"
+        app:setting_image="@drawable/ic_user"
+        app:setting_image_color="@color/developer_item"
+        android:layout_marginTop="4dp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/about_item_height"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/icons_sub_title"
+        style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
+        android:text="@string/icons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/developer_item"
+        android:layout_marginStart="16dp"
+        android:textSize="16sp"
+        android:textAllCaps="true"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+    <io.audioshinigami.superd.customviews.SettingsItem
+        android:id="@+id/download_icon_item"
+        app:layout_constraintTop_toBottomOf="@id/icons_sub_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:setting_title="Catalin Fertu"
+        app:setting_sub_title="App icon via flaticon.com"
+        app:setting_image="@drawable/ic_download"
+        android:layout_marginTop="4dp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/about_item_height"/>
+
+    <io.audioshinigami.superd.customviews.SettingsItem
+        android:id="@+id/alfredo_icon_item"
+        app:layout_constraintTop_toBottomOf="@id/download_icon_item"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:setting_title="Alfredo Hernandez"
+        app:setting_sub_title="icon via flaticon.com"
+        app:setting_image_color="@android:color/transparent"
+        android:layout_marginTop="4dp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/about_item_height"/>
+
+    <io.audioshinigami.superd.customviews.SettingsItem
+        android:id="@+id/freepik_icon_item"
+        app:layout_constraintTop_toBottomOf="@id/alfredo_icon_item"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:setting_title="FreePik"
+        app:setting_sub_title="icon via flaticon.com"
+        app:setting_image_color="@android:color/transparent"
+        android:layout_marginTop="4dp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/about_item_height"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/libraries_sub_title"
+        style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
+        android:text="@string/libraries_used"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/freepik_icon_item"
+        android:layout_marginStart="16dp"
+        android:textSize="16sp"
+        android:textAllCaps="true"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+    <io.audioshinigami.superd.customviews.SettingsItem
+        android:id="@+id/jetpack_item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/libraries_sub_title"
+        app:setting_title="@string/android_jetpack"
+        app:setting_sub_title="@string/android_jetpack_sub_title"
+        app:setting_image_color="@android:color/transparent"
+        android:layout_marginTop="4dp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/about_item_height" />
+
+    <io.audioshinigami.superd.customviews.SettingsItem
+        android:id="@+id/kotlin_item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/jetpack_item"
+        app:setting_title="@string/kotlin"
+        app:setting_sub_title="@string/kotlin_item_sub_title"
+        app:setting_image_color="@android:color/transparent"
+        android:layout_marginTop="4dp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/about_item_height" />
+
+    <io.audioshinigami.superd.customviews.SettingsItem
+        android:id="@+id/fetch2_item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/kotlin_item"
+        app:setting_title="@string/fetch_lib"
+        app:setting_sub_title="@string/fetch_item_sub_title"
+        app:setting_image_color="@android:color/transparent"
+        android:layout_marginTop="4dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+    <io.audioshinigami.superd.customviews.SettingsItem
+        android:id="@+id/mockito_item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fetch2_item"
+        app:setting_title="@string/mockito"
+        app:setting_sub_title="@string/mockito_sub_title"
+        app:setting_image_color="@android:color/transparent"
+        android:layout_marginTop="4dp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/about_item_height" />
+
+    <io.audioshinigami.superd.customviews.SettingsItem
+        android:id="@+id/timber_item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mockito_item"
+        app:setting_title="@string/timber"
+        app:setting_image_color="@android:color/transparent"
+        android:layout_marginTop="4dp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/about_item_height"/>
+
+    <io.audioshinigami.superd.customviews.SettingsItem
+        android:id="@+id/hamcrest_item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/timber_item"
+        app:setting_title="@string/hamcrest"
+        app:setting_image_color="@android:color/transparent"
+        android:layout_marginTop="4dp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/about_item_height" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,4 +20,7 @@
     <color name="settings_theme">@color/md_orange_200</color>
     <color name="setting_about">@color/md_teal_200</color>
 
+    <!--    About fragment colours-->
+    <color name="developer_item">@color/md_pink_200</color>
+
 </resources>

@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.theme_bottom_sheet_fragment.*
 class ThemeBottomSheetFragment : BottomSheetDialogFragment() {
 
     private val _viewModel by viewModels<ThemeBottomSheetViewModel>{
-        ThemeBottomSheetViewModel.ThemeBottomSheetViewModelFactory( (requireContext().applicationContext as App).sharedPreferenceRepo )
+        ThemeBottomSheetViewModelFactory( (requireContext().applicationContext as App).sharedPreferenceRepo )
     }
 
     override fun onCreateView(

@@ -10,12 +10,10 @@
 <!--        to remove default actionBar-->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
-
 <!--        App wide font-->
         <item name="android:fontFamily">@font/pt_sans</item>
 
-        <item name="android:statusBarColor" tools:targetApi="M" >@color/status_bar</item>
+        <item name="android:statusBarColor" tools:targetApi="M" >@android:color/transparent</item>
         <item name="android:windowLightStatusBar" tools:targetApi="M">@bool/dark_status_bar_icon</item>
 <!--        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="M">true</item>-->
 

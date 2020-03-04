@@ -19,6 +19,7 @@ import io.audioshinigami.superd.utility.extentions.hideView
 import io.audioshinigami.superd.utility.extentions.sendToastMsg
 import io.audioshinigami.superd.utility.extentions.showView
 import io.audioshinigami.superd.zdata.source.State.*
+import timber.log.Timber
 
 class DownloadsFragment :
     Fragment(), PopupMenu.OnMenuItemClickListener, DownloadItemActions {
@@ -116,6 +117,7 @@ class DownloadsFragment :
 
         viewModel.pagedDownloads.observe(binding?.lifecycleOwner!!, Observer {
             data ->
+            Timber.d("data size is ${data.size}")
             data?.apply {
                 adaptor.submitList(this)
 
