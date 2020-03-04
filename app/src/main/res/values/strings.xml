@@ -31,7 +31,7 @@
     <string name="theme">Theme</string>
     <string name="circleview_icon_description">Icon for circleView</string>
     <string name="setting_about">About</string>
-    <string name="setting_about_sub_title">Team and 3rd Party Library</string>
+    <string name="setting_about_sub_title">Team and Libraries</string>
     <string name="developer_name" translatable="false" >David Osemwota</string>
     <string name="developer">Developer</string>
     <string name="team">Team</string>

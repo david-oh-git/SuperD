@@ -21,9 +21,8 @@ class CircleView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : RelativeLayout(context, attrs, defStyle) {
 
-
     companion object{
-        private const val DEFAULT_BACKGROUND_COLOR = Color.GRAY
+        private const val DEFAULT_BACKGROUND_COLOR = Color.TRANSPARENT
         private const val DEFAULT_OVAL_MODE = false
     }
 

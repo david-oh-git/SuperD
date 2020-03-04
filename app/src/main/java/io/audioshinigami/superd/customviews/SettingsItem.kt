@@ -6,7 +6,6 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.databinding.BindingAdapter
 import io.audioshinigami.superd.R
 import kotlinx.android.synthetic.main.circle_view.view.*
 import kotlinx.android.synthetic.main.settings_item.view.*
@@ -18,7 +17,7 @@ class SettingsItem @JvmOverloads constructor(
 ): ConstraintLayout( context, attrs, defStyle) {
 
     companion object{
-        private const val DEFAULT_ICON_BACKGROUND_COLOR = Color.GRAY
+        private const val DEFAULT_ICON_BACKGROUND_COLOR = Color.TRANSPARENT
     }
     // View size in pixels
     private var size = 300

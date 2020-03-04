@@ -30,10 +30,10 @@
         app:setting_title="@string/developer_name"
         app:setting_sub_title="@string/developer"
         app:setting_image="@drawable/ic_user"
+        app:setting_image_color="@color/developer_item"
         android:layout_marginTop="4dp"
         android:layout_width="0dp"
         android:layout_height="@dimen/about_item_height"/>
-
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/icons_sub_title"
