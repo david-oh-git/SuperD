@@ -17,6 +17,12 @@ class AboutFragment : Fragment() {
     private val freepikUrl = "https://www.flaticon.com/authors/freepik"
     private val catalinUrl = "https://www.flaticon.com/authors/catalin-fertu"
     private val alfredoUrl = "https://www.flaticon.com/authors/alfredo-hernandez"
+    private val kotlinUrl = "https://www.kotlinlang.org"
+    private val jetpackUrl = "https://developer.android.com/jetpack"
+    private val fetchUrl = "https://www.github.com/tonyofrancis/Fetch"
+    private val mockitoUrl = "https://site.mockito.org"
+    private val timberUrl = "https://www.github.com/JakeWharton/timber"
+    private val hamcrestUrl = "https://www.hamcrest.org"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +62,30 @@ class AboutFragment : Fragment() {
 
         alfredo_icon_item.setOnClickListener {
             openWebPage(alfredoUrl)
+        }
+
+        kotlin_item.setOnClickListener {
+            openWebPage(kotlinUrl)
+        }
+
+        jetpack_item.setOnClickListener {
+            openWebPage(jetpackUrl)
+        }
+
+        fetch2_item.setOnClickListener {
+            openWebPage(fetchUrl)
+        }
+
+        mockito_item.setOnClickListener {
+            openWebPage(mockitoUrl)
+        }
+
+        timber_item.setOnClickListener {
+            openWebPage(timberUrl)
+        }
+
+        hamcrest_item.setOnClickListener {
+            openWebPage(hamcrestUrl)
         }
     }
 

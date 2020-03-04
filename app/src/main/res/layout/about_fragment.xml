@@ -127,7 +127,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/kotlin_item"
         app:setting_title="@string/fetch_lib"
-        app:setting_sub_title="3rd party android download library"
+        app:setting_sub_title="@string/fetch_item_sub_title"
         app:setting_image_color="@android:color/transparent"
         android:layout_marginTop="4dp"
         android:layout_width="0dp"
