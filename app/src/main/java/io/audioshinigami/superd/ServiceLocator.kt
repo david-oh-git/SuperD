@@ -12,6 +12,7 @@ import io.audioshinigami.superd.zdata.source.*
 import io.audioshinigami.superd.zdata.source.local.FileDatabase
 import io.audioshinigami.superd.zdata.source.local.LocalFileInfoSource
 import io.audioshinigami.superd.zdata.source.local.LocalPreferenceSource
+import io.audioshinigami.superd.zdata.source.remote.ActiveListener
 import io.audioshinigami.superd.zdata.source.remote.RemoteDownloadDataSource
 
 object ServiceLocator {
@@ -104,7 +105,8 @@ object ServiceLocator {
         return RemoteDownloadDataSource(
             provideFetch( context.applicationContext )
             , database.fileDataDao(),
-            (context.applicationContext as App) )
+            ( (context.applicationContext as App) )
+        )
     }
 
     private fun createSharedPreference( name: String, context: Context ): SharedPreferences {

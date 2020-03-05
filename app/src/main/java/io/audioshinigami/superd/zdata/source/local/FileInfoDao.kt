@@ -37,7 +37,7 @@ interface FileInfoDao {
     @Insert
     suspend fun insert(vararg allFileData: FileInfo)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(fileInfo: FileInfo)
 
     @Update /* replaces item*/

@@ -32,6 +32,8 @@ class RemoteDownloadDataSource internal constructor(
         /* start the download*/
         fetch.enqueue(request)
 
+        if( fetch.isClosed )
+            Timber.d("Fetch is closed")
         // add to active urls
         activeListener.add(request.id, DOWNLOADING)
 
@@ -53,10 +55,9 @@ class RemoteDownloadDataSource internal constructor(
         /* create a request*/
         val request = createRequest(url, downloadUri)
 
-        Timber.d("uri is $downloadUri")
-
         /* start the download*/
         fetch.enqueue(request)
+
         // add to active urls
         activeListener.add(request.id, DOWNLOADING)
         

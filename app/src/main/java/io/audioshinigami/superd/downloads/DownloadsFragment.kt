@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -16,9 +17,10 @@ import io.audioshinigami.superd.R
 import io.audioshinigami.superd.databinding.DownloadsFragmentBinding
 import io.audioshinigami.superd.utility.extentions.copyToClipBoard
 import io.audioshinigami.superd.utility.extentions.hideView
-import io.audioshinigami.superd.utility.extentions.sendToastMsg
+import io.audioshinigami.superd.utility.extentions.sendSnack
 import io.audioshinigami.superd.utility.extentions.showView
 import io.audioshinigami.superd.zdata.source.State.*
+import io.audioshinigami.superd.zdata.source.remote.ActiveListener
 import timber.log.Timber
 
 class DownloadsFragment :
@@ -44,23 +46,31 @@ class DownloadsFragment :
         }
 
         /* adaptor for download recyclerView*/
-//        val adaptor = DownloadAdaptor(R.layout.download_item, viewModel )
         val adaptor = FileDataAdaptor(  this )
         subscribeUi(binding, adaptor)
 
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        test()
+        viewModel.enableFetchListener()
+    }
+
     override fun onPause() {
         super.onPause()
 
+        Timber.d("onPause")
         viewModel.disableFetchListener()
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onStop() {
+        super.onStop()
 
-        viewModel.enableFetchListener()
+        Timber.d("onStop")
+        viewModel.disableFetchListener()
     }
 
     override fun onDestroy() {
@@ -76,7 +86,7 @@ class DownloadsFragment :
                 _itemUrl?.apply {
                     // copies url to clipboard
                     context?.copyToClipBoard(this)
-                    sendToastMsg( getString( R.string.url_copied ) )
+                    sendSnack( getString( R.string.url_copied ) )
                 }
 
                 _itemUrl = null
@@ -86,7 +96,7 @@ class DownloadsFragment :
             R.id.action_delete -> {
                 _itemUrl?.apply {
                     viewModel.delete( this )
-                    sendToastMsg(getString( R.string.deleted ))
+                    sendSnack( getString( R.string.deleted ) )
                 }
                 true
             }
@@ -118,6 +128,7 @@ class DownloadsFragment :
         viewModel.pagedDownloads.observe(binding?.lifecycleOwner!!, Observer {
             data ->
             Timber.d("data size is ${data.size}")
+
             data?.apply {
                 adaptor.submitList(this)
 
@@ -129,6 +140,10 @@ class DownloadsFragment :
 
             }
         })
+
+        viewModel.snackBarMessage.observe(binding.lifecycleOwner!!, Observer {
+            sendSnack(it.message)
+        })
     }
 
     private fun fabOnClickListener() : View.OnClickListener {
@@ -136,6 +151,7 @@ class DownloadsFragment :
         return View.OnClickListener {
 
             findNavController().navigate(R.id.action_downloadsFragment_to_getUrlFragment)
+            viewModel.enableFetchListener()
         }
     }
 
@@ -163,5 +179,17 @@ class DownloadsFragment :
                 // TODO sumamabitch !!! RIP Bernie !!
             }
         }
+    }
+
+    private fun sendSnackBarMessage(message: String){
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun test(){
+        val listener: ActiveListener = (requireContext().applicationContext as App )
+        val downloads = ( requireContext().applicationContext as App ).activeDownloads
+
+        Timber.d("onResume , is it downloading : ${listener.isDownloading()}")
+        Timber.d("onResume Downloads list: $downloads")
     }
 }
