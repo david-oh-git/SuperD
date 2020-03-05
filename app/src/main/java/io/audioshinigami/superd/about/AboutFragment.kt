@@ -8,7 +8,8 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import io.audioshinigami.superd.R
+import io.audioshinigami.superd.BuildConfig
+import io.audioshinigami.superd.databinding.AboutFragmentBinding
 import kotlinx.android.synthetic.main.about_fragment.*
 
 class AboutFragment : Fragment() {
@@ -34,7 +35,13 @@ class AboutFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.about_fragment, container, false)
+        val binding = AboutFragmentBinding.inflate( inflater, container, false)
+
+        binding.apply {
+            versionName = BuildConfig.VERSION_NAME
+            lifecycleOwner = this@AboutFragment.viewLifecycleOwner
+        }
+        return binding.root
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {

@@ -47,5 +47,6 @@
     <string name="hamcrest">Hamcrest</string>
     <string name="icons">Icons</string>
     <string name="fetch_item_sub_title">3rd party android download manager library</string>
+    <string name="version_item_title">Version</string>
 
 </resources>
