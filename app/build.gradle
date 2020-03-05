@@ -53,7 +53,7 @@ android {
         }
 
         beta {
-            applicationIdSuffix ".beta"
+            applicationIdSuffix ".alpha"
             versionNameSuffix "-beta"
             resValue "string", "my_name", "Super D-beta"
 
