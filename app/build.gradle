@@ -56,6 +56,10 @@ android {
             applicationIdSuffix ".beta"
             versionNameSuffix "-beta"
             resValue "string", "my_name", "Super D-beta"
+
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
         alpha {
