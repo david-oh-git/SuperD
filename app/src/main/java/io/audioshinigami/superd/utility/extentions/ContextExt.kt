@@ -6,6 +6,7 @@ import android.content.Context
 
 fun Context.copyToClipBoard( text: CharSequence ){
 
+    // copy text to clipboard
     val clipBoard = getSystemService( Context.CLIPBOARD_SERVICE ) as ClipboardManager
     val clip: ClipData =  ClipData.newPlainText("label", text )
 

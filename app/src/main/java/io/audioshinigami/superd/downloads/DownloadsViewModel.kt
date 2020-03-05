@@ -23,6 +23,8 @@ class DownloadsViewModel(
     private val fileInfoRepository: FileInfoRepository
 ): ViewModel() {
 
+    val snackBarMessage = OneTimeLiveData<SnackMessage>()
+
     private val _pagedDownloads = fileInfoRepository.getAllPaged()
     val pagedDownloads: LiveData<PagedList<FileInfo>> = _pagedDownloads
 
@@ -57,6 +59,9 @@ class DownloadsViewModel(
 
     fun enableFetchListener(){
         // if a download is active then create and attach a listener
+        Timber.d("ViewModel Is it downloading : ${fileInfoRepository.isDownloading()}")
+        Timber.d("ViewModel has active listeners : ${fileInfoRepository.hasActiveListener()}")
+
         if( fileInfoRepository.isDownloading() && !fileInfoRepository.hasActiveListener() ){
             Timber.d("Enabling fetchListener !!")
             val fetchListener = object : FetchListener {
@@ -65,11 +70,14 @@ class DownloadsViewModel(
                     Timber.d("download completed...")
                     viewModelScope.launch {
                         fileInfoRepository.addState(download.id , COMPLETE)
+                        fileInfoRepository.update(download.url, 100)
                     }
+
+                    snackBarMessage.sendData( SnackMessage("Download complete") )
                 }
 
                 override fun onQueued(download: Download, waitingOnNetwork: Boolean) {
-
+                    Timber.d("download Queued...")
                 }
 
                 override fun onAdded(download: Download) {
@@ -77,9 +85,11 @@ class DownloadsViewModel(
                 }
 
                 override fun onCancelled(download: Download) {
+                    Timber.d("download cancelled...")
                 }
 
                 override fun onDeleted(download: Download) {
+                    Timber.d("download deleted...")
                 }
 
                 override fun onDownloadBlockUpdated(
@@ -140,6 +150,7 @@ class DownloadsViewModel(
                 }
 
                 override fun onWaitingNetwork(download: Download) {
+                    Timber.d("download waiting for network...")
                 }
             } //END FetchListener
 
@@ -166,3 +177,5 @@ class DownloadsViewModelFactory(
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
         ( DownloadsViewModel( fileInfoRepository ) as T)
 }
+
+data class SnackMessage(val message: String )
