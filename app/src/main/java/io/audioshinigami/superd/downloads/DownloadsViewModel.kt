@@ -59,8 +59,6 @@ class DownloadsViewModel(
 
     fun enableFetchListener(){
         // if a download is active then create and attach a listener
-        Timber.d("ViewModel Is it downloading : ${fileInfoRepository.isDownloading()}")
-        Timber.d("ViewModel has active listeners : ${fileInfoRepository.hasActiveListener()}")
 
         if( fileInfoRepository.isDownloading() && !fileInfoRepository.hasActiveListener() ){
             Timber.d("Enabling fetchListener !!")

@@ -31,13 +31,13 @@ object ImageButtonBindings {
 
                 state == DOWNLOADING -> setImageResource(R.drawable.ic_pause)
 
-                state == PAUSED  -> setImageResource(R.drawable.ic_download )
+                state == PAUSED  -> setImageResource(R.drawable.ic_play )
 
                 state == ERROR -> setImageResource(R.drawable.ic_error)
 
                 _data.progressValue < 0 -> setImageResource(R.drawable.ic_error)
 //
-                state == null -> setImageResource(R.drawable.ic_download )
+                state == null -> setImageResource(R.drawable.ic_play )
 
 //                else -> setImageResource(R.drawable.ic_download)
             }

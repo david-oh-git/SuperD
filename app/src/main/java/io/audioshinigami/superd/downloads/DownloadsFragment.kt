@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -20,7 +19,6 @@ import io.audioshinigami.superd.utility.extentions.hideView
 import io.audioshinigami.superd.utility.extentions.sendSnack
 import io.audioshinigami.superd.utility.extentions.showView
 import io.audioshinigami.superd.zdata.source.State.*
-import io.audioshinigami.superd.zdata.source.remote.ActiveListener
 import timber.log.Timber
 
 class DownloadsFragment :
@@ -54,8 +52,6 @@ class DownloadsFragment :
 
     override fun onResume() {
         super.onResume()
-
-        test()
         viewModel.enableFetchListener()
     }
 
@@ -169,7 +165,7 @@ class DownloadsFragment :
 
         when( (requireContext().applicationContext as App).activeDownloads[id] ){
             DOWNLOADING -> button.setImageResource(R.drawable.ic_pause)
-            PAUSED -> button.setImageResource(R.drawable.ic_download)
+            PAUSED -> button.setImageResource(R.drawable.ic_play)
             ERROR -> button.setImageResource(R.drawable.ic_error)
             COMPLETE -> {
                 button.setImageResource(R.drawable.ic_done)
@@ -179,17 +175,5 @@ class DownloadsFragment :
                 // TODO sumamabitch !!! RIP Bernie !!
             }
         }
-    }
-
-    private fun sendSnackBarMessage(message: String){
-        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
-    }
-
-    private fun test(){
-        val listener: ActiveListener = (requireContext().applicationContext as App )
-        val downloads = ( requireContext().applicationContext as App ).activeDownloads
-
-        Timber.d("onResume , is it downloading : ${listener.isDownloading()}")
-        Timber.d("onResume Downloads list: $downloads")
     }
 }
