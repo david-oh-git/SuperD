@@ -49,4 +49,7 @@
     <string name="fetch_item_sub_title">3rd party android download manager library</string>
     <string name="version_item_title">Version</string>
 
+    <!--    download item-->
+    <string name="_new" translatable="false" >\u22EE</string>
+
 </resources>

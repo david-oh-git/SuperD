@@ -23,4 +23,7 @@
     <!--    About fragment colours-->
     <color name="developer_item">@color/md_pink_200</color>
 
+    <!--    download item-->
+    <color name="progress_bar_color">@color/md_purple_100</color>
+
 </resources>
