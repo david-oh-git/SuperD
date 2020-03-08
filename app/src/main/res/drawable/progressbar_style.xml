@@ -31,7 +31,7 @@
                     android:startColor="@color/progress_bar_color"
                     android:centerColor="@color/progress_bar_color"
                     android:centerY="1.0"
-                    android:endColor="#@color/progress_bar_color"
+                    android:endColor="@color/progress_bar_color"
                     android:angle="270" />
 
                 <corners
