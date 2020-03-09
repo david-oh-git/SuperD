@@ -44,7 +44,7 @@ class DownloadsFragment :
         }
 
         /* adaptor for download recyclerView*/
-        val adaptor = FileDataAdaptor(  this )
+        val adaptor = FileInfoAdaptor(  this )
         subscribeUi(binding, adaptor)
 
         return binding.root
@@ -113,7 +113,7 @@ class DownloadsFragment :
         _itemUrl = itemUrl
     }
 
-    private fun subscribeUi(binding: DownloadsFragmentBinding?, adaptor: FileDataAdaptor) {
+    private fun subscribeUi(binding: DownloadsFragmentBinding?, adaptor: FileInfoAdaptor) {
 
         /* shows loading progressBar , hides recyclerView*/
         binding?.apply {

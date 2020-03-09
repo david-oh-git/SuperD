@@ -3,15 +3,12 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">@color/primary_pink</color>
-
 <!--    app background colour-->
     <color name="background_color">@android:color/white</color>
     <color name="progressbar_color">@android:color/black</color>
     <color name="item_overflow">@android:color/black</color>
     <color name="primary_pink">#D81B60</color>
     <color name="download_btn_colour">@color/md_purple_400</color>
-
-    <color name="card_background">@android:color/white</color>
 
     <color name="toolbar_background">@android:color/white</color>
     <color name="status_bar">@color/md_white_1000</color>
@@ -27,5 +24,13 @@
 
     <!--    About fragment colours-->
     <color name="developer_item">@color/md_pink_600</color>
+
+    <!--    download item-->
+    <color name="progress_bar_color">@color/md_purple_500</color>
+    <color name="progress_background_color">#CFD8DC</color>
+    <color name="item_background">@android:color/white</color>
+    <color name="download_btn_color">@color/md_purple_300</color>
+
+    <color name="special_purple_hue">#40D500F9</color>
 
 </resources>

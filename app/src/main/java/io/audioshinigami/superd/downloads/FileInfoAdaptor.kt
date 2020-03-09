@@ -4,34 +4,34 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import io.audioshinigami.superd.R.layout.download_item
-import io.audioshinigami.superd.databinding.DownloadItemBinding
+import io.audioshinigami.superd.databinding.ItemBinding
 import io.audioshinigami.superd.zdata.FileInfo
+import kotlin.math.abs
 
-class FileDataAdaptor(
+/*
+* Adaptor for download items
+* recyclerView
+* */
+class FileInfoAdaptor(
     private val downloadItemActions: DownloadItemActions
 ):
-    PagedListAdapter<FileInfo, FileDataViewHolder>(FileDataDiffCallback()) {
+    PagedListAdapter<FileInfo, FileInfoViewHolder>(FileDataDiffCallback()) {
 
-//    var binding: DownloadItem2Binding? = null
+    override fun onBindViewHolder(holder: FileInfoViewHolder, position: Int) {
+        val fileInfo = getItem(position)
 
-    override fun onBindViewHolder(holder: FileDataViewHolder, position: Int) {
-        val fileData = getItem(position)
-
-        fileData?.apply {
-            holder.bind( downloadItemActions ,this)
+        fileInfo?.apply {
+            holder.bind( downloadItemActions ,this )
         } ?: holder.clear()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FileDataViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FileInfoViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
-        val binding = DownloadItemBinding.inflate(layoutInflater, parent, false)
+        val binding = ItemBinding.inflate(layoutInflater, parent, false)
 
-        return FileDataViewHolder(binding)
+        return FileInfoViewHolder(binding)
     }
-
-    override fun getItemViewType(position: Int) = download_item
 
     private class FileDataDiffCallback: DiffUtil.ItemCallback<FileInfo>() {
 
