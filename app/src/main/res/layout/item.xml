@@ -20,10 +20,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         app:cardElevation="4dp"
-        app:cardCornerRadius="4dp">
+        app:cardCornerRadius="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:background="@color/card_background"
+            android:background="@color/item_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -42,6 +42,7 @@
                 app:progress="@{ fileInfo.progressValue}"
                 app:request_id="@{ fileInfo.request_id }"
                 android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_width="0dp"
                 android:layout_height="0dp" />
 
@@ -73,6 +74,7 @@
                 android:textAlignment="center"
                 android:textStyle="bold"
                 android:textSize="20sp"
+                android:layout_marginEnd="8dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
 
@@ -85,7 +87,7 @@
                 android:progressDrawable="@drawable/progressbar_style"
                 tools:progress="45"
                 android:progress="@{ fileInfo.progressValue }"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_width="0dp"
                 android:layout_height="20dp"/>
 
@@ -93,8 +95,11 @@
                 android:id="@+id/progress_value"
                 app:layout_constraintTop_toBottomOf="@id/id_dwloadprogressbar"
                 app:layout_constraintStart_toStartOf="@id/id_filename"
+                app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="45% "
                 android:text="@{ Integer.toString(fileInfo.progressValue) + '%' }"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

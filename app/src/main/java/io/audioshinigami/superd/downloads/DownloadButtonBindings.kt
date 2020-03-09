@@ -14,25 +14,16 @@ object DownloadButtonBindings {
 
             val state = ((context.applicationContext) as App).activeDownloads[requestId]
             when{
-                progress == 100 -> {
-                    setImageResource(R.drawable.ic_done)
-                    isEnabled = false
-                }
-
-                state == State.COMPLETE -> {
+                progress == 100 || state == State.COMPLETE  -> {
                     setImageResource(R.drawable.ic_done)
                     isEnabled = false
                 }
 
                 state == State.DOWNLOADING -> setImageResource(R.drawable.ic_pause)
 
-                state == State.PAUSED -> setImageResource(R.drawable.ic_play )
+                state == State.PAUSED || state == null -> setImageResource(R.drawable.ic_play )
 
-                state == State.ERROR -> setImageResource(R.drawable.ic_error)
-
-                progress < 0 -> setImageResource(R.drawable.ic_error)
-//
-                state == null -> setImageResource(R.drawable.ic_play )
+                progress < 0 || state == State.ERROR -> setImageResource(R.drawable.ic_error)
 
 //                else -> setImageResource(R.drawable.ic_download)
             }

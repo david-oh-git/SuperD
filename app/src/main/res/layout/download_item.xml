@@ -32,7 +32,7 @@
             android:layout_marginBottom="-5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/card_background">
+            android:background="@color/item_background">
 
             <ImageButton
                 android:id="@+id/id_play_pause"

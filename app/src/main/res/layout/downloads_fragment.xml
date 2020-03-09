@@ -17,7 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            app:fabSize="normal"
             tools:context=".downloads.DownloadsFragment">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -27,6 +26,7 @@
                 android:layout_gravity="bottom|end"
                 android:layout_margin="@dimen/fab_margin"
                 android:contentDescription="@string/fab_label"
+                app:fabSize="normal"
                 android:onClick="@{fabListener}"
                 app:srcCompat="@drawable/ic_add" />
 

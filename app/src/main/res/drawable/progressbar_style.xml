@@ -8,10 +8,10 @@
             android:shape="rectangle">
 
             <gradient
-                android:startColor="#CFD8DC"
-                android:centerColor="#CFD8DC"
+                android:startColor="@color/progress_background_color"
+                android:centerColor="@color/progress_background_color"
                 android:centerY="1.0"
-                android:endColor="#CFD8DC"
+                android:endColor="@color/progress_background_color"
                 android:angle="270" />
 
             <corners
