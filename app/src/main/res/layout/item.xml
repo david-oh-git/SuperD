@@ -86,7 +86,7 @@
                 app:layout_constraintEnd_toEndOf="@id/overflow_icon"
                 android:progressDrawable="@drawable/progressbar_style"
                 tools:progress="45"
-                android:progress="@{ fileInfo.progressValue }"
+                android:progress="@{ itemAction.absValue( fileInfo.progressValue ) }"
                 android:layout_marginTop="16dp"
                 android:layout_width="0dp"
                 android:layout_height="20dp"/>
@@ -97,7 +97,7 @@
                 app:layout_constraintStart_toStartOf="@id/id_filename"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="45% "
-                android:text="@{ Integer.toString(fileInfo.progressValue) + '%' }"
+                android:text="@{ Integer.toString( itemAction.absValue(fileInfo.progressValue)) + '%' }"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
                 android:layout_width="wrap_content"

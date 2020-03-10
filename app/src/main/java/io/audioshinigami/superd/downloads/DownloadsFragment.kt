@@ -20,6 +20,7 @@ import io.audioshinigami.superd.utility.extentions.sendSnack
 import io.audioshinigami.superd.utility.extentions.showView
 import io.audioshinigami.superd.zdata.source.State.*
 import timber.log.Timber
+import kotlin.math.abs
 
 class DownloadsFragment :
     Fragment(), PopupMenu.OnMenuItemClickListener, DownloadItemActions {
@@ -112,6 +113,8 @@ class DownloadsFragment :
         /* assigns popup url*/
         _itemUrl = itemUrl
     }
+
+    override fun absValue(value: Int): Int = abs(value)
 
     private fun subscribeUi(binding: DownloadsFragmentBinding?, adaptor: FileInfoAdaptor) {
 
