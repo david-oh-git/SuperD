@@ -74,7 +74,7 @@ class AddDownloadFragment : DialogFragment() {
         if ( !PermissionManager.isPermissionGranted(context!!,permission) )
             return
 
-        // TODO get uri from user
+        // TODO get URI from user
 
         val uri = Uri.parse( ReUseMethods.getPublicFileStorageDir().toString() +
         File.separator + url.substringAfterLast("/") )
