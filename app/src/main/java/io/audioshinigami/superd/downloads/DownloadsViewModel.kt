@@ -124,9 +124,6 @@ class DownloadsViewModel(
                     downloadedBytesPerSecond: Long
                 ) {
                     Timber.d( "progress : ${download.progress}% .... ")
-//
-                    if( download.progress > 2 )
-                        fileInfoRepository.pause(download.id)
 
                     viewModelScope.launch {
                         fileInfoRepository.update( download.url, download.progress)
