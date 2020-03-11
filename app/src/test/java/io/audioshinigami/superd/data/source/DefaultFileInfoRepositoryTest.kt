@@ -1,9 +1,7 @@
 package io.audioshinigami.superd.data.source
 
 import io.audioshinigami.superd.util.FileInfoFactory
-import io.audioshinigami.superd.zdata.Result.Success
-import io.audioshinigami.superd.zdata.source.DefaultFileInfoRepository
-import io.audioshinigami.superd.zdata.source.DownloadDataSource
+import io.audioshinigami.superd.data.Result.Success
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
@@ -12,8 +10,6 @@ import org.hamcrest.MatcherAssert.assertThat
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers
-import org.mockito.ArgumentMatchers.isNotNull
 import org.mockito.Mockito.*
 
 @ExperimentalCoroutinesApi

@@ -2,10 +2,9 @@ package io.audioshinigami.superd.data.source
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
-import io.audioshinigami.superd.zdata.FileInfo
-import io.audioshinigami.superd.zdata.Result
-import io.audioshinigami.superd.zdata.Result.Success
-import io.audioshinigami.superd.zdata.source.FileInfoSource
+import io.audioshinigami.superd.data.FileInfo
+import io.audioshinigami.superd.data.Result
+import io.audioshinigami.superd.data.Result.Success
 
 class FakeInfoDataSource (
     var dbData: MutableList<FileInfo>? = mutableListOf()

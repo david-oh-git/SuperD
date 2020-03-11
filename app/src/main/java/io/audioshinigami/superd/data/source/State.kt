@@ -1,4 +1,4 @@
-package io.audioshinigami.superd.zdata.source
+package io.audioshinigami.superd.data.source
 
 /*
 * Download state for downloads

@@ -1,8 +1,8 @@
-package io.audioshinigami.superd.zdata.source.local
+package io.audioshinigami.superd.data.source.local
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import io.audioshinigami.superd.zdata.source.SharedPreferencesSource
+import io.audioshinigami.superd.data.source.SharedPreferencesSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

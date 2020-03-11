@@ -1,13 +1,13 @@
-package io.audioshinigami.superd.zdata.source.remote
+package io.audioshinigami.superd.data.source.remote
 
 import android.net.Uri
 import com.tonyodev.fetch2.*
-import io.audioshinigami.superd.zdata.FileInfo
-import io.audioshinigami.superd.zdata.source.DownloadDataSource
-import io.audioshinigami.superd.zdata.source.State
-import io.audioshinigami.superd.zdata.source.State.DOWNLOADING
-import io.audioshinigami.superd.zdata.source.State.PAUSED
-import io.audioshinigami.superd.zdata.source.local.FileInfoDao
+import io.audioshinigami.superd.data.FileInfo
+import io.audioshinigami.superd.data.source.DownloadDataSource
+import io.audioshinigami.superd.data.source.State
+import io.audioshinigami.superd.data.source.State.DOWNLOADING
+import io.audioshinigami.superd.data.source.State.PAUSED
+import io.audioshinigami.superd.data.source.local.FileInfoDao
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

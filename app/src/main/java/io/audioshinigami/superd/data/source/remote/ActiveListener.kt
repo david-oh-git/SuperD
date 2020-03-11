@@ -1,6 +1,6 @@
-package io.audioshinigami.superd.zdata.source.remote
+package io.audioshinigami.superd.data.source.remote
 
-import io.audioshinigami.superd.zdata.source.State
+import io.audioshinigami.superd.data.source.State
 
 /*
 * An interface for adding active ids to activeDownloads Map on [io.audioshinigami.superd.App]*/

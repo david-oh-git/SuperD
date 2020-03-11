@@ -5,8 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import io.audioshinigami.superd.databinding.ItemBinding
-import io.audioshinigami.superd.zdata.FileInfo
-import kotlin.math.abs
+import io.audioshinigami.superd.data.FileInfo
 
 /*
 * Adaptor for download items

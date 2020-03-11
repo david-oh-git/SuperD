@@ -12,7 +12,7 @@ import androidx.test.filters.MediumTest
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.ServiceLocator
 import io.audioshinigami.superd.data.source.FakeAndroidTestRepository
-import io.audioshinigami.superd.zdata.source.FileInfoRepository
+import io.audioshinigami.superd.data.source.FileInfoRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.After
 import org.junit.Before

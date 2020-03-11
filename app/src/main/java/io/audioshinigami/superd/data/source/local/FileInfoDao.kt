@@ -1,11 +1,11 @@
-package io.audioshinigami.superd.zdata.source.local
+package io.audioshinigami.superd.data.source.local
 
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.*
 import io.audioshinigami.superd.common.TABLE_NAME
-import io.audioshinigami.superd.zdata.FileInfo
+import io.audioshinigami.superd.data.FileInfo
 
 /* data access for DB table, info on each download */
 

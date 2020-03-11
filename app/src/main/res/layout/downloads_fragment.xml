@@ -40,7 +40,7 @@
                 android:scrollbars="vertical"
                 android:visibility="invisible"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/download_item" />
+                tools:listitem="@layout/item" />
 
         <ProgressBar
                 android:id="@+id/progressBar"

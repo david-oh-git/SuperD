@@ -9,3 +9,5 @@ const val NUMBER_OF_DOWNLOADS_KEY = "number_of_downloads"
 const val SETTINGS_PREF_NAME = "io.audioshinigami.superd.common.settings_name"
 
 const val THEME_PREF_KEY = "io.audioshinigami.superd.common.theme_key"
+
+const val WRITE_EXTERNAL_REQUEST_CODE = 523

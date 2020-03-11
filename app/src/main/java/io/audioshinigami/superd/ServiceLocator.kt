@@ -8,12 +8,11 @@ import com.tonyodev.fetch2.Fetch
 import com.tonyodev.fetch2.FetchConfiguration
 import io.audioshinigami.superd.common.NUMBER_OF_DOWNLOADS_KEY
 import io.audioshinigami.superd.common.SETTINGS_PREF_NAME
-import io.audioshinigami.superd.zdata.source.*
-import io.audioshinigami.superd.zdata.source.local.FileDatabase
-import io.audioshinigami.superd.zdata.source.local.LocalFileInfoSource
-import io.audioshinigami.superd.zdata.source.local.LocalPreferenceSource
-import io.audioshinigami.superd.zdata.source.remote.ActiveListener
-import io.audioshinigami.superd.zdata.source.remote.RemoteDownloadDataSource
+import io.audioshinigami.superd.data.source.*
+import io.audioshinigami.superd.data.source.local.FileDatabase
+import io.audioshinigami.superd.data.source.local.LocalFileInfoSource
+import io.audioshinigami.superd.data.source.local.LocalPreferenceSource
+import io.audioshinigami.superd.data.source.remote.RemoteDownloadDataSource
 
 object ServiceLocator {
 

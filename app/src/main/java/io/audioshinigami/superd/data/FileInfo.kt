@@ -1,4 +1,4 @@
-package io.audioshinigami.superd.data.source.db.entity
+package io.audioshinigami.superd.data
 
 
 import androidx.room.ColumnInfo
@@ -9,7 +9,7 @@ import io.audioshinigami.superd.common.TABLE_NAME
 
 
 @Entity(tableName = TABLE_NAME, indices = arrayOf( Index(value = ["url"], unique = true)))
-data class FileData(
+data class FileInfo(
     @PrimaryKey(autoGenerate = true) val uid: Int,
     @ColumnInfo(name = "request_id") val request_id: Int,
     @ColumnInfo(name = "url") val url: String,
@@ -25,4 +25,5 @@ data class FileData(
 
     val isActive: Boolean
     get() = false
+
 } //end FileData

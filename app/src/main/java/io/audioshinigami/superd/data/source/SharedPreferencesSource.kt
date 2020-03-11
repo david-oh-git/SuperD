@@ -1,6 +1,6 @@
-package io.audioshinigami.superd.zdata.source
+package io.audioshinigami.superd.data.source
 
-interface SharedPreferenceRepo {
+interface SharedPreferencesSource {
 
     suspend fun save( key: String , value: String )
 
@@ -12,8 +12,7 @@ interface SharedPreferenceRepo {
 
     suspend fun getBoolean( key: String ) : Boolean
 
-    suspend fun getInt( key: String ) : Int?
+    suspend fun getInt( key: String ) : Int
 
     suspend fun remove( key: String )
-
 }

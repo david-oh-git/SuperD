@@ -1,7 +1,5 @@
 package io.audioshinigami.superd.data.source
 
-import io.audioshinigami.superd.zdata.source.SharedPreferenceRepo
-
 class FakeSharedPreferenceSource(
     var preferences: MutableMap<String, Any> = mutableMapOf()
 ):SharedPreferenceRepo {

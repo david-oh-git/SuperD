@@ -18,7 +18,7 @@ import io.audioshinigami.superd.utility.extentions.copyToClipBoard
 import io.audioshinigami.superd.utility.extentions.hideView
 import io.audioshinigami.superd.utility.extentions.sendSnack
 import io.audioshinigami.superd.utility.extentions.showView
-import io.audioshinigami.superd.zdata.source.State.*
+import io.audioshinigami.superd.data.source.State.*
 import timber.log.Timber
 import kotlin.math.abs
 

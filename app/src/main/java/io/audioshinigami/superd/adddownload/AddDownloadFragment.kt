@@ -13,9 +13,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.App
 import io.audioshinigami.superd.R
+import io.audioshinigami.superd.common.WRITE_EXTERNAL_REQUEST_CODE
 import io.audioshinigami.superd.utility.PermissionManager
 import io.audioshinigami.superd.utility.ReUseMethods
-import io.audioshinigami.superd.utility.extentions.WRITE_EXTERNAL_REQUEST_CODE
 import io.audioshinigami.superd.utility.extentions.sendToastMsg
 import kotlinx.android.synthetic.main.fragment_add_download.*
 import java.io.File

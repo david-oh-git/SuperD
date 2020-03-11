@@ -3,7 +3,7 @@ package io.audioshinigami.superd.selecttheme
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.*
 import io.audioshinigami.superd.common.THEME_PREF_KEY
-import io.audioshinigami.superd.zdata.source.SharedPreferenceRepo
+import io.audioshinigami.superd.data.source.SharedPreferenceRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

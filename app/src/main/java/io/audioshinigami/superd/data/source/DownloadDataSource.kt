@@ -1,4 +1,4 @@
-package io.audioshinigami.superd.zdata.source
+package io.audioshinigami.superd.data.source
 
 import android.net.Uri
 import com.tonyodev.fetch2.FetchListener

@@ -1,14 +1,14 @@
-package io.audioshinigami.superd.zdata.source.local
+package io.audioshinigami.superd.data.source.local
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import io.audioshinigami.superd.zdata.FileInfo
-import io.audioshinigami.superd.zdata.Result
-import io.audioshinigami.superd.zdata.Result.Error
-import io.audioshinigami.superd.zdata.Result.Success
-import io.audioshinigami.superd.zdata.source.FileInfoSource
+import io.audioshinigami.superd.data.FileInfo
+import io.audioshinigami.superd.data.Result
+import io.audioshinigami.superd.data.Result.Error
+import io.audioshinigami.superd.data.Result.Success
+import io.audioshinigami.superd.data.source.FileInfoSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

@@ -1,11 +1,11 @@
-package io.audioshinigami.superd.zdata.source
+package io.audioshinigami.superd.data.source
 
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
 import com.tonyodev.fetch2.FetchListener
-import io.audioshinigami.superd.zdata.FileInfo
-import io.audioshinigami.superd.zdata.Result
+import io.audioshinigami.superd.data.FileInfo
+import io.audioshinigami.superd.data.Result
 
 interface FileInfoRepository {
 
@@ -15,9 +15,9 @@ interface FileInfoRepository {
 
     suspend fun getAllFileInfo(): Result<List<FileInfo>>
 
-    suspend fun save(vararg fileInfo: FileInfo )
+    suspend fun save(vararg fileInfo: FileInfo)
 
-    suspend fun update(fileInfo: FileInfo )
+    suspend fun update(fileInfo: FileInfo)
 
     suspend fun update( url: String , progressValue: Int )
 

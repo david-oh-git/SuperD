@@ -2,7 +2,7 @@ package io.audioshinigami.superd.downloads
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import io.audioshinigami.superd.zdata.source.FileInfoRepository
+import io.audioshinigami.superd.data.source.FileInfoRepository
 
 class FileInfoViewModel(
     private val fileInfoRepository: FileInfoRepository

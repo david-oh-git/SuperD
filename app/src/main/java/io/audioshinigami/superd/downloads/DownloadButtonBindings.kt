@@ -4,7 +4,7 @@ import androidx.appcompat.widget.AppCompatImageButton
 import androidx.databinding.BindingAdapter
 import io.audioshinigami.superd.App
 import io.audioshinigami.superd.R
-import io.audioshinigami.superd.zdata.source.State
+import io.audioshinigami.superd.data.source.State
 
 object DownloadButtonBindings {
 

@@ -12,7 +12,7 @@
 
         <variable
             name="fileInfo"
-            type="io.audioshinigami.superd.zdata.FileInfo" />
+            type="io.audioshinigami.superd.data.FileInfo" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

@@ -1,11 +1,11 @@
-package io.audioshinigami.superd.zdata.source
+package io.audioshinigami.superd.data.source
 
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
 import com.tonyodev.fetch2.FetchListener
-import io.audioshinigami.superd.zdata.FileInfo
-import io.audioshinigami.superd.zdata.Result
+import io.audioshinigami.superd.data.FileInfo
+import io.audioshinigami.superd.data.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

@@ -11,10 +11,10 @@ import com.tonyodev.fetch2.Error
 import com.tonyodev.fetch2.FetchListener
 import com.tonyodev.fetch2core.DownloadBlock
 import io.audioshinigami.superd.utility.ReUseMethods
-import io.audioshinigami.superd.zdata.FileInfo
-import io.audioshinigami.superd.zdata.source.FileInfoRepository
-import io.audioshinigami.superd.zdata.source.State
-import io.audioshinigami.superd.zdata.source.State.*
+import io.audioshinigami.superd.data.FileInfo
+import io.audioshinigami.superd.data.source.FileInfoRepository
+import io.audioshinigami.superd.data.source.State
+import io.audioshinigami.superd.data.source.State.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.File
