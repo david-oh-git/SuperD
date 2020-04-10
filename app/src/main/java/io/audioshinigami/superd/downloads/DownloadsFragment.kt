@@ -1,5 +1,6 @@
 package io.audioshinigami.superd.downloads
 
+import android.media.MediaScannerConnection
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -13,12 +14,12 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.App
 import io.audioshinigami.superd.R
+import io.audioshinigami.superd.data.source.State.*
 import io.audioshinigami.superd.databinding.DownloadsFragmentBinding
 import io.audioshinigami.superd.utility.extentions.copyToClipBoard
 import io.audioshinigami.superd.utility.extentions.hideView
 import io.audioshinigami.superd.utility.extentions.sendSnack
 import io.audioshinigami.superd.utility.extentions.showView
-import io.audioshinigami.superd.data.source.State.*
 import timber.log.Timber
 import kotlin.math.abs
 
@@ -126,7 +127,6 @@ class DownloadsFragment :
 
         viewModel.pagedDownloads.observe(binding?.lifecycleOwner!!, Observer {
             data ->
-            Timber.d("data size is ${data.size}")
 
             data?.apply {
                 adaptor.submitList(this)
@@ -143,6 +143,24 @@ class DownloadsFragment :
         viewModel.snackBarMessage.observe(binding.lifecycleOwner!!, Observer {
             sendSnack(it.message)
         })
+
+        viewModel.runMediaScanner.observe( viewLifecycleOwner, Observer {
+            scanMedia(it)
+        })
+    }
+
+    private fun scanMedia(filePath: String?) {
+
+        if( filePath == null ) return
+
+        Timber.d("File path is $filePath")
+        val filesToScan = arrayOf( filePath)
+
+        MediaScannerConnection.scanFile(context, filesToScan, null) { path, _ ->
+
+                Timber.d("Scan complete : $path")
+                sendSnack(" Scan completed")
+        }
     }
 
     private fun fabOnClickListener() : View.OnClickListener {
@@ -179,4 +197,5 @@ class DownloadsFragment :
             }
         }
     }
+
 }
