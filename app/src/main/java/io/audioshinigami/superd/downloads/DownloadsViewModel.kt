@@ -10,11 +10,11 @@ import com.tonyodev.fetch2.Download
 import com.tonyodev.fetch2.Error
 import com.tonyodev.fetch2.FetchListener
 import com.tonyodev.fetch2core.DownloadBlock
-import io.audioshinigami.superd.utility.ReUseMethods
 import io.audioshinigami.superd.data.FileInfo
 import io.audioshinigami.superd.data.source.FileInfoRepository
 import io.audioshinigami.superd.data.source.State
 import io.audioshinigami.superd.data.source.State.*
+import io.audioshinigami.superd.utility.ReUseMethods
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.File
@@ -24,6 +24,7 @@ class DownloadsViewModel(
 ): ViewModel() {
 
     val snackBarMessage = OneTimeLiveData<SnackMessage>()
+    val runMediaScanner = OneTimeLiveData<String>()
 
     private val _pagedDownloads = fileInfoRepository.getAllPaged()
     val pagedDownloads: LiveData<PagedList<FileInfo>> = _pagedDownloads
@@ -69,6 +70,7 @@ class DownloadsViewModel(
                     viewModelScope.launch {
                         fileInfoRepository.addState(download.id , COMPLETE)
                         fileInfoRepository.update(download.url, 100)
+                        download.fileUri.path?.let { runMediaScanner.sendData(it) }
                     }
 
                     snackBarMessage.sendData( SnackMessage("Download complete") )

@@ -2,6 +2,7 @@ package io.audioshinigami.superd.selecttheme
 
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.*
+import io.audioshinigami.superd.common.DEFAULT_PREF_INT_VALUE
 import io.audioshinigami.superd.common.THEME_PREF_KEY
 import io.audioshinigami.superd.data.source.SharedPreferenceRepo
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +23,7 @@ class ThemeBottomSheetViewModel(
         // get theme value from sharedPreferences & assign
         val themeValue = repository.getInt(THEME_PREF_KEY)
 
-        val theme = if( themeValue == -999 || themeValue == null ) return@launch else themeValue
+        val theme = if( themeValue == DEFAULT_PREF_INT_VALUE || themeValue == null ) return@launch else themeValue
 
         _theme.postValue(theme)
 

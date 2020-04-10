@@ -2,6 +2,7 @@ package io.audioshinigami.superd.data.source.local
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import io.audioshinigami.superd.common.DEFAULT_PREF_INT_VALUE
 import io.audioshinigami.superd.data.source.SharedPreferencesSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -39,7 +40,7 @@ class LocalPreferenceSource(
     }
 
     override suspend fun getInt(key: String) = withContext(ioDispatcher) {
-        return@withContext sharedPreferences.getInt(key, -999)
+        return@withContext sharedPreferences.getInt(key, DEFAULT_PREF_INT_VALUE)
     }
 
     override suspend fun remove(key: String) = withContext(ioDispatcher){

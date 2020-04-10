@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.onNavDestinationSelected
+import io.audioshinigami.superd.common.DEFAULT_PREF_INT_VALUE
 import io.audioshinigami.superd.common.SETTINGS_PREF_NAME
 import io.audioshinigami.superd.common.THEME_PREF_KEY
 import kotlinx.android.synthetic.main.activity_main.*
@@ -59,7 +60,7 @@ class MainActivity : AppCompatActivity() {
             .getInt(THEME_PREF_KEY)
 
         when(theme){
-            -999 -> MODE_NIGHT_FOLLOW_SYSTEM
+            DEFAULT_PREF_INT_VALUE -> MODE_NIGHT_FOLLOW_SYSTEM
             null -> MODE_NIGHT_FOLLOW_SYSTEM
             else -> theme
         }
