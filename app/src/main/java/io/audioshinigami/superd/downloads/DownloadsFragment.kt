@@ -159,7 +159,6 @@ class DownloadsFragment :
         MediaScannerConnection.scanFile(context, filesToScan, null) { path, _ ->
 
                 Timber.d("Scan complete : $path")
-                sendSnack(" Scan completed")
         }
     }
 
