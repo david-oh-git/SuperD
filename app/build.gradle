@@ -44,6 +44,10 @@ android {
         }
 
         debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+            resValue "string", "my_name", "Super D-debug"
+
             minifyEnabled false
             testCoverageEnabled true
 //            useProguard false
