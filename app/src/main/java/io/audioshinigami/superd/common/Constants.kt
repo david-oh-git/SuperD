@@ -13,3 +13,7 @@ const val THEME_PREF_KEY = "io.audioshinigami.superd.common.theme_key"
 const val WRITE_EXTERNAL_REQUEST_CODE = 523
 
 const val DEFAULT_PREF_INT_VALUE = -999
+
+const val FILE_DB_NAME = "filedownload_db"
+
+const val NUMBER_OF_DOWLOADS = "io.audioshinigami.superd.common.number_of_downloads"

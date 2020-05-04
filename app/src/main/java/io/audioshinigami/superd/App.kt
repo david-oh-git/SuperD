@@ -8,6 +8,9 @@ import io.audioshinigami.superd.data.source.SharedPreferenceRepo
 import io.audioshinigami.superd.data.source.State
 import io.audioshinigami.superd.data.source.State.DOWNLOADING
 import io.audioshinigami.superd.data.source.remote.ActiveListener
+import io.audioshinigami.superd.di.components.AppComponent
+import io.audioshinigami.superd.di.components.DaggerAppComponent
+import io.audioshinigami.superd.di.modules.AppModule
 import timber.log.Timber
 
 /**
@@ -31,19 +34,20 @@ class App : Application() , ActiveListener {
     /* list of active downloads request ids */
     val activeDownloads: MutableMap<Int, State> = ServiceLocator.provideActiveDownloadsMap()
 
+    // dagger app component
+    lateinit var appComponent: AppComponent
+
     override fun onCreate() {
         super.onCreate()
 
         if( BuildConfig.DEBUG )
             Timber.plant( Timber.DebugTree() )
 
+        appComponent = initDagger(this)
+
         synchronized(this){
             instance = this
         }
-
-//        AppCompatDelegate.setDefaultNightMode(
-//            AppCompatDelegate.MODE_NIGHT_YES
-//        )
 
     }
 
@@ -52,6 +56,11 @@ class App : Application() , ActiveListener {
     }
 
     override fun isDownloading() = DOWNLOADING in activeDownloads.values
+
+    private fun initDagger(app: App ): AppComponent =
+        DaggerAppComponent.builder()
+            .appModule( AppModule(app))
+            .build()
 
     companion object{
         lateinit var  instance: App

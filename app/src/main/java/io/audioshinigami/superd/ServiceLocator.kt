@@ -131,6 +131,7 @@ object ServiceLocator {
     private fun createFetch( context: Context ,numberOfDownloads: Int ): Fetch {
         val fetchConfig = FetchConfiguration.Builder(context.applicationContext )
             .setDownloadConcurrentLimit(numberOfDownloads)
+            .enableLogging(true)
             .build()
 
         val newFetch = Fetch.Impl.getInstance(fetchConfig)
