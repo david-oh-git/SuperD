@@ -11,6 +11,7 @@ import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.App
 import io.audioshinigami.superd.R
@@ -21,6 +22,7 @@ import io.audioshinigami.superd.utility.extentions.hideView
 import io.audioshinigami.superd.utility.extentions.sendSnack
 import io.audioshinigami.superd.utility.extentions.showView
 import timber.log.Timber
+import javax.inject.Inject
 import kotlin.math.abs
 
 class DownloadsFragment :
@@ -28,10 +30,19 @@ class DownloadsFragment :
 
 
 //    private val viewModel by lazy { obtainViewModel(SharedViewModel::class.java) }
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private val viewModel by viewModels<DownloadsViewModel> {
-        DownloadsViewModelFactory( (requireContext().applicationContext as App ).fileInfoRepository )
+        viewModelFactory
     }
     private var _itemUrl: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        ( requireActivity().application as App ).appComponent.downloadComponent().create().inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

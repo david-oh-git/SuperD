@@ -15,7 +15,7 @@ import javax.inject.Singleton
 
 
 @Module
-class DownloadModule {
+class FetchDownloadModule {
 
     @Provides
     @Singleton

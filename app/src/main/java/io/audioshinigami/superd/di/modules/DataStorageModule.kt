@@ -34,12 +34,4 @@ class DataStorageModule {
     @Singleton
     fun provideFileInfoDataSource(fileInfoDao: FileInfoDao): FileInfoSource =
         LocalFileInfoSource( fileInfoDao )
-
-    @Provides
-    @Singleton
-    fun provideFileInfoRepository(
-        fileInfoSource: LocalFileInfoSource ,
-        downloadDataSource: DownloadDataSource
-    ): FileInfoRepository =
-        DefaultFileInfoRepository( fileInfoSource, downloadDataSource )
 }

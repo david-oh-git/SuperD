@@ -14,36 +14,30 @@ import io.audioshinigami.superd.di.modules.AppModule
 import timber.log.Timber
 
 /**
-* An application that sets up Timber
+* An application that
+ * - sets up Timber
+ * - sets up Dagger
  *
  */
 
 class App : Application() , ActiveListener {
 
-    /* repository instance*/
-    val fileInfoRepository: FileInfoRepository
-        get() = ServiceLocator.provideFileInfoRepository(this)
-
     val sharedPreferenceRepo: SharedPreferenceRepo
         get() = ServiceLocator.provideSharedPreferenceRepository(SETTINGS_PREF_NAME, this)
-
-    /* fetch instance : 3rd party download library*/
-    val fetch: Fetch
-        get() = ServiceLocator.provideFetch(this)
 
     /* list of active downloads request ids */
     val activeDownloads: MutableMap<Int, State> = ServiceLocator.provideActiveDownloadsMap()
 
     // dagger app component
-    lateinit var appComponent: AppComponent
+    val appComponent: AppComponent by lazy {
+        initDagger()
+    }
 
     override fun onCreate() {
         super.onCreate()
 
         if( BuildConfig.DEBUG )
             Timber.plant( Timber.DebugTree() )
-
-        appComponent = initDagger(this)
 
         synchronized(this){
             instance = this
@@ -57,10 +51,7 @@ class App : Application() , ActiveListener {
 
     override fun isDownloading() = DOWNLOADING in activeDownloads.values
 
-    private fun initDagger(app: App ): AppComponent =
-        DaggerAppComponent.builder()
-            .appModule( AppModule(app))
-            .build()
+    open fun initDagger(): AppComponent = DaggerAppComponent.factory().create(this)
 
     companion object{
         lateinit var  instance: App

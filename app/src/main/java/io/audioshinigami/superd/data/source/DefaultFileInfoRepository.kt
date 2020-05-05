@@ -9,8 +9,9 @@ import io.audioshinigami.superd.data.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class DefaultFileInfoRepository(
+class DefaultFileInfoRepository @Inject constructor(
     private val localFileInfoSource: FileInfoSource,
     private val remoteDownloadDataSource: DownloadDataSource,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO

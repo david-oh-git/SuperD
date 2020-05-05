@@ -3,7 +3,6 @@ package io.audioshinigami.superd.downloads
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagedList
 import com.tonyodev.fetch2.Download
@@ -18,8 +17,9 @@ import io.audioshinigami.superd.utility.ReUseMethods
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.File
+import javax.inject.Inject
 
-class DownloadsViewModel(
+class DownloadsViewModel @Inject constructor(
     private val fileInfoRepository: FileInfoRepository
 ): ViewModel() {
 
@@ -164,15 +164,6 @@ class DownloadsViewModel(
         fileInfoRepository.disableListener()
     }
 
-}
-
-@Suppress("UNCHECKED_CAST")
-class DownloadsViewModelFactory(
-    private val fileInfoRepository: FileInfoRepository
-): ViewModelProvider.NewInstanceFactory() {
-
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-        ( DownloadsViewModel( fileInfoRepository ) as T)
 }
 
 data class SnackMessage(val message: String )

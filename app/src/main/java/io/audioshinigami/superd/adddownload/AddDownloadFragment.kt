@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.App
 import io.audioshinigami.superd.R
@@ -19,6 +20,7 @@ import io.audioshinigami.superd.utility.ReUseMethods
 import io.audioshinigami.superd.utility.extentions.sendToastMsg
 import kotlinx.android.synthetic.main.fragment_add_download.*
 import java.io.File
+import javax.inject.Inject
 
 
 /**
@@ -28,8 +30,17 @@ import java.io.File
 
 class AddDownloadFragment : DialogFragment() {
 
-    private val viewModel by viewModels<AddFileInfoViewModel> {
-        AddDownloadViewModelFactory( (requireContext().applicationContext as App ).fileInfoRepository)
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val viewModel by viewModels<AddDownloadViewModel> {
+        viewModelFactory
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        ( requireActivity().application as App).appComponent.addDownload().create().inject(this)
     }
 
     override fun onCreateView(
@@ -67,11 +78,11 @@ class AddDownloadFragment : DialogFragment() {
         }
 
 
-        PermissionManager.requestPermission( context!!,
+        PermissionManager.requestPermission( requireContext(),
             permission,
             ::makePermissionRequest )
 
-        if ( !PermissionManager.isPermissionGranted(context!!,permission) )
+        if ( !PermissionManager.isPermissionGranted(requireContext(),permission) )
             return
 
         // TODO get URI from user

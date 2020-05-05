@@ -1,25 +1,27 @@
 package io.audioshinigami.superd.di.modules
 
-import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides
 import io.audioshinigami.superd.App
 import io.audioshinigami.superd.data.source.remote.ActiveListener
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Module
-class AppModule(val app: Application) {
+object AppModule {
 
     @Singleton
     @Provides
-    fun provideContext(): Context = app.applicationContext
+    fun provideApp(appContext: Context ): App = ( appContext as App )
 
+    @JvmStatic
     @Singleton
     @Provides
-    fun provideApp(): App = ( app as App )
+    fun provideActiveListener(app: App ): ActiveListener = app
 
+    @JvmStatic
     @Singleton
     @Provides
-    fun provideActiveListener(_app: App ): ActiveListener = _app
+    fun provideIoDispatcher() = Dispatchers.IO
 }
