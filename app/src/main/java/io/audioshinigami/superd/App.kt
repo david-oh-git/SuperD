@@ -1,16 +1,13 @@
 package io.audioshinigami.superd
 
 import android.app.Application
-import com.tonyodev.fetch2.Fetch
 import io.audioshinigami.superd.common.SETTINGS_PREF_NAME
-import io.audioshinigami.superd.data.source.FileInfoRepository
 import io.audioshinigami.superd.data.source.SharedPreferenceRepo
 import io.audioshinigami.superd.data.source.State
 import io.audioshinigami.superd.data.source.State.DOWNLOADING
 import io.audioshinigami.superd.data.source.remote.ActiveListener
 import io.audioshinigami.superd.di.components.AppComponent
 import io.audioshinigami.superd.di.components.DaggerAppComponent
-import io.audioshinigami.superd.di.modules.AppModule
 import timber.log.Timber
 
 /**

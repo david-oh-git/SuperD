@@ -14,7 +14,6 @@ import io.audioshinigami.superd.common.SETTINGS_PREF_NAME
 import io.audioshinigami.superd.common.THEME_PREF_KEY
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.runBlocking
-import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,8 +25,6 @@ class MainActivity : AppCompatActivity() {
 
         /*sets the theme*/
         val theme = obtainTheme()
-
-        Timber.d("Theme is $theme")
         AppCompatDelegate.setDefaultNightMode(
             theme
         )

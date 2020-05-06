@@ -2,8 +2,8 @@ package io.audioshinigami.superd.downloads
 
 import androidx.recyclerview.widget.RecyclerView
 import io.audioshinigami.superd.BR
-import io.audioshinigami.superd.databinding.ItemBinding
 import io.audioshinigami.superd.data.FileInfo
+import io.audioshinigami.superd.databinding.ItemBinding
 
 class FileInfoViewHolder(private val binding: ItemBinding )
     : RecyclerView.ViewHolder(binding.root) {

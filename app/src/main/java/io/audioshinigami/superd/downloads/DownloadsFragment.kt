@@ -63,30 +63,38 @@ class DownloadsFragment :
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val currentDestination = findNavController().currentDestination?.label
+
+        findNavController().addOnDestinationChangedListener { controller, destination, arguments ->
+
+            if ( currentDestination == destination.label){
+                // updates the isDownloading livedata to trigger the fetchlistener if download is active
+                // or disable it if not active
+                viewModel.refreshIsDownloading()
+            }
+        }
+    }
+
     override fun onResume() {
         super.onResume()
-        viewModel.enableFetchListener()
+        Timber.d("onResume")
     }
 
     override fun onPause() {
         super.onPause()
 
         Timber.d("onPause")
-        viewModel.disableFetchListener()
     }
 
     override fun onStop() {
         super.onStop()
 
         Timber.d("onStop")
-        viewModel.disableFetchListener()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-
-        viewModel.disableFetchListener()
-    }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         return when(item?.itemId){
@@ -128,7 +136,7 @@ class DownloadsFragment :
 
     override fun absValue(value: Int): Int = abs(value)
 
-    private fun subscribeUi(binding: DownloadsFragmentBinding?, adaptor: FileInfoAdaptor) {
+    private fun subscribeUi(binding: DownloadsFragmentBinding, adaptor: FileInfoAdaptor) {
 
         /* shows loading progressBar , hides recyclerView*/
         binding?.apply {
@@ -136,7 +144,7 @@ class DownloadsFragment :
             progressBar.showView()
         }
 
-        viewModel.pagedDownloads.observe(binding?.lifecycleOwner!!, Observer {
+        viewModel.pagedDownloads.observe(binding.lifecycleOwner!!, Observer {
             data ->
 
             data?.apply {
@@ -158,6 +166,10 @@ class DownloadsFragment :
         viewModel.runMediaScanner.observe( viewLifecycleOwner, Observer {
             scanMedia(it)
         })
+
+        viewModel.isDownLoading.observe(binding.lifecycleOwner!!, Observer {
+            viewModel.enableFetchListener(it)
+        } )
     }
 
     private fun scanMedia(filePath: String?) {
@@ -177,8 +189,8 @@ class DownloadsFragment :
         /* launches GetUrlFragment */
         return View.OnClickListener {
 
+            viewModel.enableFetchListener(true)
             findNavController().navigate(R.id.action_downloadsFragment_to_getUrlFragment)
-            viewModel.enableFetchListener()
         }
     }
 

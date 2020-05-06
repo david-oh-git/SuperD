@@ -1,9 +1,9 @@
 package io.audioshinigami.superd.util
 
+import io.audioshinigami.superd.data.FileInfo
 import io.audioshinigami.superd.factory.DataFactory.randomProgressValue
 import io.audioshinigami.superd.factory.DataFactory.randomRequestId
 import io.audioshinigami.superd.factory.DataFactory.randomUrl
-import io.audioshinigami.superd.data.FileInfo
 
 /*
 * creates mock FileData instances for test purposes

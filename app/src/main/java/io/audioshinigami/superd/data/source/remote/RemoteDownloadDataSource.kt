@@ -2,6 +2,8 @@ package io.audioshinigami.superd.data.source.remote
 
 import android.net.Uri
 import com.tonyodev.fetch2.*
+import com.tonyodev.fetch2.exception.FetchException
+import com.tonyodev.fetch2core.Func
 import io.audioshinigami.superd.data.FileInfo
 import io.audioshinigami.superd.data.source.DownloadDataSource
 import io.audioshinigami.superd.data.source.State
@@ -29,25 +31,35 @@ class RemoteDownloadDataSource internal constructor(
     override suspend fun start(url: String, downloadUri: Uri ) = withContext(ioDispatcher){
         /* create a request*/
         val request = createRequest(url, downloadUri)
-        /* start the download*/
-        fetch.enqueue(request)
 
-        if( fetch.isClosed )
-            Timber.d("Fetch is closed")
-        // add to active urls
-        activeListener.add(request.id, DOWNLOADING)
 
-        /* create [FileData] info for file*/
-        val fileData = FileInfo(
-            0,
-            request.id,
-            url,
-            url.substringAfterLast("/"),
-            0
-        )
+        try {
+            /* start the download*/
+            fetch.enqueue(request,null,
+                Func<Error> {
+                    // TODO send snack message with error
+                    Timber.e("Error is ${it.value}")
+                })
 
-        /* add to DB*/
-        fileInfoDao.insert(fileData)
+            // add to active urls
+            activeListener.add(request.id, DOWNLOADING)
+
+            /* create [FileData] info for file*/
+            val fileData = FileInfo(
+                0,
+                request.id,
+                url,
+                url.substringAfterLast("/"),
+                0
+            )
+
+            /* add to DB*/
+            fileInfoDao.insert(fileData)
+
+        }catch ( e: FetchException){
+            Timber.d("Error message is ${e.message}")
+        }
+
 
     }
 
@@ -55,13 +67,23 @@ class RemoteDownloadDataSource internal constructor(
         /* create a request*/
         val request = createRequest(url, downloadUri)
 
-        /* start the download*/
-        fetch.enqueue(request)
 
-        // add to active urls
-        activeListener.add(request.id, DOWNLOADING)
-        
-        fileInfoDao.updateRequestId( url, request.id )
+
+        try {
+            /* start the download*/
+            fetch.enqueue(request,null,
+                Func<Error> {
+                    // TODO send snack message with error
+                    Timber.e("Error is ${it.value}")
+                })
+
+            // add to active urls
+            activeListener.add(request.id, DOWNLOADING)
+
+            fileInfoDao.updateRequestId( url, request.id )
+        }catch (e: FetchException){
+            Timber.d("Error message is ${e.message}")
+        }
     }
 
     override fun pause(id: Int) {
@@ -76,14 +98,15 @@ class RemoteDownloadDataSource internal constructor(
         activeListener.add(id, DOWNLOADING)
     }
 
-    override fun isDownloading() =  activeListener.isDownloading()
+    override fun isDownloading() = activeListener.isDownloading()
 
     override fun addState(id: Int, isActive: State) {
         activeListener.add(id, isActive)
     }
 
     override suspend fun setListener(fetchListener: FetchListener) {
-        fetch.addListener( provideFetchListener(fetchListener) )
+        if( _fetchListener == null)
+            fetch.addListener( provideFetchListener(fetchListener) )
     }
 
     override fun disableListener() {

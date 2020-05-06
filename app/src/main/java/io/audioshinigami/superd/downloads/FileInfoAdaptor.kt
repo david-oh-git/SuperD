@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import io.audioshinigami.superd.databinding.ItemBinding
 import io.audioshinigami.superd.data.FileInfo
+import io.audioshinigami.superd.databinding.ItemBinding
 
 /*
 * Adaptor for download items

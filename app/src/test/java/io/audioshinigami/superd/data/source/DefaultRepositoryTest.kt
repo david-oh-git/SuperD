@@ -1,19 +1,20 @@
 package io.audioshinigami.superd.data.source
 
-import io.audioshinigami.superd.util.FileInfoFactory
+import com.google.common.truth.Truth.assertThat
 import io.audioshinigami.superd.data.Result.Success
+import io.audioshinigami.superd.util.FileInfoFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
-import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mockito.*
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.verify
 
 @ExperimentalCoroutinesApi
-class DefaultFileInfoRepositoryTest {
+class DefaultRepositoryTest {
 
     private val allFileInfoData = FileInfoFactory.listOfEntries(7).sortedBy { it.uid }
     private lateinit var localFileInfoSource: FakeInfoDataSource
@@ -21,7 +22,7 @@ class DefaultFileInfoRepositoryTest {
     private val newFileInfo = FileInfoFactory.singleEntry()
 
     // Class under test
-    private lateinit var fileInfoRepository: DefaultFileInfoRepository
+    private lateinit var repository: DefaultRepository
 
 
     @Before
@@ -29,8 +30,8 @@ class DefaultFileInfoRepositoryTest {
         localFileInfoSource = FakeInfoDataSource( allFileInfoData.toMutableList() )
         downloadDataSource = mock(DownloadDataSource::class.java)
 
-        fileInfoRepository =
-            DefaultFileInfoRepository(
+        repository =
+            DefaultRepository(
                 localFileInfoSource,
                 downloadDataSource,
                 Dispatchers.Unconfined
@@ -42,7 +43,7 @@ class DefaultFileInfoRepositoryTest {
         // Arrange : data already added to repository
 
         // Act : request all fileInfo from FileInfo repository
-        val allFileInfo = fileInfoRepository.getAllFileInfo() as Success
+        val allFileInfo = repository.getAllFileInfo() as Success
 
         //Assert :
         assertThat( allFileInfo.data , `is`(allFileInfoData) )
@@ -52,13 +53,13 @@ class DefaultFileInfoRepositoryTest {
     fun saveFileInfo_saveToLocalSource() = runBlockingTest {
         // Arrange : create a new fileInfo that is not in localSource
         assertThat( localFileInfoSource.dbData ).doesNotContain( newFileInfo )
-        assertThat( (fileInfoRepository.getAllFileInfo() as? Success)?.data ).doesNotContain( newFileInfo )
+        assertThat( (repository.getAllFileInfo() as? Success)?.data ).doesNotContain( newFileInfo )
 
         // Act : save a fileInfo to the repository
-        fileInfoRepository.save( newFileInfo )
+        repository.save( newFileInfo )
 
         //Assert : new fileInfo is saved
-        val result =  fileInfoRepository.getAllFileInfo() as? Success
+        val result =  repository.getAllFileInfo() as? Success
         assertThat( result?.data ).contains( newFileInfo )
     }
 
@@ -67,14 +68,14 @@ class DefaultFileInfoRepositoryTest {
         // Arrange : create and save fileInfo
         val fileInfo = FileInfoFactory.singleEntry().copy( uid = 89)
         assertThat( localFileInfoSource.dbData ).doesNotContain( fileInfo )
-        assertThat( (fileInfoRepository.getAllFileInfo() as? Success)?.data ).doesNotContain( fileInfo )
-        fileInfoRepository.save( fileInfo )
+        assertThat( (repository.getAllFileInfo() as? Success)?.data ).doesNotContain( fileInfo )
+        repository.save( fileInfo )
 
         //Act : search for fileInfo
-        val result = fileInfoRepository.find(89)
+        val result = repository.find(89)
 
         // Assert :
-        val allFileInfo = fileInfoRepository.getAllFileInfo() as? Success
+        val allFileInfo = repository.getAllFileInfo() as? Success
         assertThat( allFileInfo?.data ).contains( result )
         assertThat( fileInfo, `is`(result) )
     }
@@ -83,16 +84,16 @@ class DefaultFileInfoRepositoryTest {
     fun updateFileInfo_() = runBlockingTest {
         // Arrange : create a new fileInfo that is not in localSource, save it
         assertThat( localFileInfoSource.dbData ).doesNotContain( newFileInfo )
-        assertThat( (fileInfoRepository.getAllFileInfo() as? Success)?.data ).doesNotContain( newFileInfo )
-        fileInfoRepository.save( newFileInfo )
+        assertThat( (repository.getAllFileInfo() as? Success)?.data ).doesNotContain( newFileInfo )
+        repository.save( newFileInfo )
 
         // Act : update newFileInfo
         val updatedFileInfo = newFileInfo.copy( progressValue = 0 )
-        fileInfoRepository.update( updatedFileInfo )
+        repository.update( updatedFileInfo )
 
 
         // Assert: confirm data was updated
-        val result = fileInfoRepository.find( newFileInfo.uid )
+        val result = repository.find( newFileInfo.uid )
 //        assertThat( result, isNotNull())
         assertThat( result , `is`(updatedFileInfo) )
     }
@@ -101,7 +102,7 @@ class DefaultFileInfoRepositoryTest {
     fun pauseDownload_verifyPauseIsCalled() = runBlockingTest {
 
         // Act : pause
-        fileInfoRepository.pause( 22 )
+        repository.pause( 22 )
 
         // Assert : pause is called
         verify(downloadDataSource).pause(22)
@@ -111,7 +112,7 @@ class DefaultFileInfoRepositoryTest {
     fun resumeDownload_verifyResume() = runBlockingTest {
 
         // Act : pause
-        fileInfoRepository.resume( 22 )
+        repository.resume( 22 )
 
         // Assert : pause is called
         verify(downloadDataSource).resume(22)

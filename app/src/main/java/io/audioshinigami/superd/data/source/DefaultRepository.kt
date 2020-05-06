@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class DefaultFileInfoRepository @Inject constructor(
+class DefaultRepository @Inject constructor(
     private val localFileInfoSource: FileInfoSource,
     private val remoteDownloadDataSource: DownloadDataSource,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
@@ -93,7 +93,7 @@ class DefaultFileInfoRepository @Inject constructor(
         remoteDownloadDataSource.resume(id)
     }
 
-    override fun isDownloading()= remoteDownloadDataSource.isDownloading()
+    override fun isDownloading() = remoteDownloadDataSource.isDownloading()
 
     override fun hasActiveListener() = remoteDownloadDataSource.hasActiveListener()
 

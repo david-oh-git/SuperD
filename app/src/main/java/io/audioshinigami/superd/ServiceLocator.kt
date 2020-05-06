@@ -79,7 +79,7 @@ object ServiceLocator {
     }
 
     private fun createFileInfoRepository( context: Context ): FileInfoRepository {
-        val newRepo = DefaultFileInfoRepository( createFileInfoSource(context),
+        val newRepo = DefaultRepository( createFileInfoSource(context),
             createDownloadDataSource(context))
 
         fileInfoRepository = newRepo

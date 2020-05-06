@@ -5,6 +5,7 @@ import com.tonyodev.fetch2.Fetch
 import com.tonyodev.fetch2.FetchConfiguration
 import dagger.Module
 import dagger.Provides
+import io.audioshinigami.superd.BuildConfig
 import io.audioshinigami.superd.common.NUMBER_OF_DOWLOADS
 import io.audioshinigami.superd.data.source.DownloadDataSource
 import io.audioshinigami.superd.data.source.local.FileInfoDao
@@ -29,7 +30,7 @@ class FetchDownloadModule {
         @Named(NUMBER_OF_DOWLOADS) numberOfDownloads: Int) =
         FetchConfiguration.Builder(context.applicationContext )
             .setDownloadConcurrentLimit(numberOfDownloads)
-            .enableLogging(true)
+            .enableLogging(BuildConfig.DEBUG)
             .build()
 
     @Provides

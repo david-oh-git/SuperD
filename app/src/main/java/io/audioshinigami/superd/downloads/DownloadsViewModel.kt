@@ -29,8 +29,11 @@ class DownloadsViewModel @Inject constructor(
     private val _pagedDownloads = fileInfoRepository.getAllPaged()
     val pagedDownloads: LiveData<PagedList<FileInfo>> = _pagedDownloads
 
+    val isDownLoading = OneTimeLiveData<Boolean>()
+
     fun downloadAction(id: Int, url: String , isActive: State? ) = viewModelScope.launch{
 
+        enableFetchListener(true)
         when( isActive ){
             DOWNLOADING -> {
                 fileInfoRepository.pause(id)
@@ -49,19 +52,19 @@ class DownloadsViewModel @Inject constructor(
 
                 fileInfoRepository.restart(url, uri)
                 Timber.d("restarting for $url")
-                enableFetchListener()
-
             }
         }
+
+        refreshIsDownloading()
     }
     fun delete(url: String)= viewModelScope.launch {
         fileInfoRepository.delete(url)
     }
 
-    fun enableFetchListener(){
+    fun enableFetchListener( enable: Boolean ){
         // if a download is active then create and attach a listener
 
-        if( fileInfoRepository.isDownloading() && !fileInfoRepository.hasActiveListener() ){
+        if( enable ){
             Timber.d("Enabling fetchListener !!")
             val fetchListener = object : FetchListener {
 
@@ -106,12 +109,13 @@ class DownloadsViewModel @Inject constructor(
 
                     Timber.e("b4 progress : ${download.progress}")
 
-                    /* if error , assign negative value of progress */
-                    val progress = if ( 0 > download.progress ) download.progress else download.progress * -1
+                    snackBarMessage.sendData( SnackMessage(error.name) )
 
-                    Timber.e(" Progress is : $progress")
+                    /* if error , assign negative value of progress */
+                    val progress = if ( 0 >= download.progress ) download.progress else download.progress * -1
+
                     viewModelScope.launch {
-                        fileInfoRepository.update( download.url, download.progress)
+                        fileInfoRepository.update( download.url, progress)
                         fileInfoRepository.addState(download.id, ERROR)
                     }
                 }
@@ -156,13 +160,16 @@ class DownloadsViewModel @Inject constructor(
                 fileInfoRepository.setListener(fetchListener)
             }
 
-        }// END IF
+        }
+
+        else{
+            fileInfoRepository.disableListener()
+            Timber.d("disabling listener !!")
+        }
 
     }
 
-    fun disableFetchListener(){
-        fileInfoRepository.disableListener()
-    }
+    fun refreshIsDownloading() = isDownLoading.sendData( fileInfoRepository.isDownloading() )
 
 }
 

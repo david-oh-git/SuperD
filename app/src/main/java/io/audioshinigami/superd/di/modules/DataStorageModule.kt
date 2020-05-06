@@ -5,9 +5,6 @@ import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import io.audioshinigami.superd.common.FILE_DB_NAME
-import io.audioshinigami.superd.data.source.DefaultFileInfoRepository
-import io.audioshinigami.superd.data.source.DownloadDataSource
-import io.audioshinigami.superd.data.source.FileInfoRepository
 import io.audioshinigami.superd.data.source.FileInfoSource
 import io.audioshinigami.superd.data.source.local.FileDatabase
 import io.audioshinigami.superd.data.source.local.FileInfoDao
