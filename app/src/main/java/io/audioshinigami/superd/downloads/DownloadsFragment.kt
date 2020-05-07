@@ -68,7 +68,7 @@ class DownloadsFragment :
 
         val currentDestination = findNavController().currentDestination?.label
 
-        findNavController().addOnDestinationChangedListener { controller, destination, arguments ->
+        findNavController().addOnDestinationChangedListener { _, destination, _ ->
 
             if ( currentDestination == destination.label){
                 // updates the isDownloading livedata to trigger the fetchlistener if download is active
@@ -139,7 +139,7 @@ class DownloadsFragment :
     private fun subscribeUi(binding: DownloadsFragmentBinding, adaptor: FileInfoAdaptor) {
 
         /* shows loading progressBar , hides recyclerView*/
-        binding?.apply {
+        binding.apply {
             downloadsRview.hideView()
             progressBar.showView()
         }
