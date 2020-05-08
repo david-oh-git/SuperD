@@ -8,23 +8,6 @@
             name="viewModel"
             type="io.audioshinigami.superd.selecttheme.ThemeBottomSheetViewModel" />
 
-        <variable
-            name="system_default_theme"
-            type="int" />
-
-        <variable
-            name="dark_theme"
-            type="int" />
-
-        <variable
-            name="light_theme"
-            type="int" />
-
-        <variable
-            name="assignTheme"
-            type="android.view.View.OnClickListener" />
-
-
     </data>
 
     <LinearLayout
@@ -60,7 +43,7 @@
 
             <RadioButton
                 android:id="@+id/theme_dark"
-                android:onClick="@{ (v) -> viewModel.radioButtonAction( dark_theme ) }"
+                android:onClick="@{ (v) -> viewModel.radioButtonAction( 2 ) }"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
@@ -68,7 +51,7 @@
 
             <RadioButton
                 android:id="@+id/theme_light"
-                android:onClick="@{ (v) -> viewModel.radioButtonAction( light_theme ) }"
+                android:onClick="@{ (v) -> viewModel.radioButtonAction( 1 ) }"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
@@ -76,7 +59,7 @@
 
             <RadioButton
                 android:id="@+id/theme_system_default"
-                android:onClick="@{ (v) -> viewModel.radioButtonAction( system_default_theme ) }"
+                android:onClick="@{ (v) -> viewModel.radioButtonAction( -1 ) }"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
@@ -88,7 +71,7 @@
             android:text="@string/set_btn"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="@{ assignTheme }"
+            android:onClick="@{ () -> viewModel.setTheme() }"
             android:textStyle="bold"
             android:textSize="20sp"
             android:textAllCaps="true"

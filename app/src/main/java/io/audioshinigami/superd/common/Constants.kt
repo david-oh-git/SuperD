@@ -19,3 +19,9 @@ const val FILE_DB_NAME = "filedownload_db"
 const val NUMBER_OF_DOWLOADS = "io.audioshinigami.superd.common.number_of_downloads"
 
 const val ENABLE_LOGGING = "io.audioshinigami.superd.common.enable_logging"
+
+const val DARK_THEME = 2
+
+const val LIGHT_THEME = 1
+
+const val FOLLOW_SYSTEM = -1

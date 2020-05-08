@@ -3,6 +3,7 @@ package io.audioshinigami.superd.selecttheme
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.*
 import io.audioshinigami.superd.common.DEFAULT_PREF_INT_VALUE
+import io.audioshinigami.superd.common.FOLLOW_SYSTEM
 import io.audioshinigami.superd.common.THEME_PREF_KEY
 import io.audioshinigami.superd.data.source.SharedPreferenceRepo
 import kotlinx.coroutines.Dispatchers
@@ -12,8 +13,10 @@ class ThemeBottomSheetViewModel(
     private val repository: SharedPreferenceRepo
 ) : ViewModel() {
 
-    private val _theme: MutableLiveData<Int> = MutableLiveData( AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM )
+    private val _theme: MutableLiveData<Int> = MutableLiveData( FOLLOW_SYSTEM )
     val theme: LiveData<Int> = _theme
+
+    val closeFragment: MutableLiveData<Boolean> = MutableLiveData(false)
 
     init {
         loadThemeValue()
@@ -42,7 +45,7 @@ class ThemeBottomSheetViewModel(
 
         viewModelScope.launch {
 
-            val theme = _theme.value ?: AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+            val theme = _theme.value ?: FOLLOW_SYSTEM
 
             // save theme value to preference
             repository.save(THEME_PREF_KEY, theme)
@@ -51,6 +54,9 @@ class ThemeBottomSheetViewModel(
             AppCompatDelegate.setDefaultNightMode(
                 theme
             )
+
+            // to close the fragment
+            closeFragment.value = true
 
         }
     }
