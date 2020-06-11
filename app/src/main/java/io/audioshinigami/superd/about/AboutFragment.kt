@@ -9,21 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import io.audioshinigami.superd.BuildConfig
+import io.audioshinigami.superd.R
 import io.audioshinigami.superd.databinding.AboutFragmentBinding
 import kotlinx.android.synthetic.main.about_fragment.*
 
 class AboutFragment : Fragment() {
-
-    private val developerGithubUrl = "https://www.github.com/david-oh-git"
-    private val freepikUrl = "https://www.flaticon.com/authors/freepik"
-    private val catalinUrl = "https://www.flaticon.com/authors/catalin-fertu"
-    private val alfredoUrl = "https://www.flaticon.com/authors/alfredo-hernandez"
-    private val kotlinUrl = "https://www.kotlinlang.org"
-    private val jetpackUrl = "https://developer.android.com/jetpack"
-    private val fetchUrl = "https://www.github.com/tonyofrancis/Fetch"
-    private val mockitoUrl = "https://site.mockito.org"
-    private val timberUrl = "https://www.github.com/JakeWharton/timber"
-    private val hamcrestUrl = "https://www.hamcrest.org"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,43 +46,43 @@ class AboutFragment : Fragment() {
 
     private fun initClickListeners(){
         developer_item.setOnClickListener {
-            openWebPage(developerGithubUrl)
+            openWebPage( getString(R.string.developer_url) )
         }
 
         freepik_icon_item.setOnClickListener {
-            openWebPage(freepikUrl)
+            openWebPage( getString(R.string.freepik_url) )
         }
 
         download_icon_item.setOnClickListener {
-            openWebPage(catalinUrl)
+            openWebPage( getString(R.string.catalin_url) )
         }
 
         alfredo_icon_item.setOnClickListener {
-            openWebPage(alfredoUrl)
+            openWebPage( getString(R.string.alfredo_url) )
         }
 
         kotlin_item.setOnClickListener {
-            openWebPage(kotlinUrl)
+            openWebPage( getString(R.string.kotlin_url) )
         }
 
         jetpack_item.setOnClickListener {
-            openWebPage(jetpackUrl)
+            openWebPage( getString(R.string.jetpack_url) )
         }
 
         fetch2_item.setOnClickListener {
-            openWebPage(fetchUrl)
+            openWebPage( getString(R.string.fetch_url) )
         }
 
         mockito_item.setOnClickListener {
-            openWebPage(mockitoUrl)
+            openWebPage( getString(R.string.mockito_url) )
         }
 
         timber_item.setOnClickListener {
-            openWebPage(timberUrl)
+            openWebPage( getString(R.string.timber_url) )
         }
 
         hamcrest_item.setOnClickListener {
-            openWebPage(hamcrestUrl)
+            openWebPage( getString(R.string.hamcrest_url) )
         }
     }
 

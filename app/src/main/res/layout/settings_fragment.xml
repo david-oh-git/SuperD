@@ -5,7 +5,9 @@
     <data>
 
         <variable
-            name="currentTheme" type="String" />
+            name="vm"
+            type="io.audioshinigami.superd.settings.SettingsViewModel" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -17,7 +19,7 @@
         android:layout_height="match_parent">
 
         <include
-            bind:settingSubTitle="@{ currentTheme }"
+            bind:settingSubTitle="@{ vm.theme }"
             layout="@layout/content_settings" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

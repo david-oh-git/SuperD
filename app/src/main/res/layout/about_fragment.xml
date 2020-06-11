@@ -7,6 +7,10 @@
 
         <variable
             name="version_name" type="String" />
+
+        <variable
+            name="openWebPage"
+            type="kotlin.jvm.functions.Function3" />
     </data>
 
     <ScrollView

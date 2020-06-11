@@ -51,5 +51,17 @@
 
     <!--    download item-->
     <string name="_new" translatable="false" >\u22EE</string>
+    <string name="developer_url">https://www.github.com/david-oh-git</string>
+
+<!--    URL-->
+    <string name="freepik_url" translatable="false">https://www.flaticon.com/authors/freepik</string>
+    <string name="catalin_url" translatable="false">https://www.flaticon.com/authors/catalin-fertu</string>
+    <string name="alfredo_url" translatable="false">https://www.flaticon.com/authors/alfredo-hernandez</string>
+    <string name="kotlin_url" translatable="false">https://www.kotlinlang.org</string>
+    <string name="jetpack_url" translatable="false">https://developer.android.com/jetpack</string>
+    <string name="fetch_url" translatable="false">https://www.github.com/tonyofrancis/Fetch</string>
+    <string name="mockito_url" translatable="false">https://site.mockito.org</string>
+    <string name="timber_url" translatable="false">https://www.github.com/JakeWharton/timber</string>
+    <string name="hamcrest_url" translatable="false">https://www.hamcrest.org</string>
 
 </resources>
