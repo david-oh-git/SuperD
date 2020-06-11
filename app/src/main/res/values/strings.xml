@@ -51,9 +51,8 @@
 
     <!--    download item-->
     <string name="_new" translatable="false" >\u22EE</string>
+    <!--    URL-->
     <string name="developer_url">https://www.github.com/david-oh-git</string>
-
-<!--    URL-->
     <string name="freepik_url" translatable="false">https://www.flaticon.com/authors/freepik</string>
     <string name="catalin_url" translatable="false">https://www.flaticon.com/authors/catalin-fertu</string>
     <string name="alfredo_url" translatable="false">https://www.flaticon.com/authors/alfredo-hernandez</string>

@@ -10,7 +10,7 @@
 
         <variable
             name="openWebPage"
-            type="kotlin.jvm.functions.Function3" />
+            type="kotlin.jvm.functions.Function1" />
     </data>
 
     <ScrollView
@@ -48,6 +48,7 @@
                 app:setting_sub_title="@string/developer"
                 app:setting_image="@drawable/ic_user"
                 app:setting_image_color="@color/developer_item"
+                android:onClick="@{ () -> openWebPage.invoke( @string/developer_url ) }"
                 android:layout_marginTop="4dp"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/about_item_height"/>
@@ -71,7 +72,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:setting_title="Catalin Fertu"
-
+                android:onClick="@{ () -> openWebPage.invoke( @string/catalin_url ) }"
                 app:setting_sub_title="icon via flaticon.com"
                 android:layout_marginTop="4dp"
                 android:layout_width="0dp"
@@ -85,6 +86,7 @@
                 app:setting_title="Alfredo Hernandez"
                 app:setting_sub_title="App icon via flaticon.com"
                 app:setting_image="@drawable/ic_download"
+                android:onClick="@{ () -> openWebPage.invoke( @string/alfredo_url ) }"
                 android:layout_marginTop="4dp"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/about_item_height"/>
@@ -97,6 +99,7 @@
                 app:setting_title="FreePik"
                 app:setting_sub_title="icon via flaticon.com"
                 app:setting_image_color="@android:color/transparent"
+                android:onClick="@{ () -> openWebPage.invoke( @string/freepik_url ) }"
                 android:layout_marginTop="4dp"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/about_item_height"/>
@@ -122,6 +125,7 @@
                 app:setting_title="@string/android_jetpack"
                 app:setting_sub_title="@string/android_jetpack_sub_title"
                 app:setting_image_color="@android:color/transparent"
+                android:onClick="@{ () -> openWebPage.invoke( @string/jetpack_url ) }"
                 android:layout_marginTop="4dp"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/about_item_height" />
@@ -134,6 +138,7 @@
                 app:setting_title="@string/kotlin"
                 app:setting_sub_title="@string/kotlin_item_sub_title"
                 app:setting_image_color="@android:color/transparent"
+                android:onClick="@{ () -> openWebPage.invoke( @string/kotlin_url ) }"
                 android:layout_marginTop="4dp"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/about_item_height" />
@@ -146,6 +151,7 @@
                 app:setting_title="@string/fetch_lib"
                 app:setting_sub_title="@string/fetch_item_sub_title"
                 app:setting_image_color="@android:color/transparent"
+                android:onClick="@{ () -> openWebPage.invoke( @string/fetch_url ) }"
                 android:layout_marginTop="4dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
@@ -158,6 +164,7 @@
                 app:setting_title="@string/mockito"
                 app:setting_sub_title="@string/mockito_sub_title"
                 app:setting_image_color="@android:color/transparent"
+                android:onClick="@{ () -> openWebPage.invoke( @string/mockito_url ) }"
                 android:layout_marginTop="4dp"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/about_item_height" />
@@ -169,6 +176,7 @@
                 app:layout_constraintTop_toBottomOf="@id/mockito_item"
                 app:setting_title="@string/timber"
                 app:setting_image_color="@android:color/transparent"
+                android:onClick="@{ () -> openWebPage.invoke( @string/timber_url ) }"
                 android:layout_marginTop="4dp"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/about_item_height"/>
@@ -180,6 +188,7 @@
                 app:layout_constraintTop_toBottomOf="@id/timber_item"
                 app:setting_title="@string/hamcrest"
                 app:setting_image_color="@android:color/transparent"
+                android:onClick="@{ () -> openWebPage.invoke( @string/hamcrest_url ) }"
                 android:layout_marginTop="4dp"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/about_item_height" />
