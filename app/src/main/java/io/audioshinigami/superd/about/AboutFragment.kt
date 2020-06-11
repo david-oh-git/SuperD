@@ -8,22 +8,10 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import io.audioshinigami.superd.BuildConfig
+import io.audioshinigami.superd.BuildConfig.VERSION_NAME
 import io.audioshinigami.superd.databinding.AboutFragmentBinding
-import kotlinx.android.synthetic.main.about_fragment.*
 
 class AboutFragment : Fragment() {
-
-    private val developerGithubUrl = "https://www.github.com/david-oh-git"
-    private val freepikUrl = "https://www.flaticon.com/authors/freepik"
-    private val catalinUrl = "https://www.flaticon.com/authors/catalin-fertu"
-    private val alfredoUrl = "https://www.flaticon.com/authors/alfredo-hernandez"
-    private val kotlinUrl = "https://www.kotlinlang.org"
-    private val jetpackUrl = "https://developer.android.com/jetpack"
-    private val fetchUrl = "https://www.github.com/tonyofrancis/Fetch"
-    private val mockitoUrl = "https://site.mockito.org"
-    private val timberUrl = "https://www.github.com/JakeWharton/timber"
-    private val hamcrestUrl = "https://www.hamcrest.org"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +26,9 @@ class AboutFragment : Fragment() {
         val binding = AboutFragmentBinding.inflate( inflater, container, false)
 
         binding.apply {
-            versionName = BuildConfig.VERSION_NAME
-            lifecycleOwner = this@AboutFragment.viewLifecycleOwner
+            versionName = VERSION_NAME
+            lifecycleOwner = viewLifecycleOwner
+            openWebPage = ::loadPage
         }
         return binding.root
     }
@@ -48,57 +37,8 @@ class AboutFragment : Fragment() {
         menu.clear()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        initClickListeners()
-    }
-
-    private fun initClickListeners(){
-        developer_item.setOnClickListener {
-            openWebPage(developerGithubUrl)
-        }
-
-        freepik_icon_item.setOnClickListener {
-            openWebPage(freepikUrl)
-        }
-
-        download_icon_item.setOnClickListener {
-            openWebPage(catalinUrl)
-        }
-
-        alfredo_icon_item.setOnClickListener {
-            openWebPage(alfredoUrl)
-        }
-
-        kotlin_item.setOnClickListener {
-            openWebPage(kotlinUrl)
-        }
-
-        jetpack_item.setOnClickListener {
-            openWebPage(jetpackUrl)
-        }
-
-        fetch2_item.setOnClickListener {
-            openWebPage(fetchUrl)
-        }
-
-        mockito_item.setOnClickListener {
-            openWebPage(mockitoUrl)
-        }
-
-        timber_item.setOnClickListener {
-            openWebPage(timberUrl)
-        }
-
-        hamcrest_item.setOnClickListener {
-            openWebPage(hamcrestUrl)
-        }
-    }
-
-    private fun openWebPage( url: String){
-        val webPage = Uri.parse(url)
-        val intent =  Intent( Intent.ACTION_VIEW, webPage )
+    private fun loadPage( url: String){
+        val intent =  Intent( Intent.ACTION_VIEW, Uri.parse(url) )
         startActivity(intent)
     }
 

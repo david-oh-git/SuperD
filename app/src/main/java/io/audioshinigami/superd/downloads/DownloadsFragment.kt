@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.App
 import io.audioshinigami.superd.R
@@ -144,7 +145,7 @@ class DownloadsFragment :
             progressBar.showView()
         }
 
-        viewModel.pagedDownloads.observe(binding.lifecycleOwner!!, Observer {
+        viewModel.pagedDownloads.observe(viewLifecycleOwner, Observer {
             data ->
 
             data?.apply {
@@ -159,15 +160,17 @@ class DownloadsFragment :
             }
         })
 
-        viewModel.snackBarMessage.observe(binding.lifecycleOwner!!, Observer {
-            sendSnack(it.message)
-        })
+        // TODO : replace Observer 
+        viewModel.snackBarMessage.observe(viewLifecycleOwner){snackMessage ->
+            sendSnack(snackMessage.message)
+
+        }
 
         viewModel.runMediaScanner.observe( viewLifecycleOwner, Observer {
             scanMedia(it)
         })
 
-        viewModel.isDownLoading.observe(binding.lifecycleOwner!!, Observer {
+        viewModel.isDownLoading.observe(viewLifecycleOwner, Observer {
             viewModel.enableFetchListener(it)
         } )
     }

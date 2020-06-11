@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.App
 import io.audioshinigami.superd.R
@@ -38,7 +37,10 @@ class SettingsFragment : Fragment()  {
         // Inflate the layout for this fragment
         val binding = SettingsFragmentBinding.inflate( inflater, container, false)
 
-        binding.lifecycleOwner = this@SettingsFragment.viewLifecycleOwner
+        binding?.apply {
+            lifecycleOwner = viewLifecycleOwner
+            vm = _viewModel
+        }
 
         subscribe(binding)
 
@@ -76,9 +78,6 @@ class SettingsFragment : Fragment()  {
 
     private fun subscribe(binding: SettingsFragmentBinding){
 
-        _viewModel.theme.observe(this) {
-            binding.currentTheme = it
-        }
     }
 
 
