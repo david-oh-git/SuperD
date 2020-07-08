@@ -14,8 +14,8 @@ android {
         applicationId "io.audioshinigami.superd"
         minSdkVersion rootProject.min_sdk_version
         targetSdkVersion rootProject.target_sdk_version
-        versionCode 10
-        versionName "0.37"
+        versionCode 11
+        versionName "0.4"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         vectorDrawables.useSupportLibrary = true
         javaCompileOptions {
@@ -27,8 +27,12 @@ android {
 
 
     buildTypes {
+
         release {
-            minifyEnabled false
+            // code shrinking, obfuscation & optimisation
+            minifyEnabled true
+            // resource shrinking
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -40,7 +44,6 @@ android {
 
             minifyEnabled false
             testCoverageEnabled true
-//            useProguard false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
