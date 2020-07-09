@@ -35,7 +35,7 @@ import io.audioshinigami.superd.di.components.DaggerAppComponent
 import timber.log.Timber
 
 /**
-* An application that
+* General Application class
  * - sets up Timber
  * - sets up Dagger
  *
