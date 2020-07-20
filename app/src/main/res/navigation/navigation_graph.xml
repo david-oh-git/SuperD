@@ -36,14 +36,14 @@
             tools:layout="@layout/downloads_fragment" >
         <action
                 android:id="@+id/action_downloadsFragment_to_getUrlFragment"
-                app:destination="@id/getUrlFragment" />
+                app:destination="@id/addDownloadFragment" />
         <action
             android:id="@+id/action_downloadsFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
     </fragment>
 
     <dialog
-            android:id="@+id/getUrlFragment"
+            android:id="@+id/addDownloadFragment"
             android:name="io.audioshinigami.superd.adddownload.AddDownloadFragment"
             android:label="fragment_get_url"
             tools:layout="@layout/fragment_add_download" />

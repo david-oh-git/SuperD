@@ -101,6 +101,22 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes.each {
+        // get twitter API key & secret from local.prop
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newInputStream())
+        def key = properties.getProperty("api_key", "")
+        def secret = properties.getProperty("api_secret", "")
+
+        it.buildConfigField 'String', "API_KEY", key
+        it.buildConfigField 'String', "API_SECRET", secret
+    }
 }
 
 /*

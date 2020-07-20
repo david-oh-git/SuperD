@@ -27,16 +27,12 @@ package io.audioshinigami.superd
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.annotation.VisibleForTesting
-import androidx.room.Room
-import com.tonyodev.fetch2.Fetch
-import com.tonyodev.fetch2.FetchConfiguration
-import io.audioshinigami.superd.common.NUMBER_OF_DOWNLOADS_KEY
-import io.audioshinigami.superd.common.SETTINGS_PREF_NAME
-import io.audioshinigami.superd.data.source.*
+import io.audioshinigami.superd.data.source.DefaultPreferenceRepository
+import io.audioshinigami.superd.data.source.FileInfoRepository
+import io.audioshinigami.superd.data.source.SharedPreferenceRepo
+import io.audioshinigami.superd.data.source.State
 import io.audioshinigami.superd.data.source.local.FileDatabase
-import io.audioshinigami.superd.data.source.local.LocalFileInfoSource
 import io.audioshinigami.superd.data.source.local.LocalPreferenceSource
-import io.audioshinigami.superd.data.source.remote.RemoteDownloadDataSource
 
 object ServiceLocator {
 

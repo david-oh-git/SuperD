@@ -36,7 +36,11 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.twitter.sdk.android.core.Twitter
+import com.twitter.sdk.android.core.TwitterAuthConfig
+import com.twitter.sdk.android.core.TwitterConfig
 import io.audioshinigami.superd.App
+import io.audioshinigami.superd.BuildConfig
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.common.WRITE_EXTERNAL_REQUEST_CODE
 import io.audioshinigami.superd.utility.PermissionManager
@@ -78,10 +82,16 @@ class AddDownloadFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val twitterAuthConfig = TwitterAuthConfig(BuildConfig.API_KEY, BuildConfig.API_SECRET)
+        val builder = TwitterConfig.Builder(requireContext())
+        builder.twitterAuthConfig( twitterAuthConfig)
+        Twitter.initialize(builder.build())
+
         id_edit_geturl.requestFocus()
         autoPaste()
 
         id_btn_send_url.setOnClickListener{
+
             val urlStr = id_edit_geturl.text.toString()
             if(urlStr.isNotEmpty()){
                 sendUrl(urlStr)

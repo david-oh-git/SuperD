@@ -22,33 +22,16 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.superd.adddownload
+package io.audioshinigami.superd.data.source
 
-import android.net.Uri
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import io.audioshinigami.superd.data.TweetMedia
-import io.audioshinigami.superd.data.source.FileInfoRepository
-import kotlinx.coroutines.launch
-import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
 
-class AddDownloadViewModel @Inject constructor(
-    private val fileInfoRepository: FileInfoRepository
-): ViewModel() {
+/**
+ * Retrieves the actual download url from Twitter api and returns a mutable set of [TweetMedia]
+ */
 
-    private val _listOfMedia = MutableLiveData<List<TweetMedia>>()
-    val listOfMedia: LiveData<List<TweetMedia>> = _listOfMedia
+interface TwitterUrlRepository {
 
-    internal fun startDownload( url: String , downloadUri:Uri )
-            = viewModelScope.launch {
-
-        fileInfoRepository.start(url, downloadUri)
-
-    }
-
-    private fun loadTweetUrl() = viewModelScope.launch {
-        // code to update listOfMedia
-    }
+    suspend fun getDownloadUrls(twitterUrl: String): Flow<MutableSet<TweetMedia>>
 }
