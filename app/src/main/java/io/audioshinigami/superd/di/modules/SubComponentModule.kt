@@ -27,11 +27,13 @@ package io.audioshinigami.superd.di.modules
 import dagger.Module
 import io.audioshinigami.superd.adddownload.di.AddDownloadComponent
 import io.audioshinigami.superd.downloads.di.DownloadComponent
+import io.audioshinigami.superd.settings.di.SettingsComponent
 
 @Module(
     subcomponents = [
         DownloadComponent::class,
-        AddDownloadComponent::class
+        AddDownloadComponent::class,
+        SettingsComponent::class
     ]
 )
 object SubComponentModule

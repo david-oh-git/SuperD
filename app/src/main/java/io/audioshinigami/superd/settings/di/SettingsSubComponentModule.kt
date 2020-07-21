@@ -22,34 +22,10 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.superd
+package io.audioshinigami.superd.settings.di
 
-import androidx.annotation.VisibleForTesting
-import io.audioshinigami.superd.data.source.FileInfoRepository
-import io.audioshinigami.superd.data.source.State
-import io.audioshinigami.superd.data.source.local.FileDatabase
+import dagger.Module
+import io.audioshinigami.superd.selecttheme.di.ThemeSelectComponent
 
-object ServiceLocator {
-
-    private var database: FileDatabase? = null
-    @Volatile
-    var fileInfoRepository: FileInfoRepository? = null
-        @VisibleForTesting set
-
-    @Volatile
-    private var activeDownloads: MutableMap<Int, State>? = null
-
-    internal fun provideActiveDownloadsMap(): MutableMap<Int, State> {
-        synchronized(this){
-            return activeDownloads ?: mutableMapOf()
-        }
-    }
-
-    @VisibleForTesting
-    fun resetRepository(){
-
-        database = null
-        fileInfoRepository = null
-    }
-
-}
+@Module(subcomponents = [ThemeSelectComponent::class])
+object SettingsSubComponentModule

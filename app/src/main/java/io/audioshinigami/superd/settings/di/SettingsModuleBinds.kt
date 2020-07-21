@@ -22,22 +22,21 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.superd.data.source
+package io.audioshinigami.superd.settings.di
 
-interface SharedPreferenceRepo {
+import androidx.lifecycle.ViewModel
+import dagger.Binds
+import dagger.Module
+import dagger.multibindings.IntoMap
+import io.audioshinigami.superd.di.ViewModelKey
+import io.audioshinigami.superd.settings.SettingsViewModel
 
-    suspend fun save( key: String , value: String )
+@Module
+abstract class SettingsModuleBinds {
 
-    suspend fun save( key: String , value: Boolean )
-
-    suspend fun save( key: String , value: Int )
-
-    suspend fun getString( key: String ) : String?
-
-    suspend fun getBoolean( key: String ) : Boolean
-
-    suspend fun getInt( key: String ) : Int?
-
-    suspend fun remove( key: String )
-
+    @Binds
+    @IntoMap
+    @SettingsScope
+    @ViewModelKey(SettingsViewModel::class)
+    abstract fun bindViewModel( viewModel: SettingsViewModel): ViewModel
 }

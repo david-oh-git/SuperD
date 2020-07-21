@@ -33,6 +33,7 @@ import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.onNavDestinationSelected
+import androidx.preference.PreferenceManager
 import io.audioshinigami.superd.common.DEFAULT_PREF_INT_VALUE
 import io.audioshinigami.superd.common.SETTINGS_PREF_NAME
 import io.audioshinigami.superd.common.THEME_PREF_KEY
@@ -76,15 +77,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun obtainTheme(): Int = runBlocking {
-        val theme = ServiceLocator.provideSharedPreferenceRepository(SETTINGS_PREF_NAME,  applicationContext )
-            .getInt(THEME_PREF_KEY)
+    private fun obtainTheme(): Int =
+        PreferenceManager.getDefaultSharedPreferences(this@MainActivity ).getInt(THEME_PREF_KEY, MODE_NIGHT_FOLLOW_SYSTEM)
 
-        when(theme){
-            DEFAULT_PREF_INT_VALUE -> MODE_NIGHT_FOLLOW_SYSTEM
-            null -> MODE_NIGHT_FOLLOW_SYSTEM
-            else -> theme
-        }
-    }
 
 }

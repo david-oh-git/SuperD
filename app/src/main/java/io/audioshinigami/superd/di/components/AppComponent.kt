@@ -31,6 +31,7 @@ import io.audioshinigami.superd.adddownload.di.AddDownloadComponent
 import io.audioshinigami.superd.data.source.FileInfoRepository
 import io.audioshinigami.superd.di.modules.*
 import io.audioshinigami.superd.downloads.di.DownloadComponent
+import io.audioshinigami.superd.settings.di.SettingsComponent
 import javax.inject.Singleton
 
 /**
@@ -58,6 +59,8 @@ interface AppComponent {
     fun downloadComponent(): DownloadComponent.Factory
 
     fun addDownload(): AddDownloadComponent.Factory
+
+    fun settingsComponent(): SettingsComponent.Factory
 
     val fileInfoRepository: FileInfoRepository
 }

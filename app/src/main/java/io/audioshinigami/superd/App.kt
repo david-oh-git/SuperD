@@ -25,8 +25,6 @@
 package io.audioshinigami.superd
 
 import android.app.Application
-import io.audioshinigami.superd.common.SETTINGS_PREF_NAME
-import io.audioshinigami.superd.data.source.SharedPreferenceRepo
 import io.audioshinigami.superd.data.source.State
 import io.audioshinigami.superd.data.source.State.DOWNLOADING
 import io.audioshinigami.superd.data.source.remote.ActiveListener
@@ -35,16 +33,13 @@ import io.audioshinigami.superd.di.components.DaggerAppComponent
 import timber.log.Timber
 
 /**
-* General Application class
+* General [Application] class
  * - sets up Timber
  * - sets up Dagger
  *
  */
 
 class App : Application() , ActiveListener {
-
-    val sharedPreferenceRepo: SharedPreferenceRepo
-        get() = ServiceLocator.provideSharedPreferenceRepository(SETTINGS_PREF_NAME, this)
 
     /* list of active downloads request ids */
     val activeDownloads: MutableMap<Int, State> = ServiceLocator.provideActiveDownloadsMap()

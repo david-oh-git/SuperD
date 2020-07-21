@@ -22,34 +22,27 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.superd
+package io.audioshinigami.superd.settings.di
 
-import androidx.annotation.VisibleForTesting
-import io.audioshinigami.superd.data.source.FileInfoRepository
-import io.audioshinigami.superd.data.source.State
-import io.audioshinigami.superd.data.source.local.FileDatabase
+import dagger.Subcomponent
+import io.audioshinigami.superd.selecttheme.di.ThemeSelectComponent
+import io.audioshinigami.superd.settings.SettingsFragment
 
-object ServiceLocator {
+@SettingsScope
+@Subcomponent(modules = [
+    SettingsSubComponentModule::class,
+    SettingsModuleBinds::class,
+    SettingsModule::class
+])
+interface SettingsComponent {
 
-    private var database: FileDatabase? = null
-    @Volatile
-    var fileInfoRepository: FileInfoRepository? = null
-        @VisibleForTesting set
-
-    @Volatile
-    private var activeDownloads: MutableMap<Int, State>? = null
-
-    internal fun provideActiveDownloadsMap(): MutableMap<Int, State> {
-        synchronized(this){
-            return activeDownloads ?: mutableMapOf()
-        }
+    @Subcomponent.Factory
+    interface Factory {
+        fun create(): SettingsComponent
     }
 
-    @VisibleForTesting
-    fun resetRepository(){
+    fun themeSelectComponent(): ThemeSelectComponent.Factory
 
-        database = null
-        fileInfoRepository = null
-    }
+    fun inject(target: SettingsFragment)
 
 }

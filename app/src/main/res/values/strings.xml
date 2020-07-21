@@ -87,4 +87,8 @@
     <string name="timber_url" translatable="false">https://www.github.com/JakeWharton/timber</string>
     <string name="hamcrest_url" translatable="false">https://www.hamcrest.org</string>
 
+<!--    set theme strings-->
+    <string name="dark_theme_set" translatable="false">dark</string>
+    <string name="light_theme_set" translatable="false">light</string>
+    <string name="default_theme_set" translatable="false">default</string>
 </resources>

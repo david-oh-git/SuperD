@@ -30,7 +30,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.observe
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.audioshinigami.superd.App
@@ -39,11 +39,23 @@ import io.audioshinigami.superd.common.FOLLOW_SYSTEM
 import io.audioshinigami.superd.common.LIGHT_THEME
 import io.audioshinigami.superd.databinding.ThemeBottomSheetFragmentBinding
 import kotlinx.android.synthetic.main.theme_bottom_sheet_fragment.*
+import javax.inject.Inject
 
 class ThemeBottomSheetFragment : BottomSheetDialogFragment() {
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private val _viewModel by viewModels<ThemeBottomSheetViewModel>{
-        ThemeBottomSheetViewModelFactory( (requireContext().applicationContext as App).sharedPreferenceRepo )
+        viewModelFactory
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // init dagger
+        ( requireActivity().application as App).appComponent.settingsComponent().create()
+            .themeSelectComponent().create().inject(this)
     }
 
     override fun onCreateView(
@@ -78,13 +90,10 @@ class ThemeBottomSheetFragment : BottomSheetDialogFragment() {
         super.onStart()
 
         // auto select radio group to theme already set
-        _viewModel.theme.observe(this) {
-
-            when(it){
-                DARK_THEME -> theme_dark.isChecked = true
-                LIGHT_THEME -> theme_light.isChecked = true
-                FOLLOW_SYSTEM -> theme_system_default.isChecked = true
-            }
+        when(_viewModel.getCurrentTheme()){
+            DARK_THEME -> theme_dark.isChecked = true
+            LIGHT_THEME -> theme_light.isChecked = true
+            FOLLOW_SYSTEM -> theme_system_default.isChecked = true
         }
 
     }

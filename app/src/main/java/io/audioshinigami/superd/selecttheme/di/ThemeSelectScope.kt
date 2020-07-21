@@ -22,21 +22,11 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.superd.data.source
+package io.audioshinigami.superd.selecttheme.di
 
-interface SharedPreferencesSource {
+import javax.inject.Scope
 
-    suspend fun save( key: String , value: String )
 
-    suspend fun save( key: String , value: Boolean )
-
-    suspend fun save( key: String , value: Int )
-
-    suspend fun getString( key: String ) : String?
-
-    suspend fun getBoolean( key: String ) : Boolean
-
-    suspend fun getInt( key: String ) : Int
-
-    suspend fun remove( key: String )
-}
+@Scope
+@Retention(AnnotationRetention.RUNTIME)
+annotation class ThemeSelectScope

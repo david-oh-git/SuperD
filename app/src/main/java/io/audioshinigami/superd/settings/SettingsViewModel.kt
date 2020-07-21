@@ -24,47 +24,30 @@
 
 package io.audioshinigami.superd.settings
 
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.lifecycle.*
-import io.audioshinigami.superd.common.DEFAULT_PREF_INT_VALUE
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import io.audioshinigami.superd.common.THEME_PREF_KEY
-import io.audioshinigami.superd.data.source.SharedPreferenceRepo
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SettingsViewModel(
-    private val repository: SharedPreferenceRepo
+class SettingsViewModel @Inject constructor(
+    private val sharedPreferences: SharedPreferences
 ) : ViewModel() {
 
-    private val _theme: MutableLiveData<String> = MutableLiveData( "" )
-    val theme: LiveData<String> = _theme
-
-    init {
-        loadThemeValue()
+    private val _theme: MutableLiveData<String>
+            get() = MutableLiveData<String>().apply {
+        value = getThemeName(sharedPreferences.getInt(THEME_PREF_KEY, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM) )
     }
 
-    fun loadThemeValue() = viewModelScope.launch (Dispatchers.IO) {
-        // get theme value from sharedPreferences & assign
-        val value = repository.getInt(THEME_PREF_KEY)
+    val theme: LiveData<String>
+        get() = _theme
 
-        val theme = if( value == DEFAULT_PREF_INT_VALUE || value == null ) return@launch else value
-
-        _theme.postValue( getThemeName(theme))
-    }
-
-    private fun getThemeName(theme: Int)=
+    private fun getThemeName(theme: Int) =
         when(theme){
             AppCompatDelegate.MODE_NIGHT_YES -> "Dark"
             AppCompatDelegate.MODE_NIGHT_NO -> "Light"
             else -> "System Default"
         }
-}
-
-@Suppress("UNCHECKED_CAST")
-class SettingsViewModelFactory(
-    private val repository: SharedPreferenceRepo
-): ViewModelProvider.NewInstanceFactory() {
-
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-        ( SettingsViewModel(repository) as T)
 }

@@ -31,11 +31,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.App
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.databinding.SettingsFragmentBinding
 import kotlinx.android.synthetic.main.content_settings.*
+import javax.inject.Inject
 
 
 /**
@@ -43,8 +45,11 @@ import kotlinx.android.synthetic.main.content_settings.*
  */
 class SettingsFragment : Fragment()  {
 
-    private val _viewModel by viewModels<SettingsViewModel> {
-        SettingsViewModelFactory( (requireContext().applicationContext as App).sharedPreferenceRepo )
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val viewModel by viewModels<SettingsViewModel> {
+        viewModelFactory
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +57,8 @@ class SettingsFragment : Fragment()  {
 
         setHasOptionsMenu(true)
 
+        // init dagger
+        ( requireActivity().application as App).appComponent.settingsComponent().create().inject(this)
     }
 
     override fun onCreateView(
@@ -61,9 +68,9 @@ class SettingsFragment : Fragment()  {
         // Inflate the layout for this fragment
         val binding = SettingsFragmentBinding.inflate( inflater, container, false)
 
-        binding?.apply {
+        binding.apply {
             lifecycleOwner = viewLifecycleOwner
-            vm = _viewModel
+            vm = viewModel
         }
 
         subscribe(binding)
@@ -79,15 +86,6 @@ class SettingsFragment : Fragment()  {
     override fun onPrepareOptionsMenu(menu: Menu) {
 //        remove optionsMenu
         menu.clear()
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        // load the latest theme value
-        _viewModel.loadThemeValue()
-
-
     }
 
     private fun initClickListeners(){

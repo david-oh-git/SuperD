@@ -22,34 +22,21 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.superd
+package io.audioshinigami.superd.selecttheme.di
 
-import androidx.annotation.VisibleForTesting
-import io.audioshinigami.superd.data.source.FileInfoRepository
-import io.audioshinigami.superd.data.source.State
-import io.audioshinigami.superd.data.source.local.FileDatabase
+import androidx.lifecycle.ViewModel
+import dagger.Binds
+import dagger.Module
+import dagger.multibindings.IntoMap
+import io.audioshinigami.superd.di.ViewModelKey
+import io.audioshinigami.superd.selecttheme.ThemeBottomSheetViewModel
 
-object ServiceLocator {
+@Module
+abstract class ThemeSelectModuleBinds {
 
-    private var database: FileDatabase? = null
-    @Volatile
-    var fileInfoRepository: FileInfoRepository? = null
-        @VisibleForTesting set
-
-    @Volatile
-    private var activeDownloads: MutableMap<Int, State>? = null
-
-    internal fun provideActiveDownloadsMap(): MutableMap<Int, State> {
-        synchronized(this){
-            return activeDownloads ?: mutableMapOf()
-        }
-    }
-
-    @VisibleForTesting
-    fun resetRepository(){
-
-        database = null
-        fileInfoRepository = null
-    }
-
+    @Binds
+    @IntoMap
+    @ThemeSelectScope
+    @ViewModelKey(ThemeBottomSheetViewModel::class)
+    abstract fun bindViewModel( viewModel: ThemeBottomSheetViewModel): ViewModel
 }

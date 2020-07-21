@@ -8,14 +8,7 @@ apply plugin: 'kotlin-kapt'
 
 
 android {
-    signingConfigs {
-        release {
-            keyAlias 'upload-alpha'
-            keyPassword 'emilom2HFZ'
-            storeFile file('/home/shinji/Projects/android/key-stores/upload-keystore.jks')
-            storePassword 'Blue6I2jre'
-        }
-    }
+
     compileSdkVersion rootProject.target_sdk_version
 
     defaultConfig {
@@ -46,7 +39,6 @@ android {
 
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
 
         debug {
@@ -176,6 +168,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     kapt "androidx.room:room-compiler:$room_version"
+    // sharedPreference
+    implementation "androidx.preference:preference:$preference_version"
     // 3rd Party
     // Fetch2
     implementation "androidx.tonyodev.fetch2:xfetch2:$fetch2_version"
@@ -184,7 +178,6 @@ dependencies {
     // Dagger2
     implementation "com.google.dagger:dagger:$dagger2_version"
     kapt "com.google.dagger:dagger-compiler:$dagger2_version"
-    kaptTest "com.google.dagger:dagger-compiler:$dagger2_version"
     // Twitter kit
     implementation("com.twitter.sdk.android:twitter:$twitter_kit@aar"){
         transitive = true
@@ -216,6 +209,7 @@ dependencies {
     testImplementation "org.mockito:mockito-core:$mockito_version"
     testImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dex_maker_version"
     testImplementation "com.google.truth:truth:$truth_version"
+    kaptTest "com.google.dagger:dagger-compiler:$dagger2_version"
 
     // Coroutines test
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutine_version"

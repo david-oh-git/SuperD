@@ -67,7 +67,7 @@
 
             <RadioButton
                 android:id="@+id/theme_dark"
-                android:onClick="@{ (v) -> viewModel.radioButtonAction( 2 ) }"
+                android:onClick="@{ (v) -> viewModel.radioButtonAction( @string/dark_theme_set ) }"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
@@ -75,7 +75,7 @@
 
             <RadioButton
                 android:id="@+id/theme_light"
-                android:onClick="@{ (v) -> viewModel.radioButtonAction( 1 ) }"
+                android:onClick="@{ (v) -> viewModel.radioButtonAction( @string/light_theme_set ) }"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
@@ -83,7 +83,7 @@
 
             <RadioButton
                 android:id="@+id/theme_system_default"
-                android:onClick="@{ (v) -> viewModel.radioButtonAction( -1 ) }"
+                android:onClick="@{ (v) -> viewModel.radioButtonAction( @string/default_theme_set ) }"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"

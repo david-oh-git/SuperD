@@ -24,44 +24,39 @@
 
 package io.audioshinigami.superd.selecttheme
 
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.lifecycle.*
-import io.audioshinigami.superd.common.DEFAULT_PREF_INT_VALUE
-import io.audioshinigami.superd.common.FOLLOW_SYSTEM
+import androidx.core.content.edit
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import io.audioshinigami.superd.common.THEME_PREF_KEY
-import io.audioshinigami.superd.data.source.SharedPreferenceRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
-class ThemeBottomSheetViewModel(
-    private val repository: SharedPreferenceRepo
+class ThemeBottomSheetViewModel @Inject constructor(
+    private val sharedPreferences: SharedPreferences
 ) : ViewModel() {
 
-    private val _theme: MutableLiveData<Int> = MutableLiveData( FOLLOW_SYSTEM )
+    private val _theme = MutableLiveData<Int>().apply {
+        value = sharedPreferences.getInt(THEME_PREF_KEY, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+    }
     val theme: LiveData<Int> = _theme
 
     val closeFragment: MutableLiveData<Boolean> = MutableLiveData(false)
 
-    init {
-        loadThemeValue()
-    }
-
-    private fun loadThemeValue() = viewModelScope.launch (Dispatchers.IO) {
-        // get theme value from sharedPreferences & assign
-        val themeValue = repository.getInt(THEME_PREF_KEY)
-
-        val theme = if( themeValue == DEFAULT_PREF_INT_VALUE || themeValue == null ) return@launch else themeValue
-
-        _theme.postValue(theme)
-
-    }
-
-    fun radioButtonAction(theme: Int) {
+    fun radioButtonAction(theme: String) {
 
         viewModelScope.launch(Dispatchers.IO) {
-
             // assign theme value
-            _theme.postValue(theme)
+            when(theme){
+                "dark" -> _theme.postValue( AppCompatDelegate.MODE_NIGHT_YES )
+                "light" -> _theme.postValue( AppCompatDelegate.MODE_NIGHT_NO)
+                else -> _theme.postValue( AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM )
+            }
         }
     }
 
@@ -69,10 +64,12 @@ class ThemeBottomSheetViewModel(
 
         viewModelScope.launch {
 
-            val theme = _theme.value ?: FOLLOW_SYSTEM
+            val theme = _theme.value ?: AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 
             // save theme value to preference
-            repository.save(THEME_PREF_KEY, theme)
+            sharedPreferences.edit {
+                putInt(THEME_PREF_KEY, theme)
+            }
 
             // set theme
             AppCompatDelegate.setDefaultNightMode(
@@ -83,15 +80,13 @@ class ThemeBottomSheetViewModel(
             closeFragment.value = true
 
         }
+
     }
 
-}
+    fun getCurrentTheme(): Int = sharedPreferences.getInt(THEME_PREF_KEY, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 
-@Suppress("UNCHECKED_CAST")
-class ThemeBottomSheetViewModelFactory(
-    private val repository: SharedPreferenceRepo
-): ViewModelProvider.NewInstanceFactory() {
+    private fun log(message: String){
+        Timber.d(message)
+    }
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-        ( ThemeBottomSheetViewModel(repository) as T)
 }

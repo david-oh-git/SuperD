@@ -86,4 +86,5 @@ ext {
     dex_maker_version = "2.12.1"
     dagger2_version = '2.28'
     twitter_kit = '3.3.0'
+    preference_version = "1.1.1"
 }
