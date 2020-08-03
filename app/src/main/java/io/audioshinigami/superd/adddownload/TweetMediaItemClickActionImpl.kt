@@ -22,29 +22,16 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.superd.downloads
+package io.audioshinigami.superd.adddownload
 
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import io.audioshinigami.superd.BR
-import io.audioshinigami.superd.data.FileInfo
-import io.audioshinigami.superd.databinding.ItemBinding
+import io.audioshinigami.superd.databinding.FragmentAddDownloadBinding
 
-class FileInfoViewHolder(private val binding: ItemBinding )
-    : RecyclerView.ViewHolder(binding.root) {
+class TweetMediaItemClickActionImpl(
+    private val binding: FragmentAddDownloadBinding
+): TweetMediaItemClickAction {
 
-    fun bind( downloadItemActions: DownloadItemActions ,any: FileInfo){
-        binding.apply {
-            setVariable(BR.fileInfo, any)
-            itemAction = downloadItemActions
-            executePendingBindings()
-
-        }
-
+    override fun click(url: String) {
+        binding.idEditGeturl.setText(url)
+//        binding.idBtnSendUrl.performClick()
     }
-
-    fun clear(){
-        binding.unbind()
-    }
-
 }

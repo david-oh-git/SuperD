@@ -24,19 +24,53 @@
 
 package io.audioshinigami.superd.adddownload.di
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
+import com.twitter.sdk.android.core.*
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.multibindings.IntoMap
+import io.audioshinigami.superd.BuildConfig
 import io.audioshinigami.superd.adddownload.AddDownloadViewModel
+import io.audioshinigami.superd.data.TweetMedia
+import io.audioshinigami.superd.data.source.TwitterSource
+import io.audioshinigami.superd.data.source.remote.TwitterSourceImpl
 import io.audioshinigami.superd.di.ViewModelKey
+import kotlinx.coroutines.channels.Channel
 
 
 @Module
 abstract class AddDownloadModule {
 
+    @AddDownloadScope
     @Binds
     @IntoMap
     @ViewModelKey(AddDownloadViewModel::class)
     abstract fun bindViewModel( viewModel: AddDownloadViewModel): ViewModel
+
+    @AddDownloadScope
+    @Binds
+    abstract fun bindTwitterSource( twitterSource: TwitterSourceImpl): TwitterSource
+
+    companion object {
+
+        @JvmStatic
+        @AddDownloadScope
+        @Provides
+        fun provideMediaListChannel(): Channel<List<TweetMedia>> = Channel(Channel.CONFLATED)
+
+        @AddDownloadScope
+        @JvmStatic
+        @Provides
+        fun provideTwitterApiClient(context: Context): TwitterApiClient {
+
+            val twitterAuthConfig = TwitterAuthConfig(BuildConfig.API_KEY, BuildConfig.API_SECRET)
+            val builder = TwitterConfig.Builder(context)
+            builder.twitterAuthConfig( twitterAuthConfig)
+            Twitter.initialize(builder.build())
+
+            return TwitterCore.getInstance().apiClient
+        }
+    }
 }

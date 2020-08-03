@@ -33,7 +33,7 @@ import io.audioshinigami.superd.data.FileInfo
 import io.audioshinigami.superd.data.Result
 import io.audioshinigami.superd.data.Result.Error
 import io.audioshinigami.superd.data.Result.Success
-import io.audioshinigami.superd.util.FileInfoFactory
+import io.audioshinigami.superd.utility.FileInfoFactory
 
 class FakeTestRepository : FileInfoRepository {
 

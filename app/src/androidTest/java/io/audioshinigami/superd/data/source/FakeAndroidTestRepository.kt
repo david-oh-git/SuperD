@@ -29,7 +29,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
 import com.tonyodev.fetch2.FetchListener
-import io.audioshinigami.superd.util.FileInfoAndroidFactory
+import io.audioshinigami.superd.utility.FileInfoAndroidFactory
 import io.audioshinigami.superd.data.FileInfo
 import io.audioshinigami.superd.data.Result
 import io.audioshinigami.superd.data.Result.Error

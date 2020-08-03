@@ -22,29 +22,17 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.superd.downloads
+package io.audioshinigami.superd.data.source
 
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import io.audioshinigami.superd.BR
-import io.audioshinigami.superd.data.FileInfo
-import io.audioshinigami.superd.databinding.ItemBinding
+import io.audioshinigami.superd.data.Result
+import io.audioshinigami.superd.data.TweetMedia
+import kotlinx.coroutines.channels.Channel
 
-class FileInfoViewHolder(private val binding: ItemBinding )
-    : RecyclerView.ViewHolder(binding.root) {
+interface TwitterSource {
 
-    fun bind( downloadItemActions: DownloadItemActions ,any: FileInfo){
-        binding.apply {
-            setVariable(BR.fileInfo, any)
-            itemAction = downloadItemActions
-            executePendingBindings()
+    val allMediaChannel: Channel<Result<List<TweetMedia>>>
 
-        }
+    suspend fun getTweetUrls(id: Long)
 
-    }
-
-    fun clear(){
-        binding.unbind()
-    }
-
+    suspend fun updateTweetMediaList(result: Result<List<TweetMedia>>)
 }

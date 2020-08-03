@@ -22,35 +22,25 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.superd.util
+package io.audioshinigami.superd.utility
 
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineScope
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.setMain
-import org.junit.rules.TestWatcher
-import org.junit.runner.Description
-import kotlin.coroutines.ContinuationInterceptor
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.Observer
 
-/*
-* i basically just copied & paste this code from google codelabs
-* i need to read further to understand this,
-*
-* TODO
-*  */
+class OneTimeObserver<T>(private val handler: (T) -> Unit ): Observer<T>, LifecycleOwner {
 
-@ExperimentalCoroutinesApi
-class TestCoroutineRule : TestWatcher() , TestCoroutineScope by TestCoroutineScope() {
+    private val lifecycle = LifecycleRegistry(this)
 
-    override fun starting(description: Description?) {
-        super.starting(description)
-        Dispatchers.setMain(this.coroutineContext[ContinuationInterceptor] as CoroutineDispatcher )
+    init {
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
     }
 
-    override fun finished(description: Description?) {
-        super.finished(description)
-        Dispatchers.resetMain()
+    override fun onChanged(t: T) {
+        handler(t)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     }
+
+    override fun getLifecycle() = lifecycle
 }

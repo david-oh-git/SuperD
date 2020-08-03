@@ -22,29 +22,27 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.superd.downloads
+package io.audioshinigami.superd.di.component
 
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import io.audioshinigami.superd.BR
-import io.audioshinigami.superd.data.FileInfo
-import io.audioshinigami.superd.databinding.ItemBinding
+import android.content.Context
+import dagger.BindsInstance
+import dagger.Component
+import io.audioshinigami.superd.data.source.TwitterApiRepositoryTest
+import io.audioshinigami.superd.di.modules.TestModule
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import javax.inject.Singleton
 
-class FileInfoViewHolder(private val binding: ItemBinding )
-    : RecyclerView.ViewHolder(binding.root) {
+@Singleton
+@Component(
+    modules = [TestModule::class]
+)
+interface TestAppComponent {
 
-    fun bind( downloadItemActions: DownloadItemActions ,any: FileInfo){
-        binding.apply {
-            setVariable(BR.fileInfo, any)
-            itemAction = downloadItemActions
-            executePendingBindings()
-
-        }
-
+    @Component.Factory
+    interface Factory {
+        fun create(@BindsInstance applicationContext: Context): TestAppComponent
     }
 
-    fun clear(){
-        binding.unbind()
-    }
-
+    @ExperimentalCoroutinesApi
+    fun inject(target: TwitterApiRepositoryTest)
 }

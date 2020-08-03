@@ -22,11 +22,29 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.superd.util
+package io.audioshinigami.superd.data.source.remote
 
-import androidx.lifecycle.LiveData
+import io.audioshinigami.superd.data.Result
+import io.audioshinigami.superd.data.TweetMedia
+import io.audioshinigami.superd.data.source.TwitterSource
+import kotlinx.coroutines.channels.Channel
+import javax.inject.Inject
 
-fun <T> LiveData<T>.observeOnce(onChangeHandler: (T) -> Unit ) {
-    val observer = OneTimeObserver(handler = onChangeHandler)
-    observe(observer, observer)
+class FakeTwitterSource @Inject constructor(
+    private val fakeTwitterService: List<TweetMedia>
+) : TwitterSource {
+
+    override val allMediaChannel: Channel<Result<List<TweetMedia>>> = Channel(Channel.CONFLATED)
+
+    override suspend fun getTweetUrls(id: Long) {
+        if( id % 2L == 0L){
+            updateTweetMediaList( Result.Success(fakeTwitterService))
+        }
+        else
+            updateTweetMediaList( Result.Error( Exception("Error getting url")))
+    }
+
+    override suspend fun updateTweetMediaList(result: Result<List<TweetMedia>>) {
+        allMediaChannel.send(result)
+    }
 }

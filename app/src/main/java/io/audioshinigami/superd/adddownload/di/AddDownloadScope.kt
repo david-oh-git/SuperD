@@ -22,16 +22,11 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.superd.data.source
+package io.audioshinigami.superd.adddownload.di
 
-import io.audioshinigami.superd.data.TweetMedia
-import kotlinx.coroutines.flow.Flow
+import javax.inject.Scope
 
-/**
- * Retrieves the actual download url from Twitter api and returns a mutable set of [TweetMedia]
- */
 
-interface TwitterUrlRepository {
-
-    suspend fun getDownloadUrls(twitterUrl: String): Flow<MutableSet<TweetMedia>>
-}
+@Scope
+@Retention(AnnotationRetention.RUNTIME)
+annotation class AddDownloadScope

@@ -34,19 +34,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.twitter.sdk.android.core.Twitter
-import com.twitter.sdk.android.core.TwitterAuthConfig
-import com.twitter.sdk.android.core.TwitterConfig
+import androidx.recyclerview.widget.LinearLayoutManager
 import io.audioshinigami.superd.App
-import io.audioshinigami.superd.BuildConfig
 import io.audioshinigami.superd.R
 import io.audioshinigami.superd.common.WRITE_EXTERNAL_REQUEST_CODE
+import io.audioshinigami.superd.data.Result
+import io.audioshinigami.superd.databinding.FragmentAddDownloadBinding
 import io.audioshinigami.superd.utility.PermissionManager
 import io.audioshinigami.superd.utility.ReUseMethods
 import io.audioshinigami.superd.utility.extentions.sendToastMsg
 import kotlinx.android.synthetic.main.fragment_add_download.*
+import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
 
@@ -65,6 +66,8 @@ class AddDownloadFragment : DialogFragment() {
         viewModelFactory
     }
 
+    private lateinit var binding: FragmentAddDownloadBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -76,23 +79,23 @@ class AddDownloadFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_download, container, false)
+        binding = FragmentAddDownloadBinding.inflate(inflater, container, false)
+            .apply {
+                lifecycleOwner = viewLifecycleOwner
+                vm = viewModel
+            }
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val twitterAuthConfig = TwitterAuthConfig(BuildConfig.API_KEY, BuildConfig.API_SECRET)
-        val builder = TwitterConfig.Builder(requireContext())
-        builder.twitterAuthConfig( twitterAuthConfig)
-        Twitter.initialize(builder.build())
-
-        id_edit_geturl.requestFocus()
+        binding.idEditGeturl.requestFocus()
         autoPaste()
 
         id_btn_send_url.setOnClickListener{
 
-            val urlStr = id_edit_geturl.text.toString()
+            val urlStr = binding.idEditGeturl.text.toString()
             if(urlStr.isNotEmpty()){
                 sendUrl(urlStr)
             }
@@ -100,6 +103,33 @@ class AddDownloadFragment : DialogFragment() {
                 sendToastMsg( getString(R.string.download_url) )
 
         }
+
+        setupRecyclerView(binding)
+    }
+
+    private fun setupRecyclerView(binding: FragmentAddDownloadBinding) {
+        binding.vm?.listOfMedia?.observe(this, Observer { result ->
+
+            when(result){
+                is Result.Success -> {
+                    if(result.data.isNotEmpty()){
+                        log("size is ${result.data.size}")
+                        binding.listView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,
+                            false )
+                        binding.listView.adapter = TweetMediaAdaptor(TweetMediaItemClickActionImpl(binding) )
+                            .apply { submitList(result.data) }
+
+                        viewModel.showListView()
+
+                        log("list visible: ${viewModel.isListVisible.value} ")
+                        log("isLoading: ${viewModel.isLoading.value}")
+                    }
+                }
+                is Result.Error -> {
+                    // TODO : Snack for error msg
+                }
+            }
+        })
     }
 
     private fun sendUrl(url: String){
@@ -125,8 +155,11 @@ class AddDownloadFragment : DialogFragment() {
         File.separator + url.substringAfterLast("/") )
 
         viewModel.startDownload(url, uri)
+            .run {
+            if (this)
+                findNavController().popBackStack()
+        }
 
-        findNavController().popBackStack()
     }
 
     private fun makePermissionRequest(permission: String){
@@ -143,10 +176,14 @@ class AddDownloadFragment : DialogFragment() {
         if( clipBoard.hasPrimaryClip() && ( clipBoard.primaryClipDescription?.hasMimeType( MIMETYPE_TEXT_PLAIN ) == true ) ){
 
             val pasteText = clipBoard.primaryClip?.getItemAt(0)?.text
-            id_edit_geturl.setText(pasteText)
+            binding.idEditGeturl.setText(pasteText)
 
         }
 
+    }
+
+    private fun log(message: String){
+        Timber.d(message)
     }
 
 }

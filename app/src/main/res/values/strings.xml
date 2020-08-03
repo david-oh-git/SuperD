@@ -91,4 +91,8 @@
     <string name="dark_theme_set" translatable="false">dark</string>
     <string name="light_theme_set" translatable="false">light</string>
     <string name="default_theme_set" translatable="false">default</string>
+    <string name="loading_url">Loading url ....</string>
+    <string name="loading_url_description">displays loading url when application is doing so</string>
+    <string name="select_bitrate">Select bitrate</string>
+    <string name="list_view_description">Displays a list of available bitrate horizontally</string>
 </resources>

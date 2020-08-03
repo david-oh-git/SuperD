@@ -36,6 +36,7 @@ import javax.inject.Singleton
 object AppModule {
 
     @Singleton
+    @JvmStatic
     @Provides
     fun provideApp(appContext: Context ): App = ( appContext as App )
 

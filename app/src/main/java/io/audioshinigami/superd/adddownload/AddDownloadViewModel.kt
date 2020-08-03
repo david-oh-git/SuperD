@@ -25,30 +25,74 @@
 package io.audioshinigami.superd.adddownload
 
 import android.net.Uri
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import io.audioshinigami.superd.data.Result
 import io.audioshinigami.superd.data.TweetMedia
 import io.audioshinigami.superd.data.source.FileInfoRepository
+import io.audioshinigami.superd.data.source.TwitterApiRepoImpl
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 class AddDownloadViewModel @Inject constructor(
-    private val fileInfoRepository: FileInfoRepository
+    private val fileInfoRepository: FileInfoRepository,
+    private val twitterRepository: TwitterApiRepoImpl
 ): ViewModel() {
 
+    private val _isTwitterUrl = MutableLiveData<Boolean>()
+    val isTwitterUrl: LiveData<Boolean> = _isTwitterUrl
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _isListVisible = MutableLiveData<Boolean>()
+    val isListVisible: LiveData<Boolean> = _isListVisible
+
     private val _listOfMedia = MutableLiveData<List<TweetMedia>>()
-    val listOfMedia: LiveData<List<TweetMedia>> = _listOfMedia
-
-    internal fun startDownload( url: String , downloadUri:Uri )
-            = viewModelScope.launch {
-
-        fileInfoRepository.start(url, downloadUri)
-
+    val listOfMedia: LiveData<Result<List<TweetMedia>>>
+            get() = liveData {
+        twitterRepository.allMediaChannel.consumeAsFlow()
+            .catch { error -> log("Error msg: \n $error") }
+            .collect {
+                emit(it)
+            }
+//                emit( twitterApiRepository.listOfMedia.toList() )
     }
 
-    private fun loadTweetUrl() = viewModelScope.launch {
+    internal fun startDownload( url: String , downloadUri:Uri ): Boolean {
+
+        if( url.contains("https://twitter.com/", ignoreCase = true)){
+            loadTweetUrl(url)
+            return false
+        }
+
+        viewModelScope.launch {
+            fileInfoRepository.start(url, downloadUri)
+        }
+        return true
+    }
+
+    fun showListView() {
+        _isLoading.value = false
+        _isListVisible.value = true
+    }
+
+    fun loadTweetUrl(url: String) = viewModelScope.launch {
+
+        _isListVisible.postValue(false) // hide RecyclerView
+        _isTwitterUrl.postValue(true)
+        _isLoading.postValue(true)
         // code to update listOfMedia
+        twitterRepository.getDownloadUrls( getId(url) )
+
     }
+
+    private fun log(message: String){
+        Timber.d(message)
+    }
+
+    private fun getId(twitterUrl: String) = twitterUrl.split("/")[5].split("?")[0].trim().toLong()
 }

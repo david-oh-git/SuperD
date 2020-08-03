@@ -24,6 +24,7 @@
 
 package io.audioshinigami.superd
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -34,11 +35,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.preference.PreferenceManager
-import io.audioshinigami.superd.common.DEFAULT_PREF_INT_VALUE
-import io.audioshinigami.superd.common.SETTINGS_PREF_NAME
 import io.audioshinigami.superd.common.THEME_PREF_KEY
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.runBlocking
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,6 +46,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        when (intent?.action) {
+            Intent.ACTION_SEND -> {
+                Timber.d("EXTRA SEND confirmed")
+                if (intent.type == "text/html" || intent.type == "text/plain")
+                    handleIntent(intent)
+            }
+        }
 
         /*sets the theme*/
         val theme = obtainTheme()
@@ -80,5 +87,25 @@ class MainActivity : AppCompatActivity() {
     private fun obtainTheme(): Int =
         PreferenceManager.getDefaultSharedPreferences(this@MainActivity ).getInt(THEME_PREF_KEY, MODE_NIGHT_FOLLOW_SYSTEM)
 
+    private val fakeExtra = "When I finally buy this iPhone, it’s over for all of you \uD83E\uDD32 https://t.co/zoPlSf4XCc\n" +
+            "    \n" +
+            "    https://twitter.com/_VALKlNG/status/1289899309844979712"
+
+    private val fakeTwitterShare = " https://twitter.com/almircolan/status/1289744460130050049?s=09"
+
+    private val anodaFakeExtra = "When I finally buy this iPhone, it’s over for all of you \uD83E\uDD32 https://t.co/zoPlSf4XCc\n" +
+            "    \n" +
+            "    https://twitter.com/_VALKlNG/status/1289899309844979712"
+
+    private fun handleIntent(intent: Intent){
+        intent.getStringExtra(Intent.EXTRA_TEXT)?.let {
+            Timber.d("Extra is :$it")
+        }
+
+    }
+
+    private fun extractTwitterUrl(intentTwitterText: String): String {
+        return  ""
+    }
 
 }

@@ -156,6 +156,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     //Paging
     implementation "androidx.paging:paging-runtime:$paging_version"
     // Navigation components
@@ -210,6 +211,8 @@ dependencies {
     testImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dex_maker_version"
     testImplementation "com.google.truth:truth:$truth_version"
     kaptTest "com.google.dagger:dagger-compiler:$dagger2_version"
+    // Robolectric
+    testImplementation "org.robolectric:robolectric:$robolectric"
 
     // Coroutines test
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutine_version"

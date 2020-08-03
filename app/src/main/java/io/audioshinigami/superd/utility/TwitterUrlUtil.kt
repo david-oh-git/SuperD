@@ -22,29 +22,32 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.superd.downloads
+package io.audioshinigami.superd.utility
 
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import io.audioshinigami.superd.BR
-import io.audioshinigami.superd.data.FileInfo
-import io.audioshinigami.superd.databinding.ItemBinding
+/**
+ *  Utility for handling various forms of twitter urls
+ *  - download url from Twitter's stream API response
+ *  - extracting id value from url
+ *  - also parsing string from android OS share Intent
+ */
 
-class FileInfoViewHolder(private val binding: ItemBinding )
-    : RecyclerView.ViewHolder(binding.root) {
+object TwitterUrlUtil {
 
-    fun bind( downloadItemActions: DownloadItemActions ,any: FileInfo){
-        binding.apply {
-            setVariable(BR.fileInfo, any)
-            itemAction = downloadItemActions
-            executePendingBindings()
+    fun isTwitterUrl(url: String): Boolean = url.contains("https://twitter.com/", ignoreCase = true)
 
-        }
-
+    // share intent verbose info asides the url , eg the tweet itself
+    fun extractTwitterUrlFromShareIntent(intentTwitterText: String): String {
+        return  Regex("""https://twitter.com/.*""").find(intentTwitterText)?.value?.trim() ?: ""
     }
 
-    fun clear(){
-        binding.unbind()
-    }
+    // parse url data from twitter API and return just the direct download link
+    fun extractDownloadUrl(url: String) = Regex("""https://.*\.[mM][pP]4""").find(url)?.value?.trim()
 
+    /**
+     * get id [Long]value from the twitter url
+     *  see sample url:
+     *  https://twitter.com/_USERNAME/status/_ID_?s=19
+     *  https://twitter.com/_blablabla_/status/1280374462542745605?s=19
+     */
+    fun getId(twitterUrl: String) = twitterUrl.split("/")[5].split("?")[0].trim().toLong()
 }

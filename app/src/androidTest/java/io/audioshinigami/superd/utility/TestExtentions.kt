@@ -22,29 +22,11 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.superd.downloads
+package io.audioshinigami.superd.utility
 
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import io.audioshinigami.superd.BR
-import io.audioshinigami.superd.data.FileInfo
-import io.audioshinigami.superd.databinding.ItemBinding
+import androidx.lifecycle.LiveData
 
-class FileInfoViewHolder(private val binding: ItemBinding )
-    : RecyclerView.ViewHolder(binding.root) {
-
-    fun bind( downloadItemActions: DownloadItemActions ,any: FileInfo){
-        binding.apply {
-            setVariable(BR.fileInfo, any)
-            itemAction = downloadItemActions
-            executePendingBindings()
-
-        }
-
-    }
-
-    fun clear(){
-        binding.unbind()
-    }
-
+fun <T> LiveData<T>.observeOnce(onChangeHandler: (T) -> Unit ) {
+    val observer = OneTimeObserver(handler = onChangeHandler)
+    observe(observer, observer)
 }

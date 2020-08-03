@@ -22,40 +22,35 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.superd.util
+package io.audioshinigami.superd.utility
 
-import io.audioshinigami.superd.factory.DataFactory.randomProgressValue
-import io.audioshinigami.superd.factory.DataFactory.randomRequestId
-import io.audioshinigami.superd.factory.DataFactory.randomUrl
-import io.audioshinigami.superd.data.FileInfo
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import org.junit.rules.TestWatcher
+import org.junit.runner.Description
+import kotlin.coroutines.ContinuationInterceptor
 
 /*
-* creates mock FileData instances for test purposes
-* */
+* i basically just copied & paste this code from google codelabs
+* i need to read further to understand this,
+*
+* TODO
+*  */
 
-object FileInfoAndroidFactory {
+@ExperimentalCoroutinesApi
+class TestCoroutineRule : TestWatcher() , TestCoroutineScope by TestCoroutineScope() {
 
-    fun singleEntry(): FileInfo {
-
-        /* create a FIleDat instance with random values*/
-        val url =  randomUrl()
-        val fileName = url.substringAfter('/')
-        return FileInfo(
-            0,
-            randomRequestId(),
-            url,
-            fileName,
-            randomProgressValue()
-        )
+    override fun starting(description: Description?) {
+        super.starting(description)
+        Dispatchers.setMain(this.coroutineContext[ContinuationInterceptor] as CoroutineDispatcher )
     }
 
-    fun listOfEntries(size : Int): List<FileInfo> {
-        val fileDataList = mutableListOf<FileInfo>()
-
-        repeat(size){
-            fileDataList.add( singleEntry())
-        }
-
-        return fileDataList
-    } /*END makeListOfFileData*/
+    override fun finished(description: Description?) {
+        super.finished(description)
+        Dispatchers.resetMain()
+    }
 }
