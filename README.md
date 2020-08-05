@@ -7,6 +7,8 @@ Download files with pause and resume options.
 
 
 
-App main screen             |  Add url screen
-:-------------------------:|:-------------------------:
-![App main screen](https://drive.google.com/uc?export=view&id=17Mt4CZD4vAQOvBqtzeopo_PmYnU1Ev4s)  | ![add url screen](https://drive.google.com/uc?export=view&id=1h5RcBVHr3FeYHHIr4c5CIm60uFrlyUCZ)
+<h2 align="left">Screenshots</h2>
+<h4 align="center">
+<img src="https://res.cloudinary.com/sakanade/image/upload/v1596608896/super_d/home.png" width="30%" vspace="10" hspace="10">
+<img src="https://res.cloudinary.com/sakanade/image/upload/v1596608895/super_d/theme.png" width="30%" vspace="10" hspace="10">
+<img src="https://res.cloudinary.com/sakanade/image/upload/v1596608873/super_d/add_url.png" width="30%" vspace="10" hspace="10""><br>
