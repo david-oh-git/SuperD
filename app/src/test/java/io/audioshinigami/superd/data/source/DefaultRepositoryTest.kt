@@ -26,7 +26,7 @@ package io.audioshinigami.superd.data.source
 
 import com.google.common.truth.Truth.assertThat
 import io.audioshinigami.superd.data.Result.Success
-import io.audioshinigami.superd.util.FileInfoFactory
+import io.audioshinigami.superd.utility.FileInfoFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
@@ -35,7 +35,6 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.mock
-import org.mockito.Mockito.verify
 
 @ExperimentalCoroutinesApi
 class DefaultRepositoryTest {
@@ -120,26 +119,6 @@ class DefaultRepositoryTest {
         val result = repository.find( newFileInfo.uid )
 //        assertThat( result, isNotNull())
         assertThat( result , `is`(updatedFileInfo) )
-    }
-
-    @Test
-    fun pauseDownload_verifyPauseIsCalled() = runBlockingTest {
-
-        // Act : pause
-        repository.pause( 22 )
-
-        // Assert : pause is called
-        verify(downloadDataSource).pause(22)
-    }
-
-    @Test
-    fun resumeDownload_verifyResume() = runBlockingTest {
-
-        // Act : pause
-        repository.resume( 22 )
-
-        // Assert : pause is called
-        verify(downloadDataSource).resume(22)
     }
 
 }

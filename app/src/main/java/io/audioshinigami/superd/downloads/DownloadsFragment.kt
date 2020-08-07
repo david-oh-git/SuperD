@@ -37,6 +37,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.superd.App
 import io.audioshinigami.superd.R
@@ -91,16 +94,18 @@ class DownloadsFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val currentDestination = findNavController().currentDestination?.label
+//        val currentDestination = findNavController().currentDestination?.label
+        val currentDestination = view.findNavController().currentDestination?.label
 
-        findNavController().addOnDestinationChangedListener { _, destination, _ ->
+        view.findNavController().addOnDestinationChangedListener { _, destination, _ ->
 
             if ( currentDestination == destination.label){
-                // updates the isDownloading livedata to trigger the fetchlistener if download is active
+                // updates the isDownloading liveData to trigger the fetchListener if download is active
                 // or disable it if not active
                 viewModel.refreshIsDownloading()
             }
         }
+
     }
 
     override fun onResume() {
@@ -217,7 +222,8 @@ class DownloadsFragment :
         return View.OnClickListener {
 
             viewModel.enableFetchListener(true)
-            findNavController().navigate(R.id.action_downloadsFragment_to_getUrlFragment)
+            val action = DownloadsFragmentDirections.actionDownloadsFragmentToAddDownloadFragment()
+            findNavController().navigate(action)
         }
     }
 

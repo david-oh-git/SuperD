@@ -35,7 +35,7 @@
             android:label="Super D"
             tools:layout="@layout/downloads_fragment" >
         <action
-                android:id="@+id/action_downloadsFragment_to_getUrlFragment"
+                android:id="@+id/action_downloadsFragment_to_addDownloadFragment"
                 app:destination="@id/addDownloadFragment" />
         <action
             android:id="@+id/action_downloadsFragment_to_settingsFragment"
@@ -45,8 +45,14 @@
     <dialog
             android:id="@+id/addDownloadFragment"
             android:name="io.audioshinigami.superd.adddownload.AddDownloadFragment"
-            android:label="fragment_get_url"
-            tools:layout="@layout/fragment_add_download" />
+            android:label="fragment_add_download"
+            tools:layout="@layout/fragment_add_download" >
+        <argument
+            android:name="url"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="string" />
+    </dialog>
 
     <fragment
         android:id="@+id/settingsFragment"
@@ -64,10 +70,22 @@
         android:id="@+id/themeBottomSheetFragment"
         android:name="io.audioshinigami.superd.selecttheme.ThemeBottomSheetFragment"
         android:label="ThemeBottomSheetFragment" />
+
     <fragment
         android:id="@+id/aboutFragment"
         android:name="io.audioshinigami.superd.about.AboutFragment"
         android:label="About"
         tools:layout="@layout/about_fragment" />
+
+    <action android:id="@+id/action_global_addDownloadFragment"
+        app:destination="@id/addDownloadFragment">
+
+        <argument
+            android:name="url"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="string" />
+
+    </action>
 
 </navigation>

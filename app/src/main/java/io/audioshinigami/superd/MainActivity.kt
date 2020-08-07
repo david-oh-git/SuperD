@@ -24,6 +24,7 @@
 
 package io.audioshinigami.superd
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -34,11 +35,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.preference.PreferenceManager
-import io.audioshinigami.superd.common.DEFAULT_PREF_INT_VALUE
-import io.audioshinigami.superd.common.SETTINGS_PREF_NAME
 import io.audioshinigami.superd.common.THEME_PREF_KEY
+import io.audioshinigami.superd.utility.TwitterUrlUtil
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,6 +46,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        when (intent?.action) {
+            Intent.ACTION_SEND -> {
+                if (intent.type == "text/html" || intent.type == "text/plain")
+                    handleIntent(intent)
+            }
+        }
 
         /*sets the theme*/
         val theme = obtainTheme()
@@ -62,7 +68,7 @@ class MainActivity : AppCompatActivity() {
     /*handles back or up actions
     * + fragments back stack*/
     override fun onSupportNavigateUp() : Boolean {
-        return findNavController(R.id.nav_host_fragment_container).navigateUp() || super.onSupportNavigateUp()
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -77,8 +83,29 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+//    override fun onNewIntent(intent: Intent?) {
+//        super.onNewIntent(intent)
+//
+//        intent?.getStringExtra(Intent.EXTRA_TEXT)?.let {
+//            val action = DownloadsFragmentDirections.actionDownloadsFragmentToAddDownloadFragment(
+//                TwitterUrlUtil.extractTwitterUrlFromShareIntent(it)
+//            )
+//            navController.navigate(action)
+//        }
+//    }
+
     private fun obtainTheme(): Int =
         PreferenceManager.getDefaultSharedPreferences(this@MainActivity ).getInt(THEME_PREF_KEY, MODE_NIGHT_FOLLOW_SYSTEM)
 
+    // launch AddDownload fragment and pass string value as an argument
+    private fun handleIntent(intent: Intent){
+        intent.getStringExtra(Intent.EXTRA_TEXT)?.let {
+            val action = NavigationGraphDirections.actionGlobalAddDownloadFragment(
+                TwitterUrlUtil.extractTwitterUrlFromShareIntent(it)
+            )
+            navController.navigate(action)
+        }
+
+    }
 
 }

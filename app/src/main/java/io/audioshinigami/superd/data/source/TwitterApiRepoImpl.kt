@@ -22,29 +22,24 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.superd.downloads
+package io.audioshinigami.superd.data.source
 
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import io.audioshinigami.superd.BR
-import io.audioshinigami.superd.data.FileInfo
-import io.audioshinigami.superd.databinding.ItemBinding
+import io.audioshinigami.superd.data.Result
+import io.audioshinigami.superd.data.TweetMedia
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class FileInfoViewHolder(private val binding: ItemBinding )
-    : RecyclerView.ViewHolder(binding.root) {
+class TwitterApiRepoImpl @Inject constructor(
+    private val twitterSource: TwitterSource,
+    private val ioDispatcher: CoroutineDispatcher
+): TwitterApiRepository {
 
-    fun bind( downloadItemActions: DownloadItemActions ,any: FileInfo){
-        binding.apply {
-            setVariable(BR.fileInfo, any)
-            itemAction = downloadItemActions
-            executePendingBindings()
+    override val allMediaChannel: Channel<Result<List<TweetMedia>>> = twitterSource.allMediaChannel
 
-        }
-
-    }
-
-    fun clear(){
-        binding.unbind()
+    override suspend fun getDownloadUrls(id: Long) = withContext(ioDispatcher){
+        twitterSource.getTweetUrls(id)
     }
 
 }

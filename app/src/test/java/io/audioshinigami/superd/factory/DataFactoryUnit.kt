@@ -22,25 +22,23 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.superd.util
+package io.audioshinigami.superd.factory
 
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LifecycleRegistry
-import androidx.lifecycle.Observer
+import kotlin.random.Random
 
-class OneTimeObserver<T>(private val handler: (T) -> Unit ): Observer<T>, LifecycleOwner {
+/*
+* helps generate random values for url, resquest_id & progress value*/
 
-    private val lifecycle = LifecycleRegistry(this)
+object DataFactoryUnit {
 
-    init {
-        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    }
+    private val alphabet = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 
-    override fun onChanged(t: T) {
-        handler(t)
-        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    }
+    fun randomUrl() = "https://${randomString(8)}.com/${randomString(11)}/${randomString(8)}.mp4"
 
-    override fun getLifecycle() = lifecycle
-}
+    fun randomProgressValue() = Random.nextInt(0, 100)
+
+    fun randomRequestId(length: Int = 12) = Random.nextInt(100000000, 999999999)
+
+    private fun randomString( length: Int = 15) = alphabet.map { it }.shuffled().subList(0, length).joinToString("")
+
+} /*END DataFactory*/

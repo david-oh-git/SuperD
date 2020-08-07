@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
 
 android {
 
@@ -85,6 +87,12 @@ android {
         }
     }
 
+    configurations.all {
+        resolutionStrategy {
+            force "androidx.test:monitor:${rootProject.test_rules_version}"
+        }
+    }
+
     buildFeatures {
         dataBinding = true
     }
@@ -156,6 +164,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     //Paging
     implementation "androidx.paging:paging-runtime:$paging_version"
     // Navigation components
@@ -196,6 +205,8 @@ dependencies {
     androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dex_maker_version"
     debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$test_coroutine_version"
+    //  navigation testing
+    androidTestImplementation "androidx.navigation:navigation-testing:$navigation_version"
     // Espresso
     androidTestImplementation "androidx.test.espresso:espresso-core:$expresso_core_version"
 
@@ -210,6 +221,8 @@ dependencies {
     testImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dex_maker_version"
     testImplementation "com.google.truth:truth:$truth_version"
     kaptTest "com.google.dagger:dagger-compiler:$dagger2_version"
+    // Robolectric
+    testImplementation "org.robolectric:robolectric:$robolectric"
 
     // Coroutines test
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutine_version"
