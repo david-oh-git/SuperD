@@ -87,6 +87,12 @@ android {
         }
     }
 
+    configurations.all {
+        resolutionStrategy {
+            force "androidx.test:monitor:${rootProject.test_rules_version}"
+        }
+    }
+
     buildFeatures {
         dataBinding = true
     }
@@ -199,6 +205,8 @@ dependencies {
     androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dex_maker_version"
     debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$test_coroutine_version"
+    //  navigation testing
+    androidTestImplementation "androidx.navigation:navigation-testing:$navigation_version"
     // Espresso
     androidTestImplementation "androidx.test.espresso:espresso-core:$expresso_core_version"
 

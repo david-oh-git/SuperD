@@ -37,6 +37,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.audioshinigami.superd.App
 import io.audioshinigami.superd.R
@@ -66,6 +67,8 @@ class AddDownloadFragment : DialogFragment() {
         viewModelFactory
     }
 
+    val args: AddDownloadFragmentArgs by navArgs()
+
     private lateinit var binding: FragmentAddDownloadBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,7 +94,12 @@ class AddDownloadFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.idEditGeturl.requestFocus()
-        autoPaste()
+
+        if ( args.url == null ){
+            autoPaste()
+        }else{
+            binding.idEditGeturl.setText(args.url)
+        }
 
         id_btn_send_url.setOnClickListener{
 

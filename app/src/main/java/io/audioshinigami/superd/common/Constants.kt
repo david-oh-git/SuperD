@@ -45,3 +45,5 @@ const val DARK_THEME = 2
 const val LIGHT_THEME = 1
 
 const val FOLLOW_SYSTEM = -1
+
+const val INTENT_SHARE_URL = "io.audioshinigami.superd.common.url"

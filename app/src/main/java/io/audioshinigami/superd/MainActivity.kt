@@ -36,8 +36,8 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.preference.PreferenceManager
 import io.audioshinigami.superd.common.THEME_PREF_KEY
+import io.audioshinigami.superd.utility.TwitterUrlUtil
 import kotlinx.android.synthetic.main.activity_main.*
-import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity() {
 
         when (intent?.action) {
             Intent.ACTION_SEND -> {
-                Timber.d("EXTRA SEND confirmed")
                 if (intent.type == "text/html" || intent.type == "text/plain")
                     handleIntent(intent)
             }
@@ -69,7 +68,7 @@ class MainActivity : AppCompatActivity() {
     /*handles back or up actions
     * + fragments back stack*/
     override fun onSupportNavigateUp() : Boolean {
-        return findNavController(R.id.nav_host_fragment_container).navigateUp() || super.onSupportNavigateUp()
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -84,28 +83,29 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+//    override fun onNewIntent(intent: Intent?) {
+//        super.onNewIntent(intent)
+//
+//        intent?.getStringExtra(Intent.EXTRA_TEXT)?.let {
+//            val action = DownloadsFragmentDirections.actionDownloadsFragmentToAddDownloadFragment(
+//                TwitterUrlUtil.extractTwitterUrlFromShareIntent(it)
+//            )
+//            navController.navigate(action)
+//        }
+//    }
+
     private fun obtainTheme(): Int =
         PreferenceManager.getDefaultSharedPreferences(this@MainActivity ).getInt(THEME_PREF_KEY, MODE_NIGHT_FOLLOW_SYSTEM)
 
-    private val fakeExtra = "When I finally buy this iPhone, it’s over for all of you \uD83E\uDD32 https://t.co/zoPlSf4XCc\n" +
-            "    \n" +
-            "    https://twitter.com/_VALKlNG/status/1289899309844979712"
-
-    private val fakeTwitterShare = " https://twitter.com/almircolan/status/1289744460130050049?s=09"
-
-    private val anodaFakeExtra = "When I finally buy this iPhone, it’s over for all of you \uD83E\uDD32 https://t.co/zoPlSf4XCc\n" +
-            "    \n" +
-            "    https://twitter.com/_VALKlNG/status/1289899309844979712"
-
+    // launch AddDownload fragment and pass string value as an argument
     private fun handleIntent(intent: Intent){
         intent.getStringExtra(Intent.EXTRA_TEXT)?.let {
-            Timber.d("Extra is :$it")
+            val action = NavigationGraphDirections.actionGlobalAddDownloadFragment(
+                TwitterUrlUtil.extractTwitterUrlFromShareIntent(it)
+            )
+            navController.navigate(action)
         }
 
-    }
-
-    private fun extractTwitterUrl(intentTwitterText: String): String {
-        return  ""
     }
 
 }

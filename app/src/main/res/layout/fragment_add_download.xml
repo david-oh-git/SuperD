@@ -83,6 +83,7 @@
                 android:layout_height="wrap_content" />
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/loading_textview"
                 android:text="@string/loading_url"
                 android:contentDescription="@string/loading_url_description"
                 android:textAlignment="center"
