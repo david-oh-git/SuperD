@@ -1,3 +1,4 @@
+import io.audioshinigami.superd.buildsrc.BuildPlugins
 import io.audioshinigami.superd.buildsrc.Libs
 
 /*
@@ -23,17 +24,24 @@ import io.audioshinigami.superd.buildsrc.Libs
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import io.audioshinigami.superd.buildsrc.BuildPlugins
+
+apply plugin: BuildPlugins.benManes
 
 buildscript {
     repositories {
         google()
         jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
 
     dependencies {
         classpath Libs.androidGradlePlugin
         classpath Libs.Kotlin.gradlePlugin
         classpath Libs.AndroidX.Navigation.navSafeArgsPlugin
+        classpath Libs.benManesUpdatePlugin
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -49,4 +57,39 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+def isNonStable = { String version ->
+    def stableKeyword = ['RELEASE', 'FINAL', 'GA'].any { it -> version.toUpperCase().contains(it) }
+    def regex = /^[0-9,.v-]+(-r)?$/
+    return !stableKeyword && !(version ==~ regex)
+}
+
+tasks.named("dependencyUpdates").configure {
+
+    checkForGradleUpdate = true
+    outputFormatter = "html"
+    outputDir = "build/dependencyUpdates"
+    reportfileName = "report"
+    
+    // reject all non stable versions
+    rejectVersionIf {
+        isNonStable(it.candidate.version)
+    }
+
+    // Example 2: disallow release candidates as upgradable versions from stable versions
+    rejectVersionIf {
+        isNonStable(it.candidate.version) && !isNonStable(it.currentVersion)
+    }
+
+    // Example 3: using the full syntax
+    resolutionStrategy {
+        componentSelection {
+            all {
+                if (isNonStable(it.candidate.version) && !isNonStable(it.currentVersion)) {
+                    reject('Release candidate')
+                }
+            }
+        }
+    }
 }

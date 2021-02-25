@@ -22,6 +22,7 @@ object Versions {
 
 object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:4.1.2"
+    const val benManesUpdatePlugin = "com.github.ben-manes:gradle-versions-plugin:0.36.0"
     const val jdkDesugar = "com.android.tools:desugar_jdk_libs:1.0.9"
 
     const val material = "com.google.android.material:material:1.1.0"
@@ -29,6 +30,7 @@ object Libs {
     const val timber = "com.jakewharton.timber:timber:4.7.1"
     const val fetch = "androidx.tonyodev.fetch2:xfetch2:3.1.4"
     const val twitterKit = "com.twitter.sdk.android:twitter:3.3.0@aar"
+    const val spotless = "com.diffplug.spotless:spotless-plugin-gradle:5.6.1"
 
     const val truth = "com.google.truth:truth:1.0.1"
     const val robolectric = "org.robolectric:robolectric:4.3.1"
