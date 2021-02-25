@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+@file:Suppress("SpellCheckingInspection")
 package io.audioshinigami.superd.buildsrc
 
 object Versions {
@@ -21,15 +21,44 @@ object Versions {
 }
 
 object Libs {
-    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0-alpha08"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:4.1.2"
     const val jdkDesugar = "com.android.tools:desugar_jdk_libs:1.0.9"
 
     const val material = "com.google.android.material:material:1.1.0"
+
+    const val timber = "com.jakewharton.timber:timber:4.7.1"
+    const val fetch = "androidx.tonyodev.fetch2:xfetch2:3.1.4"
+    const val twitterKit = "com.twitter.sdk.android:twitter:3.3.0@aar"
+
+    const val truth = "com.google.truth:truth:1.0.1"
+    const val robolectric = "org.robolectric:robolectric:4.3.1"
+    const val mockito = "org.mockito:mockito-core:3.3.3"
+    const val mockitoDexMaker = "com.linkedin.dexmaker:dexmaker-mockito:2.12.1"
+    const val testCore = "androidx.test:core-ktx:1.2.0"
+    const val testRules = "androidx.test:rules:1.3.0-rc02"
+    const val junitKtx = "androidx.test.ext:junit-ktx:1.1.2-rc02"
+    const val testMonitor = "androidx.test:monitor:1.3.0-rc02"
+    const val fragmentTesting = "androidx.fragment:fragment-testing:1.2.5"
+    const val coreTesting = "androidx.arch.core:core-testing:2.1.0"
+    const val espresso = "androidx.test.espresso:espresso-core:3.2.0"
+
+    object Hamcrest {
+        private const val version = "2.2"
+        const val hamcrest = "org.hamcrest:hamcrest:$version"
+        const val hamcrestLib = "org.hamcrest:hamcrest-library:$version"
+    }
 
     object Accompanist {
         private const val version = "0.6.0"
         const val coil = "dev.chrisbanes.accompanist:accompanist-coil:$version"
         const val insets = "dev.chrisbanes.accompanist:accompanist-insets:$version"
+    }
+
+    object Dagger2 {
+        private const val version = "2.28.3"
+        const val dagger = "com.google.dagger:dagger:$version"
+        const val compiler = "com.google.dagger:dagger-compiler:$version"
+        const val testCompiler = "com.google.dagger:dagger-compiler:$version"
     }
 
     object Kotlin {
@@ -40,7 +69,7 @@ object Libs {
     }
 
     object Coroutines {
-        private const val version = "1.4.2"
+        private const val version = "1.3.7"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
         const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
@@ -58,42 +87,36 @@ object Libs {
     }
 
     object AndroidX {
-        const val appcompat = "androidx.appcompat:appcompat:1.2.0"
+        const val appcompat = "androidx.appcompat:appcompat:1.1.0"
         const val palette = "androidx.palette:palette:1.0.0"
+        const val constraintLayout = "androidx.constraintlayout:constraintlayout:1.1.3"
+        const val sharedPreference = "androidx.preference:preference:1.1.1"
 
         const val coreKtx = "androidx.core:core-ktx:1.5.0-beta01"
 
-        object Activity {
-            const val activityCompose = "androidx.activity:activity-compose:1.3.0-alpha03"
+        object Paging {
+            private const val version = "2.1.2"
+            const val paging = "androidx.paging:paging-runtime:$version"
         }
 
-        object Constraint {
-            const val constraintLayoutCompose = "androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha03"
+        object RecyclerView {
+            private const val version = "1.1.0"
+            const val recyclerView = "androidx.recyclerview:recyclerview:$version"
         }
 
-        object Compose {
-            private const val snapshot = ""
-            private const val version = "1.0.0-beta01"
-
-            @get:JvmStatic
-            val snapshotUrl: String
-                get() = "https://androidx.dev/snapshots/builds/$snapshot/artifacts/repository/"
-
-            const val runtime = "androidx.compose.runtime:runtime:$version"
-            const val foundation = "androidx.compose.foundation:foundation:$version"
-            const val layout = "androidx.compose.foundation:foundation-layout:$version"
-
-            const val ui = "androidx.compose.ui:ui:$version"
-            const val material = "androidx.compose.material:material:$version"
-            const val materialIconsExtended = "androidx.compose.material:material-icons-extended:$version"
-
-            const val tooling = "androidx.compose.ui:ui-tooling:$version"
+        object Navigation {
+            private const val version = "2.3.0"
+            const val navSafeArgsPlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$version"
+            const val navigationUi = "androidx.navigation:navigation-ui-ktx:$version"
+            const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:$version"
+            const val navigationTesting = "androidx.navigation:navigation-testing:$version"
         }
 
         object Lifecycle {
-            private const val version = "2.3.0-beta01"
-            const val viewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha02"
+            private const val version = "2.2.0"
             const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
+            const val extentions = "androidx.lifecycle:lifecycle-extensions:$version"
+            const val livedataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
         }
 
         object Test {
@@ -114,6 +137,7 @@ object Libs {
             const val runtime = "androidx.room:room-runtime:$version"
             const val ktx = "androidx.room:room-ktx:$version"
             const val compiler = "androidx.room:room-compiler:$version"
+            const val test = "androidx.room:room-testing:$version"
         }
     }
 
