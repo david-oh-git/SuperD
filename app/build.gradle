@@ -19,6 +19,8 @@ android {
         versionName AndroidBuildConfig.version_name
         testInstrumentationRunner AndroidBuildConfig.testInstrumentationRunner
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
@@ -87,7 +89,7 @@ android {
 
     configurations.all {
         resolutionStrategy {
-            force Libs.testMonitor
+            force Libs.AndroidX.Test.testMonitor
         }
     }
 
@@ -169,7 +171,6 @@ dependencies {
     implementation Libs.AndroidX.RecyclerView.recyclerView
     // Lifecycle
     implementation Libs.AndroidX.Lifecycle.viewmodel
-    implementation Libs.AndroidX.Lifecycle.extentions
     implementation Libs.AndroidX.Lifecycle.livedataKtx
     // Fetch2
     implementation Libs.fetch
@@ -182,12 +183,14 @@ dependencies {
     implementation(Libs.twitterKit){
         transitive = true
     }
+    // MultiDex
+    implementation Libs.multidex
 
     // Unit tests
-    testImplementation Libs.testCore
-    testImplementation Libs.testRules
-    testImplementation Libs.junitKtx
-    testImplementation Libs.coreTesting
+    testImplementation Libs.AndroidX.Test.core
+    testImplementation Libs.AndroidX.Test.rules
+    testImplementation Libs.AndroidX.Test.junitKtx
+    testImplementation Libs.AndroidX.Test.coreTesting
     // Coroutines
     testImplementation Libs.Coroutines.android
     testImplementation Libs.Coroutines.test
@@ -204,10 +207,10 @@ dependencies {
     kaptTest Libs.Dagger2.testCompiler
 
     // Android tests
-    androidTestImplementation Libs.testCore
-    androidTestImplementation Libs.testRules
-    androidTestImplementation Libs.junitKtx
-    androidTestImplementation Libs.coreTesting
+    androidTestImplementation Libs.AndroidX.Test.core
+    androidTestImplementation Libs.AndroidX.Test.rules
+    androidTestImplementation Libs.AndroidX.Test.junitKtx
+    androidTestImplementation Libs.AndroidX.Test.coreTesting
     //  navigation testing
     androidTestImplementation Libs.AndroidX.Navigation.navigationTesting
     // Room
@@ -220,7 +223,7 @@ dependencies {
     androidTestImplementation Libs.Hamcrest.hamcrest
     androidTestImplementation Libs.Hamcrest.hamcrestLib
     // Espresso
-    androidTestImplementation Libs.espresso
+    androidTestImplementation Libs.AndroidX.Test.espressoCore
 
-    debugImplementation Libs.fragmentTesting
+    debugImplementation Libs.AndroidX.Test.fragmentTesting
 }

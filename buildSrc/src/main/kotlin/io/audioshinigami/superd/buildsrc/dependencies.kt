@@ -25,24 +25,26 @@ object Libs {
     const val benManesUpdatePlugin = "com.github.ben-manes:gradle-versions-plugin:0.36.0"
     const val jdkDesugar = "com.android.tools:desugar_jdk_libs:1.0.9"
 
-    const val material = "com.google.android.material:material:1.1.0"
-
+    const val material = "com.google.android.material:material:1.3.0"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
-    const val fetch = "androidx.tonyodev.fetch2:xfetch2:3.1.4"
+    const val fetch = "androidx.tonyodev.fetch2:xfetch2:3.1.6"
     const val twitterKit = "com.twitter.sdk.android:twitter:3.3.0@aar"
     const val spotless = "com.diffplug.spotless:spotless-plugin-gradle:5.6.1"
+    const val multidex = "androidx.multidex:multidex:2.0.1"
 
-    const val truth = "com.google.truth:truth:1.0.1"
-    const val robolectric = "org.robolectric:robolectric:4.3.1"
-    const val mockito = "org.mockito:mockito-core:3.3.3"
-    const val mockitoDexMaker = "com.linkedin.dexmaker:dexmaker-mockito:2.12.1"
-    const val testCore = "androidx.test:core-ktx:1.2.0"
-    const val testRules = "androidx.test:rules:1.3.0-rc02"
-    const val junitKtx = "androidx.test.ext:junit-ktx:1.1.2-rc02"
-    const val testMonitor = "androidx.test:monitor:1.3.0-rc02"
-    const val fragmentTesting = "androidx.fragment:fragment-testing:1.2.5"
-    const val coreTesting = "androidx.arch.core:core-testing:2.1.0"
-    const val espresso = "androidx.test.espresso:espresso-core:3.2.0"
+    const val truth = "com.google.truth:truth:1.1.2"
+    const val robolectric = "org.robolectric:robolectric:4.5.1"
+    const val mockito = "org.mockito:mockito-core:3.8.0"
+    const val mockitoDexMaker = "com.linkedin.dexmaker:dexmaker-mockito:2.28.0"
+    const val mockk = "io.mockk:mockk:1.10.2"
+
+    object Junit5 {
+        private const val version = "5.7.0"
+        const val vantage = "org.junit.vintage:junit-vintage-engine:$version"
+        const val api = "org.junit.jupiter:junit-jupiter-api:$version"
+        const val engine = "org.junit.jupiter:junit-jupiter-engine:$version"
+        const val platform = "org.junit.platform:junit-platform-launcher:$version"
+    }
 
     object Hamcrest {
         private const val version = "2.2"
@@ -57,21 +59,21 @@ object Libs {
     }
 
     object Dagger2 {
-        private const val version = "2.28.3"
+        private const val version = "2.32"
         const val dagger = "com.google.dagger:dagger:$version"
         const val compiler = "com.google.dagger:dagger-compiler:$version"
         const val testCompiler = "com.google.dagger:dagger-compiler:$version"
     }
 
     object Kotlin {
-        private const val version = "1.4.30"
+        private const val version = "1.4.31"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
         const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$version"
     }
 
     object Coroutines {
-        private const val version = "1.3.7"
+        private const val version = "1.4.2"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
         const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
@@ -89,9 +91,9 @@ object Libs {
     }
 
     object AndroidX {
-        const val appcompat = "androidx.appcompat:appcompat:1.1.0"
+        const val appcompat = "androidx.appcompat:appcompat:1.2.0"
         const val palette = "androidx.palette:palette:1.0.0"
-        const val constraintLayout = "androidx.constraintlayout:constraintlayout:1.1.3"
+        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
         const val sharedPreference = "androidx.preference:preference:1.1.1"
 
         const val coreKtx = "androidx.core:core-ktx:1.5.0-beta01"
@@ -107,7 +109,7 @@ object Libs {
         }
 
         object Navigation {
-            private const val version = "2.3.0"
+            private const val version = "2.3.3"
             const val navSafeArgsPlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$version"
             const val navigationUi = "androidx.navigation:navigation-ui-ktx:$version"
             const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:$version"
@@ -115,27 +117,31 @@ object Libs {
         }
 
         object Lifecycle {
-            private const val version = "2.2.0"
+            private const val version = "2.3.0"
             const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
             const val extentions = "androidx.lifecycle:lifecycle-extensions:$version"
             const val livedataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
         }
 
         object Test {
-            private const val version = "1.2.0"
+            private const val version = "1.3.0"
             const val core = "androidx.test:core:$version"
             const val rules = "androidx.test:rules:$version"
+            const val junitKtx = "androidx.test.ext:junit-ktx:1.1.2-rc02"
+            const val testMonitor = "androidx.test:monitor:1.3.0-rc02"
+            const val fragmentTesting = "androidx.fragment:fragment-testing:1.2.5"
+            const val coreTesting = "androidx.arch.core:core-testing:2.1.0"
 
             object Ext {
                 private const val version = "1.1.2-rc01"
                 const val junit = "androidx.test.ext:junit-ktx:$version"
             }
 
-            const val espressoCore = "androidx.test.espresso:espresso-core:3.2.0"
+            const val espressoCore = "androidx.test.espresso:espresso-core:3.3.0"
         }
 
         object Room {
-            private const val version = "2.2.5"
+            private const val version = "2.2.6"
             const val runtime = "androidx.room:room-runtime:$version"
             const val ktx = "androidx.room:room-ktx:$version"
             const val compiler = "androidx.room:room-compiler:$version"
